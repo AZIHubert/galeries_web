@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useFormik } from 'formik';
 
 import FacebookButton from '#components/FacebookButton';
+import GoogleButton from '#components/GoogleButton';
 import { signinSchema } from '#helpers/schemas';
 
 interface PopupSigninI {
@@ -30,6 +31,11 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
   return (
     <div>
       <FacebookButton
+        loading={loading}
+        setLoading={setLoading}
+        type={'signin'}
+      />
+      <GoogleButton
         loading={loading}
         setLoading={setLoading}
         type={'signin'}
