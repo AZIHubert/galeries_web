@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleButton renders without crashing 1`] = `
+<button
+  data-testid="button"
+  disabled={false}
+  onClick={[Function]}
+>
+  log in 
+  with Google
+</button>
+`;
