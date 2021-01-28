@@ -4,11 +4,12 @@ import * as ReactDOM from 'react-dom';
 interface ModalI {
   open: boolean;
   handleClose: () => void;
+  children: React.ReactNode;
 }
 
 const modalRoot = document.getElementById('modal-root');
 
-const PopupLogin : React.FunctionComponent<ModalI> = ({ children, open, handleClose }) => {
+const PopupLogin = ({ children, open, handleClose }: ModalI) => {
   const el = React.useRef(document.createElement('div'));
 
   React.useEffect(() => {
@@ -28,28 +29,13 @@ const PopupLogin : React.FunctionComponent<ModalI> = ({ children, open, handleCl
     ReactDOM.createPortal(
       <>
         <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 1,
-          }}
+          data-testid="modal"
         >
           {children}
         </div>
         <div
-          data-testid="modal-background"
+          data-testid="modalBackground"
           onClick={handleClose}
-          style={{
-            background: '#000',
-            height: '100vh',
-            left: 0,
-            opacity: 0.5,
-            position: 'absolute',
-            top: 0,
-            width: '100vw',
-          }}
         >
         </div>
       </>,
