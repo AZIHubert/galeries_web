@@ -21,7 +21,7 @@ const FacebookButton = ({
     <img src={logoFacebook} alt='logo facebook' />
     {type === 'signin' && 'sign in '}
     {type === 'login' && 'log in '}
-    with facebook
+    with Facebook
   </button>
 );
 
