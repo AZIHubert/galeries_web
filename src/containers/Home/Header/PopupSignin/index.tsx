@@ -1,69 +1,121 @@
 import * as React from 'react';
+import { useFormik } from 'formik';
+
+import { signinSchema } from '#helpers/schemas';
 
 interface PopupSigninI {
   loading: boolean,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const signinOriginalValues = {
-  userNameOrEmail: '',
+const initialValues = {
+  confirmPassword: '',
+  email: '',
   password: '',
+  userName: '',
 };
 
 const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
-  const [signinValues, setSigninValues] = React.useState(signinOriginalValues);
-
-  const timer: React.MutableRefObject<null | number> = React.useRef(null);
-
-  React.useEffect(() => () => {
-    if (timer.current) clearInterval(timer.current);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!loading) {
-      setLoading(true);
-      timer.current = setInterval(() => setLoading(false), 2000);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!loading) {
-      setSigninValues({
-        ...signinValues,
-        [e.target.name]: e.target.value,
-      });
-    }
-  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit: () => {
+      if (!loading) { setLoading(true); }
+    },
+    validateOnChange: false,
+    validateOnBlur: true,
+    validationSchema: signinSchema,
+  });
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          data-testid='userNameOrEmailField'
-          disabled={loading}
-          name='userNameOrEmail'
-          onChange={handleChange}
-          type='text'
-          value={signinValues.userNameOrEmail}
-        />
-        <input
-          data-testid='passwordField'
-          disabled={loading}
-          name='password'
-          onChange={handleChange}
-          type='password'
-          value={signinValues.password}
-        />
-        <button
-          data-testid='loginLogin'
-          disabled={loading}
-          type='submit'
+    <form onSubmit={formik.handleSubmit}>
+      <label htmlFor="userName">
+        user name
+      </label>
+      <input
+        data-testid='userNameField'
+        disabled={loading}
+        id='userName'
+        name='userName'
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        type='text'
+        value={formik.values.userName}
+      />
+      {formik.errors.userName && formik.touched.userName && (
+        <div
+          data-testid='userNameError'
         >
-          {loading ? 'loading' : 'login'}
-        </button>
-      </form>
-    </div>
+          {formik.errors.userName}
+        </div>)
+      }
+      <label htmlFor="email">
+        email
+      </label>
+      <input
+        data-testid='emailField'
+        disabled={loading}
+        id='email'
+        name='email'
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        type='text'
+        value={formik.values.email}
+      />
+      {formik.errors.email && formik.touched.email && (
+        <div
+          data-testid='emailError'
+        >
+          {formik.errors.email}
+        </div>)
+      }
+      <label htmlFor="password">
+        password
+      </label>
+      <input
+        data-testid='passwordField'
+        disabled={loading}
+        id='password'
+        name='password'
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        type='password'
+        value={formik.values.password}
+      />
+      {formik.errors.password && formik.touched.password && (
+        <div
+          data-testid='passwordError'
+        >
+          {formik.errors.password}
+        </div>)
+      }
+      <label htmlFor="confirmPassword">
+        confirm password
+      </label>
+      <input
+        data-testid='confirmPasswordField'
+        disabled={loading}
+        id='confirmPassword'
+        name='confirmPassword'
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        type='password'
+        value={formik.values.confirmPassword}
+      />
+      {formik.errors.confirmPassword && formik.touched.confirmPassword && (
+        <div
+          data-testid='confirmPasswordError'
+        >
+          {formik.errors.confirmPassword}
+        </div>)
+      }
+      <button
+        disabled={loading}
+        data-testid='submitButton'
+        type='submit'
+      >
+        {loading ? 'loading' : 'signin'}
+      </button>
+    </form>
   );
 };
 

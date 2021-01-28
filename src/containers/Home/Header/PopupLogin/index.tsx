@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useFormik } from 'formik';
 
-import { signinSchema } from '#helpers/schemas';
+import { loginSchema } from '#helpers/schemas';
 
 interface PopupLoginI {
   loading: boolean,
@@ -9,10 +9,8 @@ interface PopupLoginI {
 }
 
 const initialValues = {
-  confirmPassword: '',
-  email: '',
+  userNameOrEmail: '',
   password: '',
-  userName: '',
 };
 
 const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
@@ -23,50 +21,32 @@ const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
     },
     validateOnChange: false,
     validateOnBlur: true,
-    validationSchema: signinSchema,
+    validationSchema: loginSchema,
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="userName">
-        user name
+      <label htmlFor="userNameOrEmail">
+        user name or email
       </label>
       <input
-        data-testid='userNameField'
+        data-testid='userNameOrEmailField'
         disabled={loading}
-        id='userName'
-        name='userName'
+        id='userNameOrEmail'
+        name='userNameOrEmail'
         onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         type='text'
-        value={formik.values.userName}
+        value={formik.values.userNameOrEmail}
       />
-      {formik.errors.userName && formik.touched.userName && (
-        <div
-          data-testid='userNameError'
-        >
-          {formik.errors.userName}
-        </div>)
-      }
-      <label htmlFor="email">
-        email
-      </label>
-      <input
-        data-testid='emailField'
-        disabled={loading}
-        id='email'
-        name='email'
-        onBlur={formik.handleBlur}
-        onChange={formik.handleChange}
-        type='text'
-        value={formik.values.email}
-      />
-      {formik.errors.email && formik.touched.email && (
-        <div
-          data-testid='emailError'
-        >
-          {formik.errors.email}
-        </div>)
+      {formik.errors.userNameOrEmail
+        && formik.touched.userNameOrEmail
+        && (
+          <div
+            data-testid='userNameOrEmailError'
+          >
+            {formik.errors.userNameOrEmail}
+          </div>)
       }
       <label htmlFor="password">
         password
@@ -86,26 +66,6 @@ const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
           data-testid='passwordError'
         >
           {formik.errors.password}
-        </div>)
-      }
-      <label htmlFor="confirmPassword">
-        confirm password
-      </label>
-      <input
-        data-testid='confirmPasswordField'
-        disabled={loading}
-        id='confirmPassword'
-        name='confirmPassword'
-        onBlur={formik.handleBlur}
-        onChange={formik.handleChange}
-        type='password'
-        value={formik.values.confirmPassword}
-      />
-      {formik.errors.confirmPassword && formik.touched.confirmPassword && (
-        <div
-          data-testid='confirmPasswordError'
-        >
-          {formik.errors.confirmPassword}
         </div>)
       }
       <button
