@@ -9,7 +9,7 @@ interface ModalI {
 
 const modalRoot = document.getElementById('modal-root');
 
-const PopupLogin = ({ children, open, handleClose }: ModalI) => {
+const Modal = ({ children, open, handleClose }: ModalI) => {
   const el = React.useRef(document.createElement('div'));
 
   React.useEffect(() => {
@@ -44,4 +44,4 @@ const PopupLogin = ({ children, open, handleClose }: ModalI) => {
   );
 };
 
-export default PopupLogin;
+export default Modal;
