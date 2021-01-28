@@ -6,6 +6,10 @@ exports[`GoogleButton renders without crashing 1`] = `
   disabled={false}
   onClick={[Function]}
 >
+  <img
+    alt="logo google"
+    src=""
+  />
   log in 
   with Google
 </button>

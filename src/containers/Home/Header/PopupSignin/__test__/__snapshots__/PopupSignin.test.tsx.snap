@@ -12,23 +12,30 @@ exports[`PopupSignin renders without crashing 1`] = `
       src=""
     />
     sign in 
-    with facebook
+    with Facebook
   </button>
   <button
     data-testid="button"
     disabled={false}
     onClick={[Function]}
   >
+    <img
+      alt="logo google"
+      src=""
+    />
     sign in 
     with Google
   </button>
+  <div>
+    or
+  </div>
   <form
     onSubmit={[Function]}
   >
     <label
       htmlFor="userName"
     >
-      user name
+      user name *
     </label>
     <input
       data-testid="userNameField"
@@ -43,7 +50,7 @@ exports[`PopupSignin renders without crashing 1`] = `
     <label
       htmlFor="email"
     >
-      email
+      email *
     </label>
     <input
       data-testid="emailField"
@@ -58,7 +65,7 @@ exports[`PopupSignin renders without crashing 1`] = `
     <label
       htmlFor="password"
     >
-      password
+      password *
     </label>
     <input
       data-testid="passwordField"
@@ -73,7 +80,7 @@ exports[`PopupSignin renders without crashing 1`] = `
     <label
       htmlFor="confirmPassword"
     >
-      confirm password
+      confirm password *
     </label>
     <input
       data-testid="confirmPasswordField"
@@ -85,6 +92,9 @@ exports[`PopupSignin renders without crashing 1`] = `
       type="password"
       value=""
     />
+    <div>
+      * Required field
+    </div>
     <button
       data-testid="submitButton"
       disabled={false}

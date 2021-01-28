@@ -40,9 +40,12 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
         setLoading={setLoading}
         type={'signin'}
       />
+      <div>
+        or
+      </div>
       <form onSubmit={formik.handleSubmit}>
         <label htmlFor="userName">
-        user name
+        user name *
         </label>
         <input
           data-testid='userNameField'
@@ -62,7 +65,7 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
           </div>)
         }
         <label htmlFor="email">
-        email
+          email *
         </label>
         <input
           data-testid='emailField'
@@ -82,7 +85,7 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
           </div>)
         }
         <label htmlFor="password">
-        password
+          password *
         </label>
         <input
           data-testid='passwordField'
@@ -102,7 +105,7 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
           </div>)
         }
         <label htmlFor="confirmPassword">
-        confirm password
+          confirm password *
         </label>
         <input
           data-testid='confirmPasswordField'
@@ -121,6 +124,9 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
             {formik.errors.confirmPassword}
           </div>)
         }
+        <div>
+          * Required field
+        </div>
         <button
           disabled={loading}
           data-testid='submitButton'

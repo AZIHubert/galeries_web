@@ -11,6 +11,6 @@ exports[`Modal renders without crashing 1`] = `
     src=""
   />
   log in 
-  with facebook
+  with Facebook
 </button>
 `;

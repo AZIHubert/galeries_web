@@ -42,7 +42,7 @@ describe('Modal', () => {
     const button = getByTestId('button');
     expect(button).not.toBeDisabled();
   });
-  it('should display \'sign in with facebook if type is \'signin\'', () => {
+  it('should display \'sign in with Facebook if type is \'signin\'', () => {
     const { getByTestId } = render(
       <FacebookButton
         loading={false}
@@ -51,9 +51,9 @@ describe('Modal', () => {
       />,
     );
     const button = getByTestId('button');
-    expect(button).toHaveTextContent('sign in with facebook');
+    expect(button).toHaveTextContent('sign in with Facebook');
   });
-  it('should display \'log in with facebook if type is \'login\'', () => {
+  it('should display \'log in with Facebook if type is \'login\'', () => {
     const { getByTestId } = render(
       <FacebookButton
         loading={false}
@@ -62,7 +62,7 @@ describe('Modal', () => {
       />,
     );
     const button = getByTestId('button');
-    expect(button).toHaveTextContent('log in with facebook');
+    expect(button).toHaveTextContent('log in with Facebook');
   });
   it('should be disabled after clicking', () => {
     const { getByTestId } = render(<Container />);
