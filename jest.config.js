@@ -10,6 +10,7 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
     '^.+\\.svg$': '<rootDir>/svgTransform.js',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',

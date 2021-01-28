@@ -1,45 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PopupLogin renders without crashing 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <label
-    htmlFor="userNameOrEmail"
-  >
-    user name or email
-  </label>
-  <input
-    data-testid="userNameOrEmailField"
-    disabled={false}
-    id="userNameOrEmail"
-    name="userNameOrEmail"
-    onBlur={[Function]}
-    onChange={[Function]}
-    type="text"
-    value=""
-  />
-  <label
-    htmlFor="password"
-  >
-    password
-  </label>
-  <input
-    data-testid="passwordField"
-    disabled={false}
-    id="password"
-    name="password"
-    onBlur={[Function]}
-    onChange={[Function]}
-    type="password"
-    value=""
-  />
+<div>
   <button
-    data-testid="submitButton"
+    data-testid="button"
     disabled={false}
-    type="submit"
+    onClick={[Function]}
   >
-    signin
+    <img
+      alt="logo facebook"
+      src=""
+    />
+    log in 
+    with facebook
   </button>
-</form>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="userNameOrEmail"
+    >
+      user name or email
+    </label>
+    <input
+      data-testid="userNameOrEmailField"
+      disabled={false}
+      id="userNameOrEmail"
+      name="userNameOrEmail"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label
+      htmlFor="password"
+    >
+      password
+    </label>
+    <input
+      data-testid="passwordField"
+      disabled={false}
+      id="password"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="password"
+      value=""
+    />
+    <button
+      data-testid="submitButton"
+      disabled={false}
+      type="submit"
+    >
+      signin
+    </button>
+  </form>
+</div>
 `;
