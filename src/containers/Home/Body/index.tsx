@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { LogoGaleries } from '#ressources/svgComponents';
 
-const body = () => (
+const Body = () => (
   <div>
     <h2>
         Welcome to
@@ -18,4 +18,4 @@ const body = () => (
   </div>
 );
 
-export default body;
+export default Body;
