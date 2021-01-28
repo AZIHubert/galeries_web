@@ -21,7 +21,7 @@ const Container = () => {
   );
 };
 
-describe('PopupSignin', () => {
+describe('PopupLogin', () => {
   const setLoading = jest.fn;
   let passwordField: HTMLElement;
   let submitButton: HTMLElement;

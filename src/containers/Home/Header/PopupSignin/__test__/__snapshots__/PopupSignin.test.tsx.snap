@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PopupLogin renders without crashing 1`] = `
+exports[`PopupSignin renders without crashing 1`] = `
 <form
   onSubmit={[Function]}
 >
