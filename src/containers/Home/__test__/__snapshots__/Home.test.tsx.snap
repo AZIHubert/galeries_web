@@ -152,5 +152,10 @@ Array [
       A web app to share pictures with your friends and family.
     </p>
   </div>,
+  <footer>
+    <p>
+      Allan Aoudji @2021
+    </p>
+  </footer>,
 ]
 `;
