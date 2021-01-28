@@ -1,34 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PopupLogin renders without crashing 1`] = `
+exports[`PopupSignin renders without crashing 1`] = `
 <form
   onSubmit={[Function]}
 >
   <label
-    htmlFor="userName"
+    htmlFor="userNameOrEmail"
   >
-    user name
+    user name or email
   </label>
   <input
-    data-testid="userNameField"
+    data-testid="userNameOrEmailField"
     disabled={false}
-    id="userName"
-    name="userName"
-    onBlur={[Function]}
-    onChange={[Function]}
-    type="text"
-    value=""
-  />
-  <label
-    htmlFor="email"
-  >
-    email
-  </label>
-  <input
-    data-testid="emailField"
-    disabled={false}
-    id="email"
-    name="email"
+    id="userNameOrEmail"
+    name="userNameOrEmail"
     onBlur={[Function]}
     onChange={[Function]}
     type="text"
@@ -44,21 +29,6 @@ exports[`PopupLogin renders without crashing 1`] = `
     disabled={false}
     id="password"
     name="password"
-    onBlur={[Function]}
-    onChange={[Function]}
-    type="password"
-    value=""
-  />
-  <label
-    htmlFor="confirmPassword"
-  >
-    confirm password
-  </label>
-  <input
-    data-testid="confirmPasswordField"
-    disabled={false}
-    id="confirmPassword"
-    name="confirmPassword"
     onBlur={[Function]}
     onChange={[Function]}
     type="password"
