@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modal renders without crashing 1`] = `
+Array [
+  <div
+    data-testid="modal"
+  >
+    <div />
+  </div>,
+  <div
+    data-testid="modalBackground"
+    onClick={[Function]}
+  />,
+]
+`;
