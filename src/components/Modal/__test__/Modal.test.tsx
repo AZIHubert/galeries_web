@@ -36,7 +36,7 @@ const Container = ({ initialOpen }: ContainerI) => {
   );
 };
 
-describe('modal', () => {
+describe('Modal', () => {
   beforeAll(() => {
     // @ts-ignore
     ReactDOM.createPortal = jest.fn((element) => element);

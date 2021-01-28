@@ -9,6 +9,7 @@ module.exports = {
   },
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.svg$': '<rootDir>/svgTransform.js',
   },
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
@@ -25,5 +26,6 @@ module.exports = {
     '#components/(.*)': '<rootDir>/src/components/$1',
     '#containers/(.*)': '<rootDir>/src/containers/$1',
     '#helpers/(.*)': '<rootDir>/src/helpers/$1',
+    '#ressources/(.*)': '<rootDir>/src/ressources/$1',
   },
 };

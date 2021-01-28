@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`modal renders without crashing 1`] = `
+exports[`Modal renders without crashing 1`] = `
 Array [
   <div
     data-testid="modal"

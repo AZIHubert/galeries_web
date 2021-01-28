@@ -30,7 +30,7 @@ const Container = () => {
   );
 };
 
-describe('PopupLogin', () => {
+describe('PopupSignin', () => {
   const setLoading = jest.fn;
   let confirmPasswordField: HTMLElement;
   let emailField: HTMLElement;

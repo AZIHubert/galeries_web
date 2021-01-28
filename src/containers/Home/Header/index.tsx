@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Modal from '#components/Modal';
+import logo from '#ressources/svg/logoG.svg';
 
 import PopupLogin from './PopupLogin';
 import PopupSignin from './PopupSignin';
@@ -22,15 +23,16 @@ const Header = () => {
       setOpenSignin(!openSignin);
     }
   };
-  const handleCloseLoginModal = () => {
-    if (!loading) setOpenLogin(false);
-  };
-  const handleCloseSigninModal = () => {
-    if (!loading) setOpenSignin(false);
+  const handleCloseModal = () => {
+    if (!loading) {
+      setOpenLogin(false);
+      setOpenSignin(false);
+    }
   };
 
   return (
     <header>
+      <img src={logo} alt="header logo" />
       <button
         onClick={handleClickSignin}
         data-testid='openSignin'
@@ -44,22 +46,17 @@ const Header = () => {
         login
       </button>
       <Modal
-        open={openLogin}
-        handleClose={handleCloseLoginModal}
+        open={openLogin || openSignin}
+        handleClose={handleCloseModal}
       >
-        <PopupLogin
+        {openLogin && <PopupLogin
           loading={loading}
           setLoading={setLoading}
-        />
-      </Modal>
-      <Modal
-        open={openSignin}
-        handleClose={handleCloseSigninModal}
-      >
-        <PopupSignin
+        />}
+        {openSignin && <PopupSignin
           loading={loading}
           setLoading={setLoading}
-        />
+        />}
       </Modal>
     </header>
   );
