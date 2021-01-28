@@ -2,7 +2,6 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   clearMocks: true,
-  roots: ['<rootDir>/src'],
   globals: {
     'ts-jest': {
       tsconfig: 'tsconfig.json',
@@ -23,8 +22,8 @@ module.exports = {
   testMatch: null,
   testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleNameMapper: {
-    '@src/(.*)': '<rootDir>/src/$1',
-    '@sequelize/(.*)': '<rootDir>/sequelize/$1',
-    '@root/(.*)': '<rootDir>/$1',
+    '#components/(.*)': '<rootDir>/src/components/$1',
+    '#containers/(.*)': '<rootDir>/src/containers/$1',
+    '#helpers/(.*)': '<rootDir>/src/helpers/$1',
   },
 };

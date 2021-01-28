@@ -5,6 +5,14 @@
         "@babel/preset-react"
     ],
     "plugins": [
-        "@babel/plugin-transform-runtime"
+        "@babel/plugin-transform-runtime",
+        ["module-resolver", {
+            "root": ["."],
+            "alias": {
+              "#components": "./src/components",
+              "#containers": "./src/containers",
+              "#helpers": "./src/helpers"
+            }
+         }]
     ]
 }

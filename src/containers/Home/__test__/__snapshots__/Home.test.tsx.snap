@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders without crashing 1`] = `
+<header>
+  <button
+    data-testid="openSignin"
+    onClick={[Function]}
+  >
+    signin
+  </button>
+  <button
+    data-testid="openLogin"
+    onClick={[Function]}
+  >
+    login
+  </button>
+</header>
+`;

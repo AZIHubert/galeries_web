@@ -1,7 +1,11 @@
 import * as React from 'react';
 
+import Home from '#containers/Home';
+
 const App = () => (
-  <div></div>
+  <div>
+    <Home />
+  </div>
 );
 
 export default App;
