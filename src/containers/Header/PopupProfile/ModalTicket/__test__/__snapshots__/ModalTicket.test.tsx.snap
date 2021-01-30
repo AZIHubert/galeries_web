@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalSignin renders without crashing 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="header"
+    >
+      title *
+    </label>
+    <input
+      data-testid="headerField"
+      disabled={false}
+      id="header"
+      name="header"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label
+      htmlFor="body"
+    >
+      body *
+    </label>
+    <input
+      data-testid="bodyField"
+      disabled={false}
+      id="body"
+      name="body"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <div>
+      * Required field
+    </div>
+    <button
+      data-testid="submitButton"
+      disabled={false}
+      type="submit"
+    >
+      send
+    </button>
+  </form>
+</div>
+`;
