@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal renders without crashing 1`] = `
+exports[`FacebookButton renders without crashing 1`] = `
 <button
   data-testid="button"
   disabled={false}

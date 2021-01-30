@@ -19,7 +19,7 @@ const Container = () => {
   );
 };
 
-describe('Modal', () => {
+describe('FacebookButton', () => {
   const setLoading = jest.fn;
   it('renders without crashing', () => {
     const tree = renderer.create(

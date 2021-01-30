@@ -5,7 +5,7 @@ import FacebookButton from '#components/FacebookButton';
 import GoogleButton from '#components/GoogleButton';
 import { loginSchema } from '#helpers/schemas';
 
-interface PopupLoginI {
+interface ModalLoginI {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -15,7 +15,7 @@ const initialValues = {
   password: '',
 };
 
-const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
+const ModalLogin = ({ loading, setLoading }: ModalLoginI) => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
@@ -42,8 +42,10 @@ const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
         or
       </div>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="userNameOrEmail">
-        user name or email *
+        <label
+          htmlFor="userNameOrEmail"
+        >
+          user name or email *
         </label>
         <input
           data-testid='userNameOrEmailField'
@@ -62,10 +64,12 @@ const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
             data-testid='userNameOrEmailError'
           >
             {formik.errors.userNameOrEmail}
-          </div>)
-        }
-        <label htmlFor="password">
-        password *
+          </div>
+        )}
+        <label
+          htmlFor="password"
+        >
+          password *
         </label>
         <input
           data-testid='passwordField'
@@ -82,8 +86,8 @@ const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
             data-testid='passwordError'
           >
             {formik.errors.password}
-          </div>)
-        }
+          </div>
+        )}
         <div>
           * Required field
         </div>
@@ -99,4 +103,4 @@ const PopupLogin = ({ loading, setLoading }: PopupLoginI) => {
   );
 };
 
-export default PopupLogin;
+export default ModalLogin;

@@ -3,8 +3,8 @@ import * as React from 'react';
 import Modal from '#components/Modal';
 import logo from '#ressources/svg/logoG.svg';
 
-import PopupLogin from './PopupLogin';
-import PopupSignin from './PopupSignin';
+import ModalLogin from './ModalLogin';
+import ModalSignin from './ModalSignin';
 
 const Header = () => {
   const [loading, setLoading] = React.useState(false);
@@ -32,7 +32,10 @@ const Header = () => {
 
   return (
     <header>
-      <img src={logo} alt="header logo" />
+      <img
+        src={logo}
+        alt="header logo"
+      />
       <button
         onClick={handleClickSignin}
         data-testid='openSignin'
@@ -49,14 +52,18 @@ const Header = () => {
         open={openLogin || openSignin}
         handleClose={handleCloseModal}
       >
-        {openLogin && <PopupLogin
-          loading={loading}
-          setLoading={setLoading}
-        />}
-        {openSignin && <PopupSignin
-          loading={loading}
-          setLoading={setLoading}
-        />}
+        {openLogin && (
+          <ModalLogin
+            loading={loading}
+            setLoading={setLoading}
+          />
+        )}
+        {openSignin && (
+          <ModalSignin
+            loading={loading}
+            setLoading={setLoading}
+          />
+        )}
       </Modal>
     </header>
   );

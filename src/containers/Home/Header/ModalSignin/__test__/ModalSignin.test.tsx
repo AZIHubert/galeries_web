@@ -18,19 +18,19 @@ import {
   REQUIRED,
 } from '#helpers/formErrors';
 
-import PopupLogin from '../index';
+import ModalSignin from '../index';
 
 const Container = () => {
   const [loading, setLoading] = React.useState(false);
   return (
-    <PopupLogin
+    <ModalSignin
       loading={loading}
       setLoading={setLoading}
     />
   );
 };
 
-describe('PopupSignin', () => {
+describe('ModalSignin', () => {
   const setLoading = jest.fn;
   let confirmPasswordField: HTMLElement;
   let emailField: HTMLElement;
@@ -47,7 +47,7 @@ describe('PopupSignin', () => {
   });
   afterEach(cleanup);
   it('renders without crashing', () => {
-    const tree = renderer.create(<PopupLogin loading={false} setLoading={setLoading} />).toJSON();
+    const tree = renderer.create(<ModalSignin loading={false} setLoading={setLoading} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it('should not loading if errors', async () => {

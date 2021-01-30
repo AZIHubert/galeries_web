@@ -5,7 +5,7 @@ import FacebookButton from '#components/FacebookButton';
 import GoogleButton from '#components/GoogleButton';
 import { signinSchema } from '#helpers/schemas';
 
-interface PopupSigninI {
+interface ModalSigninI {
   loading: boolean,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -17,7 +17,7 @@ const initialValues = {
   userName: '',
 };
 
-const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
+const ModalSignin = ({ loading, setLoading }: ModalSigninI) => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
@@ -44,8 +44,10 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
         or
       </div>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="userName">
-        user name *
+        <label
+          htmlFor="userName"
+        >
+          user name *
         </label>
         <input
           data-testid='userNameField'
@@ -62,9 +64,11 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
             data-testid='userNameError'
           >
             {formik.errors.userName}
-          </div>)
-        }
-        <label htmlFor="email">
+          </div>
+        )}
+        <label
+          htmlFor="email"
+        >
           email *
         </label>
         <input
@@ -82,8 +86,8 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
             data-testid='emailError'
           >
             {formik.errors.email}
-          </div>)
-        }
+          </div>
+        )}
         <label htmlFor="password">
           password *
         </label>
@@ -102,9 +106,11 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
             data-testid='passwordError'
           >
             {formik.errors.password}
-          </div>)
-        }
-        <label htmlFor="confirmPassword">
+          </div>
+        )}
+        <label
+          htmlFor="confirmPassword"
+        >
           confirm password *
         </label>
         <input
@@ -122,8 +128,8 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
             data-testid='confirmPasswordError'
           >
             {formik.errors.confirmPassword}
-          </div>)
-        }
+          </div>
+        )}
         <div>
           * Required field
         </div>
@@ -139,4 +145,4 @@ const PopupSignin = ({ loading, setLoading }: PopupSigninI) => {
   );
 };
 
-export default PopupSignin;
+export default ModalSignin;

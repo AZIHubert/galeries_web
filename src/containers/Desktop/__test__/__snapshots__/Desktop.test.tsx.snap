@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Desktop renders without crashing 1`] = `
+<header>
+  <div>
+    <img
+      alt="header logo"
+      src={Object {}}
+    />
+    <img
+      alt="search pictogram"
+    />
+    <input
+      placeholder="search on Galeries"
+    />
+  </div>
+  <button>
+    <img
+      alt="home pictogram"
+    />
+  </button>
+  <button>
+    <img
+      alt="create new galerie pictogram"
+    />
+  </button>
+  <button>
+    <img
+      alt="notification pictogram"
+    />
+  </button>
+  <button
+    data-testid="profilButton"
+    onClick={[Function]}
+  >
+    <img
+      alt="profile picture"
+    />
+    userName
+  </button>
+  <button>
+    logout
+  </button>
+</header>
+`;

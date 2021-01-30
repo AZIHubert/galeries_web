@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App renders without crashing 1`] = `
-<div>
+Array [
   <header>
     <img
       alt="header logo"
@@ -19,7 +19,7 @@ exports[`App renders without crashing 1`] = `
     >
       login
     </button>
-  </header>
+  </header>,
   <div>
     <h2>
       Welcome to
@@ -151,11 +151,11 @@ exports[`App renders without crashing 1`] = `
     <p>
       A web app to share pictures with your friends and family.
     </p>
-  </div>
+  </div>,
   <footer>
     <p>
       Allan Aoudji @2021
     </p>
-  </footer>
-</div>
+  </footer>,
+]
 `;
