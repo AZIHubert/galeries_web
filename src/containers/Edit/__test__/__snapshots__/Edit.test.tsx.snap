@@ -97,5 +97,17 @@ exports[`Edit renders without crashing 1`] = `
       </button>
     </form>
   </div>
+  <div>
+    <p>
+      delete your account
+    </p>
+    <p>
+      Once you delete your account, there is no going back. Please be certain.
+    </p>
+    <button
+      data-testid="buttonDeleteModal"
+      onClick={[Function]}
+    />
+  </div>
 </div>
 `;
