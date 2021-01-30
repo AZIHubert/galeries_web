@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalDelete renders without crashing 1`] = `
+<div
+  data-testid="deleteModal"
+>
+  <p>
+    Are you sure you want to do this?
+  </p>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="password"
+    >
+      confirm yout password
+    </label>
+    <input
+      data-testid="passwordField"
+      disabled={false}
+      id="password"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="password"
+      value=""
+    />
+    <button
+      data-testid="submitButton"
+      disabled={false}
+      type="submit"
+    >
+      delete your account
+    </button>
+  </form>
+</div>
+`;

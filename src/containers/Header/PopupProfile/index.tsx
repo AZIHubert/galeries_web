@@ -2,10 +2,15 @@ import * as React from 'react';
 
 import Modal from '#components/Modal';
 
+import ModalTicket from './ModalTicket';
+
 const PopupProfile = () => {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
   const handleClose = () => {
-    setOpenModal(false);
+    if (!loading) {
+      setOpenModal(false);
+    }
   };
   return (
     <>
@@ -50,8 +55,9 @@ const PopupProfile = () => {
         open={openModal}
         handleClose={handleClose}
       >
-        <div
-          data-testid='ticketModal'
+        <ModalTicket
+          loading={loading}
+          setLoading={setLoading}
         />
       </Modal>
     </>
