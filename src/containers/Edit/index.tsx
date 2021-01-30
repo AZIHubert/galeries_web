@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
 
 const Edit = () => {
@@ -7,6 +8,10 @@ const Edit = () => {
   return (
     <div>
       <ChangePassword
+        loading={loading}
+        setLoading={setLoading}
+      />
+      <ChangeEmail
         loading={loading}
         setLoading={setLoading}
       />

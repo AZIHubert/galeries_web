@@ -1,3 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Edit renders without crashing 1`] = `<div />`;
+exports[`Edit renders without crashing 1`] = `
+<div>
+  <div>
+    <p>
+      change password
+    </p>
+    <form
+      onSubmit={[Function]}
+    >
+      <label
+        htmlFor="currentPassword"
+      >
+        current password
+      </label>
+      <input
+        data-testid="currentPasswordField"
+        disabled={false}
+        id="currentPassword"
+        name="currentPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <label
+        htmlFor="newPassword"
+      >
+        new password
+      </label>
+      <input
+        data-testid="newPasswordField"
+        disabled={false}
+        id="newPassword"
+        name="newPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <label
+        htmlFor="confirmNewPassword"
+      >
+        confirm new password
+      </label>
+      <input
+        data-testid="confirmNewPasswordField"
+        disabled={false}
+        id="confirmNewPassword"
+        name="confirmNewPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <button
+        data-testid="submitButton"
+        disabled={false}
+        type="submit"
+      >
+        change your password
+      </button>
+    </form>
+  </div>
+  <div>
+    <p>
+      change your email
+    </p>
+    <p>
+      Enter your password to receive a message on your current adress. This message contain a link to update your email.
+    </p>
+    <form
+      onSubmit={[Function]}
+    >
+      <label
+        htmlFor="password"
+      >
+        password
+      </label>
+      <input
+        data-testid="passwordField"
+        disabled={false}
+        id="password"
+        name="password"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+      <button
+        data-testid="submitButton"
+        disabled={false}
+        type="submit"
+      >
+        change your email
+      </button>
+    </form>
+  </div>
+</div>
+`;
