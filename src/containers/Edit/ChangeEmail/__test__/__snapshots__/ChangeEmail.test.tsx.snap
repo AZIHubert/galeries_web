@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChangeEmail renders without crashing 1`] = `
+<div>
+  <p>
+    change your email
+  </p>
+  <p>
+    Enter your password to receive a message on your current adress. This message contain a link to update your email.
+  </p>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      htmlFor="password"
+    >
+      password
+    </label>
+    <input
+      data-testid="passwordField"
+      disabled={false}
+      id="password"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="password"
+      value=""
+    />
+    <button
+      data-testid="submitButton"
+      disabled={false}
+      type="submit"
+    >
+      change your email
+    </button>
+  </form>
+</div>
+`;

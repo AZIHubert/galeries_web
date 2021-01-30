@@ -24,7 +24,9 @@ const ModalTicket = ({ loading, setLoading }: ModalTicketI) => {
     validationSchema: ticketSchema,
   });
   return (
-    <div>
+    <div
+      data-testid='ticketModal'
+    >
       <form onSubmit={formik.handleSubmit}>
         <label
           htmlFor="header"

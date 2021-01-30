@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ModalSignin renders without crashing 1`] = `
-<div>
+<div
+  data-testid="ticketModal"
+>
   <form
     onSubmit={[Function]}
   >
