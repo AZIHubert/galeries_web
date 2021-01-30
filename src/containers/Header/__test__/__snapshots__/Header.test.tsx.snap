@@ -9,6 +9,7 @@ exports[`Header renders without crashing 1`] = `
     />
     <img
       alt="search pictogram"
+      src={Object {}}
     />
     <input
       placeholder="search on Galeries"
@@ -17,16 +18,19 @@ exports[`Header renders without crashing 1`] = `
   <button>
     <img
       alt="home pictogram"
+      src={Object {}}
     />
   </button>
   <button>
     <img
       alt="create new galerie pictogram"
+      src={Object {}}
     />
   </button>
   <button>
     <img
       alt="notification pictogram"
+      src={Object {}}
     />
   </button>
   <button
@@ -35,6 +39,7 @@ exports[`Header renders without crashing 1`] = `
   >
     <img
       alt="profile picture"
+      src={Object {}}
     />
     userName
   </button>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Modal from '#components/Modal';
+import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
 
 import ModalTicket from './ModalTicket';
 
@@ -20,6 +21,7 @@ const PopupProfile = () => {
         <button>
           <img
             alt='profile picture'
+            src={defaultProfilePicture}
           />
           <p>
               userName
