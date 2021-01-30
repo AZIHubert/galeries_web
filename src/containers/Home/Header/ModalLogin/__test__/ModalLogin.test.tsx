@@ -25,12 +25,12 @@ describe('ModalSignin', () => {
   const setLoading = jest.fn;
   let passwordField: HTMLElement;
   let submitButton: HTMLElement;
-  let userNameOrEmaildField: HTMLElement;
+  let userNameOrEmailField: HTMLElement;
   beforeEach(() => {
     const { getByTestId } = render(<Container />);
     passwordField = getByTestId('passwordField');
     submitButton = getByTestId('submitButton');
-    userNameOrEmaildField = getByTestId('userNameOrEmailField');
+    userNameOrEmailField = getByTestId('userNameOrEmailField');
   });
   afterEach(cleanup);
   it('renders without crashing', () => {
@@ -46,22 +46,21 @@ describe('ModalSignin', () => {
     expect(submitButton).toHaveTextContent('signin');
     expect(submitButton).not.toBeDisabled();
     expect(userNameOrEmailError).toHaveTextContent(REQUIRED);
-    expect(userNameOrEmailError).not.toBeDisabled();
+    expect(userNameOrEmailField).not.toBeDisabled();
   });
   it('should loading if no error', async () => {
-    fireEvent.change(userNameOrEmaildField, { target: { value: 'user!' } });
+    fireEvent.change(userNameOrEmailField, { target: { value: 'user!' } });
     fireEvent.change(passwordField, { target: { value: 'password' } });
     fireEvent.click(submitButton);
-    await screen.findAllByText('loading');
+    await screen.findByText('loading');
     expect(passwordField).toBeDisabled();
     expect(submitButton).toBeDisabled();
-    expect(submitButton).toBeDisabled();
-    expect(userNameOrEmaildField).toBeDisabled();
+    expect(userNameOrEmailField).toBeDisabled();
   });
   describe('should return an error if', () => {
     describe('userNameOrEmail', () => {
       it('is empty', async () => {
-        fireEvent.blur(userNameOrEmaildField);
+        fireEvent.blur(userNameOrEmailField);
         const userNameError = await screen.findByTestId('userNameOrEmailError');
         expect(userNameError).not.toBeNull();
         expect(userNameError).toHaveTextContent(REQUIRED);
