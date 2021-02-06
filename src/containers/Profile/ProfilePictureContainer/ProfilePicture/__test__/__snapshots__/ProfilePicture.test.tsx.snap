@@ -1,11 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProfilePicture renders without crashing 1`] = `
-<a
-  href="#"
->
-  <img
-    alt="profile picture"
+<div>
+  <button
+    data-testid="profilePictureButton"
+    onClick={[Function]}
   />
-</a>
+  <a
+    href="#"
+  >
+    <img
+      alt="profile picture"
+      src="http://url.com"
+    />
+  </a>
+</div>
 `;
