@@ -1,6 +1,7 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import {
+  act,
   cleanup,
   fireEvent,
   render,
@@ -21,33 +22,55 @@ import {
 import ModalSignin from '../index';
 
 const Container = () => {
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
   return (
-    <ModalSignin
-      loading={loading}
-      setLoading={setLoading}
-    />
+    <>
+      <ModalSignin
+        loading={loading}
+        setLoading={setLoading}
+        setAccountCreate={setAccountCreate}
+      />
+      {accountCreate
+        ? (
+          <p
+            data-testid='accountCreate'
+          >
+            accountCreate
+          </p>
+        )
+        : null}
+    </>
   );
 };
 
 describe('ModalSignin', () => {
-  const setLoading = jest.fn;
+  const mockedSetLoading = jest.fn;
+  const mockedSetAccountCreate = jest.fn;
   let confirmPasswordField: HTMLElement;
   let emailField: HTMLElement;
   let submitButton: HTMLElement;
   let passwordField: HTMLElement;
   let userNameField: HTMLElement;
   beforeEach(() => {
-    const { getByTestId } = render(<Container />);
-    confirmPasswordField = getByTestId('confirmPasswordField');
-    emailField = getByTestId('emailField');
-    passwordField = getByTestId('passwordField');
-    submitButton = getByTestId('submitButton');
-    userNameField = getByTestId('userNameField');
+    act(() => {
+      render(<Container />);
+    });
+    confirmPasswordField = screen.getByTestId('confirmPasswordField');
+    emailField = screen.getByTestId('emailField');
+    passwordField = screen.getByTestId('passwordField');
+    submitButton = screen.getByTestId('submitButton');
+    userNameField = screen.getByTestId('userNameField');
   });
   afterEach(cleanup);
   it('renders without crashing', () => {
-    const tree = renderer.create(<ModalSignin loading={false} setLoading={setLoading} />).toJSON();
+    const tree = renderer.create(
+      <ModalSignin
+        loading={false}
+        setLoading={mockedSetLoading}
+        setAccountCreate={mockedSetAccountCreate}
+      />,
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it('should not loading if errors', async () => {
@@ -80,6 +103,15 @@ describe('ModalSignin', () => {
     expect(submitButton).toBeDisabled();
     expect(submitButton).toBeDisabled();
     expect(userNameField).toBeDisabled();
+  });
+  it('should set accountCreated to true if no error', async () => {
+    fireEvent.change(confirmPasswordField, { target: { value: 'Aaoudjiuvhds9!' } });
+    fireEvent.change(emailField, { target: { value: 'user@email.com' } });
+    fireEvent.change(passwordField, { target: { value: 'Aaoudjiuvhds9!' } });
+    fireEvent.change(userNameField, { target: { value: 'user' } });
+    fireEvent.click(submitButton);
+    const accountCreate = await screen.findByTestId('accountCreate');
+    expect(accountCreate).toHaveTextContent('accountCreate');
   });
   describe('should show an error if', () => {
     describe('userName field', () => {

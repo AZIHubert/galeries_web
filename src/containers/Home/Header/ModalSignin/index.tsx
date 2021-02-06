@@ -6,8 +6,9 @@ import GoogleButton from '#components/GoogleButton';
 import { signinSchema } from '#helpers/schemas';
 
 interface ModalSigninI {
-  loading: boolean,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setAccountCreate:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const initialValues = {
@@ -17,11 +18,18 @@ const initialValues = {
   userName: '',
 };
 
-const ModalSignin = ({ loading, setLoading }: ModalSigninI) => {
+const ModalSignin = ({
+  loading,
+  setAccountCreate,
+  setLoading,
+}: ModalSigninI) => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
-      if (!loading) { setLoading(true); }
+      if (!loading) {
+        setLoading(true);
+        setAccountCreate(true);
+      }
     },
     validateOnChange: false,
     validateOnBlur: true,
@@ -29,7 +37,9 @@ const ModalSignin = ({ loading, setLoading }: ModalSigninI) => {
   });
 
   return (
-    <div>
+    <div
+      data-testid='modalSignin'
+    >
       <FacebookButton
         loading={loading}
         setLoading={setLoading}
