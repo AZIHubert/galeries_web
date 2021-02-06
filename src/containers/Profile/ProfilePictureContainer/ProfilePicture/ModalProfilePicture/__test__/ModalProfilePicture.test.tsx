@@ -79,27 +79,27 @@ describe('Body', () => {
   });
   it('should display profilePicture button properly if not current', () => {
     const { getByTestId } = render(<Container />);
-    const profilePictureButton = getByTestId('profilePictureButton');
-    expect(profilePictureButton).toHaveTextContent('use as profile picture');
+    const modalProfilePictureButton = getByTestId('modalProfilePictureButton');
+    expect(modalProfilePictureButton).toHaveTextContent('use as profile picture');
   });
   it('should display profilePicture button properly if current', () => {
     const { getByTestId } = render(<Container
       defaultCurrent={true}
     />);
-    const profilePictureButton = getByTestId('profilePictureButton');
-    expect(profilePictureButton).toHaveTextContent('remove profile picture');
+    const modalProfilePictureButton = getByTestId('modalProfilePictureButton');
+    expect(modalProfilePictureButton).toHaveTextContent('remove profile picture');
   });
   it('should switch current when clicking on profilePicture button', () => {
     const { getByTestId } = render(<Container />);
-    const profilePictureButton = getByTestId('profilePictureButton');
-    fireEvent.click(profilePictureButton);
+    const modalProfilePictureButton = getByTestId('modalProfilePictureButton');
+    fireEvent.click(modalProfilePictureButton);
     const profilePictureButtonWithCurrentTrue = screen
-      .getByTestId('profilePictureButton');
+      .getByTestId('modalProfilePictureButton');
     expect(profilePictureButtonWithCurrentTrue)
       .toHaveTextContent('remove profile picture');
-    fireEvent.click(profilePictureButton);
+    fireEvent.click(modalProfilePictureButton);
     const profilePictureButtonWithCurrentFalse = screen
-      .getByTestId('profilePictureButton');
+      .getByTestId('modalProfilePictureButton');
     expect(profilePictureButtonWithCurrentFalse)
       .toHaveTextContent('use as profile picture');
   });

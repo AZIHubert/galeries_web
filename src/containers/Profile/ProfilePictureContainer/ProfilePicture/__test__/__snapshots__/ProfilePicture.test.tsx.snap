@@ -8,13 +8,13 @@ exports[`ProfilePicture renders without crashing 1`] = `
     data-testid="profilePictureButton"
     onClick={[Function]}
   />
-  <a
-    href="#"
+  <button
+    onClick={[Function]}
   >
     <img
       alt="profile picture"
       src="http://url.com"
     />
-  </a>
+  </button>
 </div>
 `;

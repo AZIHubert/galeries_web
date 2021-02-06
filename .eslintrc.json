@@ -41,6 +41,7 @@
                 ]
             }
         ],
+        "global-require": 0,
         "no-use-before-define": "off",
         "no-console": "off",
         "indent": "off",

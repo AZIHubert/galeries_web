@@ -6,7 +6,7 @@ import { ProfilePictureI } from '#helpers/interfaces';
 interface ModalProfilPictureI {
   current?: boolean;
   profilePicture: ProfilePictureI;
-  switchCurrent: () => void
+  switchCurrent: (pp: ProfilePictureI) => void
 }
 
 const formatBytes = (a: number, b = 2) => {
@@ -17,7 +17,10 @@ const formatBytes = (a: number, b = 2) => {
 
 const ModalProfilPicture = ({
   current = false,
-  profilePicture: {
+  profilePicture,
+  switchCurrent,
+}: ModalProfilPictureI) => {
+  const {
     createdAt,
     originalImage: {
       height,
@@ -25,45 +28,45 @@ const ModalProfilPicture = ({
       size,
       width,
     },
-  },
-  switchCurrent,
-}: ModalProfilPictureI) => (
-  <div>
-    <img src={signedUrl} alt='image' />
-    <p>
-      upload at
-    </p>
-    <p
-      data-testid='uploadAtText'
-    >
-      {` ${moment(createdAt).format('MMMM Do YYYY')}`}
-    </p>
-    <p>
-      weight:
-    </p>
-    <p
-      data-testid='weightText'
-    >
-      {formatBytes(size)}
-    </p>
-    <p>
-      size:
-    </p>
-    <p
-      data-testid='sizeText'
-    >
-      {`${width} x ${height} px`}
-    </p>
-    <button
-      data-testid='profilePictureButton'
-      onClick={switchCurrent}
-    >
-      {current ? 'remove profile picture' : 'use as profile picture'}
-    </button>
-    <button>
-      download image
-    </button>
-  </div>
-);
+  } = profilePicture;
+  return (
+    <div>
+      <img src={signedUrl} alt='image' />
+      <p>
+        upload at
+      </p>
+      <p
+        data-testid='uploadAtText'
+      >
+        {` ${moment(createdAt).format('MMMM Do YYYY')}`}
+      </p>
+      <p>
+        weight:
+      </p>
+      <p
+        data-testid='weightText'
+      >
+        {formatBytes(size)}
+      </p>
+      <p>
+        size:
+      </p>
+      <p
+        data-testid='sizeText'
+      >
+        {`${width} x ${height} px`}
+      </p>
+      <button
+        data-testid='modalProfilePictureButton'
+        onClick={() => switchCurrent(profilePicture)}
+      >
+        {current ? 'remove profile picture' : 'use as profile picture'}
+      </button>
+      <button>
+        download image
+      </button>
+    </div>
+  );
+};
 
 export default ModalProfilPicture;

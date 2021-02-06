@@ -37,31 +37,36 @@ const profilePictureTwo: ProfilePictureI = {
 };
 
 const Container = ({
-  defaultCurrentProfileId = null,
+  defaultCurrentProfile = null,
   profilePictures = [profilePictureOne],
 }: {
-  defaultCurrentProfileId?: string | null;
+  defaultCurrentProfile?: ProfilePictureI | null;
   profilePictures?: ProfilePictureI[];
 }) => {
   const [
-    currentProfileId,
-    setCurrentProfileId,
-  ] = React.useState<string | null>(defaultCurrentProfileId);
-  const switchCurrent = (id: string) => {
-    setCurrentProfileId((prevState) => (prevState === id ? null : id));
+    currentProfile,
+    setCurrentProfile,
+  ] = React.useState<ProfilePictureI | null>(defaultCurrentProfile);
+  const switchCurrent = (profilePicture: ProfilePictureI) => {
+    setCurrentProfile((prevState) => {
+      if (prevState && prevState.id === profilePicture.id) {
+        return null;
+      }
+      return { ...profilePicture };
+    });
   };
   return (
     <>
       <ProfilePictureContainer
-        currentProfileId={currentProfileId}
+        currentProfileId={currentProfile ? currentProfile.id : null}
         profilePictures={profilePictures}
         switchCurrent={switchCurrent}
       />
-      {currentProfileId ? (
+      {currentProfile ? (
         <p
           data-testid='currentId'
         >
-          {currentProfileId}
+          {currentProfile.id}
         </p>
       ) : null}
     </>
@@ -118,7 +123,7 @@ describe('ProfilePictureContainer', () => {
   it('should switch current id', () => {
     const { getAllByTestId } = render(<Container
       profilePictures={[profilePictureOne, profilePictureTwo]}
-      defaultCurrentProfileId={profilePictureOne.id}
+      defaultCurrentProfile={profilePictureOne}
     />);
     const secondProfilePictureButton = getAllByTestId('profilePictureButton')[1];
     fireEvent.click(secondProfilePictureButton);

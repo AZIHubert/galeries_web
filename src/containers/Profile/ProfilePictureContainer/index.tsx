@@ -7,7 +7,7 @@ import ProfilePicture from './ProfilePicture';
 interface ProfilPictureContainerI {
   currentProfileId: string | null;
   profilePictures: ProfilePictureI[];
-  switchCurrent: (id: string) => void;
+  switchCurrent: (pp: ProfilePictureI) => void;
 }
 
 const ProfilePictureContainer = ({

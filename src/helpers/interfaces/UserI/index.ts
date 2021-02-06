@@ -2,7 +2,7 @@ import ProfilePictureI from '../ProfilePictureI';
 
 interface UserI {
   createdAt: Date;
-  currentProfilePicture: null | ProfilePictureI;
+  currentProfilePicture: ProfilePictureI | null;
   currentProfilePictureId: string | null;
   defaultProfilePicture: string | null;
   email: string | null;
@@ -11,7 +11,7 @@ interface UserI {
   id: string;
   profilePictures: ProfilePictureI[];
   role: string;
-  updatedAt: string;
+  updatedAt: string | null;
   userName: string;
 }
 

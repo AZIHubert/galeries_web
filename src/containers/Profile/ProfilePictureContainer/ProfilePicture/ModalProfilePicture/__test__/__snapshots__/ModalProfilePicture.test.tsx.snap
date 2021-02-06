@@ -31,8 +31,8 @@ exports[`Body renders without crashing 1`] = `
     1080 x 2340 px
   </p>
   <button
-    data-testid="profilePictureButton"
-    onClick={[MockFunction]}
+    data-testid="modalProfilePictureButton"
+    onClick={[Function]}
   >
     use as profile picture
   </button>
