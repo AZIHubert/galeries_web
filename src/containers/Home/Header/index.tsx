@@ -12,18 +12,7 @@ const Header = () => {
   const [openLogin, setOpenLogin] = React.useState<boolean>(false);
   const [openSignin, setOpenSignin] = React.useState<boolean>(false);
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
-  const LoggerModal = accountCreate ? (
-    <ModalVerifyAccount
-      loading={loading}
-      setLoading={setLoading}
-    />
-  ) : (
-    <ModalSignin
-      loading={loading}
-      setAccountCreate={setAccountCreate}
-      setLoading={setLoading}
-    />
-  );
+
   const handleClickLogin = () => {
     if (!loading) {
       setOpenSignin(false);
@@ -42,6 +31,20 @@ const Header = () => {
       setOpenSignin(false);
     }
   };
+
+  const LoggerModal = accountCreate ? (
+    <ModalVerifyAccount
+      loading={loading}
+      setLoading={setLoading}
+    />
+  ) : (
+    <ModalSignin
+      loading={loading}
+      setAccountCreate={setAccountCreate}
+      setLoading={setLoading}
+      switchModal={handleClickLogin}
+    />
+  );
 
   return (
     <header>
@@ -69,6 +72,7 @@ const Header = () => {
           <ModalLogin
             loading={loading}
             setLoading={setLoading}
+            switchModal={handleClickSignin}
           />
         )}
         {openSignin && LoggerModal}

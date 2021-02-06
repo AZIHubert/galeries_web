@@ -105,5 +105,17 @@ exports[`ModalSignin renders without crashing 1`] = `
       signin
     </button>
   </form>
+  <p>
+    You already have an account? click
+  </p>
+  <button
+    data-testid="switchToLogin"
+    disabled={false}
+  >
+    here
+  </button>
+  <p>
+    .
+  </p>
 </div>
 `;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ModalSignin renders without crashing 1`] = `
+exports[`ModalLogin renders without crashing 1`] = `
 <div>
   <button
     data-testid="button"
@@ -70,8 +70,21 @@ exports[`ModalSignin renders without crashing 1`] = `
       disabled={false}
       type="submit"
     >
-      signin
+      login
     </button>
   </form>
+  <p>
+    You don’t have an account yet? click
+  </p>
+  <button
+    data-testid="switchToSignin"
+    disabled={false}
+    onClick={[Function]}
+  >
+    here
+  </button>
+  <p>
+    .
+  </p>
 </div>
 `;

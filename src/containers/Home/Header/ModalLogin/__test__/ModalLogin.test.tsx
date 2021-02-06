@@ -9,20 +9,23 @@ import {
 
 import { REQUIRED } from '#helpers/formErrors';
 
-import ModalSignin from '../index';
+import ModalLogin from '../index';
 
 const Container = () => {
   const [loading, setLoading] = React.useState(false);
+  const switchModal = () => {};
   return (
-    <ModalSignin
+    <ModalLogin
       loading={loading}
       setLoading={setLoading}
+      switchModal={switchModal}
     />
   );
 };
 
-describe('ModalSignin', () => {
-  const setLoading = jest.fn;
+describe('ModalLogin', () => {
+  const mockedSetLoading = jest.fn;
+  const mockedSwitchModal = jest.fn;
   let passwordField: HTMLElement;
   let submitButton: HTMLElement;
   let userNameOrEmailField: HTMLElement;
@@ -34,7 +37,13 @@ describe('ModalSignin', () => {
   });
   afterEach(cleanup);
   it('renders without crashing', () => {
-    const tree = renderer.create(<ModalSignin loading={false} setLoading={setLoading} />).toJSON();
+    const tree = renderer.create(
+      <ModalLogin
+        loading={false}
+        setLoading={mockedSetLoading}
+        switchModal={mockedSwitchModal}
+      />,
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it('should not loading if errors', async () => {
@@ -43,7 +52,7 @@ describe('ModalSignin', () => {
     const userNameOrEmailError = await screen.findByTestId('userNameOrEmailError');
     expect(passwordError).toHaveTextContent(REQUIRED);
     expect(passwordField).not.toBeDisabled();
-    expect(submitButton).toHaveTextContent('signin');
+    expect(submitButton).toHaveTextContent('login');
     expect(submitButton).not.toBeDisabled();
     expect(userNameOrEmailError).toHaveTextContent(REQUIRED);
     expect(userNameOrEmailField).not.toBeDisabled();

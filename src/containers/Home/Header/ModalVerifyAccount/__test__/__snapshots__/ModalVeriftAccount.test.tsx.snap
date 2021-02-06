@@ -5,10 +5,10 @@ exports[`Home renders without crashing 1`] = `
   data-testid="modalVerifyAccount"
 >
   <p>
-    Reset your password
+    Verify your email
   </p>
   <p>
-    To reset your password, click the verification button in the email we sent to user@email.com. This helps keep your account secure.
+    To use Galeries, click the verification button in the email we sent to user@email.com. This helps keep your account secure.
   </p>
   <p>
     No email in your inbox or spam folder? Let’s
