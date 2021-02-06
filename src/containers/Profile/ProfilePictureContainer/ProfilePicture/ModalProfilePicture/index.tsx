@@ -1,12 +1,12 @@
 import moment from 'moment';
 import * as React from 'react';
 
+import { UserContext } from '#contexts/UserContext';
+
 import { ProfilePictureI } from '#helpers/interfaces';
 
 interface ModalProfilPictureI {
-  current?: boolean;
   profilePicture: ProfilePictureI;
-  switchCurrent: (pp: ProfilePictureI) => void
 }
 
 const formatBytes = (a: number, b = 2) => {
@@ -16,9 +16,7 @@ const formatBytes = (a: number, b = 2) => {
 };
 
 const ModalProfilPicture = ({
-  current = false,
   profilePicture,
-  switchCurrent,
 }: ModalProfilPictureI) => {
   const {
     createdAt,
@@ -29,6 +27,30 @@ const ModalProfilPicture = ({
       width,
     },
   } = profilePicture;
+  const { setUser, user } = React.useContext(UserContext);
+  const switchCurrent = () => {
+    setUser((prevState) => {
+      if (prevState) {
+        const { currentProfilePicture } = prevState;
+        if (currentProfilePicture && currentProfilePicture.id === profilePicture.id) {
+          return {
+            ...prevState,
+            currentProfilePicture: null,
+            currentProfilePictureId: null,
+          };
+        }
+        return {
+          ...prevState,
+          currentProfilePicture: profilePicture,
+          currentProfilePictureId: profilePicture.id,
+        };
+      }
+      return null;
+    });
+  };
+  const current = user
+    ? user.currentProfilePictureId === profilePicture.id
+    : null;
   return (
     <div>
       <img src={signedUrl} alt='image' />
@@ -58,7 +80,7 @@ const ModalProfilPicture = ({
       </p>
       <button
         data-testid='modalProfilePictureButton'
-        onClick={() => switchCurrent(profilePicture)}
+        onClick={() => switchCurrent()}
       >
         {current ? 'remove profile picture' : 'use as profile picture'}
       </button>

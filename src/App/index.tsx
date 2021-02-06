@@ -2,8 +2,12 @@ import * as React from 'react';
 
 import Home from '#containers/Home';
 
+import { UserProvider } from '#contexts/UserContext';
+
 const App = () => (
-  <Home />
+  <UserProvider>
+    <Home />
+  </UserProvider>
 );
 
 export default App;

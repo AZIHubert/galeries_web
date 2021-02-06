@@ -2,24 +2,43 @@ import * as React from 'react';
 
 import Modal from '#components/Modal';
 
+import { UserContext } from '#contexts/UserContext';
+
 import { ProfilePictureI } from '#helpers/interfaces';
 
 import ModalProfilePicture from './ModalProfilePicture';
 
 interface ProfilePictureComponentI {
-  current?: boolean;
   profilePicture: ProfilePictureI;
-  switchCurrent: (pp: ProfilePictureI) => void
 }
 
 const ProfilePicture = ({
-  current = false,
   profilePicture,
-  switchCurrent,
 }: ProfilePictureComponentI) => {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
+  const { setUser } = React.useContext(UserContext);
   const handleClose = () => {
     setOpenModal(false);
+  };
+  const switchCurrent = () => {
+    setUser((prevState) => {
+      if (prevState) {
+        const { currentProfilePicture } = prevState;
+        if (currentProfilePicture && currentProfilePicture.id === profilePicture.id) {
+          return {
+            ...prevState,
+            currentProfilePicture: null,
+            currentProfilePictureId: null,
+          };
+        }
+        return {
+          ...prevState,
+          currentProfilePicture: profilePicture,
+          currentProfilePictureId: profilePicture.id,
+        };
+      }
+      return null;
+    });
   };
   return (
     <div
@@ -27,7 +46,7 @@ const ProfilePicture = ({
     >
       <button
         data-testid='profilePictureButton'
-        onClick={() => switchCurrent(profilePicture)}
+        onClick={() => switchCurrent()}
       />
       <button
         onClick={() => setOpenModal((nextState) => !nextState)}
@@ -42,9 +61,7 @@ const ProfilePicture = ({
         handleClose={handleClose}
       >
         <ModalProfilePicture
-          current={current}
           profilePicture={profilePicture}
-          switchCurrent={switchCurrent}
         />
       </Modal>
     </div>

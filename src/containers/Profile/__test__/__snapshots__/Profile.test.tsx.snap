@@ -10,7 +10,7 @@ exports[`Profile renders without crashing 1`] = `
   <p
     data-testid="userNameText"
   >
-    user
+    user name
   </p>
   <input
     accept="image/*"
@@ -27,23 +27,5 @@ exports[`Profile renders without crashing 1`] = `
   <button>
     Edit your info
   </button>
-  <div>
-    <div
-      data-testid="profilePicture"
-    >
-      <button
-        data-testid="profilePictureButton"
-        onClick={[Function]}
-      />
-      <button
-        onClick={[Function]}
-      >
-        <img
-          alt="profile picture"
-          src="http://url.com"
-        />
-      </button>
-    </div>
-  </div>
 </div>
 `;

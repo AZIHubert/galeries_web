@@ -8,8 +8,14 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 
 import {
+  UserContext,
+  UserProvider,
+} from '#contexts/UserContext';
+
+import {
   ImageI,
   ProfilePictureI,
+  UserI,
 } from '#helpers/interfaces';
 
 import ProfilePictureContainer from '../index';
@@ -35,38 +41,38 @@ const profilePictureTwo: ProfilePictureI = {
   ...profilePictureOne,
   id: '2',
 };
+const newUser: UserI = {
+  createdAt: new Date('2021-02-05 18:42:02.528+01'),
+  currentProfilePicture: null,
+  currentProfilePictureId: null,
+  defaultProfilePicture: null,
+  email: 'user@email.com',
+  facebookId: null,
+  googleId: null,
+  id: '1',
+  profilePictures: [profilePictureOne],
+  role: 'admin',
+  updatedAt: null,
+  userName: 'user',
+};
 
 const Container = ({
-  defaultCurrentProfile = null,
-  profilePictures = [profilePictureOne],
+  defaultUser = newUser,
 }: {
-  defaultCurrentProfile?: ProfilePictureI | null;
-  profilePictures?: ProfilePictureI[];
+  defaultUser?: UserI;
 }) => {
-  const [
-    currentProfile,
-    setCurrentProfile,
-  ] = React.useState<ProfilePictureI | null>(defaultCurrentProfile);
-  const switchCurrent = (profilePicture: ProfilePictureI) => {
-    setCurrentProfile((prevState) => {
-      if (prevState && prevState.id === profilePicture.id) {
-        return null;
-      }
-      return { ...profilePicture };
-    });
-  };
+  const { setUser, user } = React.useContext(UserContext);
+  React.useEffect(() => {
+    setUser(defaultUser);
+  }, []);
   return (
     <>
-      <ProfilePictureContainer
-        currentProfileId={currentProfile ? currentProfile.id : null}
-        profilePictures={profilePictures}
-        switchCurrent={switchCurrent}
-      />
-      {currentProfile ? (
+      <ProfilePictureContainer />
+      {user && user.currentProfilePictureId ? (
         <p
           data-testid='currentId'
         >
-          {currentProfile.id}
+          {user.currentProfilePictureId}
         </p>
       ) : null}
     </>
@@ -74,46 +80,55 @@ const Container = ({
 };
 
 describe('ProfilePictureContainer', () => {
-  const mockedSwitchCurrent = jest.fn;
   afterEach(cleanup);
   it('renders without crashing', () => {
-    const tree = renderer.create(<ProfilePictureContainer
-      currentProfileId='1'
-      profilePictures={[profilePictureOne]}
-      switchCurrent={mockedSwitchCurrent}
-    />).toJSON();
+    const tree = renderer.create(<ProfilePictureContainer />).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it('should render one profile picture', () => {
-    const { getAllByTestId } = render(<ProfilePictureContainer
-      currentProfileId='1'
-      profilePictures={[profilePictureOne]}
-      switchCurrent={mockedSwitchCurrent}
-    />);
+    const { getAllByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const profilePictures = getAllByTestId('profilePicture');
     expect(profilePictures.length).toBe(1);
   });
   it('should render Two profile picture', () => {
-    const { getAllByTestId } = render(<ProfilePictureContainer
-      currentProfileId='1'
-      profilePictures={[
+    const userWithTwoProfilePictures = {
+      ...newUser,
+      profilePictures: [
         profilePictureOne,
         profilePictureTwo,
-      ]}
-      switchCurrent={mockedSwitchCurrent}
-    />);
+      ],
+    };
+    const { getAllByTestId } = render(
+      <UserProvider>
+        <Container
+          defaultUser={userWithTwoProfilePictures}
+        />
+      </UserProvider>,
+    );
     const profilePictures = getAllByTestId('profilePicture');
     expect(profilePictures.length).toBe(2);
   });
   it('should set current profile id on click', () => {
-    const { getByTestId } = render(<Container />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const profilePictureButton = getByTestId('profilePictureButton');
     fireEvent.click(profilePictureButton);
     const currentId = screen.getByTestId('currentId');
     expect(currentId).toHaveTextContent(profilePictureOne.id);
   });
   it('should set to null profile id if is the same on click', () => {
-    const { getByTestId } = render(<Container />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const profilePictureButton = getByTestId('profilePictureButton');
     fireEvent.click(profilePictureButton);
     fireEvent.click(profilePictureButton);
@@ -121,10 +136,20 @@ describe('ProfilePictureContainer', () => {
     expect(currentId).toBeNull();
   });
   it('should switch current id', () => {
-    const { getAllByTestId } = render(<Container
-      profilePictures={[profilePictureOne, profilePictureTwo]}
-      defaultCurrentProfile={profilePictureOne}
-    />);
+    const userWithTwoProfilePictures = {
+      ...newUser,
+      profilePictures: [
+        profilePictureOne,
+        profilePictureTwo,
+      ],
+    };
+    const { getAllByTestId } = render(
+      <UserProvider>
+        <Container
+          defaultUser={userWithTwoProfilePictures}
+        />
+      </UserProvider>,
+    );
     const secondProfilePictureButton = getAllByTestId('profilePictureButton')[1];
     fireEvent.click(secondProfilePictureButton);
     const currentId = screen.queryByTestId('currentId');

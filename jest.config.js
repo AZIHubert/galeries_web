@@ -25,6 +25,7 @@ module.exports = {
   testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   moduleNameMapper: {
     '#components/(.*)': '<rootDir>/src/components/$1',
+    '#contexts/(.*)': '<rootDir>/src/contexts/$1',
     '#containers/(.*)': '<rootDir>/src/containers/$1',
     '#helpers/(.*)': '<rootDir>/src/helpers/$1',
     '#ressources/(.*)': '<rootDir>/src/ressources/$1',

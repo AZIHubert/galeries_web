@@ -1,30 +1,22 @@
 import * as React from 'react';
 
-import { ProfilePictureI } from '#helpers/interfaces';
+import { UserContext } from '#contexts/UserContext';
 
 import ProfilePicture from './ProfilePicture';
 
-interface ProfilPictureContainerI {
-  currentProfileId: string | null;
-  profilePictures: ProfilePictureI[];
-  switchCurrent: (pp: ProfilePictureI) => void;
-}
-
-const ProfilePictureContainer = ({
-  currentProfileId,
-  profilePictures,
-  switchCurrent,
-}: ProfilPictureContainerI) => (
-  <div>
-    {profilePictures.map((profilePicture) => (
-      <ProfilePicture
-        current={currentProfileId === profilePicture.id}
-        key={profilePicture.id}
-        profilePicture={profilePicture}
-        switchCurrent={switchCurrent}
-      />
-    ))}
-  </div>
-);
+const ProfilePictureContainer = () => {
+  const { user } = React.useContext(UserContext);
+  if (!user) return null;
+  return (
+    <div>
+      {user.profilePictures.map((profilePicture) => (
+        <ProfilePicture
+          key={profilePicture.id}
+          profilePicture={profilePicture}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default ProfilePictureContainer;

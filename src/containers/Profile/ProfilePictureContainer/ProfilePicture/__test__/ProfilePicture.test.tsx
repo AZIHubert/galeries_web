@@ -7,8 +7,14 @@ import {
 } from '@testing-library/react';
 
 import {
+  UserContext,
+  UserProvider,
+} from '#contexts/UserContext';
+
+import {
   ImageI,
   ProfilePictureI,
+  UserI,
 } from '#helpers/interfaces';
 
 import ProfilePicture from '../index';
@@ -30,17 +36,37 @@ const newProfilePicture: ProfilePictureI = {
   originalImage: newImage,
   pendingImage: newImage,
 };
+const newUser: UserI = {
+  createdAt: new Date('2021-02-05 18:42:02.528+01'),
+  currentProfilePicture: null,
+  currentProfilePictureId: null,
+  defaultProfilePicture: null,
+  email: 'user@email.com',
+  facebookId: null,
+  googleId: null,
+  id: '1',
+  profilePictures: [newProfilePicture],
+  role: 'admin',
+  updatedAt: null,
+  userName: 'user',
+};
 
-const Container = () => {
-  const [current, setCurrent] = React.useState<boolean>(false);
-  const switchCurrent = () => {
-    setCurrent((prevState) => !prevState);
-  };
+const Container = ({
+  defaultUser = newUser,
+}: {
+  defaultUser?: UserI
+}) => {
+  const { setUser, user } = React.useContext(UserContext);
+  React.useEffect(() => {
+    setUser(defaultUser);
+  }, []);
+  const current = user
+    ? user.currentProfilePictureId === newProfilePicture.id
+    : null;
   return (
     <>
       <ProfilePicture
         profilePicture={newProfilePicture}
-        switchCurrent={switchCurrent}
       />
       <p
         data-testid='checkCurrentState'
@@ -52,16 +78,18 @@ const Container = () => {
 };
 
 describe('ProfilePicture', () => {
-  const mockSwitchCurrent = jest.fn;
   it('renders without crashing', () => {
     const tree = renderer.create(<ProfilePicture
-      switchCurrent={mockSwitchCurrent}
       profilePicture={newProfilePicture}
     />).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it('shouls switch current', () => {
-    const { getByTestId } = render(<Container />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const profilePictureButton = getByTestId('profilePictureButton');
     fireEvent.click(profilePictureButton);
     const checkCurrentStateTrue = screen.getByTestId('checkCurrentState');

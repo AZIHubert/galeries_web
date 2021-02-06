@@ -8,6 +8,11 @@ import * as React from 'react';
 import renderer from 'react-test-renderer';
 
 import {
+  UserContext,
+  UserProvider,
+} from '#contexts/UserContext';
+
+import {
   ImageI,
   ProfilePictureI,
   UserI,
@@ -53,75 +58,27 @@ const Container = ({
 }: {
   defaultUser?: UserI
 }) => {
-  const [user, setUser] = React.useState<UserI>(defaultUser);
-  const switchCurrent = (profilePicture: ProfilePictureI) => {
-    setUser((prevState) => {
-      const { currentProfilePicture } = prevState;
-      if (currentProfilePicture && currentProfilePicture.id === profilePicture.id) {
-        return {
-          ...prevState,
-          currentProfilePicture: null,
-          currentProfilePictureId: null,
-        };
-      }
-      return {
-        ...prevState,
-        currentProfilePicture: profilePicture,
-        currentProfilePictureId: profilePicture.id,
-      };
-    });
-  };
-  const addProfilePicture = (pp: File) => {
-    const addedImage: ImageI = {
-      bucketName: 'bucketName',
-      fileName: pp.name,
-      format: 'jpg',
-      height: 2340,
-      id: '2',
-      signedUrl: 'http://newprofilepicture.com/',
-      size: 100857,
-      width: 1080,
-    };
-    const addedProfilePicture: ProfilePictureI = {
-      createdAt: new Date(),
-      cropedImage: addedImage,
-      id: '2',
-      originalImage: addedImage,
-      pendingImage: addedImage,
-    };
-    setUser((prevState) => ({
-      ...prevState,
-      currentProfilePicture: addedProfilePicture,
-      currentProfilePictureId: '2',
-      profilePictures: [
-        addedProfilePicture,
-        ...prevState.profilePictures,
-      ],
-    }));
-  };
+  const { setUser } = React.useContext(UserContext);
+  React.useEffect(() => {
+    setUser(defaultUser);
+  }, []);
   return (
-    <Profile
-      addProfilePicture={addProfilePicture}
-      user={user}
-      switchCurrent={switchCurrent}
-    />
+    <Profile />
   );
 };
 
 describe('Profile', () => {
-  const mockedSwitchCurrent = jest.fn;
-  const mockedAddProfilePicture = jest.fn;
   afterEach(cleanup);
   it('renders without crashing', () => {
-    const tree = renderer.create(<Profile
-      addProfilePicture={mockedAddProfilePicture}
-      switchCurrent={mockedSwitchCurrent}
-      user={newUser}
-    />).toJSON();
+    const tree = renderer.create(<Profile />).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it('should render local profile picture if currentProfilePictureId and defaultProfilePicture are null', () => {
-    const { getByTestId } = render(<Container />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const currentProfilePicture = getByTestId('currentProfilePicture');
     expect(currentProfilePicture).toHaveAttribute('src', '#ressources/images/defaultProfilePicture.png');
   });
@@ -130,9 +87,13 @@ describe('Profile', () => {
       ...newUser,
       defaultProfilePicture: 'defaultProfilePicture',
     };
-    const { getByTestId } = render(<Container
-      defaultUser={userWithDefaultProfilePicture}
-    />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container
+          defaultUser={userWithDefaultProfilePicture}
+        />
+      </UserProvider>,
+    );
     const currentProfilePicture = getByTestId('currentProfilePicture');
     expect(currentProfilePicture).toHaveAttribute('src', 'defaultProfilePicture');
   });
@@ -142,9 +103,13 @@ describe('Profile', () => {
       currentProfilePicture: newProfilePicture,
       currentProfilePictureId: newProfilePicture.id,
     };
-    const { getByTestId } = render(<Container
-      defaultUser={userWithCurrentProfilePicture}
-    />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container
+          defaultUser={userWithCurrentProfilePicture}
+        />
+      </UserProvider>,
+    );
     const currentProfilePicture = getByTestId('currentProfilePicture');
     expect(currentProfilePicture).toHaveAttribute('src', newProfilePicture.originalImage.signedUrl);
   });
@@ -155,19 +120,31 @@ describe('Profile', () => {
       currentProfilePictureId: newProfilePicture.id,
       defaultProfilePicture: 'defaultProfilePicture',
     };
-    const { getByTestId } = render(<Container
-      defaultUser={userWithCurrentProfilePicture}
-    />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container
+          defaultUser={userWithCurrentProfilePicture}
+        />
+      </UserProvider>,
+    );
     const currentProfilePicture = getByTestId('currentProfilePicture');
     expect(currentProfilePicture).toHaveAttribute('src', newProfilePicture.originalImage.signedUrl);
   });
   it('should render username', () => {
-    const { getByTestId } = render(<Container />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const userNameText = getByTestId('userNameText');
     expect(userNameText).toHaveTextContent(newUser.userName);
   });
   it('should set picture if currentProfileProfile is null', () => {
-    const { getByTestId } = render(<Container />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const profilePictureButton = getByTestId('profilePictureButton');
     fireEvent.click(profilePictureButton);
     const currentProfilePicture = screen.getByTestId('currentProfilePicture');
@@ -179,9 +156,13 @@ describe('Profile', () => {
       currentProfilePicture: newProfilePicture,
       currentProfilePictureId: newProfilePicture.id,
     };
-    const { getByTestId } = render(<Container
-      defaultUser={userWithCurrentProfilePicture}
-    />);
+    const { getByTestId } = render(
+      <UserProvider>
+        <Container
+          defaultUser={userWithCurrentProfilePicture}
+        />
+      </UserProvider>,
+    );
     const profilePictureButton = getByTestId('profilePictureButton');
     fireEvent.click(profilePictureButton);
     const currentProfilePicture = screen.getByTestId('currentProfilePicture');
@@ -189,7 +170,11 @@ describe('Profile', () => {
   });
   it('should add a profile picture', () => {
     const file = new File(['blob'], 'image.png', { type: 'image/png' });
-    const { getByTestId, getAllByTestId } = render(<Container />);
+    const { getByTestId, getAllByTestId } = render(
+      <UserProvider>
+        <Container />
+      </UserProvider>,
+    );
     const previousProfilePictures = getAllByTestId('profilePicture');
     const inputFile = getByTestId('inputFile');
     fireEvent.change(inputFile, { target: { files: [file] } });

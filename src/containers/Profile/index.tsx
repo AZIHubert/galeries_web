@@ -1,35 +1,63 @@
 import * as React from 'react';
 
-import { ProfilePictureI, UserI } from '#helpers/interfaces';
+import { UserContext } from '#contexts/UserContext';
+
+import {
+  ImageI,
+  ProfilePictureI,
+  UserI,
+} from '#helpers/interfaces';
 
 import ProfilePictureContainer from './ProfilePictureContainer';
 
-const profilePicture: (user: UserI) => any = (user: UserI) => {
-  if (user.currentProfilePicture) {
+const profilePicture
+: (user: UserI | null) => any = (user: UserI | null) => {
+  if (user && user.currentProfilePicture) {
     return user.currentProfilePicture.cropedImage.signedUrl;
   }
-  if (user.defaultProfilePicture) {
+  if (user && user.defaultProfilePicture) {
     return user.defaultProfilePicture;
   }
   return '#ressources/images/defaultProfilePicture.png';
 };
 
-interface ProfileI {
-  switchCurrent: (pp: ProfilePictureI) => void;
-  addProfilePicture: (pp: File) => void;
-  user: UserI;
-}
-
-const Profile = ({
-  addProfilePicture,
-  switchCurrent,
-  user,
-}: ProfileI) => {
+const Profile = () => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
+  const { setUser, user } = React.useContext(UserContext);
   React.useEffect(() => {
     if (selectedFile) {
-      addProfilePicture(selectedFile);
+      const newImage: ImageI = {
+        bucketName: 'bucketName',
+        fileName: selectedFile.name,
+        format: 'jpg',
+        height: 2340,
+        id: '2',
+        signedUrl: 'http://newprofilepicture.com/',
+        size: 100857,
+        width: 1080,
+      };
+      const newProfilePicture: ProfilePictureI = {
+        createdAt: new Date(),
+        cropedImage: newImage,
+        id: '2',
+        originalImage: newImage,
+        pendingImage: newImage,
+      };
+      setUser((prevState) => {
+        if (prevState) {
+          return {
+            ...prevState,
+            currentProfilePictureId: newProfilePicture.id,
+            currentProfilePicture: newProfilePicture,
+            profilePictures: [
+              newProfilePicture,
+              ...prevState.profilePictures,
+            ],
+          };
+        }
+        return null;
+      });
     }
   }, [selectedFile]);
   const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +78,7 @@ const Profile = ({
       <p
         data-testid='userNameText'
       >
-        {user.userName}
+        {user ? user.userName : 'user name'}
       </p>
       <input
         accept="image/*"
@@ -68,11 +96,7 @@ const Profile = ({
       <button>
         Edit your info
       </button>
-      <ProfilePictureContainer
-        currentProfileId={user.currentProfilePictureId}
-        profilePictures={user.profilePictures}
-        switchCurrent={switchCurrent}
-      />
+      <ProfilePictureContainer />
     </div>
   );
 };

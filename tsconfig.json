@@ -48,6 +48,7 @@
     "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
     "paths": {
       "#components/*": ["./src/components/*"],
+      "#contexts/*": ["./src/contexts/*"],
       "#containers/*": ["./src/containers/*"],
       "#helpers/*": ["./src/helpers/*"],
       "#ressources/*": ["./src/ressources/*"]
