@@ -3,14 +3,27 @@ import * as React from 'react';
 import Modal from '#components/Modal';
 import logo from '#ressources/svg/logoG.svg';
 
+import ModalVerifyAccount from './ModalVerifyAccount';
 import ModalLogin from './ModalLogin';
 import ModalSignin from './ModalSignin';
 
 const Header = () => {
-  const [loading, setLoading] = React.useState(false);
-  const [openLogin, setOpenLogin] = React.useState(false);
-  const [openSignin, setOpenSignin] = React.useState(false);
-
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [openLogin, setOpenLogin] = React.useState<boolean>(false);
+  const [openSignin, setOpenSignin] = React.useState<boolean>(false);
+  const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
+  const LoggerModal = accountCreate ? (
+    <ModalVerifyAccount
+      loading={loading}
+      setLoading={setLoading}
+    />
+  ) : (
+    <ModalSignin
+      loading={loading}
+      setAccountCreate={setAccountCreate}
+      setLoading={setLoading}
+    />
+  );
   const handleClickLogin = () => {
     if (!loading) {
       setOpenSignin(false);
@@ -58,12 +71,7 @@ const Header = () => {
             setLoading={setLoading}
           />
         )}
-        {openSignin && (
-          <ModalSignin
-            loading={loading}
-            setLoading={setLoading}
-          />
-        )}
+        {openSignin && LoggerModal}
       </Modal>
     </header>
   );
