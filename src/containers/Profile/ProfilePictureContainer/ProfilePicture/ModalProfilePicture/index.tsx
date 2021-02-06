@@ -6,6 +6,7 @@ import { ProfilePictureI } from '#helpers/interfaces';
 interface ModalProfilPictureI {
   current?: boolean;
   profilePicture: ProfilePictureI;
+  switchCurrent: () => void
 }
 
 const formatBytes = (a: number, b = 2) => {
@@ -15,6 +16,7 @@ const formatBytes = (a: number, b = 2) => {
 };
 
 const ModalProfilPicture = ({
+  current = false,
   profilePicture: {
     createdAt,
     originalImage: {
@@ -24,7 +26,7 @@ const ModalProfilPicture = ({
       width,
     },
   },
-  current = false,
+  switchCurrent,
 }: ModalProfilPictureI) => (
   <div>
     <img src={signedUrl} alt='image' />
@@ -53,7 +55,8 @@ const ModalProfilPicture = ({
       {`${width} x ${height} px`}
     </p>
     <button
-      data-testid='useProfilePictureButton'
+      data-testid='profilePictureButton'
+      onClick={switchCurrent}
     >
       {current ? 'remove profile picture' : 'use as profile picture'}
     </button>
