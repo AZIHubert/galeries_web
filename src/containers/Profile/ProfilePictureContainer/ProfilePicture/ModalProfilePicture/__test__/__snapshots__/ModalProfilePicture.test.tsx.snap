@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Body renders without crashing 1`] = `
+<div>
+  <img
+    alt="image"
+    src="http://url.com"
+  />
+  <p>
+    upload at
+  </p>
+  <p
+    data-testid="uploadAtText"
+  >
+     February 5th 2021
+  </p>
+  <p>
+    weight:
+  </p>
+  <p
+    data-testid="weightText"
+  >
+    98.49 KB
+  </p>
+  <p>
+    size:
+  </p>
+  <p
+    data-testid="sizeText"
+  >
+    1080 x 2340 px
+  </p>
+  <button
+    data-testid="useProfilePictureButton"
+  >
+    use as profile picture
+  </button>
+  <button>
+    download image
+  </button>
+</div>
+`;
