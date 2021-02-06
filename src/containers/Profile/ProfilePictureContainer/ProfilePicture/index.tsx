@@ -3,22 +3,26 @@ import * as React from 'react';
 import { ProfilePictureI } from '#helpers/interfaces';
 
 interface ProfilePictureComponentI {
+  current: boolean;
   profilePicture: ProfilePictureI;
-  switchCurrent: () => void
+  switchCurrent: (id: string) => void
 }
 
 const ProfilePicture = ({
   profilePicture: {
+    id,
     originalImage: {
       signedUrl,
     },
   },
   switchCurrent,
 }: ProfilePictureComponentI) => (
-  <div>
+  <div
+    data-testid='profilePicture'
+  >
     <button
       data-testid='profilePictureButton'
-      onClick={switchCurrent}
+      onClick={() => switchCurrent(id)}
     />
     <a href='#'>
       <img
