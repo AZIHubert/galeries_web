@@ -1,13 +1,13 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 
-import ModalVerifyAccount from '../index';
+import ModalValidateResetPassword from '../index';
 
-describe('Home', () => {
+describe('ModalValidateResetPassword', () => {
+  const mockedSetLoading = jest.fn;
   it('renders without crashing', () => {
-    const mockedSetLoading = jest.fn;
     const tree = renderer.create(
-      <ModalVerifyAccount
+      <ModalValidateResetPassword
         loading={false}
         setLoading={mockedSetLoading}
         currentEmail='mockedEmail@email.com'

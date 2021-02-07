@@ -24,6 +24,7 @@ describe('Header', () => {
     expect(tree).toMatchSnapshot();
   });
   it('should render verify account modal if account is created', async () => {
+    const email = 'user@email.com';
     act(() => {
       render(<Header />);
     });
@@ -35,13 +36,15 @@ describe('Header', () => {
     const submitButton = screen.getByTestId('submitButton');
     const userNameField = screen.getByTestId('userNameField');
     fireEvent.change(confirmPasswordField, { target: { value: 'Aaoudjiuvhds9!' } });
-    fireEvent.change(emailField, { target: { value: 'user@email.com' } });
+    fireEvent.change(emailField, { target: { value: email } });
     fireEvent.change(passwordField, { target: { value: 'Aaoudjiuvhds9!' } });
     fireEvent.change(userNameField, { target: { value: 'user' } });
     fireEvent.click(submitButton);
     await screen.findByTestId('modalVerifyAccount');
     const modalSignin = screen.queryByTestId('modalSignin');
     expect(modalSignin).toBeNull();
+    const verifyAccountBody = screen.getByTestId('verifyAccountBody');
+    expect(verifyAccountBody).toHaveTextContent(email);
   });
   it('should switch betwen login and forgotPassword modal', () => {
     const { getByTestId } = render(<Header />);
@@ -68,5 +71,22 @@ describe('Header', () => {
     fireEvent.click(switchToLogin);
     const loginModal = screen.queryByTestId('loginModal');
     expect(loginModal).not.toBeNull();
+  });
+  it('should switch to ModalValidateResetPassword if ValidateResetPassword form is valid', async () => {
+    const email = 'user@email.com';
+    const { getByTestId } = render(<Header />);
+    const openLogin = getByTestId('openLogin');
+    fireEvent.click(openLogin);
+    const forgotPasswordButton = screen.getByTestId('forgotPasswordButton');
+    fireEvent.click(forgotPasswordButton);
+    const emailField = screen.getByTestId('emailField');
+    const submitButton = screen.getByTestId('submitButton');
+    fireEvent.change(emailField, { target: { value: email } });
+    fireEvent.click(submitButton);
+    await screen.findByTestId('modalValidateResetPassword');
+    const modalForgotPassword = screen.queryByTestId('modalForgotPassword');
+    expect(modalForgotPassword).toBeNull();
+    const validateResetPasswordBody = screen.getByTestId('validateResetPasswordBody');
+    expect(validateResetPasswordBody).toHaveTextContent(email);
   });
 });

@@ -4,9 +4,11 @@ import * as React from 'react';
 import { resetPasswordSchema } from '#helpers/schemas';
 
 interface ModalForgotPasswordI {
-  loading: boolean;
+  setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
   setForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  switchModal: () => void;
+  loading: boolean;
 }
 
 const initialValues = {
@@ -14,14 +16,20 @@ const initialValues = {
 };
 
 const ModalForgotPassword = ({
-  loading,
+  setCurrentEmail,
   setForgotPassword,
   setLoading,
+  switchModal,
+  loading,
 }: ModalForgotPasswordI) => {
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {
-      if (!loading) { setLoading(true); }
+    onSubmit: ({ email }) => {
+      if (!loading) {
+        setLoading(true);
+        switchModal();
+        setCurrentEmail(email);
+      }
     },
     validateOnChange: false,
     validateOnBlur: true,
