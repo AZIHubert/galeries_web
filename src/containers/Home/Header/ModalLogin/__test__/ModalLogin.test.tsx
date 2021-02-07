@@ -13,12 +13,14 @@ import ModalLogin from '../index';
 
 const Container = () => {
   const [loading, setLoading] = React.useState(false);
+  const setForgotPassword = () => {};
   const switchModal = () => {};
   return (
     <ModalLogin
       loading={loading}
       setLoading={setLoading}
       switchModal={switchModal}
+      setForgotPassword={setForgotPassword}
     />
   );
 };
@@ -26,6 +28,7 @@ const Container = () => {
 describe('ModalLogin', () => {
   const mockedSetLoading = jest.fn;
   const mockedSwitchModal = jest.fn;
+  const mockedSetForgotPassword = jest.fn;
   let passwordField: HTMLElement;
   let submitButton: HTMLElement;
   let userNameOrEmailField: HTMLElement;
@@ -40,6 +43,7 @@ describe('ModalLogin', () => {
     const tree = renderer.create(
       <ModalLogin
         loading={false}
+        setForgotPassword={mockedSetForgotPassword}
         setLoading={mockedSetLoading}
         switchModal={mockedSwitchModal}
       />,

@@ -111,6 +111,7 @@ exports[`ModalSignin renders without crashing 1`] = `
   <button
     data-testid="switchToLogin"
     disabled={false}
+    onClick={[Function]}
   >
     here
   </button>
