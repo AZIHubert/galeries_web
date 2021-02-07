@@ -24,12 +24,14 @@ import ModalSignin from '../index';
 const Container = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
+  const switchModal = () => {};
   return (
     <>
       <ModalSignin
         loading={loading}
         setLoading={setLoading}
         setAccountCreate={setAccountCreate}
+        switchModal={switchModal}
       />
       {accountCreate
         ? (
@@ -47,6 +49,7 @@ const Container = () => {
 describe('ModalSignin', () => {
   const mockedSetLoading = jest.fn;
   const mockedSetAccountCreate = jest.fn;
+  const mockedSwitchModal = jest.fn;
   let confirmPasswordField: HTMLElement;
   let emailField: HTMLElement;
   let submitButton: HTMLElement;
@@ -69,6 +72,7 @@ describe('ModalSignin', () => {
         loading={false}
         setLoading={mockedSetLoading}
         setAccountCreate={mockedSetAccountCreate}
+        switchModal={mockedSwitchModal}
       />,
     ).toJSON();
     expect(tree).toMatchSnapshot();

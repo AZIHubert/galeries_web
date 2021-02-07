@@ -68,6 +68,12 @@ exports[`ModalLogin renders without crashing 1`] = `
       * Required field
     </div>
     <button
+      data-testid="forgotPasswordButton"
+      onClick={[Function]}
+    >
+      Forgot your password?
+    </button>
+    <button
       data-testid="submitButton"
       disabled={false}
       type="submit"

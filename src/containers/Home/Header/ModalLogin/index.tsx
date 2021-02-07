@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { useFormik } from 'formik';
+import * as React from 'react';
 
 import FacebookButton from '#components/FacebookButton';
 import GoogleButton from '#components/GoogleButton';
@@ -7,6 +7,7 @@ import { loginSchema } from '#helpers/schemas';
 
 interface ModalLoginI {
   loading: boolean;
+  setForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   switchModal: () => void;
 }
@@ -18,6 +19,7 @@ const initialValues = {
 
 const ModalLogin = ({
   loading,
+  setForgotPassword,
   setLoading,
   switchModal,
 }: ModalLoginI) => {
@@ -98,6 +100,16 @@ const ModalLogin = ({
         <div>
           * Required field
         </div>
+        <button
+          data-testid='forgotPasswordButton'
+          onClick={() => {
+            if (!loading) {
+              setForgotPassword(true);
+            }
+          }}
+        >
+          Forgot your password?
+        </button>
         <button
           disabled={loading}
           data-testid='submitButton'

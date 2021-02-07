@@ -3,15 +3,17 @@ import * as React from 'react';
 import Modal from '#components/Modal';
 import logo from '#ressources/svg/logoG.svg';
 
-import ModalVerifyAccount from './ModalVerifyAccount';
+import ModalForgotPassword from './ModalForgotPassword';
 import ModalLogin from './ModalLogin';
 import ModalSignin from './ModalSignin';
+import ModalVerifyAccount from './ModalVerifyAccount';
 
 const Header = () => {
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [openLogin, setOpenLogin] = React.useState<boolean>(false);
   const [openSignin, setOpenSignin] = React.useState<boolean>(false);
+  const [forgotPassword, setForgotPassword] = React.useState<boolean>(false);
 
   const handleClickLogin = () => {
     if (!loading) {
@@ -45,6 +47,20 @@ const Header = () => {
       switchModal={handleClickLogin}
     />
   );
+  const SignerModal = forgotPassword ? (
+    <ModalForgotPassword
+      loading={loading}
+      setForgotPassword={setForgotPassword}
+      setLoading={setLoading}
+    />
+  ) : (
+    <ModalLogin
+      loading={loading}
+      setLoading={setLoading}
+      setForgotPassword={setForgotPassword}
+      switchModal={handleClickSignin}
+    />
+  );
 
   return (
     <header>
@@ -68,13 +84,7 @@ const Header = () => {
         open={openLogin || openSignin}
         handleClose={handleCloseModal}
       >
-        {openLogin && (
-          <ModalLogin
-            loading={loading}
-            setLoading={setLoading}
-            switchModal={handleClickSignin}
-          />
-        )}
+        {openLogin && SignerModal}
         {openSignin && LoggerModal}
       </Modal>
     </header>

@@ -43,6 +43,19 @@ describe('Header', () => {
     const modalSignin = screen.queryByTestId('modalSignin');
     expect(modalSignin).toBeNull();
   });
+  it('should switch betwen login and forgotPassword modal', () => {
+    const { getByTestId } = render(<Header />);
+    const openLogin = getByTestId('openLogin');
+    fireEvent.click(openLogin);
+    const forgotPasswordButton = screen.getByTestId('forgotPasswordButton');
+    fireEvent.click(forgotPasswordButton);
+    const modalForgotPassword = screen.queryByTestId('modalForgotPassword');
+    expect(modalForgotPassword).not.toBeNull();
+    const cancelButton = screen.getByTestId('cancelButton');
+    fireEvent.click(cancelButton);
+    const loginModal = screen.queryByTestId('loginModal');
+    expect(loginModal).not.toBeNull();
+  });
   it('should switch between login and signin modal', () => {
     const { getByTestId } = render(<Header />);
     const openLogin = getByTestId('openLogin');
