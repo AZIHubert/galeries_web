@@ -25,6 +25,7 @@ const Container = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
   const switchModal = () => {};
+  const setCurrentEmail = () => {};
   return (
     <>
       <ModalSignin
@@ -32,6 +33,7 @@ const Container = () => {
         setLoading={setLoading}
         setAccountCreate={setAccountCreate}
         switchModal={switchModal}
+        setCurrentEmail={setCurrentEmail}
       />
       {accountCreate
         ? (
@@ -50,6 +52,7 @@ describe('ModalSignin', () => {
   const mockedSetLoading = jest.fn;
   const mockedSetAccountCreate = jest.fn;
   const mockedSwitchModal = jest.fn;
+  const mockedSetCurrentEmail = jest.fn;
   let confirmPasswordField: HTMLElement;
   let emailField: HTMLElement;
   let submitButton: HTMLElement;
@@ -73,6 +76,7 @@ describe('ModalSignin', () => {
         setLoading={mockedSetLoading}
         setAccountCreate={mockedSetAccountCreate}
         switchModal={mockedSwitchModal}
+        setCurrentEmail={mockedSetCurrentEmail}
       />,
     ).toJSON();
     expect(tree).toMatchSnapshot();

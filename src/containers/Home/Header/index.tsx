@@ -7,13 +7,16 @@ import ModalForgotPassword from './ModalForgotPassword';
 import ModalLogin from './ModalLogin';
 import ModalSignin from './ModalSignin';
 import ModalVerifyAccount from './ModalVerifyAccount';
+import ModalValidateResetPassword from './ModalValidateResetPassword';
 
 const Header = () => {
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
+  const [forgotPassword, setForgotPassword] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [openLogin, setOpenLogin] = React.useState<boolean>(false);
   const [openSignin, setOpenSignin] = React.useState<boolean>(false);
-  const [forgotPassword, setForgotPassword] = React.useState<boolean>(false);
+  const [validateResetPassword, setValidateResetPassword] = React.useState<boolean>(false);
+  const [currentEmail, setCurrentEmail] = React.useState<string>('');
 
   const handleClickLogin = () => {
     if (!loading) {
@@ -29,13 +32,24 @@ const Header = () => {
   };
   const handleCloseModal = () => {
     if (!loading) {
+      setAccountCreate(false);
+      setForgotPassword(false);
       setOpenLogin(false);
       setOpenSignin(false);
+      setValidateResetPassword(false);
+      setCurrentEmail('');
+    }
+  };
+  const switchToValidateResetPassword = () => {
+    if (!loading) {
+      setForgotPassword(false);
+      setValidateResetPassword(true);
     }
   };
 
   const LoggerModal = accountCreate ? (
     <ModalVerifyAccount
+      currentEmail={currentEmail}
       loading={loading}
       setLoading={setLoading}
     />
@@ -43,24 +57,41 @@ const Header = () => {
     <ModalSignin
       loading={loading}
       setAccountCreate={setAccountCreate}
+      setCurrentEmail={setCurrentEmail}
       setLoading={setLoading}
       switchModal={handleClickLogin}
     />
   );
-  const SignerModal = forgotPassword ? (
-    <ModalForgotPassword
-      loading={loading}
-      setForgotPassword={setForgotPassword}
-      setLoading={setLoading}
-    />
-  ) : (
-    <ModalLogin
-      loading={loading}
-      setLoading={setLoading}
-      setForgotPassword={setForgotPassword}
-      switchModal={handleClickSignin}
-    />
-  );
+  const SignerModal = () => {
+    if (forgotPassword) {
+      return (
+        <ModalForgotPassword
+          setCurrentEmail={setCurrentEmail}
+          setForgotPassword={setForgotPassword}
+          setLoading={setLoading}
+          loading={loading}
+          switchModal={switchToValidateResetPassword}
+        />
+      );
+    }
+    if (validateResetPassword) {
+      return (
+        <ModalValidateResetPassword
+          currentEmail={currentEmail}
+          loading={loading}
+          setLoading={setLoading}
+        />
+      );
+    }
+    return (
+      <ModalLogin
+        loading={loading}
+        setLoading={setLoading}
+        setForgotPassword={setForgotPassword}
+        switchModal={handleClickSignin}
+      />
+    );
+  };
 
   return (
     <header>
@@ -84,7 +115,7 @@ const Header = () => {
         open={openLogin || openSignin}
         handleClose={handleCloseModal}
       >
-        {openLogin && SignerModal}
+        {openLogin && SignerModal()}
         {openSignin && LoggerModal}
       </Modal>
     </header>

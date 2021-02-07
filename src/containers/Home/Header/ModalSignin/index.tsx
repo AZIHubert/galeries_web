@@ -7,8 +7,9 @@ import { signinSchema } from '#helpers/schemas';
 
 interface ModalSigninI {
   loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setAccountCreate:React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   switchModal: () => void;
 }
 
@@ -24,12 +25,14 @@ const ModalSignin = ({
   setAccountCreate,
   setLoading,
   switchModal,
+  setCurrentEmail,
 }: ModalSigninI) => {
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {
+    onSubmit: ({ email }) => {
       if (!loading) {
         setLoading(true);
+        setCurrentEmail(email);
         setAccountCreate(true);
       }
     },

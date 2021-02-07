@@ -1,29 +1,29 @@
 import * as React from 'react';
 
-interface ModalVerifyAccountI {
+interface ModalValidateResetPasswordI {
   currentEmail: string;
   loading: boolean,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ModalVerifyAccount = ({
+const ModalValidateResetPassword = ({
   currentEmail,
   loading,
   setLoading,
-}: ModalVerifyAccountI) => (
+}: ModalValidateResetPasswordI) => (
   <div
-    data-testid="modalVerifyAccount"
+    data-testid="modalValidateResetPassword"
   >
     <p>
-      Verify your email
+      Reset your password
     </p>
     <p
-      data-testid='verifyAccountBody'
+      data-testid='validateResetPasswordBody'
     >
-      To use Galeries, click the verification
-      button in the email we sent
-      to {currentEmail}. This helps keep
-      your account secure.
+      To reset your password, click the
+      verification button in
+      the email we sent to {currentEmail}.
+      This helps keep your account secure.
     </p>
     <p>
       No email in your inbox or spam folder?
@@ -41,4 +41,4 @@ const ModalVerifyAccount = ({
   </div>
 );
 
-export default ModalVerifyAccount;
+export default ModalValidateResetPassword;
