@@ -8,6 +8,7 @@ import { loginSchema } from '#helpers/schemas';
 interface ModalLoginI {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  switchModal: () => void;
 }
 
 const initialValues = {
@@ -15,7 +16,11 @@ const initialValues = {
   password: '',
 };
 
-const ModalLogin = ({ loading, setLoading }: ModalLoginI) => {
+const ModalLogin = ({
+  loading,
+  setLoading,
+  switchModal,
+}: ModalLoginI) => {
   const formik = useFormik({
     initialValues,
     onSubmit: () => {
@@ -27,7 +32,9 @@ const ModalLogin = ({ loading, setLoading }: ModalLoginI) => {
   });
 
   return (
-    <div>
+    <div
+      data-testid='loginModal'
+    >
       <FacebookButton
         loading={loading}
         setLoading={setLoading}
@@ -96,9 +103,22 @@ const ModalLogin = ({ loading, setLoading }: ModalLoginI) => {
           data-testid='submitButton'
           type='submit'
         >
-          {loading ? 'loading' : 'signin'}
+          {loading ? 'loading' : 'login'}
         </button>
       </form>
+      <p>
+        You don’t have an account yet? click
+      </p>
+      <button
+        data-testid='switchToSignin'
+        disabled={loading}
+        onClick={switchModal}
+      >
+        here
+      </button>
+      <p>
+        .
+      </p>
     </div>
   );
 };

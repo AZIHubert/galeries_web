@@ -9,6 +9,7 @@ interface ModalSigninI {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setAccountCreate:React.Dispatch<React.SetStateAction<boolean>>;
+  switchModal: () => void;
 }
 
 const initialValues = {
@@ -22,6 +23,7 @@ const ModalSignin = ({
   loading,
   setAccountCreate,
   setLoading,
+  switchModal,
 }: ModalSigninI) => {
   const formik = useFormik({
     initialValues,
@@ -151,6 +153,19 @@ const ModalSignin = ({
           {loading ? 'loading' : 'signin'}
         </button>
       </form>
+      <p>
+        You already have an account? click
+      </p>
+      <button
+        disabled={loading}
+        data-testid='switchToLogin'
+        onClick={switchModal}
+      >
+        here
+      </button>
+      <p>
+        .
+      </p>
     </div>
   );
 };
