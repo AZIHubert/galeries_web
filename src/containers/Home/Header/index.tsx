@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
 import Modal from '#components/Modal';
 import logo from '#ressources/svg/logoG.svg';
@@ -8,6 +9,63 @@ import ModalLogin from './ModalLogin';
 import ModalSignin from './ModalSignin';
 import ModalVerifyAccount from './ModalVerifyAccount';
 import ModalValidateResetPassword from './ModalValidateResetPassword';
+
+interface ButtonI {
+  variant?: 'primary' | 'secondary';
+  marginRight?: number;
+}
+
+const Wrapper = styled.header`
+  align-items: 'center';
+  background-color: #FFFFF4;
+  border-bottom: 5px solid #7483FF;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 30px;
+  padding: 20px 0;
+`;
+const Logo = styled.img`
+  width: 35px;
+`;
+const Button = styled.button<ButtonI>`
+  background-color: ${(props) => (
+    props.variant === 'primary'
+      ? '#7483FF'
+      : '#FFFFF4'
+  )};
+  border: 2px solid #7483FF;
+  border-radius: 6px;
+  color: ${(props) => (
+    props.variant === 'primary'
+      ? '#FFFFF4'
+      : '#7483FF'
+  )};
+  cursor: pointer;
+  font-size: 15px;
+  padding: 5px 20px;
+  margin-right: ${(props) => `${props.marginRight}px`};
+  transition: color .2s ease-in, background-color .3s ease-in;
+  &:hover {
+    background-color: ${(props) => (
+    props.variant === 'primary'
+      ? '#FFFFF4'
+      : '#7483FF'
+  )};
+    color: ${(props) => (
+    props.variant === 'primary'
+      ? '#7483FF'
+      : '#FFFFF4'
+  )};
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+Button.defaultProps = {
+  variant: 'primary',
+  marginRight: 0,
+};
 
 const Header = () => {
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
@@ -94,23 +152,27 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <img
+    <Wrapper>
+      <Logo
         src={logo}
         alt="header logo"
       />
-      <button
-        onClick={handleClickSignin}
-        data-testid='openSignin'
-      >
+      <div>
+        <Button
+          data-testid='openSignin'
+          marginRight={29}
+          onClick={handleClickSignin}
+        >
         signin
-      </button>
-      <button
-        data-testid='openLogin'
-        onClick={handleClickLogin}
-      >
+        </Button>
+        <Button
+          data-testid='openLogin'
+          onClick={handleClickLogin}
+          variant='secondary'
+        >
         login
-      </button>
+        </Button>
+      </div>
       <Modal
         open={openLogin || openSignin}
         handleClose={handleCloseModal}
@@ -118,7 +180,7 @@ const Header = () => {
         {openLogin && SignerModal()}
         {openSignin && LoggerModal}
       </Modal>
-    </header>
+    </Wrapper>
   );
 };
 

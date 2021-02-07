@@ -40,8 +40,8 @@ const ModalForgotPassword = ({
       data-testid="modalForgotPassword"
     >
       <p>
-      Enter your email to reset
-      your password
+        Enter your email to reset
+        your password
       </p>
       <form onSubmit={formik.handleSubmit}>
         <label
