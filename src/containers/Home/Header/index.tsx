@@ -8,10 +8,10 @@ import ModalLogin from './ModalLogin';
 import ModalSignin from './ModalSignin';
 
 const Header = () => {
+  const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [openLogin, setOpenLogin] = React.useState<boolean>(false);
   const [openSignin, setOpenSignin] = React.useState<boolean>(false);
-  const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
 
   const handleClickLogin = () => {
     if (!loading) {

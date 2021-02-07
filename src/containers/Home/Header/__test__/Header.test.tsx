@@ -43,4 +43,17 @@ describe('Header', () => {
     const modalSignin = screen.queryByTestId('modalSignin');
     expect(modalSignin).toBeNull();
   });
+  it('should switch between login and signin modal', () => {
+    const { getByTestId } = render(<Header />);
+    const openLogin = getByTestId('openLogin');
+    fireEvent.click(openLogin);
+    const switchToSignin = screen.getByTestId('switchToSignin');
+    fireEvent.click(switchToSignin);
+    const modalSignin = screen.queryByTestId('modalSignin');
+    expect(modalSignin).not.toBeNull();
+    const switchToLogin = screen.getByTestId('switchToLogin');
+    fireEvent.click(switchToLogin);
+    const loginModal = screen.queryByTestId('loginModal');
+    expect(loginModal).not.toBeNull();
+  });
 });

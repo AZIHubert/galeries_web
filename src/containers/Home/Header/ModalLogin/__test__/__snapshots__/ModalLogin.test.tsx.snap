@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ModalLogin renders without crashing 1`] = `
-<div>
+<div
+  data-testid="loginModal"
+>
   <button
     data-testid="button"
     disabled={false}

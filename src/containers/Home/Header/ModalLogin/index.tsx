@@ -32,7 +32,9 @@ const ModalLogin = ({
   });
 
   return (
-    <div>
+    <div
+      data-testid='loginModal'
+    >
       <FacebookButton
         loading={loading}
         setLoading={setLoading}
