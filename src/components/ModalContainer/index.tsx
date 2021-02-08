@@ -1,35 +1,33 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
-const Container = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  display: flex;
-  height: auto;
-  position: 'absolute';
-`;
+import {
+  Background,
+  Container,
+  InnerContainer,
+  Title,
+} from './styled';
 
-const Background = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #7483FF;
-  position: absolute;
-  top: 15px;
-  border-radius: 20px 0;
-  right: 15px;
-`;
-const InnerContainer = styled.div`
-  z-index: 1;
-  background-color: #FFFFF4;
-  border-radius: 20px 0;
-  border: 4px solid #7483FF;
-  padding: 50px 40px 40px 40px;
-`;
+type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 
-const ModalContainer: React.FC<{}> = ({ children }) => (
+interface ModalContainerI {
+  title?: string;
+  titleTextAlign?: TextAlign;
+}
+
+const ModalContainer: React.FC<ModalContainerI> = ({
+  children,
+  title,
+  titleTextAlign,
+}) => (
   <Container>
     <InnerContainer>
+      {title ? (
+        <Title
+          textAlign={titleTextAlign}
+        >
+          {title}
+        </Title>
+      ) : null}
       {children}
     </InnerContainer>
     <Background />

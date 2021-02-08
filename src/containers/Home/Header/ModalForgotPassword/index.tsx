@@ -1,7 +1,17 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 
+import Field from '#components/Field';
+
 import { resetPasswordSchema } from '#helpers/schemas';
+
+import ModalContainer from '#components/ModalContainer';
+import GradientButton from '#components/GradientButton';
+
+import {
+  CancelButton,
+  CancelButtonContainer,
+} from './styles';
 
 interface ModalForgotPasswordI {
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -36,57 +46,43 @@ const ModalForgotPassword = ({
     validationSchema: resetPasswordSchema,
   });
   return (
-    <div
+    <ModalContainer
       data-testid="modalForgotPassword"
+      title='Enter your email to reset your password'
     >
-      <p>
-        Enter your email to reset
-        your password
-      </p>
       <form onSubmit={formik.handleSubmit}>
-        <label
-          htmlFor="email"
-        >
-          email
-        </label>
-        <input
-          data-testid='emailField'
+        <Field
           disabled={loading}
           id='email'
-          name='email'
+          error={formik.errors.email}
+          label='email'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          type='text'
+          touched={formik.touched.email}
           value={formik.values.email}
         />
-        {formik.errors.email
-        && formik.touched.email
-        && (
-          <div
-            data-testid='emailError'
-          >
-            {formik.errors.email}
-          </div>
-        )}
-        <button
-          disabled={loading}
+        <GradientButton
           data-testid='submitButton'
+          disabled={loading}
+          marginBottom={20}
+          marginTop={20}
           type='submit'
-        >
-          {loading ? 'loading' : 'reset'}
-        </button>
+          title='Reset'
+        />
       </form>
-      <button
-        data-testid='cancelButton'
-        onClick={() => {
-          if (!loading) {
-            setForgotPassword(false);
-          }
-        }}
-      >
-      cancel
-      </button>
-    </div>
+      <CancelButtonContainer>
+        <CancelButton
+          data-testid='cancelButton'
+          onClick={() => {
+            if (!loading) {
+              setForgotPassword(false);
+            }
+          }}
+        >
+          Cancel
+        </CancelButton>
+      </CancelButtonContainer>
+    </ModalContainer>
   );
 };
 

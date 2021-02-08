@@ -1,12 +1,17 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
-import styled from 'styled-components';
 
-import FacebookButton from '#components/FacebookButton';
-import GoogleButton from '#components/GoogleButton';
+import Field from '#components/Field';
+import GradientButton from '#components/GradientButton';
+import ModalContainer from '#components/ModalContainer';
+import RequiredField from '#components/RequiredField';
+import SocialMediaButton from '#components/SocialMediaButton';
+import TextButton from '#components/TextButton';
+import TextSepatator from '#components/TextSeparator';
+
 import { loginSchema } from '#helpers/schemas';
 
-import ModalContainer from '#components/ModalContainer';
+import { ForgotPassword } from './styles';
 
 interface ModalLoginI {
   loading: boolean;
@@ -16,14 +21,9 @@ interface ModalLoginI {
 }
 
 const initialValues = {
-  userNameOrEmail: '',
   password: '',
+  userNameOrEmail: '',
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const ModalLogin = ({
   loading,
@@ -45,71 +45,52 @@ const ModalLogin = ({
     <ModalContainer
       data-testid='loginModal'
     >
-      <Container>
-        <FacebookButton
-          loading={loading}
-          setLoading={setLoading}
-          type={'login'}
+      <SocialMediaButton
+        action='login'
+        disabled={loading}
+        marginBottom={12}
+        onClick={() => setLoading(true)}
+      />
+      <SocialMediaButton
+        action='login'
+        disabled={loading}
+        onClick={() => setLoading(true)}
+        variant='google'
+      />
+      <TextSepatator
+        marginBottom={12}
+        marginTop={12}
+        text='or'
+      />
+      <form onSubmit={formik.handleSubmit}>
+        <Field
+          disabled={loading}
+          id='userNameOrEmail'
+          error={formik.errors.userNameOrEmail}
+          marginBottom={7}
+          label='user name or email'
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          required
+          touched={formik.touched.userNameOrEmail}
+          value={formik.values.userNameOrEmail}
         />
-        <GoogleButton
-          loading={loading}
-          setLoading={setLoading}
-          type={'login'}
+        <Field
+          disabled={loading}
+          id='password'
+          error={formik.errors.password}
+          label='password'
+          marginBottom={15}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          required
+          touched={formik.touched.password}
+          type='password'
+          value={formik.values.password}
         />
+        <RequiredField />
         <div>
-        or
-        </div>
-        <form onSubmit={formik.handleSubmit}>
-          <label
-            htmlFor="userNameOrEmail"
-          >
-          user name or email *
-          </label>
-          <input
-            data-testid='userNameOrEmailField'
-            disabled={loading}
-            id='userNameOrEmail'
-            name='userNameOrEmail'
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            type='text'
-            value={formik.values.userNameOrEmail}
-          />
-          {formik.errors.userNameOrEmail
-        && formik.touched.userNameOrEmail
-        && (
-          <div
-            data-testid='userNameOrEmailError'
-          >
-            {formik.errors.userNameOrEmail}
-          </div>
-        )}
-          <label
-            htmlFor="password"
-          >
-          password *
-          </label>
-          <input
-            data-testid='passwordField'
-            disabled={loading}
-            id='password'
-            name='password'
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            type='password'
-            value={formik.values.password}
-          />
-          {formik.errors.password && formik.touched.password && (
-            <div
-              data-testid='passwordError'
-            >
-              {formik.errors.password}
-            </div>
-          )}
-          <div>
-          * Required field
-          </div>
-          <button
+          <ForgotPassword
             data-testid='forgotPasswordButton'
             onClick={() => {
               if (!loading) {
@@ -117,30 +98,26 @@ const ModalLogin = ({
               }
             }}
           >
-          Forgot your password?
-          </button>
-          <button
-            disabled={loading}
-            data-testid='submitButton'
-            type='submit'
-          >
-            {loading ? 'loading' : 'login'}
-          </button>
-        </form>
-        <p>
-        You don’t have an account yet? click
-        </p>
-        <button
-          data-testid='switchToSignin'
+              Forgot your password?
+          </ForgotPassword>
+        </div>
+        <GradientButton
+          data-testid='submitButton'
           disabled={loading}
-          onClick={switchModal}
-        >
-        here
-        </button>
-        <p>
-        .
-        </p>
-      </Container>
+          marginBottom={20}
+          marginTop={20}
+          type='submit'
+          title='Log in'
+        />
+      </form>
+      <TextButton
+        disabled={loading}
+        fontSize={0.65}
+        justifyContent='center'
+        onClick={switchModal}
+        text='You don’t have an account yet? click'
+        textButton='here'
+      />
     </ModalContainer>
   );
 };

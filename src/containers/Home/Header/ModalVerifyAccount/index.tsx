@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+import ModalContainer from '#components/ModalContainer';
+import TextButton from '#components/TextButton';
+
 interface ModalVerifyAccountI {
   currentEmail: string;
   loading: boolean,
@@ -11,12 +14,11 @@ const ModalVerifyAccount = ({
   loading,
   setLoading,
 }: ModalVerifyAccountI) => (
-  <div
+  <ModalContainer
     data-testid="modalVerifyAccount"
+    title='Verify your email'
+    titleTextAlign='center'
   >
-    <p>
-      Verify your email
-    </p>
     <p
       data-testid='verifyAccountBody'
     >
@@ -25,20 +27,16 @@ const ModalVerifyAccount = ({
       to {currentEmail}. This helps keep
       your account secure.
     </p>
-    <p>
-      No email in your inbox or spam folder?
-      Let’s
-    </p>
-    <button
+    <TextButton
       disabled={loading}
-      onClick={() => { if (!loading) { setLoading(true); } }}
-    >
-      resend it
-    </button>
-    <p>
-      .
-    </p>
-  </div>
+      justifyContent='center'
+      onClick={() => setLoading(true)}
+      marginBottom={30}
+      marginTop={20}
+      text='No email in your inbox or spam folder? Let’s'
+      textButton='resend it'
+    />
+  </ModalContainer>
 );
 
 export default ModalVerifyAccount;

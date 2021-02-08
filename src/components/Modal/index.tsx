@@ -1,37 +1,24 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import styled from 'styled-components';
+
+import {
+  Background,
+  Container,
+} from './styles';
 
 interface ModalI {
-  open: boolean;
-  handleClose: () => void;
   children: React.ReactNode;
+  handleClose: () => void;
+  open: boolean;
 }
 
 const modalRoot = document.getElementById('modal-root');
 
-const Background = styled.div`
-  background-color: #000;
-  height: 100vh;
-  opacity: 0.5;
-  position: fixed;
-  top: 0;
-  width: 100%;
-`;
-
-const ModalContainer = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  max-width: 80%;
-  width: 560px;
-  max-height: 90vh;
-
-`;
-
-const Modal = ({ children, open, handleClose }: ModalI) => {
+const Modal = ({
+  children,
+  handleClose,
+  open,
+}: ModalI) => {
   const el = React.useRef(document.createElement('div'));
 
   React.useEffect(() => {
@@ -50,11 +37,11 @@ const Modal = ({ children, open, handleClose }: ModalI) => {
   return (
     ReactDOM.createPortal(
       <>
-        <ModalContainer
+        <Container
           data-testid="modal"
         >
           {children}
-        </ModalContainer>
+        </Container>
         <Background
           data-testid="modalBackground"
           onClick={handleClose}

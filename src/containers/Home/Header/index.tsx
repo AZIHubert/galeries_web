@@ -1,71 +1,39 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
+
 import logo from '#ressources/svg/logoG.svg';
 
 import ModalForgotPassword from './ModalForgotPassword';
 import ModalLogin from './ModalLogin';
 import ModalSignin from './ModalSignin';
-import ModalVerifyAccount from './ModalVerifyAccount';
 import ModalValidateResetPassword from './ModalValidateResetPassword';
+import ModalVerifyAccount from './ModalVerifyAccount';
 
-interface ButtonI {
-  variant?: 'primary' | 'secondary';
-  marginRight?: number;
-}
+import {
+  Container,
+  Logo,
+} from './styles';
 
-const Wrapper = styled.header`
-  align-items: 'center';
-  background-color: #FFFFF4;
-  border-bottom: 5px solid #7483FF;
+const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 30px;
-  padding: 20px 0;
-`;
-const Logo = styled.img`
-  width: 35px;
-`;
-const Button = styled.button<ButtonI>`
-  background-color: ${(props) => (
-    props.variant === 'primary'
-      ? '#7483FF'
-      : '#FFFFF4'
+  border-bottom: ${({ theme }) => (
+    `2px solid ${theme.colors.primary}`
   )};
-  border: 2px solid #7483FF;
-  border-radius: 6px;
-  color: ${(props) => (
-    props.variant === 'primary'
-      ? '#FFFFF4'
-      : '#7483FF'
-  )};
-  cursor: pointer;
-  font-size: 15px;
-  padding: 5px 20px;
-  margin-right: ${(props) => `${props.marginRight}px`};
-  transition: color .2s ease-in, background-color .3s ease-in;
-  &:hover {
-    background-color: ${(props) => (
-    props.variant === 'primary'
-      ? '#FFFFF4'
-      : '#7483FF'
-  )};
-    color: ${(props) => (
-    props.variant === 'primary'
-      ? '#7483FF'
-      : '#FFFFF4'
-  )};
-  }
-  &:focus {
-    outline: none;
+  height: ${({ theme }) => `${theme.header.height}px`};
+  margin: ${({ theme }) => `0 ${theme.wrapper.margin.medium}px`};
+  @media ${mediaQueries.laptopL} { 
+    margin: ${({ theme }) => `0 ${theme.wrapper.margin.large}px`};
   }
 `;
-
-Button.defaultProps = {
-  variant: 'primary',
-  marginRight: 0,
-};
+const ButtonContainer = styled.div`
+  align-items: center;
+  display: flex;
+`;
 
 const Header = () => {
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
@@ -152,35 +120,35 @@ const Header = () => {
   };
 
   return (
-    <Wrapper>
-      <Logo
-        src={logo}
-        alt="header logo"
-      />
-      <div>
-        <Button
-          data-testid='openSignin'
-          marginRight={29}
-          onClick={handleClickSignin}
+    <Container>
+      <InnerContainer>
+        <Logo
+          src={logo}
+          alt="header logo"
+        />
+        <ButtonContainer>
+          <HeaderButton
+            data-testid='openSignin'
+            marginRight={20}
+            onClick={handleClickSignin}
+            title='Sign in'
+          />
+          <HeaderButton
+            data-testid='openLogin'
+            onClick={handleClickLogin}
+            variant='secondary'
+            title='Log in'
+          />
+        </ButtonContainer>
+        <Modal
+          open={openLogin || openSignin}
+          handleClose={handleCloseModal}
         >
-        signin
-        </Button>
-        <Button
-          data-testid='openLogin'
-          onClick={handleClickLogin}
-          variant='secondary'
-        >
-        login
-        </Button>
-      </div>
-      <Modal
-        open={openLogin || openSignin}
-        handleClose={handleCloseModal}
-      >
-        {openLogin && SignerModal()}
-        {openSignin && LoggerModal}
-      </Modal>
-    </Wrapper>
+          {openLogin && SignerModal()}
+          {openSignin && LoggerModal}
+        </Modal>
+      </InnerContainer>
+    </Container>
   );
 };
 
