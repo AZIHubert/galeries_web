@@ -37,9 +37,10 @@ const ModalSignin = ({
     initialValues,
     onSubmit: ({ email }) => {
       if (!loading) {
+        setLoading(true);
         setAccountCreate(true);
         setCurrentEmail(email);
-        setLoading(true);
+        setLoading(false);
       }
     },
     validateOnBlur: true,
