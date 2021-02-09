@@ -38,12 +38,12 @@ const Modal = ({
     ReactDOM.createPortal(
       <>
         <Container
-          data-testid="modal"
+          testId="modal"
         >
           {children}
         </Container>
         <Background
-          data-testid="modalBackground"
+          testId="modalBackground"
           onClick={handleClose}
         />
       </>,

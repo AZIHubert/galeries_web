@@ -5,10 +5,15 @@ type Variant = 'facebook' | 'google';
 interface ButtonI {
   marginBottom?: number;
   marginTop?: number;
+  testId?: string;
   variant?: Variant;
 }
 
-const Button = styled.button<ButtonI>`
+const Button = styled.button.attrs<ButtonI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ButtonI>`
   align-items: center;
   background-color: ${({
     theme,

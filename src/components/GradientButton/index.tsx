@@ -9,7 +9,7 @@ interface GradientButtonI {
   marginBottom?: number;
   marginTop?: number;
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
-  testid?: string;
+  testId?: string;
   title: string;
   type: Type;
 }
@@ -19,12 +19,12 @@ const GradientButton = ({
   marginBottom = 0,
   marginTop = 0,
   onClick,
-  testid,
+  testId,
   title,
   type = 'button',
 }: GradientButtonI) => (
   <Button
-    data-testid={testid}
+    testId={testId}
     disabled={disabled}
     marginBottom={marginBottom}
     marginTop={marginTop}

@@ -111,13 +111,13 @@ const Header = () => {
         />
         <ButtonContainer>
           <HeaderButton
-            data-testid='openSignin'
+            testId='openSignin'
             marginRight={30}
             onClick={handleClickSignin}
             title='Sign in'
           />
           <HeaderButton
-            data-testid='openLogin'
+            testId='openLogin'
             onClick={handleClickLogin}
             variant='secondary'
             title='Log in'

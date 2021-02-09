@@ -15,7 +15,7 @@ const ModalVerifyAccount = ({
   setLoading,
 }: ModalVerifyAccountI) => (
   <ModalContainer
-    data-testid="modalVerifyAccount"
+    testId="modalVerifyAccount"
     title='Verify your email'
     titleTextAlign='center'
   >

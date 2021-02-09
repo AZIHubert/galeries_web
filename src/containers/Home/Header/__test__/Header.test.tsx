@@ -8,6 +8,8 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 
+import ThemeProvider from '#contexts/ThemeContext';
+
 import Header from '../index';
 
 describe('Header', () => {
@@ -15,19 +17,29 @@ describe('Header', () => {
     // @ts-ignore
     ReactDOM.createPortal = jest.fn((element) => element);
   });
+  beforeEach(() => {
+    act(() => {
+      render(
+        <ThemeProvider>
+          <Header />
+        </ThemeProvider>,
+      );
+    });
+  });
   afterEach(() => {
     // @ts-ignore
     ReactDOM.createPortal.mockClear();
   });
   it('renders without crashing', () => {
-    const tree = renderer.create(<Header />).toJSON();
+    const tree = renderer.create(
+      <ThemeProvider>
+        <Header />
+      </ThemeProvider>,
+    ).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it('should render verify account modal if account is created', async () => {
     const email = 'user@email.com';
-    act(() => {
-      render(<Header />);
-    });
     const openSignin = screen.getByTestId('openSignin');
     fireEvent.click(openSignin);
     const confirmPasswordField = screen.getByTestId('confirmPasswordField');
@@ -47,8 +59,7 @@ describe('Header', () => {
     expect(verifyAccountBody).toHaveTextContent(email);
   });
   it('should switch betwen login and forgotPassword modal', () => {
-    const { getByTestId } = render(<Header />);
-    const openLogin = getByTestId('openLogin');
+    const openLogin = screen.getByTestId('openLogin');
     fireEvent.click(openLogin);
     const forgotPasswordButton = screen.getByTestId('forgotPasswordButton');
     fireEvent.click(forgotPasswordButton);
@@ -60,8 +71,7 @@ describe('Header', () => {
     expect(loginModal).not.toBeNull();
   });
   it('should switch between login and signin modal', () => {
-    const { getByTestId } = render(<Header />);
-    const openLogin = getByTestId('openLogin');
+    const openLogin = screen.getByTestId('openLogin');
     fireEvent.click(openLogin);
     const switchToSignin = screen.getByTestId('switchToSignin');
     fireEvent.click(switchToSignin);
@@ -74,8 +84,7 @@ describe('Header', () => {
   });
   it('should switch to ModalValidateResetPassword if ValidateResetPassword form is valid', async () => {
     const email = 'user@email.com';
-    const { getByTestId } = render(<Header />);
-    const openLogin = getByTestId('openLogin');
+    const openLogin = screen.getByTestId('openLogin');
     fireEvent.click(openLogin);
     const forgotPasswordButton = screen.getByTestId('forgotPasswordButton');
     fireEvent.click(forgotPasswordButton);

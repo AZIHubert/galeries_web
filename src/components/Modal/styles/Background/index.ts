@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-const Background = styled.div`
+interface BackgroundI {
+  testId?: string;
+}
+
+const Background = styled.div.attrs<BackgroundI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<BackgroundI>`
   background-color: #000;
   height: 100vh;
   opacity: 0.5;

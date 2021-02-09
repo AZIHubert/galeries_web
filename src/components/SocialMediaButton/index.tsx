@@ -31,7 +31,7 @@ const SocialMediaButton = ({
   variant = 'facebook',
 }: SocialMediaButtonI) => (
   <Button
-    data-testid={testId}
+    testId={testId}
     disabled={disabled}
     marginBottom={marginBottom}
     marginTop={marginTop}

@@ -22,7 +22,7 @@ const HeaderButton = ({
   variant = 'primary',
 }: HeaderButtonI) => (
   <Button
-    data-testid={testId}
+    testId={testId}
     marginLeft={marginLeft}
     marginRight={marginRight}
     onClick={onClick}

@@ -10,16 +10,20 @@ import {
 type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 
 interface ModalContainerI {
+  testId?: string;
   title?: string;
   titleTextAlign?: TextAlign;
 }
 
 const ModalContainer: React.FC<ModalContainerI> = ({
   children,
+  testId,
   title,
   titleTextAlign,
 }) => (
-  <Container>
+  <Container
+    testId={testId}
+  >
     <InnerContainer>
       {title ? (
         <Title

@@ -7,10 +7,15 @@ type Variant = 'primary' | 'secondary';
 interface ButtonI {
   marginLeft?: number;
   marginRight?: number;
+  testId?: string;
   variant?: Variant;
 }
 
-const Button = styled.button<ButtonI>`
+const Button = styled.button.attrs<ButtonI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ButtonI>`
   background-color: ${({ variant }) => (
     variant === 'primary'
       ? '#7483FF'

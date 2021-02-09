@@ -12,6 +12,8 @@ import {
   REQUIRED,
 } from '#helpers/formErrors';
 
+import ThemeProvider from '#contexts/ThemeContext';
+
 import ModalForgotPassword from '../index';
 
 const Container = () => {
@@ -20,13 +22,15 @@ const Container = () => {
   const switchModal = () => {};
   const setCurrentEmail = () => {};
   return (
-    <ModalForgotPassword
-      setCurrentEmail={setCurrentEmail}
-      setForgotPassword={setForgotPassword}
-      setLoading={setLoading}
-      switchModal={switchModal}
-      loading={loading}
-    />
+    <ThemeProvider>
+      <ModalForgotPassword
+        setCurrentEmail={setCurrentEmail}
+        setForgotPassword={setForgotPassword}
+        setLoading={setLoading}
+        switchModal={switchModal}
+        loading={loading}
+      />
+    </ThemeProvider>
   );
 };
 
@@ -45,13 +49,15 @@ describe('ModalLogin', () => {
   });
   it('renders without crashing', () => {
     const tree = renderer.create(
-      <ModalForgotPassword
-        setCurrentEmail={mockedSetCurrentEmail}
-        setForgotPassword={mockedSetForgotPassword}
-        setLoading={mockedSetLoading}
-        switchModal={mockedSwitchModal}
-        loading={false}
-      />,
+      <ThemeProvider>
+        <ModalForgotPassword
+          setCurrentEmail={mockedSetCurrentEmail}
+          setForgotPassword={mockedSetForgotPassword}
+          setLoading={mockedSetLoading}
+          switchModal={mockedSwitchModal}
+          loading={false}
+        />
+      </ThemeProvider>,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -60,7 +66,7 @@ describe('ModalLogin', () => {
     const emailError = await screen.findByTestId('emailError');
     expect(emailError).toHaveTextContent(REQUIRED);
     expect(emailField).not.toBeDisabled();
-    expect(submitButton).toHaveTextContent('reset');
+    expect(submitButton).toHaveTextContent('Reset');
     expect(submitButton).not.toBeDisabled();
   });
   it('should loading if no error', async () => {
