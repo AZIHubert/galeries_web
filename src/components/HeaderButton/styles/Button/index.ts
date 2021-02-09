@@ -34,7 +34,8 @@ const Button = styled.button<ButtonI>`
   )};
   padding: 3px 15px;
   transition: ${({ theme }) => (
-    `color ${theme.transition.default} ease-in, background-color ${theme.transition.slow} ease-in;`
+    `color ${theme.transition.default} ease-in,
+    background-color ${theme.transition.slow} ease-in;`
   )};
   &:focus {
     outline: none;

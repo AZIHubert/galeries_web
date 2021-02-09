@@ -17,6 +17,7 @@ interface SocialMediaButtonI {
   marginBottom?: number;
   marginTop?: number;
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+  testId?: string;
   variant?: Variant;
 }
 
@@ -26,9 +27,11 @@ const SocialMediaButton = ({
   marginBottom = 0,
   marginTop = 0,
   onClick,
+  testId,
   variant = 'facebook',
 }: SocialMediaButtonI) => (
   <Button
+    data-testid={testId}
     disabled={disabled}
     marginBottom={marginBottom}
     marginTop={marginTop}

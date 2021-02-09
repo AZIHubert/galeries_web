@@ -51,7 +51,9 @@ const Field = ({
           {label}
         </p>
         {required && (
-          <p>*</p>
+          <p>
+            *
+          </p>
         )}
       </Label>
     ) : null}

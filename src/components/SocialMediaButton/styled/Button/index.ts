@@ -40,8 +40,8 @@ const Button = styled.button<ButtonI>`
   )};
   cursor: pointer;
   display: flex;
-  height: 34px;
   font-size: 0.9rem;
+  height: 34px;
   justify-content: space-between;
   margin: ${({
     marginBottom,
@@ -50,7 +50,6 @@ const Button = styled.button<ButtonI>`
     `${marginTop}px 0 ${marginBottom}px 0`
   )};
   padding: 0 20px;
-  -webkit-box-shadow: ${({ theme }) => theme.boxShadow};
   & img {
     height: 16px;
   }

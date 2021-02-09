@@ -1,7 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
-import mediaQueries from '#helpers/mediaQueries';
 import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
 
@@ -14,34 +12,11 @@ import ModalValidateResetPassword from './ModalValidateResetPassword';
 import ModalVerifyAccount from './ModalVerifyAccount';
 
 import {
+  ButtonContainer,
   Container,
+  InnerContainer,
   Logo,
 } from './styles';
-
-const InnerContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: ${({ theme }) => (
-    `2px solid ${theme.colors.primary}`
-  )};
-  height: ${({ theme }) => `${theme.header.height.small}px`};
-  margin: ${({ theme }) => `0 ${theme.wrapper.margin.smallest}px`};
-  @media ${mediaQueries.mobileL} {
-    margin: ${({ theme }) => `0 ${theme.wrapper.margin.small}px`};
-  }
-  @media ${mediaQueries.laptop} {
-    height: ${({ theme }) => `${theme.header.height.medium}px`};
-    margin: ${({ theme }) => `0 ${theme.wrapper.margin.medium}px`};
-  }
-  @media ${mediaQueries.laptopL} { 
-    margin: ${({ theme }) => `0 ${theme.wrapper.margin.large}px`};
-    height: ${({ theme }) => `${theme.header.height.large}px`};
-  }
-`;
-const ButtonContainer = styled.div`
-  align-items: center;
-  display: flex;
-`;
 
 const Header = () => {
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);

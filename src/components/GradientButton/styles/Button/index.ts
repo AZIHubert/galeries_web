@@ -17,14 +17,16 @@ const Button = styled.button<ButtonI>`
   cursor: pointer;
   font-size: 1rem;
   height: 32px;
-  margin: ${({ marginBottom, marginTop }) => (
+  margin: ${({
+    marginBottom,
+    marginTop,
+  }) => (
     `${marginTop}px 0 ${marginBottom}px`
   )};
   padding: 0 10px;
   text-transform: capitalize;
   transition: ${({ theme }) => `background-position ${theme.transition.default} ease-in`};
   width: 100%;
-  -webkit-box-shadow: ${({ theme }) => theme.boxShadow};
   &:focus {
     outline: none;
   }

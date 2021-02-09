@@ -11,8 +11,8 @@ interface SwitchContainerI {
 
 const SwitchContainer = styled.div<SwitchContainerI>`
   display: flex;
-  justify-content: ${({ justifyContent }) => justifyContent};
   font-size: ${({ fontSize }) => (`${fontSize}rem`)};
+  justify-content: ${({ justifyContent }) => justifyContent};
   margin: ${({
     marginBottom,
     marginTop,
