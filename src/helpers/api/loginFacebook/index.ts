@@ -3,7 +3,7 @@ import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-face
 
 import client from '#helpers/api/client';
 
-const endpoint = '/users/auth/mobile/facebook';
+const endpoint = '/users/auth/facebook';
 
 const signin: (
   values: ReactFacebookLoginInfo | ReactFacebookFailureResponse

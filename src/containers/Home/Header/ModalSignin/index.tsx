@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
@@ -48,6 +49,9 @@ const ModalSignin = ({
     }
     setLoading(false);
   };
+  const responseGoogle = (googleResponse: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    console.log(googleResponse);
+  };
 
   const formik = useFormik({
     initialValues,
@@ -91,13 +95,22 @@ const ModalSignin = ({
           />
         )}
       />
-
-      <SocialMediaButton
-        action='signin'
-        disabled={loading}
-        onClick={() => setLoading(true)}
-        variant='google'
+      <GoogleLogin
+        clientId="863840240633-1fo49l2neof9t9ifg0ufbvotun3a6udf.apps.googleusercontent.com"
+        buttonText="Login"
+        onSuccess={responseGoogle}
+        onFailure={(err) => console.log(err)}
+        cookiePolicy={'single_host_origin'}
+        render={(renderProps) => (
+          <SocialMediaButton
+            action='signin'
+            disabled={loading}
+            onClick={renderProps.onClick}
+            variant='google'
+          />
+        )}
       />
+
       <TextSepatator
         marginBottom={12}
         marginTop={12}
