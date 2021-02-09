@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { useFormik } from 'formik';
-
-import { signinSchema } from '#helpers/schemas';
+import * as React from 'react';
+import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
@@ -10,6 +9,10 @@ import RequiredField from '#components/RequiredField';
 import SocialMediaButton from '#components/SocialMediaButton';
 import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
+
+import { signin, loginFacebook } from '#helpers/api';
+
+import { signinSchema } from '#helpers/schemas';
 
 interface ModalSigninI {
   loading: boolean;
@@ -33,13 +36,36 @@ const ModalSignin = ({
   setLoading,
   switchModal,
 }: ModalSigninI) => {
+  const responseFacebook = async (
+    faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
+  ) => {
+    try {
+      const response = await loginFacebook(faceBookResponse);
+      localStorage.setItem('authToken', response.data.token);
+      localStorage.setItem('expiresIn', response.data.expiresIn);
+    } catch (err) {
+      console.log(err.data);
+    }
+    setLoading(false);
+  };
+
   const formik = useFormik({
     initialValues,
-    onSubmit: ({ email }) => {
+    onSubmit: async (values, { setFieldError }) => {
       if (!loading) {
-        setAccountCreate(true);
-        setCurrentEmail(email);
-        setLoading(true);
+        try {
+          const response = await signin(values);
+          console.log(response.data);
+          setAccountCreate(true);
+          setCurrentEmail(values.email);
+          setLoading(false);
+        } catch (err) {
+          const { errors } = err.response.data;
+          if (typeof errors === 'object') {
+            Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+          }
+          setLoading(false);
+        }
       }
     },
     validateOnBlur: true,
@@ -51,12 +77,21 @@ const ModalSignin = ({
     <ModalContainer
       testId='modalSignin'
     >
-      <SocialMediaButton
-        action='signin'
-        disabled={loading}
-        marginBottom={12}
+      <FacebookLogin
+        appId="688539228486770"
+        fields="email, gender, name, picture.type(large)"
         onClick={() => setLoading(true)}
+        callback={responseFacebook}
+        render={(renderProps) => (
+          <SocialMediaButton
+            action='signin'
+            disabled={loading}
+            marginBottom={12}
+            onClick={renderProps.onClick}
+          />
+        )}
       />
+
       <SocialMediaButton
         action='signin'
         disabled={loading}
