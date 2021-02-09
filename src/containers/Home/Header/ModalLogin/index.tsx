@@ -43,7 +43,7 @@ const ModalLogin = ({
 
   return (
     <ModalContainer
-      data-testid='loginModal'
+      testId='loginModal'
     >
       <SocialMediaButton
         action='login'
@@ -67,6 +67,8 @@ const ModalLogin = ({
           disabled={loading}
           id='userNameOrEmail'
           error={formik.errors.userNameOrEmail}
+          errorTestId='userNameOrEmailError'
+          fieldTestId='userNameOrEmailField'
           marginBottom={7}
           label='user name or email'
           onBlur={formik.handleBlur}
@@ -79,6 +81,8 @@ const ModalLogin = ({
           disabled={loading}
           id='password'
           error={formik.errors.password}
+          errorTestId='passwordError'
+          fieldTestId='passwordField'
           label='password'
           marginBottom={15}
           onBlur={formik.handleBlur}
@@ -91,7 +95,7 @@ const ModalLogin = ({
         <RequiredField />
         <div>
           <ForgotPassword
-            data-testid='forgotPasswordButton'
+            testId='forgotPasswordButton'
             onClick={() => {
               if (!loading) {
                 setForgotPassword(true);
@@ -102,7 +106,7 @@ const ModalLogin = ({
           </ForgotPassword>
         </div>
         <GradientButton
-          data-testid='submitButton'
+          testId='submitButton'
           disabled={loading}
           marginBottom={20}
           marginTop={20}
@@ -115,6 +119,7 @@ const ModalLogin = ({
         fontSize={0.65}
         justifyContent='center'
         onClick={switchModal}
+        testId='switchToSignin'
         text='You don’t have an account yet? click'
         textButton='here'
       />

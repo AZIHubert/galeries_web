@@ -15,7 +15,7 @@ const ModalValidateResetPassword = ({
   setLoading,
 }: ModalValidateResetPasswordI) => (
   <ModalContainer
-    data-testid="modalValidateResetPassword"
+    testId="modalValidateResetPassword"
     title='Reset your password'
     titleTextAlign='center'
   >

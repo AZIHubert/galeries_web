@@ -2,29 +2,42 @@
 
 exports[`Home renders without crashing 1`] = `
 <div
+  className="sc-gsTCUz gpRCqf"
   data-testid="modalVerifyAccount"
 >
-  <p>
-    Verify your email
-  </p>
-  <p
-    data-testid="verifyAccountBody"
+  <div
+    className="sc-dlfnbm iCYrgf"
   >
-    To use Galeries, click the verification button in the email we sent to 
-    mockedEmail@email.com
-    . This helps keep your account secure.
-  </p>
-  <p>
-    No email in your inbox or spam folder? Let’s
-  </p>
-  <button
-    disabled={false}
-    onClick={[Function]}
-  >
-    resend it
-  </button>
-  <p>
-    .
-  </p>
+    <h3
+      className="sc-hKgILt fVwsjm"
+    >
+      Verify your email
+    </h3>
+    <p
+      data-testid="verifyAccountBody"
+    >
+      To use Galeries, click the verification button in the email we sent to 
+      mockedEmail@email.com
+      . This helps keep your account secure.
+    </p>
+    <div
+      className="sc-jSgupP cTlbEJ"
+      fontSize={1}
+    >
+      <p>
+        No email in your inbox or spam folder? Let’s 
+        <span
+          className="sc-eCssSg dfRMkT"
+          onClick={[Function]}
+        >
+          resend it
+        </span>
+        .
+      </p>
+    </div>
+  </div>
+  <div
+    className="sc-bdfBwQ kHDgwz"
+  />
 </div>
 `;

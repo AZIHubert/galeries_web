@@ -7,6 +7,8 @@ import {
   screen,
 } from '@testing-library/react';
 
+import ThemeProvider from '#contexts/ThemeContext';
+
 import { REQUIRED } from '#helpers/formErrors';
 
 import ModalLogin from '../index';
@@ -16,12 +18,14 @@ const Container = () => {
   const setForgotPassword = () => {};
   const switchModal = () => {};
   return (
-    <ModalLogin
-      loading={loading}
-      setLoading={setLoading}
-      switchModal={switchModal}
-      setForgotPassword={setForgotPassword}
-    />
+    <ThemeProvider>
+      <ModalLogin
+        loading={loading}
+        setLoading={setLoading}
+        switchModal={switchModal}
+        setForgotPassword={setForgotPassword}
+      />
+    </ThemeProvider>
   );
 };
 
@@ -33,7 +37,11 @@ describe('ModalLogin', () => {
   let submitButton: HTMLElement;
   let userNameOrEmailField: HTMLElement;
   beforeEach(() => {
-    const { getByTestId } = render(<Container />);
+    const { getByTestId } = render(
+      <ThemeProvider>
+        <Container />
+      </ThemeProvider>,
+    );
     passwordField = getByTestId('passwordField');
     submitButton = getByTestId('submitButton');
     userNameOrEmailField = getByTestId('userNameOrEmailField');
@@ -41,12 +49,14 @@ describe('ModalLogin', () => {
   afterEach(cleanup);
   it('renders without crashing', () => {
     const tree = renderer.create(
-      <ModalLogin
-        loading={false}
-        setForgotPassword={mockedSetForgotPassword}
-        setLoading={mockedSetLoading}
-        switchModal={mockedSwitchModal}
-      />,
+      <ThemeProvider>
+        <ModalLogin
+          loading={false}
+          setForgotPassword={mockedSetForgotPassword}
+          setLoading={mockedSetLoading}
+          switchModal={mockedSwitchModal}
+        />
+      </ThemeProvider>,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -56,7 +66,7 @@ describe('ModalLogin', () => {
     const userNameOrEmailError = await screen.findByTestId('userNameOrEmailError');
     expect(passwordError).toHaveTextContent(REQUIRED);
     expect(passwordField).not.toBeDisabled();
-    expect(submitButton).toHaveTextContent('login');
+    expect(submitButton).toHaveTextContent('Log in');
     expect(submitButton).not.toBeDisabled();
     expect(userNameOrEmailError).toHaveTextContent(REQUIRED);
     expect(userNameOrEmailField).not.toBeDisabled();

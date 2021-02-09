@@ -2,9 +2,14 @@ import styled from 'styled-components';
 
 interface InputI {
   error?: boolean;
+  testId?: string;
 }
 
-const Input = styled.input<InputI>`
+const Input = styled.input.attrs<InputI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<InputI>`
   background-color: ${({ theme }) => theme.colors.white};
   border: ${({
     error,

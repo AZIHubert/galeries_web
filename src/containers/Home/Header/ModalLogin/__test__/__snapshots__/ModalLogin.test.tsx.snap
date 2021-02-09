@@ -2,97 +2,153 @@
 
 exports[`ModalLogin renders without crashing 1`] = `
 <div
+  className="sc-gKsewC glimMp"
   data-testid="loginModal"
 >
-  <button
-    data-testid="button"
-    disabled={false}
-    onClick={[Function]}
+  <div
+    className="sc-iBPRYJ gNBldS"
   >
-    <img
-      alt="logo facebook"
-      src=""
-    />
-    log in 
-    with Facebook
-  </button>
-  <button
-    data-testid="button"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <img
-      alt="logo google"
-      src=""
-    />
-    log in 
-    with Google
-  </button>
-  <div>
-    or
-  </div>
-  <form
-    onSubmit={[Function]}
-  >
-    <label
-      htmlFor="userNameOrEmail"
-    >
-      user name or email *
-    </label>
-    <input
-      data-testid="userNameOrEmailField"
-      disabled={false}
-      id="userNameOrEmail"
-      name="userNameOrEmail"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <label
-      htmlFor="password"
-    >
-      password *
-    </label>
-    <input
-      data-testid="passwordField"
-      disabled={false}
-      id="password"
-      name="password"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="password"
-      value=""
-    />
-    <div>
-      * Required field
-    </div>
     <button
-      data-testid="forgotPasswordButton"
+      className="sc-jrAGrp brUJJc"
+      disabled={false}
       onClick={[Function]}
     >
-      Forgot your password?
+      <div
+        className="sc-kEjbxe kqrVhM"
+      >
+        <img
+          alt="logo facebook"
+          src=""
+        />
+      </div>
+      Log in
+      with
+    Facebook
     </button>
     <button
-      data-testid="submitButton"
+      className="sc-jrAGrp gYDHmD"
       disabled={false}
-      type="submit"
+      onClick={[Function]}
     >
-      login
+      <div
+        className="sc-kEjbxe kqrVhM"
+      >
+        <img
+          alt="logo google"
+          src=""
+        />
+      </div>
+      Log in
+      with
+    Google
     </button>
-  </form>
-  <p>
-    You don’t have an account yet? click
-  </p>
-  <button
-    data-testid="switchToSignin"
-    disabled={false}
-    onClick={[Function]}
-  >
-    here
-  </button>
-  <p>
-    .
-  </p>
+    <p
+      className="sc-dQppl krnyqM"
+    >
+      or
+    </p>
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="sc-bdfBwQ bPodhE"
+      >
+        <label
+          className="sc-hKgILt fWofNq"
+          htmlFor="userNameOrEmail"
+        >
+          <p>
+            user name or email
+          </p>
+          <p>
+            *
+          </p>
+        </label>
+        <input
+          className="sc-dlfnbm jEuCWi"
+          data-testid="userNameOrEmailField"
+          disabled={false}
+          id="userNameOrEmail"
+          name="userNameOrEmail"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="sc-bdfBwQ jjTxxT"
+      >
+        <label
+          className="sc-hKgILt fWofNq"
+          htmlFor="password"
+        >
+          <p>
+            password
+          </p>
+          <p>
+            *
+          </p>
+        </label>
+        <input
+          className="sc-dlfnbm jEuCWi"
+          data-testid="passwordField"
+          disabled={false}
+          id="password"
+          name="password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="sc-pFZIQ fWwXIM"
+      >
+        <p>
+          *
+        </p>
+        <p>
+          Required fields
+        </p>
+      </div>
+      <div>
+        <div
+          className="sc-bqyKva iXpSHc"
+          data-testid="forgotPasswordButton"
+          onClick={[Function]}
+        >
+          Forgot your password?
+        </div>
+      </div>
+      <button
+        className="sc-eCssSg jyZzSq"
+        data-testid="submitButton"
+        disabled={false}
+        type="submit"
+      >
+        Log in
+      </button>
+    </form>
+    <div
+      className="sc-crrsfI dauOmI"
+      fontSize={0.65}
+    >
+      <p>
+        You don’t have an account yet? click 
+        <span
+          className="sc-iqHYGH bleeKr"
+          data-testid="switchToSignin"
+          onClick={[Function]}
+        >
+          here
+        </span>
+        .
+      </p>
+    </div>
+  </div>
+  <div
+    className="sc-jSgupP bpponA"
+  />
 </div>
 `;

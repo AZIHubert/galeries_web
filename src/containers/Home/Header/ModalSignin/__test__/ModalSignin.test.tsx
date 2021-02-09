@@ -8,6 +8,8 @@ import {
   screen,
 } from '@testing-library/react';
 
+import ThemeProvider from '#contexts/ThemeContext';
+
 import {
   CONFIRM_PASSWORD,
   EMAIL_FIELD,
@@ -27,7 +29,7 @@ const Container = () => {
   const switchModal = () => {};
   const setCurrentEmail = () => {};
   return (
-    <>
+    <ThemeProvider>
       <ModalSignin
         loading={loading}
         setLoading={setLoading}
@@ -44,7 +46,7 @@ const Container = () => {
           </p>
         )
         : null}
-    </>
+    </ThemeProvider>
   );
 };
 
@@ -71,13 +73,15 @@ describe('ModalSignin', () => {
   afterEach(cleanup);
   it('renders without crashing', () => {
     const tree = renderer.create(
-      <ModalSignin
-        loading={false}
-        setLoading={mockedSetLoading}
-        setAccountCreate={mockedSetAccountCreate}
-        switchModal={mockedSwitchModal}
-        setCurrentEmail={mockedSetCurrentEmail}
-      />,
+      <ThemeProvider>
+        <ModalSignin
+          loading={false}
+          setLoading={mockedSetLoading}
+          setAccountCreate={mockedSetAccountCreate}
+          switchModal={mockedSwitchModal}
+          setCurrentEmail={mockedSetCurrentEmail}
+        />
+      </ThemeProvider>,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -93,7 +97,7 @@ describe('ModalSignin', () => {
     expect(emailField).not.toBeDisabled();
     expect(passwordError).toHaveTextContent(REQUIRED);
     expect(passwordField).not.toBeDisabled();
-    expect(submitButton).toHaveTextContent('signin');
+    expect(submitButton).toHaveTextContent('Sign in');
     expect(submitButton).not.toBeDisabled();
     expect(userNameError).toHaveTextContent(REQUIRED);
     expect(userNameField).not.toBeDisabled();

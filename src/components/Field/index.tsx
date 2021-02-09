@@ -58,7 +58,7 @@ const Field = ({
       </Label>
     ) : null}
     <Input
-      data-testid={fieldTestId}
+      testId={fieldTestId}
       disabled={disabled}
       error={!!error && touched}
       id={id}
@@ -70,7 +70,7 @@ const Field = ({
     />
     {error && touched && (
       <Error
-        data-testid={errorTestId}
+        testId={errorTestId}
       >
         {error}
       </Error>

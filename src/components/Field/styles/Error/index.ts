@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-const Error = styled.div`
+interface ErrorI {
+  testId?: string;
+}
+
+const Error = styled.div.attrs<ErrorI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ErrorI>`
   color: ${({ theme }) => theme.colors.danger};
   display: flex;
   font-size: 0.7rem;

@@ -2,121 +2,196 @@
 
 exports[`ModalSignin renders without crashing 1`] = `
 <div
+  className="sc-gKsewC glimMp"
   data-testid="modalSignin"
 >
-  <button
-    data-testid="button"
-    disabled={false}
-    onClick={[Function]}
+  <div
+    className="sc-iBPRYJ gNBldS"
   >
-    <img
-      alt="logo facebook"
-      src=""
-    />
-    sign in 
-    with Facebook
-  </button>
-  <button
-    data-testid="button"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <img
-      alt="logo google"
-      src=""
-    />
-    sign in 
-    with Google
-  </button>
-  <div>
-    or
-  </div>
-  <form
-    onSubmit={[Function]}
-  >
-    <label
-      htmlFor="userName"
-    >
-      user name *
-    </label>
-    <input
-      data-testid="userNameField"
-      disabled={false}
-      id="userName"
-      name="userName"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <label
-      htmlFor="email"
-    >
-      email *
-    </label>
-    <input
-      data-testid="emailField"
-      disabled={false}
-      id="email"
-      name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <label
-      htmlFor="password"
-    >
-      password *
-    </label>
-    <input
-      data-testid="passwordField"
-      disabled={false}
-      id="password"
-      name="password"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="password"
-      value=""
-    />
-    <label
-      htmlFor="confirmPassword"
-    >
-      confirm password *
-    </label>
-    <input
-      data-testid="confirmPasswordField"
-      disabled={false}
-      id="confirmPassword"
-      name="confirmPassword"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="password"
-      value=""
-    />
-    <div>
-      * Required field
-    </div>
     <button
-      data-testid="submitButton"
+      className="sc-jrAGrp brUJJc"
       disabled={false}
-      type="submit"
+      onClick={[Function]}
     >
-      signin
+      <div
+        className="sc-kEjbxe kqrVhM"
+      >
+        <img
+          alt="logo facebook"
+          src=""
+        />
+      </div>
+      Sign in
+      with
+    Facebook
     </button>
-  </form>
-  <p>
-    You already have an account? click
-  </p>
-  <button
-    data-testid="switchToLogin"
-    disabled={false}
-    onClick={[Function]}
-  >
-    here
-  </button>
-  <p>
-    .
-  </p>
+    <button
+      className="sc-jrAGrp gYDHmD"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <div
+        className="sc-kEjbxe kqrVhM"
+      >
+        <img
+          alt="logo google"
+          src=""
+        />
+      </div>
+      Sign in
+      with
+    Google
+    </button>
+    <p
+      className="sc-dQppl krnyqM"
+    >
+      or
+    </p>
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="sc-bdfBwQ bPodhE"
+      >
+        <label
+          className="sc-hKgILt fWofNq"
+          htmlFor="userName"
+        >
+          <p>
+            user name
+          </p>
+          <p>
+            *
+          </p>
+        </label>
+        <input
+          className="sc-dlfnbm jEuCWi"
+          data-testid="userNameField"
+          disabled={false}
+          id="userName"
+          name="userName"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="sc-bdfBwQ bPodhE"
+      >
+        <label
+          className="sc-hKgILt fWofNq"
+          htmlFor="email"
+        >
+          <p>
+            email
+          </p>
+          <p>
+            *
+          </p>
+        </label>
+        <input
+          className="sc-dlfnbm jEuCWi"
+          data-testid="emailField"
+          disabled={false}
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="sc-bdfBwQ bPodhE"
+      >
+        <label
+          className="sc-hKgILt fWofNq"
+          htmlFor="password"
+        >
+          <p>
+            password
+          </p>
+          <p>
+            *
+          </p>
+        </label>
+        <input
+          className="sc-dlfnbm jEuCWi"
+          data-testid="passwordField"
+          disabled={false}
+          id="password"
+          name="password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="sc-bdfBwQ jjTxxT"
+      >
+        <label
+          className="sc-hKgILt fWofNq"
+          htmlFor="confirmPassword"
+        >
+          <p>
+            confirm password
+          </p>
+          <p>
+            *
+          </p>
+        </label>
+        <input
+          className="sc-dlfnbm jEuCWi"
+          data-testid="confirmPasswordField"
+          disabled={false}
+          id="confirmPassword"
+          name="confirmPassword"
+          onBlur={[Function]}
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="sc-pFZIQ fWwXIM"
+      >
+        <p>
+          *
+        </p>
+        <p>
+          Required fields
+        </p>
+      </div>
+      <button
+        className="sc-eCssSg jyZzSq"
+        data-testid="submitButton"
+        disabled={false}
+        type="submit"
+      >
+        Sign in
+      </button>
+    </form>
+    <div
+      className="sc-crrsfI dauOmI"
+      fontSize={0.65}
+    >
+      <p>
+        You already have an account? click 
+        <span
+          className="sc-iqHYGH bleeKr"
+          data-testid="switchToLogin"
+          onClick={[Function]}
+        >
+          here
+        </span>
+        .
+      </p>
+    </div>
+  </div>
+  <div
+    className="sc-jSgupP bpponA"
+  />
 </div>
 `;

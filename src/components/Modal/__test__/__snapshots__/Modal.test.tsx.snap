@@ -3,11 +3,13 @@
 exports[`Modal renders without crashing 1`] = `
 Array [
   <div
+    className="sc-gsTCUz jsmmeE"
     data-testid="modal"
   >
     <div />
   </div>,
   <div
+    className="sc-bdfBwQ grHJXv"
     data-testid="modalBackground"
     onClick={[Function]}
   />,

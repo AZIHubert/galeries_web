@@ -47,7 +47,7 @@ const ModalForgotPassword = ({
   });
   return (
     <ModalContainer
-      data-testid="modalForgotPassword"
+      testId="modalForgotPassword"
       title='Enter your email to reset your password'
     >
       <form onSubmit={formik.handleSubmit}>
@@ -55,6 +55,8 @@ const ModalForgotPassword = ({
           disabled={loading}
           id='email'
           error={formik.errors.email}
+          errorTestId='emailError'
+          fieldTestId='emailField'
           label='email'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -62,7 +64,7 @@ const ModalForgotPassword = ({
           value={formik.values.email}
         />
         <GradientButton
-          data-testid='submitButton'
+          testId='submitButton'
           disabled={loading}
           marginBottom={20}
           marginTop={20}
@@ -72,7 +74,7 @@ const ModalForgotPassword = ({
       </form>
       <CancelButtonContainer>
         <CancelButton
-          data-testid='cancelButton'
+          testId='cancelButton'
           onClick={() => {
             if (!loading) {
               setForgotPassword(false);

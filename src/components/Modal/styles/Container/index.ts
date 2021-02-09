@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+interface ContainerI {
+  testId?: string;
+}
+
+const Container = styled.div.attrs<ContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ContainerI>`
   left: 50%;
   max-width: 80%;
   max-height: 90vh;

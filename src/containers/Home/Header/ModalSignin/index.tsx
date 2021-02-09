@@ -49,7 +49,7 @@ const ModalSignin = ({
 
   return (
     <ModalContainer
-      data-testid='modalSignin'
+      testId='modalSignin'
     >
       <SocialMediaButton
         action='signin'
@@ -73,6 +73,8 @@ const ModalSignin = ({
           disabled={loading}
           id='userName'
           error={formik.errors.userName}
+          errorTestId='userNameError'
+          fieldTestId='userNameField'
           marginBottom={7}
           label='user name'
           onBlur={formik.handleBlur}
@@ -85,6 +87,8 @@ const ModalSignin = ({
           disabled={loading}
           id='email'
           error={formik.errors.email}
+          errorTestId='emailError'
+          fieldTestId='emailField'
           marginBottom={7}
           label='email'
           onBlur={formik.handleBlur}
@@ -97,6 +101,8 @@ const ModalSignin = ({
           disabled={loading}
           id='password'
           error={formik.errors.password}
+          errorTestId='passwordError'
+          fieldTestId='passwordField'
           marginBottom={7}
           label='password'
           onBlur={formik.handleBlur}
@@ -110,6 +116,8 @@ const ModalSignin = ({
           disabled={loading}
           id='confirmPassword'
           error={formik.errors.confirmPassword}
+          errorTestId='confirmPasswordError'
+          fieldTestId='confirmPasswordField'
           marginBottom={15}
           label='confirm password'
           onBlur={formik.handleBlur}
@@ -121,7 +129,7 @@ const ModalSignin = ({
         />
         <RequiredField />
         <GradientButton
-          data-testid='submitButton'
+          testId='submitButton'
           disabled={loading}
           marginBottom={20}
           marginTop={20}
@@ -134,6 +142,7 @@ const ModalSignin = ({
         fontSize={0.65}
         justifyContent='center'
         onClick={switchModal}
+        testId='switchToLogin'
         text='You already have an account? click'
         textButton='here'
       />

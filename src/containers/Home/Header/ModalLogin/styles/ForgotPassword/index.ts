@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-const ForgotPassword = styled.div`
+interface ForgotPasswordI {
+  testId?: string;
+}
+
+const ForgotPassword = styled.div.attrs<ForgotPasswordI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ForgotPasswordI>`
   color: ${({ theme }) => theme.colors.black};
   font-size: 0.8rem;
   border: none;

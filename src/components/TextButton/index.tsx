@@ -39,7 +39,7 @@ const TextButton = ({
     <p>
       {`${text} `}
       <Button
-        data-testid={testId}
+        testId={testId}
         onClick={() => {
           if (!disabled) {
             onClick();

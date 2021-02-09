@@ -3,9 +3,14 @@ import styled from 'styled-components';
 interface ButtonI {
   marginBottom?: number;
   marginTop?: number;
+  testId?: string;
 }
 
-const Button = styled.button<ButtonI>`
+const Button = styled.button.attrs<ButtonI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ButtonI>`
   background-image: ${({ theme }) => (
     `linear-gradient(90deg, ${theme.colors.tertiary} 0%, ${theme.colors.primary} 50%)`
   )};
