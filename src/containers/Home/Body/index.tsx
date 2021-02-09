@@ -6,49 +6,86 @@ import mediaQueries from '#helpers/mediaQueries';
 
 const Container = styled.div`
   padding-top: ${({ theme }) => (
-    `${theme.header.height + 20}px`
+    `${theme.header.height.medium + 20}px`
   )};
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
+  align-items: center;
 `;
 
 const TextContainer = styled.div`
-  margin-left: 150px;
-  margin-bottom: 80px;
+  margin-bottom: 11vh;
+  @media ${mediaQueries.mobileL} {
+    margin-left: 50px;
+  }
+  @media ${mediaQueries.tablet} {
+    margin-left: 80px;
+  }
+  @media ${mediaQueries.laptop} {
+    margin-left: 120px;
+  }
   @media ${mediaQueries.laptopL} { 
-    margin-left: 250px;
-    margin-bottom: 120px;
+    margin-left: 180px;
   }
 `;
 
 const Welcolme = styled.h2`
-  font-size: 2.3rem;
   font-weight: bold;
-  margin-bottom: 15px;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  @media ${mediaQueries.mobileL} {
+    font-size: 1.6rem;
+  }
+  @media ${mediaQueries.tablet} {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+  @media ${mediaQueries.laptop} {
+    font-size: 2.5rem;
+    margin-bottom: 14px;
+  }
   @media ${mediaQueries.laptopL} { 
-    font-size: 4rem;
+    font-size: 2.9rem;
+    margin-bottom: 17px;
   }
 `;
 
 const Galeries = styled.h1`
-  width: 430px;
-  margin-bottom: 55px;
+  width: 270px;
+  margin-bottom: 30px;
+  @media ${mediaQueries.mobileL} {
+    width: 290px;
+    margin-bottom: 30px;
+  }
+  @media ${mediaQueries.tablet} {
+    width: 350px;
+    margin-bottom: 50px;
+  }
+  @media ${mediaQueries.laptop} {
+    width: 420px;
+  }
   @media ${mediaQueries.laptopL} { 
-    width: 600px;
+    width: 520px;
+    margin-bottom: 55px;
   }
 `;
 const Text = styled.p`
-  margin-left: 150px;
   font-style: italic;
-  font-size: 1.35rem;
-  line-height: 1.45rem;
+  font-size: 1.1rem;
+  line-height: 1.35rem;
+  margin-left: 50px;
+  @media ${mediaQueries.mobileL} {
+    margin-left: 60px;
+  }
+  @media ${mediaQueries.tablet} {
+    margin-left: 120px;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
   @media ${mediaQueries.laptopL} { 
-    margin-left: 200px;
-    font-size: 1.6rem;
-    line-height: 1.6rem;
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+    margin-left: 145px;
   }
 `;
 

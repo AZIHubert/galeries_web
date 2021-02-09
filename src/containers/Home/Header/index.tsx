@@ -24,10 +24,18 @@ const InnerContainer = styled.div`
   border-bottom: ${({ theme }) => (
     `2px solid ${theme.colors.primary}`
   )};
-  height: ${({ theme }) => `${theme.header.height}px`};
-  margin: ${({ theme }) => `0 ${theme.wrapper.margin.medium}px`};
+  height: ${({ theme }) => `${theme.header.height.small}px`};
+  margin: ${({ theme }) => `0 ${theme.wrapper.margin.smallest}px`};
+  @media ${mediaQueries.mobileL} {
+    margin: ${({ theme }) => `0 ${theme.wrapper.margin.small}px`};
+  }
+  @media ${mediaQueries.laptop} {
+    height: ${({ theme }) => `${theme.header.height.medium}px`};
+    margin: ${({ theme }) => `0 ${theme.wrapper.margin.medium}px`};
+  }
   @media ${mediaQueries.laptopL} { 
     margin: ${({ theme }) => `0 ${theme.wrapper.margin.large}px`};
+    height: ${({ theme }) => `${theme.header.height.large}px`};
   }
 `;
 const ButtonContainer = styled.div`
@@ -129,7 +137,7 @@ const Header = () => {
         <ButtonContainer>
           <HeaderButton
             data-testid='openSignin'
-            marginRight={20}
+            marginRight={30}
             onClick={handleClickSignin}
             title='Sign in'
           />

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 type Variant = 'primary' | 'secondary';
 
 interface ButtonI {
@@ -14,22 +16,23 @@ const Button = styled.button<ButtonI>`
       ? '#7483FF'
       : '#FFFFF4'
   )};
-  border: 2px solid #7483FF;
+  border: ${({ theme }) => `2px solid ${theme.colors.primary}`};
   border-radius: 5px;
+  box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({ variant }) => (
     variant === 'primary'
       ? '#FFFFF4'
       : '#7483FF'
   )};
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: ${({
     marginLeft,
     marginRight,
   }) => (
     `0 ${marginRight}px 0 ${marginLeft}px`
   )};
-  padding: 5px 15px;
+  padding: 3px 15px;
   transition: ${({ theme }) => (
     `color ${theme.transition.default} ease-in, background-color ${theme.transition.slow} ease-in;`
   )};
@@ -47,6 +50,16 @@ const Button = styled.button<ButtonI>`
       ? '#7483FF'
       : '#FFFFF4'
   )};
+  }
+  @media ${mediaQueries.laptop} {
+    font-size: 1.1rem;
+    padding: 5px 15px;
+  }
+  @media ${mediaQueries.laptopL} {
+    border: ${({ theme }) => `3px solid ${theme.colors.primary}`};
+    border-radius: 8px;
+    font-size: 1.3rem;
+    padding: 5px 20px;
   }
 `;
 

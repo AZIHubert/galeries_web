@@ -10,8 +10,21 @@ interface ColorsI {
   white: string;
 }
 
+interface HeaderHeightI {
+  large: number;
+  medium: number;
+  small: number;
+}
+
+interface HeaderLogoI {
+  large: number;
+  medium: number;
+  small: number;
+}
+
 interface HeaderI {
-  height: number;
+  height: HeaderHeightI;
+  logoWidth: HeaderLogoI;
 }
 
 interface TransitionI {
@@ -24,6 +37,7 @@ interface WrapperMarginI {
   large: number;
   medium: number;
   small: number;
+  smallest: number;
 }
 
 interface WrapperI {

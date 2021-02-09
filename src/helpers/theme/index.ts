@@ -9,10 +9,19 @@ const theme: DefaultTheme = {
     primary: '#7483FF',
     secondary: '#FFFFF4',
     tertiary: '#78FFF7',
-    white: '#fff',
+    white: '#FFF',
   },
   header: {
-    height: 90,
+    height: {
+      large: 110,
+      medium: 90,
+      small: 80,
+    },
+    logoWidth: {
+      large: 54,
+      medium: 38,
+      small: 34,
+    },
   },
   transition: {
     default: '0.3s',
@@ -21,9 +30,10 @@ const theme: DefaultTheme = {
   },
   wrapper: {
     margin: {
-      large: 200,
-      medium: 50,
-      small: 25,
+      large: 260,
+      medium: 130,
+      small: 40,
+      smallest: 25,
     },
   },
 };
