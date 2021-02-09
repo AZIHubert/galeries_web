@@ -4,7 +4,15 @@ import styled from 'styled-components';
 
 const modalRoot = document.getElementById('modal-root');
 
-const Container = styled.div`
+interface ContainerI {
+  testId?: string;
+}
+
+const Container = styled.div.attrs<ContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ContainerI>`
   position: absolute;
   top: 50px;
   left: 50%;
@@ -20,21 +28,25 @@ const Container = styled.div`
 interface ModalTimerI {
   handleClose: () => void;
   open: boolean;
+  testId?: string;
   text: string;
 }
 
 const ModalTimer = ({
   handleClose,
   open,
+  testId,
   text,
 }: ModalTimerI) => {
   const el = React.useRef(document.createElement('div'));
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   React.useEffect(() => {
-    if (modalRoot && open) {
-      modalRoot.appendChild(el.current);
+    if (open) {
       timer.current = setTimeout(() => handleClose(), 3000);
+      if (modalRoot) {
+        modalRoot.appendChild(el.current);
+      }
     }
     return () => {
       if (modalRoot && open) {
@@ -45,10 +57,11 @@ const ModalTimer = ({
       }
     };
   }, [open]);
+  if (!open) return null;
   return (
     ReactDOM.createPortal(
       <Container
-        data-testid="modal"
+        testId={testId}
       >
         {text}
       </Container>,
