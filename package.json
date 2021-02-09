@@ -6,6 +6,9 @@
   "author": "AZIHubert <allan.aoudji@protonmail.com>",
   "license": "MIT",
   "repository": "git@github.com:AZIHubert/galeries_web.git",
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "scripts": {
     "build:svg": "svgr src/ressources/svg/ -d src/ressources/svgComponents",
     "dev": "parcel index.html",
@@ -28,6 +31,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-test-renderer": "^17.0.0",
+    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
     "babel-loader": "^8.2.2",
@@ -60,6 +64,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "src": "^1.1.2",
+    "styled-components": "^5.2.1",
+    "styled-reset": "^4.3.4",
     "yup": "^0.32.8"
   }
 }

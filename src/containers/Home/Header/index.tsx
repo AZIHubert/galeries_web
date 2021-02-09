@@ -1,13 +1,22 @@
 import * as React from 'react';
 
+import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
+
 import logo from '#ressources/svg/logoG.svg';
 
 import ModalForgotPassword from './ModalForgotPassword';
 import ModalLogin from './ModalLogin';
 import ModalSignin from './ModalSignin';
-import ModalVerifyAccount from './ModalVerifyAccount';
 import ModalValidateResetPassword from './ModalValidateResetPassword';
+import ModalVerifyAccount from './ModalVerifyAccount';
+
+import {
+  ButtonContainer,
+  Container,
+  InnerContainer,
+  Logo,
+} from './styles';
 
 const Header = () => {
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
@@ -94,31 +103,35 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <img
-        src={logo}
-        alt="header logo"
-      />
-      <button
-        onClick={handleClickSignin}
-        data-testid='openSignin'
-      >
-        signin
-      </button>
-      <button
-        data-testid='openLogin'
-        onClick={handleClickLogin}
-      >
-        login
-      </button>
-      <Modal
-        open={openLogin || openSignin}
-        handleClose={handleCloseModal}
-      >
-        {openLogin && SignerModal()}
-        {openSignin && LoggerModal}
-      </Modal>
-    </header>
+    <Container>
+      <InnerContainer>
+        <Logo
+          src={logo}
+          alt="header logo"
+        />
+        <ButtonContainer>
+          <HeaderButton
+            data-testid='openSignin'
+            marginRight={30}
+            onClick={handleClickSignin}
+            title='Sign in'
+          />
+          <HeaderButton
+            data-testid='openLogin'
+            onClick={handleClickLogin}
+            variant='secondary'
+            title='Log in'
+          />
+        </ButtonContainer>
+        <Modal
+          open={openLogin || openSignin}
+          handleClose={handleCloseModal}
+        >
+          {openLogin && SignerModal()}
+          {openSignin && LoggerModal}
+        </Modal>
+      </InnerContainer>
+    </Container>
   );
 };
 

@@ -1,11 +1,11 @@
 import * as React from 'react';
 
+import { Container } from './styled';
+
 const Footer = () => (
-  <footer>
-    <p>
-      Allan Aoudji @2021
-    </p>
-  </footer>
+  <Container>
+    Allan Aoudji @2021
+  </Container>
 );
 
 export default Footer;

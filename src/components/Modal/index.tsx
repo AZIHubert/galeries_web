@@ -1,15 +1,24 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import {
+  Background,
+  Container,
+} from './styles';
+
 interface ModalI {
-  open: boolean;
-  handleClose: () => void;
   children: React.ReactNode;
+  handleClose: () => void;
+  open: boolean;
 }
 
 const modalRoot = document.getElementById('modal-root');
 
-const Modal = ({ children, open, handleClose }: ModalI) => {
+const Modal = ({
+  children,
+  handleClose,
+  open,
+}: ModalI) => {
   const el = React.useRef(document.createElement('div'));
 
   React.useEffect(() => {
@@ -28,16 +37,15 @@ const Modal = ({ children, open, handleClose }: ModalI) => {
   return (
     ReactDOM.createPortal(
       <>
-        <div
+        <Container
           data-testid="modal"
         >
           {children}
-        </div>
-        <div
+        </Container>
+        <Background
           data-testid="modalBackground"
           onClick={handleClose}
-        >
-        </div>
+        />
       </>,
       el.current,
     )

@@ -2,20 +2,33 @@ import * as React from 'react';
 
 import { LogoGaleries } from '#ressources/svgComponents';
 
+import {
+  CatchPhrase,
+  Container,
+  GaleriesLogo,
+  Welcolme,
+} from './styles';
+
 const Body = () => (
-  <div>
-    <h2>
+  <Container>
+    <div>
+      <Welcolme>
         Welcome to
-    </h2>
-    <h1>
-      <LogoGaleries />
-    </h1>
-    <p>
-      A web app to share
-      pictures with
-      your friends and family.
-    </p>
-  </div>
+      </Welcolme>
+      <GaleriesLogo>
+        <LogoGaleries />
+      </GaleriesLogo>
+      <CatchPhrase>
+        A web app to share
+      </CatchPhrase>
+      <CatchPhrase>
+        pictures with
+      </CatchPhrase>
+      <CatchPhrase>
+        your friends and family.
+      </CatchPhrase>
+    </div>
+  </Container>
 );
 
 export default Body;
