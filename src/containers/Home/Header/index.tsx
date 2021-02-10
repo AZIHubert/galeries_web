@@ -56,7 +56,7 @@ const Header = () => {
     }
   };
 
-  const LoggerModal = accountCreate ? (
+  const signerModal = accountCreate ? (
     <ModalVerifyAccount
       currentEmail={currentEmail}
       loading={loading}
@@ -71,7 +71,7 @@ const Header = () => {
       switchModal={handleClickLogin}
     />
   );
-  const SignerModal = () => {
+  const LoginModal = () => {
     if (forgotPassword) {
       return (
         <ModalForgotPassword
@@ -127,8 +127,8 @@ const Header = () => {
           open={openLogin || openSignin}
           handleClose={handleCloseModal}
         >
-          {openLogin && SignerModal()}
-          {openSignin && LoggerModal}
+          {openLogin && LoginModal()}
+          {openSignin && signerModal}
         </Modal>
       </InnerContainer>
     </Container>

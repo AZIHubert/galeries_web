@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import GoogleLogin from 'react-google-login';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
@@ -11,7 +11,11 @@ import SocialMediaButton from '#components/SocialMediaButton';
 import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
-import { signin, loginFacebook } from '#helpers/api';
+import {
+  loginFacebook,
+  loginGoogle,
+  signin,
+} from '#helpers/api';
 
 import { signinSchema } from '#helpers/schemas';
 
@@ -37,26 +41,48 @@ const ModalSignin = ({
   setLoading,
   switchModal,
 }: ModalSigninI) => {
+  const [errorCallback, setErrorCallBack] = React.useState<string>('');
   const responseFacebook = async (
     faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
   ) => {
+    setLoading(true);
     try {
       const response = await loginFacebook(faceBookResponse);
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('expiresIn', response.data.expiresIn);
+      setLoading(false);
     } catch (err) {
-      console.log(err.data);
+      if (err.status === 500) {
+        setErrorCallBack('something went wrong');
+      } else {
+        setErrorCallBack(err.data.errors);
+      }
     }
     setLoading(false);
   };
-  const responseGoogle = (googleResponse: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    console.log(googleResponse);
+  const responseGoogle = async (
+    googleResponse: any,
+  ) => {
+    setLoading(true);
+    try {
+      const response = await loginGoogle(googleResponse.profileObj);
+      localStorage.setItem('authToken', response.data.token);
+      localStorage.setItem('expiresIn', response.data.expiresIn);
+    } catch (err) {
+      if (err.response.status === 500) {
+        setErrorCallBack('something went wrong');
+      } else {
+        setErrorCallBack(err.response.data.errors);
+      }
+    }
+    setLoading(false);
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, { setFieldError }) => {
       if (!loading) {
+        setLoading(true);
         try {
           const response = await signin(values);
           console.log(response.data);
@@ -96,7 +122,7 @@ const ModalSignin = ({
         )}
       />
       <GoogleLogin
-        clientId="863840240633-1fo49l2neof9t9ifg0ufbvotun3a6udf.apps.googleusercontent.com"
+        clientId="863840240633-tve0cuo6hib6uhgap61j1nkq03k7k5vq.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={(err) => console.log(err)}

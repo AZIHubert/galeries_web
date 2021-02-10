@@ -7,7 +7,7 @@ const endpoint = '/users/auth/facebook';
 
 const signin: (
   values: ReactFacebookLoginInfo | ReactFacebookFailureResponse
-) =>Promise<AxiosResponse<any>> = async (
+) =>Promise<AxiosResponse<any>> = (
   values: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
 ) => new Promise((
   resolve,
