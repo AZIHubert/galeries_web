@@ -8,6 +8,8 @@ import { resetPasswordSchema } from '#helpers/schemas';
 import ModalContainer from '#components/ModalContainer';
 import GradientButton from '#components/GradientButton';
 
+import { resendResetPassword } from '#helpers/api';
+
 import {
   CancelButton,
   CancelButtonContainer,
@@ -15,6 +17,7 @@ import {
 
 interface ModalForgotPasswordI {
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
+  setError: React.Dispatch<React.SetStateAction<string>>;
   setForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   switchModal: () => void;
@@ -27,6 +30,7 @@ const initialValues = {
 
 const ModalForgotPassword = ({
   setCurrentEmail,
+  setError,
   setForgotPassword,
   setLoading,
   switchModal,
@@ -34,11 +38,29 @@ const ModalForgotPassword = ({
 }: ModalForgotPasswordI) => {
   const formik = useFormik({
     initialValues,
-    onSubmit: ({ email }) => {
+    onSubmit: async (value, { setFieldError }) => {
       if (!loading) {
         setLoading(true);
-        switchModal();
-        setCurrentEmail(email);
+        try {
+          await resendResetPassword(value);
+          setCurrentEmail(value.email);
+          switchModal();
+        } catch (err) {
+          if (err.response) {
+            if (err.status === 500) {
+              setError('Something went wrong. Please try again');
+            } else {
+              const { errors } = err.response.data;
+              if (typeof errors === 'object') {
+                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+              } else {
+                setError(errors);
+              }
+            }
+          } else {
+            setError('Something went wrong. Please try again');
+          }
+        }
         setLoading(false);
       }
     },

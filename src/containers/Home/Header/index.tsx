@@ -66,6 +66,7 @@ const Header = () => {
     <ModalVerifyAccount
       currentEmail={currentEmail}
       loading={loading}
+      setError={setError}
       setLoading={setLoading}
     />
   ) : (
@@ -83,6 +84,7 @@ const Header = () => {
       return (
         <ModalForgotPassword
           setCurrentEmail={setCurrentEmail}
+          setError={setError}
           setForgotPassword={setForgotPassword}
           setLoading={setLoading}
           loading={loading}
@@ -95,6 +97,7 @@ const Header = () => {
         <ModalValidateResetPassword
           currentEmail={currentEmail}
           loading={loading}
+          setError={setError}
           setLoading={setLoading}
         />
       );
