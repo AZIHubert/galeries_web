@@ -51,12 +51,15 @@ const ModalSignin = ({
       const response = await loginFacebook(faceBookResponse);
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('expiresIn', response.data.expiresIn);
-      setLoading(false);
     } catch (err) {
-      if (err.status === 500) {
-        setError('something went wrong');
+      if (err.response) {
+        if (err.status === 500) {
+          setError('Something went wrong. Please try again.');
+        } else {
+          setError(err.response.data.errors);
+        }
       } else {
-        setError(err.data.errors);
+        setError('Something went wrong. Please try again.');
       }
     }
     setLoading(false);
@@ -70,10 +73,14 @@ const ModalSignin = ({
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('expiresIn', response.data.expiresIn);
     } catch (err) {
-      if (err.response.status === 500) {
-        setError('something went wrong');
+      if (err.response) {
+        if (err.status === 500) {
+          setError('Something went wrong. Please try again.');
+        } else {
+          setError(err.response.data.errors);
+        }
       } else {
-        setError(err.response.data.errors);
+        setError('Something went wrong. Please try again.');
       }
     }
     setLoading(false);
@@ -84,19 +91,29 @@ const ModalSignin = ({
     onSubmit: async (values, { setFieldError }) => {
       if (!loading) {
         setLoading(true);
+        setError('');
         try {
           const response = await signin(values);
           console.log(response.data);
           setAccountCreate(true);
           setCurrentEmail(values.email);
-          setLoading(false);
         } catch (err) {
-          const { errors } = err.response.data;
-          if (typeof errors === 'object') {
-            Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+          if (err.response) {
+            if (err.status === 500) {
+              setError('Something went wrong. Please try again');
+            } else {
+              const { errors } = err.response.data;
+              if (typeof errors === 'object') {
+                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+              } else {
+                setError('Something went wrong. Please try again');
+              }
+            }
+          } else {
+            setError('Something went wrong. Please try again');
           }
-          setLoading(false);
         }
+        setLoading(false);
       }
     },
     validateOnBlur: true,
@@ -118,7 +135,10 @@ const ModalSignin = ({
             action='signin'
             disabled={loading}
             marginBottom={12}
-            onClick={renderProps.onClick}
+            onClick={() => {
+              setError('');
+              renderProps.onClick();
+            }}
           />
         )}
       />
@@ -132,15 +152,17 @@ const ModalSignin = ({
           <SocialMediaButton
             action='signin'
             disabled={loading}
-            onClick={renderProps.onClick}
+            onClick={() => {
+              setError('');
+              renderProps.onClick();
+            }}
             variant='google'
           />
         )}
       />
-
       <TextSepatator
-        marginBottom={12}
-        marginTop={12}
+        marginBottom={10}
+        marginTop={10}
         text='or'
       />
       <form onSubmit={formik.handleSubmit}>
@@ -206,8 +228,8 @@ const ModalSignin = ({
         <GradientButton
           testId='submitButton'
           disabled={loading}
-          marginBottom={20}
-          marginTop={20}
+          marginBottom={15}
+          marginTop={15}
           type='submit'
           title='Sign in'
         />

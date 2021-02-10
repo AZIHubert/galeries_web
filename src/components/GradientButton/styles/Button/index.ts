@@ -20,8 +20,8 @@ const Button = styled.button.attrs<ButtonI>(
   box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({ theme }) => theme.colors.secondary};
   cursor: pointer;
-  font-size: 1rem;
-  height: 32px;
+  font-size: 0.9rem;
+  height: 29px;
   margin: ${({
     marginBottom,
     marginTop,

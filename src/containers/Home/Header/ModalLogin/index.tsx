@@ -72,8 +72,8 @@ const ModalLogin = ({
         variant='google'
       />
       <TextSepatator
-        marginBottom={12}
-        marginTop={12}
+        marginBottom={10}
+        marginTop={10}
         text='or'
       />
       <form onSubmit={formik.handleSubmit}>
@@ -122,8 +122,8 @@ const ModalLogin = ({
         <GradientButton
           testId='submitButton'
           disabled={loading}
-          marginBottom={20}
-          marginTop={20}
+          marginBottom={15}
+          marginTop={15}
           type='submit'
           title='Log in'
         />

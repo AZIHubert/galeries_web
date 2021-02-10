@@ -4,7 +4,7 @@ const ImageContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  width: 20px;
+  margin-right: 25px;
 `;
 
 export default ImageContainer;

@@ -4,7 +4,7 @@ const Label = styled.label`
   color: ${({ theme }) => theme.colors.primary};
   display: flex;
   font-family: 'HelveticaLTstd';
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-bottom: 5px;
   & {
     p:nth-child(2) {  

@@ -45,9 +45,9 @@ const Button = styled.button.attrs<ButtonI>(
   )};
   cursor: pointer;
   display: flex;
-  font-size: 0.9rem;
-  height: 34px;
-  justify-content: space-between;
+  font-size: 0.85rem;
+  height: 30px;
+  justify-content: center;
   margin: ${({
     marginBottom,
     marginTop,
