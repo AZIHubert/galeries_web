@@ -1,3 +1,4 @@
+export { default as confirmation } from './confirmation';
 export { default as login } from './login';
 export { default as loginFacebook } from './loginFacebook';
 export { default as loginGoogle } from './loginGoogle';

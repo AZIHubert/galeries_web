@@ -29,5 +29,6 @@ module.exports = {
     '#containers/(.*)': '<rootDir>/src/containers/$1',
     '#helpers/(.*)': '<rootDir>/src/helpers/$1',
     '#ressources/(.*)': '<rootDir>/src/ressources/$1',
+    '#src/(.*)': '<routDir>/src/$1',
   },
 };

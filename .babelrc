@@ -13,8 +13,9 @@
               "#containers": "./src/containers",
               "#contexts": "./src/contexts",
               "#helpers": "./src/helpers",
+              "react-facebook-login":  "react-facebook-login/dist/facebook-login-render-props",
               "#ressources": "./src/ressources",
-              "react-facebook-login":  "react-facebook-login/dist/facebook-login-render-props"
+              "#src": "./src"
             }
          }]
     ]

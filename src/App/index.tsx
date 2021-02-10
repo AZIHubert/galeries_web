@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Reset } from 'styled-reset';
 
-import Home from '#containers/Home';
+import Routes from '#src/Routes';
 
 import ThemeProvider from '#contexts/ThemeContext';
 import { UserProvider } from '#contexts/UserContext';
@@ -13,7 +13,7 @@ const App = () => (
     <UserProvider>
       <GlobalStyle />
       <Reset />
-      <Home />
+      <Routes />
     </UserProvider>
   </ThemeProvider>
 );
