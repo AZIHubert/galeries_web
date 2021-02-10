@@ -11,7 +11,7 @@ import logo from '#ressources/svg/logoG.svg';
 
 interface ConfirmAccountI {
   setCallbackModal: React.Dispatch<React.SetStateAction<string>>;
-  setOpenCallbackModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setCallbackModalError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Container = styled.div`
@@ -29,7 +29,7 @@ const Image = styled.img`
 
 const ConfirmAccount = ({
   setCallbackModal,
-  setOpenCallbackModal,
+  setCallbackModalError,
 }: ConfirmAccountI) => {
   const { token } = useParams<{ token: string }>();
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -45,10 +45,10 @@ const ConfirmAccount = ({
       } catch (err) {
         const { errors } = err.response.data;
         setCallbackModal(errors);
+        setCallbackModalError(true);
       }
       setRequestFinish(true);
     };
-    setOpenCallbackModal(true);
     confimAccount();
   }, []);
   React.useEffect(() => {

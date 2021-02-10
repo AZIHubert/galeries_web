@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const Background = styled.div`
+const Background = styled.div.attrs(() => ({
+  className: 'background-container',
+}))`
   background-color: #7483FF;
   border-radius: 20px 0;
   box-shadow: ${({ theme }) => theme.boxShadow};
