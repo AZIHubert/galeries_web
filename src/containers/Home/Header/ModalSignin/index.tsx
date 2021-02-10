@@ -21,7 +21,8 @@ import { signinSchema } from '#helpers/schemas';
 
 interface ModalSigninI {
   loading: boolean;
-  setAccountCreate:React.Dispatch<React.SetStateAction<boolean>>;
+  setAccountCreate: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string>>;
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   switchModal: () => void;
@@ -38,10 +39,10 @@ const ModalSignin = ({
   loading,
   setAccountCreate,
   setCurrentEmail,
+  setError,
   setLoading,
   switchModal,
 }: ModalSigninI) => {
-  const [errorCallback, setErrorCallBack] = React.useState<string>('');
   const responseFacebook = async (
     faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
   ) => {
@@ -53,9 +54,9 @@ const ModalSignin = ({
       setLoading(false);
     } catch (err) {
       if (err.status === 500) {
-        setErrorCallBack('something went wrong');
+        setError('something went wrong');
       } else {
-        setErrorCallBack(err.data.errors);
+        setError(err.data.errors);
       }
     }
     setLoading(false);
@@ -70,9 +71,9 @@ const ModalSignin = ({
       localStorage.setItem('expiresIn', response.data.expiresIn);
     } catch (err) {
       if (err.response.status === 500) {
-        setErrorCallBack('something went wrong');
+        setError('something went wrong');
       } else {
-        setErrorCallBack(err.response.data.errors);
+        setError(err.response.data.errors);
       }
     }
     setLoading(false);

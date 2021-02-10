@@ -24,6 +24,7 @@ const Header = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [openLogin, setOpenLogin] = React.useState<boolean>(false);
   const [openSignin, setOpenSignin] = React.useState<boolean>(false);
+  const [signinError, setSigninError] = React.useState<string>('');
   const [validateResetPassword, setValidateResetPassword] = React.useState<boolean>(false);
   const [currentEmail, setCurrentEmail] = React.useState<string>('');
 
@@ -67,6 +68,7 @@ const Header = () => {
       loading={loading}
       setAccountCreate={setAccountCreate}
       setCurrentEmail={setCurrentEmail}
+      setError={setSigninError}
       setLoading={setLoading}
       switchModal={handleClickLogin}
     />
