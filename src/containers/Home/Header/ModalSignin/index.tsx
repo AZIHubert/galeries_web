@@ -1,21 +1,16 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
-import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
-import GoogleLogin from 'react-google-login';
 
+import FacebookButton from '#components/FacebookButton';
 import Field from '#components/Field';
+import GoogleButton from '#components/GoogleButton';
 import GradientButton from '#components/GradientButton';
 import ModalContainer from '#components/ModalContainer';
 import RequiredField from '#components/RequiredField';
-import SocialMediaButton from '#components/SocialMediaButton';
 import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
-import {
-  loginFacebook,
-  loginGoogle,
-  signin,
-} from '#helpers/api';
+import { signin } from '#helpers/api';
 
 import { signinSchema } from '#helpers/schemas';
 
@@ -43,60 +38,34 @@ const ModalSignin = ({
   setLoading,
   switchModal,
 }: ModalSigninI) => {
-  const responseFacebook = async (
-    faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
-  ) => {
-    setLoading(true);
-    try {
-      const response = await loginFacebook(faceBookResponse);
-      localStorage.setItem('authToken', response.data.token);
-      localStorage.setItem('expiresIn', response.data.expiresIn);
-      setLoading(false);
-    } catch (err) {
-      if (err.status === 500) {
-        setError('something went wrong');
-      } else {
-        setError(err.data.errors);
-      }
-    }
-    setLoading(false);
-  };
-  const responseGoogle = async (
-    googleResponse: any,
-  ) => {
-    setLoading(true);
-    try {
-      const response = await loginGoogle(googleResponse.profileObj);
-      localStorage.setItem('authToken', response.data.token);
-      localStorage.setItem('expiresIn', response.data.expiresIn);
-    } catch (err) {
-      if (err.response.status === 500) {
-        setError('something went wrong');
-      } else {
-        setError(err.response.data.errors);
-      }
-    }
-    setLoading(false);
-  };
-
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, { setFieldError }) => {
       if (!loading) {
         setLoading(true);
+        setError('');
         try {
           const response = await signin(values);
           console.log(response.data);
           setAccountCreate(true);
           setCurrentEmail(values.email);
-          setLoading(false);
         } catch (err) {
-          const { errors } = err.response.data;
-          if (typeof errors === 'object') {
-            Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+          if (err.response) {
+            if (err.status === 500) {
+              setError('Something went wrong. Please try again');
+            } else {
+              const { errors } = err.response.data;
+              if (typeof errors === 'object') {
+                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+              } else {
+                setError(errors);
+              }
+            }
+          } else {
+            setError('Something went wrong. Please try again');
           }
-          setLoading(false);
         }
+        setLoading(false);
       }
     },
     validateOnBlur: true,
@@ -108,39 +77,21 @@ const ModalSignin = ({
     <ModalContainer
       testId='modalSignin'
     >
-      <FacebookLogin
-        appId="688539228486770"
-        fields="email, gender, name, picture.type(large)"
-        onClick={() => setLoading(true)}
-        callback={responseFacebook}
-        render={(renderProps) => (
-          <SocialMediaButton
-            action='signin'
-            disabled={loading}
-            marginBottom={12}
-            onClick={renderProps.onClick}
-          />
-        )}
+      <FacebookButton
+        action='signin'
+        loading={loading}
+        setError={setError}
+        setLoading={setLoading}
       />
-      <GoogleLogin
-        clientId="863840240633-tve0cuo6hib6uhgap61j1nkq03k7k5vq.apps.googleusercontent.com"
-        buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={(err) => console.log(err)}
-        cookiePolicy={'single_host_origin'}
-        render={(renderProps) => (
-          <SocialMediaButton
-            action='signin'
-            disabled={loading}
-            onClick={renderProps.onClick}
-            variant='google'
-          />
-        )}
+      <GoogleButton
+        action='signin'
+        loading={loading}
+        setError={setError}
+        setLoading={setLoading}
       />
-
       <TextSepatator
-        marginBottom={12}
-        marginTop={12}
+        marginBottom={9}
+        marginTop={9}
         text='or'
       />
       <form onSubmit={formik.handleSubmit}>
@@ -150,7 +101,7 @@ const ModalSignin = ({
           error={formik.errors.userName}
           errorTestId='userNameError'
           fieldTestId='userNameField'
-          marginBottom={7}
+          marginBottom={6}
           label='user name'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -164,7 +115,7 @@ const ModalSignin = ({
           error={formik.errors.email}
           errorTestId='emailError'
           fieldTestId='emailField'
-          marginBottom={7}
+          marginBottom={6}
           label='email'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -178,7 +129,7 @@ const ModalSignin = ({
           error={formik.errors.password}
           errorTestId='passwordError'
           fieldTestId='passwordField'
-          marginBottom={7}
+          marginBottom={6}
           label='password'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -193,7 +144,7 @@ const ModalSignin = ({
           error={formik.errors.confirmPassword}
           errorTestId='confirmPasswordError'
           fieldTestId='confirmPasswordField'
-          marginBottom={15}
+          marginBottom={12}
           label='confirm password'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -206,8 +157,8 @@ const ModalSignin = ({
         <GradientButton
           testId='submitButton'
           disabled={loading}
-          marginBottom={20}
-          marginTop={20}
+          marginBottom={15}
+          marginTop={15}
           type='submit'
           title='Sign in'
         />

@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
+import ModalTimer from '#components/ModalTimer';
 
 import logo from '#ressources/svg/logoG.svg';
 
@@ -20,11 +21,11 @@ import {
 
 const Header = () => {
   const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<string>('');
   const [forgotPassword, setForgotPassword] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [openLogin, setOpenLogin] = React.useState<boolean>(false);
   const [openSignin, setOpenSignin] = React.useState<boolean>(false);
-  const [signinError, setSigninError] = React.useState<string>('');
   const [validateResetPassword, setValidateResetPassword] = React.useState<boolean>(false);
   const [currentEmail, setCurrentEmail] = React.useState<string>('');
 
@@ -32,12 +33,14 @@ const Header = () => {
     if (!loading) {
       setOpenSignin(false);
       setOpenLogin(!openLogin);
+      setError('');
     }
   };
   const handleClickSignin = () => {
     if (!loading) {
       setOpenLogin(false);
       setOpenSignin(!openSignin);
+      setError('');
     }
   };
   const handleCloseModal = () => {
@@ -48,12 +51,14 @@ const Header = () => {
       setOpenSignin(false);
       setValidateResetPassword(false);
       setCurrentEmail('');
+      setError('');
     }
   };
   const switchToValidateResetPassword = () => {
     if (!loading) {
       setForgotPassword(false);
       setValidateResetPassword(true);
+      setError('');
     }
   };
 
@@ -61,6 +66,7 @@ const Header = () => {
     <ModalVerifyAccount
       currentEmail={currentEmail}
       loading={loading}
+      setError={setError}
       setLoading={setLoading}
     />
   ) : (
@@ -68,7 +74,7 @@ const Header = () => {
       loading={loading}
       setAccountCreate={setAccountCreate}
       setCurrentEmail={setCurrentEmail}
-      setError={setSigninError}
+      setError={setError}
       setLoading={setLoading}
       switchModal={handleClickLogin}
     />
@@ -78,6 +84,7 @@ const Header = () => {
       return (
         <ModalForgotPassword
           setCurrentEmail={setCurrentEmail}
+          setError={setError}
           setForgotPassword={setForgotPassword}
           setLoading={setLoading}
           loading={loading}
@@ -90,6 +97,7 @@ const Header = () => {
         <ModalValidateResetPassword
           currentEmail={currentEmail}
           loading={loading}
+          setError={setError}
           setLoading={setLoading}
         />
       );
@@ -97,8 +105,9 @@ const Header = () => {
     return (
       <ModalLogin
         loading={loading}
-        setLoading={setLoading}
+        setError={setError}
         setForgotPassword={setForgotPassword}
+        setLoading={setLoading}
         switchModal={handleClickSignin}
       />
     );
@@ -131,6 +140,12 @@ const Header = () => {
         >
           {openLogin && LoginModal()}
           {openSignin && signerModal}
+          <ModalTimer
+            handleClose={() => setError('')}
+            open={!!error}
+            text={error}
+            variant='danger'
+          />
         </Modal>
       </InnerContainer>
     </Container>

@@ -8,11 +8,11 @@ const InnerContainer = styled.div`
   border-radius: 20px 0;
   display: flex;
   flex-direction: column;
-  padding: 30px 25px 20px 25px;
-  @media ${mediaQueries.mobileL} {
-    padding: 30px 45px 20px 45px;
-  }
+  padding: 25px 25px 15px 25px;
   z-index: 1;
+  @media ${mediaQueries.mobileL} {
+    padding: 25px 45px 15px 45px;
+  }
 `;
 
 export default InnerContainer;

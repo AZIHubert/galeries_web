@@ -1,35 +1,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import styled from 'styled-components';
+
+import { Container } from './styles';
+
+type Variant = 'danger' | 'primary';
 
 const modalRoot = document.getElementById('modal-root');
-
-interface ContainerI {
-  testId?: string;
-}
-
-const Container = styled.div.attrs<ContainerI>(
-  ({ testId }) => ({
-    'data-testid': testId,
-  }),
-)<ContainerI>`
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.secondary};
-  padding: 7px 14px;
-  border-radius: 4px;
-  border: ${({ theme }) => `1px solid ${theme.colors.secondary}`};
-  box-shadow: ${({ theme }) => theme.boxShadow};
-`;
-
 interface ModalTimerI {
   handleClose: () => void;
   open: boolean;
   testId?: string;
   text: string;
+  variant?: Variant;
 }
 
 const ModalTimer = ({
@@ -37,6 +19,7 @@ const ModalTimer = ({
   open,
   testId,
   text,
+  variant = 'primary',
 }: ModalTimerI) => {
   const el = React.useRef(document.createElement('div'));
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -62,6 +45,7 @@ const ModalTimer = ({
     ReactDOM.createPortal(
       <Container
         testId={testId}
+        variant={variant}
       >
         {text}
       </Container>,
