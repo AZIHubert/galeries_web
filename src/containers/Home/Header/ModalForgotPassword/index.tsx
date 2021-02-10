@@ -39,6 +39,7 @@ const ModalForgotPassword = ({
         setLoading(true);
         switchModal();
         setCurrentEmail(email);
+        setLoading(false);
       }
     },
     validateOnChange: false,
