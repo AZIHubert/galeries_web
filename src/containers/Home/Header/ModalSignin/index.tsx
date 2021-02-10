@@ -20,6 +20,7 @@ interface ModalSigninI {
   setError: React.Dispatch<React.SetStateAction<string>>;
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
   switchModal: () => void;
 }
 
@@ -36,6 +37,7 @@ const ModalSignin = ({
   setCurrentEmail,
   setError,
   setLoading,
+  setOpenError,
   switchModal,
 }: ModalSigninI) => {
   const formik = useFormik({
@@ -82,12 +84,14 @@ const ModalSignin = ({
         loading={loading}
         setError={setError}
         setLoading={setLoading}
+        setOpenError={setOpenError}
       />
       <GoogleButton
         action='signin'
         loading={loading}
         setError={setError}
         setLoading={setLoading}
+        setOpenError={setOpenError}
       />
       <TextSepatator
         marginBottom={9}

@@ -20,6 +20,7 @@ interface ModalForgotPasswordI {
   setError: React.Dispatch<React.SetStateAction<string>>;
   setForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
   switchModal: () => void;
   loading: boolean;
 }
@@ -33,6 +34,7 @@ const ModalForgotPassword = ({
   setError,
   setForgotPassword,
   setLoading,
+  setOpenError,
   switchModal,
   loading,
 }: ModalForgotPasswordI) => {
@@ -49,16 +51,19 @@ const ModalForgotPassword = ({
           if (err.response) {
             if (err.status === 500) {
               setError('Something went wrong. Please try again');
+              setOpenError(true);
             } else {
               const { errors } = err.response.data;
               if (typeof errors === 'object') {
                 Object.keys(errors).map((error) => setFieldError(error, errors[error]));
               } else {
                 setError(errors);
+                setOpenError(true);
               }
             }
           } else {
             setError('Something went wrong. Please try again');
+            setOpenError(true);
           }
         }
         setLoading(false);
