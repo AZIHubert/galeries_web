@@ -10,6 +10,7 @@ import {
 type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
 
 interface ModalContainerI {
+  open?: boolean;
   testId?: string;
   title?: string;
   titleTextAlign?: TextAlign;

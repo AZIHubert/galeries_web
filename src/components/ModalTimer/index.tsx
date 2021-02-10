@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 
 import { Container } from './styles';
 
@@ -7,6 +8,7 @@ type Variant = 'danger' | 'primary';
 
 const modalRoot = document.getElementById('modal-root');
 interface ModalTimerI {
+  callBack?: () => void;
   handleClose: () => void;
   open: boolean;
   testId?: string;
@@ -15,6 +17,7 @@ interface ModalTimerI {
 }
 
 const ModalTimer = ({
+  callBack,
   handleClose,
   open,
   testId,
@@ -32,23 +35,32 @@ const ModalTimer = ({
       }
     }
     return () => {
-      if (modalRoot && open) {
-        modalRoot.removeChild(el.current);
-      }
       if (timer.current) {
         clearTimeout(timer.current);
       }
     };
   }, [open]);
-  if (!open) return null;
   return (
     ReactDOM.createPortal(
-      <Container
-        testId={testId}
-        variant={variant}
+      <CSSTransition
+        in={open}
+        classNames='fade'
+        timeout={300}
+        unmountOnExit
+        onExited={() => {
+          if (modalRoot) {
+            modalRoot.removeChild(el.current);
+          }
+          if (callBack) callBack();
+        }}
       >
-        {text}
-      </Container>,
+        <Container
+          testId={testId}
+          variant={variant}
+        >
+          {text}
+        </Container>
+      </CSSTransition>,
       el.current,
     )
   );

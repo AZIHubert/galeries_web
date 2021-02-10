@@ -12,6 +12,7 @@ interface GoogleButtonI {
   loading: boolean;
   setError: React.Dispatch<React.SetStateAction<string>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const GoogleButton = ({
@@ -19,6 +20,7 @@ const GoogleButton = ({
   loading = false,
   setError,
   setLoading,
+  setOpenError,
 }: GoogleButtonI) => {
   const responseGoogle = async (
     googleResponse: any,
@@ -32,11 +34,14 @@ const GoogleButton = ({
       if (err.response) {
         if (err.status === 500) {
           setError('Something went wrong. Please try again.');
+          setOpenError(true);
         } else {
           setError(err.response.data.errors);
+          setOpenError(true);
         }
       } else {
         setError('Something went wrong. Please try again.');
+        setOpenError(true);
       }
     }
     setLoading(false);
@@ -53,6 +58,7 @@ const GoogleButton = ({
           action={action}
           disabled={loading}
           onClick={() => {
+            setOpenError(false);
             setError('');
             renderProps.onClick();
           }}

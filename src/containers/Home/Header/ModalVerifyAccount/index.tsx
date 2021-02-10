@@ -10,7 +10,8 @@ interface ModalVerifyAccountI {
   currentEmail: string;
   loading: boolean,
   setError: React.Dispatch<React.SetStateAction<string>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalVerifyAccount = ({
@@ -18,6 +19,7 @@ const ModalVerifyAccount = ({
   loading,
   setError,
   setLoading,
+  setOpenError,
 }: ModalVerifyAccountI) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClose = () => setOpen(false);
@@ -30,11 +32,14 @@ const ModalVerifyAccount = ({
       if (err.response) {
         if (err.status === 500) {
           setError('Something went wrong. Please try again');
+          setOpenError(true);
         } else {
           setError(err.response.data);
+          setOpenError(true);
         }
       } else {
         setError('Something went wrong. Please try again');
+        setOpenError(true);
       }
     }
     setLoading(false);

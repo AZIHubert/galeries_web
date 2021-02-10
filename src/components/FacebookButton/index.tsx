@@ -17,6 +17,7 @@ interface FacebookButtonI {
   loading: boolean;
   setError: React.Dispatch<React.SetStateAction<string>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FacebookButton = ({
@@ -24,6 +25,7 @@ const FacebookButton = ({
   loading = false,
   setError,
   setLoading,
+  setOpenError,
 }: FacebookButtonI) => {
   const responseFacebook = async (
     faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
@@ -37,11 +39,14 @@ const FacebookButton = ({
       if (err.response) {
         if (err.status === 500) {
           setError('Something went wrong. Please try again.');
+          setOpenError(true);
         } else {
           setError(err.response.data.errors);
+          setOpenError(true);
         }
       } else {
         setError('Something went wrong. Please try again.');
+        setOpenError(true);
       }
     }
     setLoading(false);
@@ -51,6 +56,7 @@ const FacebookButton = ({
       appId="688539228486770"
       fields="email, gender, name, picture.type(large)"
       onClick={() => {
+        setOpenError(false);
         setError('');
         setLoading(true);
       }}

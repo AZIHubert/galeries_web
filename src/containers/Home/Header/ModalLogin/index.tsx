@@ -20,6 +20,7 @@ interface ModalLoginI {
   setError: React.Dispatch<React.SetStateAction<string>>;
   setForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
   switchModal: () => void;
 }
 
@@ -33,6 +34,7 @@ const ModalLogin = ({
   setError,
   setForgotPassword,
   setLoading,
+  setOpenError,
   switchModal,
 }: ModalLoginI) => {
   const formik = useFormik({
@@ -77,12 +79,14 @@ const ModalLogin = ({
         loading={loading}
         setError={setError}
         setLoading={setLoading}
+        setOpenError={setOpenError}
       />
       <GoogleButton
         action='signin'
         loading={loading}
         setError={setError}
         setLoading={setLoading}
+        setOpenError={setOpenError}
       />
       <TextSepatator
         marginBottom={9}

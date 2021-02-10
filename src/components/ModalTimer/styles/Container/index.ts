@@ -37,6 +37,24 @@ const Container = styled.div.attrs<ContainerI>(
   transform: translateX(-50%);
   width: 90%;
   z-index: 10;
+  &.fade-enter {
+    opacity: 0;
+    top: 20px;
+  }
+  &.fade-enter-active {
+    opacity: 1;
+    top: 14px;
+    transition: 500ms;
+  }
+  &.fade-exit {
+    opacity: 1;
+    top: 14px;
+  }
+  &.fade-exit-active {
+    opacity: 0;
+    top: 20px;
+    transition: 500ms;
+  }
   @media ${mediaQueries.mobileL} {
     width: auto;
   }
