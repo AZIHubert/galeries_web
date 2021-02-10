@@ -28,12 +28,12 @@ const Container = styled.div.attrs<ContainerI>(
   }) => (
     variant === 'primary' ? theme.colors.secondary : theme.colors.white
   )};
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   left: 50%;
   padding: 6px 12px;
   position: absolute;
   text-align: center;
-  top: 10px;
+  top: 14px;
   transform: translateX(-50%);
   width: 90%;
   z-index: 10;

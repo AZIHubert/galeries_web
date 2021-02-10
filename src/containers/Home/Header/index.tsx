@@ -102,8 +102,9 @@ const Header = () => {
     return (
       <ModalLogin
         loading={loading}
-        setLoading={setLoading}
+        setError={setError}
         setForgotPassword={setForgotPassword}
+        setLoading={setLoading}
         switchModal={handleClickSignin}
       />
     );
