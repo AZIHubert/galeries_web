@@ -9,6 +9,7 @@ import SocialMediaButton from '#components/SocialMediaButton';
 import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
+import { login } from '#helpers/api';
 import { loginSchema } from '#helpers/schemas';
 
 import { ForgotPassword } from './styles';
@@ -33,8 +34,21 @@ const ModalLogin = ({
 }: ModalLoginI) => {
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {
-      if (!loading) { setLoading(true); }
+    onSubmit: async (values, { setFieldError }) => {
+      if (!loading) {
+        try {
+          const response = await login(values);
+          localStorage.setItem('authToken', response.data.token);
+          console.log(response.data);
+          setLoading(false);
+        } catch (err) {
+          const { errors } = err.response.data;
+          if (typeof errors === 'object') {
+            Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+          }
+          setLoading(false);
+        }
+      }
     },
     validateOnChange: false,
     validateOnBlur: true,

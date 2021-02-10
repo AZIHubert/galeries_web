@@ -24,6 +24,7 @@ const Header = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [openLogin, setOpenLogin] = React.useState<boolean>(false);
   const [openSignin, setOpenSignin] = React.useState<boolean>(false);
+  const [signinError, setSigninError] = React.useState<string>('');
   const [validateResetPassword, setValidateResetPassword] = React.useState<boolean>(false);
   const [currentEmail, setCurrentEmail] = React.useState<string>('');
 
@@ -56,7 +57,7 @@ const Header = () => {
     }
   };
 
-  const LoggerModal = accountCreate ? (
+  const signerModal = accountCreate ? (
     <ModalVerifyAccount
       currentEmail={currentEmail}
       loading={loading}
@@ -67,11 +68,12 @@ const Header = () => {
       loading={loading}
       setAccountCreate={setAccountCreate}
       setCurrentEmail={setCurrentEmail}
+      setError={setSigninError}
       setLoading={setLoading}
       switchModal={handleClickLogin}
     />
   );
-  const SignerModal = () => {
+  const LoginModal = () => {
     if (forgotPassword) {
       return (
         <ModalForgotPassword
@@ -127,8 +129,8 @@ const Header = () => {
           open={openLogin || openSignin}
           handleClose={handleCloseModal}
         >
-          {openLogin && SignerModal()}
-          {openSignin && LoggerModal}
+          {openLogin && LoginModal()}
+          {openSignin && signerModal}
         </Modal>
       </InnerContainer>
     </Container>
