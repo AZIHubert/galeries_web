@@ -58,13 +58,13 @@ const Field = ({
       </Label>
     ) : null}
     <Input
-      testId={fieldTestId}
       disabled={disabled}
       error={!!error && touched}
       id={id}
       name={id}
       onBlur={onBlur}
       onChange={onChange}
+      testId={fieldTestId}
       type={type}
       value={value}
     />

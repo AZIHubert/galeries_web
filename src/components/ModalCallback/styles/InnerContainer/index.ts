@@ -9,14 +9,14 @@ interface InnerContainerI {
 const InnerContainer = styled.div<InnerContainerI>`
   background-color: #FFFFF4;
   border: ${({
-    variant,
     theme,
+    variant,
   }) => (
     `3px solid ${variant === 'primary' ? theme.colors.primary : theme.colors.danger}`
   )};
   color: ${({
-    variant,
     theme,
+    variant,
   }) => (
     variant === 'primary' ? theme.colors.primary : theme.colors.danger
   )};

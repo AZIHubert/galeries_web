@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import {
+  Background,
   Container,
   InnerContainer,
-  Background,
 } from './styles';
 
 type Variant = 'error' | 'primary';

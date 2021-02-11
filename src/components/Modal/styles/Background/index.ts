@@ -6,8 +6,8 @@ interface BackgroundI {
 
 const Background = styled.div.attrs<BackgroundI>(
   ({ testId }) => ({
-    'data-testid': testId,
     className: 'background-modal',
+    'data-testid': testId,
   }),
 )<BackgroundI>`
   background-color: #000;

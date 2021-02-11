@@ -3,9 +3,9 @@ import { Reset } from 'styled-reset';
 
 import Routes from '#src/Routes';
 
+import { LoadingProvider } from '#contexts/LoadingContext';
 import ThemeProvider from '#contexts/ThemeContext';
 import { UserProvider } from '#contexts/UserContext';
-import { LoadingProvider } from '#contexts/LoadingContext';
 
 import GlobalStyle from '#helpers/GlobalStyle';
 

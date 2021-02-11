@@ -1,16 +1,14 @@
 import * as React from 'react';
 import FacebookLogin, {
-  ReactFacebookLoginInfo,
   ReactFacebookFailureResponse,
+  ReactFacebookLoginInfo,
 } from 'react-facebook-login';
 
 import SocialMediaButton from '#components/SocialMediaButton';
 
 import { LoadingContext } from '#contexts/LoadingContext';
 
-import {
-  loginFacebook,
-} from '#helpers/api';
+import { loginFacebook } from '#helpers/api';
 
 type Action = 'login' | 'signin';
 
@@ -60,21 +58,20 @@ const FacebookButton = ({
   return (
     <FacebookLogin
       appId="688539228486770"
-      fields="email, gender, name, picture.type(large)"
-      onClick={() => {
-        setErrorModal((prevState) => ({
-          ...prevState,
-          open: false,
-        }));
-        setLoading(true);
-      }}
       callback={responseFacebook}
+      fields="email, gender, name, picture.type(large)"
       render={(renderProps) => (
         <SocialMediaButton
           action={action}
           disabled={loading}
           marginBottom={10}
-          onClick={renderProps.onClick}
+          onClick={() => {
+            setErrorModal((prevState) => ({
+              ...prevState,
+              open: false,
+            }));
+            renderProps.onClick();
+          }}
         />
       )}
     />

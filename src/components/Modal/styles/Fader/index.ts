@@ -2,27 +2,27 @@ import styled from 'styled-components';
 
 const Fader = styled.div`
   &.fade-enter {
+    & .background-container {
+      right: 8px;
+      top: 8px;
+    }
     & .background-modal {
       opacity: 0;
     }
-    & .background-container {
-      top: 8px;
-      right: 8px;
-    }
     & .modal {
-      transform: translate(-50%, -50%) scale(1.03);
       opacity: 0;
+      transform: translate(-50%, -50%) scale(1.03);
     }
   }
   &.fade-enter-active {
-    & .background-modal {
-      opacity: 0.7;
-      transition: opacity 300ms;
-    }
     & .background-container {
       right: 15px;
       top: 15px;
       transition: 400ms;
+    }
+    & .background-modal {
+      opacity: 0.7;
+      transition: opacity 300ms;
     }
     & .modal {
       opacity: 1;
@@ -31,27 +31,27 @@ const Fader = styled.div`
     }
   }
   &.fade-exit {
-    & .background-modal {
-      opacity: 0.7;
-    }
     & .background-container {
       right: 15px;
       top: 15px;
     }
+    & .background-modal {
+      opacity: 0.7;
+    }
     & .modal {
-      transform: translate(-50%, -50%) scale(1);
       opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
   }
   &.fade-exit-active {
-    & .background-modal {
-      opacity: 0;
-      transition: opacity 300ms;
-    }
     & .background-container {
       right: 8px;
       top: 8px;
       transition:  450ms;
+    }
+    & .background-modal {
+      opacity: 0;
+      transition: opacity 300ms;
     }
     & .modal {
       opacity: 0;

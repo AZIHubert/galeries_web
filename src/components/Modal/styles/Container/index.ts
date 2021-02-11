@@ -6,13 +6,13 @@ interface ContainerI {
 
 const Container = styled.div.attrs<ContainerI>(
   ({ testId }) => ({
-    'data-testid': testId,
     className: 'modal',
+    'data-testid': testId,
   }),
 )<ContainerI>`
   left: 50%;
-  max-width: 80%;
   max-height: 90vh;
+  max-width: 80%;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
