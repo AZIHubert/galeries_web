@@ -2,18 +2,18 @@
 
 exports[`Header renders without crashing 1`] = `
 <header
-  className="sc-dIUggk bzTsUN"
+  className="sc-dmlrTW jWnbQa"
 >
   <div
-    className="sc-hHftDr bGHNmb"
+    className="sc-kfzAmx fRViZQ"
   >
     <img
       alt="header logo"
-      className="sc-dmlrTW bPBhZW"
+      className="sc-fKFyDc ZYkwf"
       src={Object {}}
     />
     <div
-      className="sc-idOhPF cbJGzu"
+      className="sc-hHftDr kLgjWa"
     >
       <button
         className="sc-bdfBwQ kjBTJr"

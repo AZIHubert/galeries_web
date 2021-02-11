@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { useFormik } from 'formik';
 
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import { changeEmailSchema } from '#helpers/schemas';
 
 const initialValues = {
   password: '',
 };
 
-interface ChangeEmailI {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const ChangeEmail = ({ loading, setLoading }: ChangeEmailI) => {
+const ChangeEmail = () => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
     initialValues,
     onSubmit: () => {

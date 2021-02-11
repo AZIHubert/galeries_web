@@ -3,25 +3,25 @@ import GoogleLogin from 'react-google-login';
 
 import SocialMediaButton from '#components/SocialMediaButton';
 
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import { loginGoogle } from '#helpers/api';
 
 type Action = 'login' | 'signin';
 
 interface GoogleButtonI {
   action: Action;
-  loading: boolean;
-  setError: React.Dispatch<React.SetStateAction<string>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
+  setErrorModal: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    text: string;
+  }>>;
 }
 
 const GoogleButton = ({
   action = 'login',
-  loading = false,
-  setError,
-  setLoading,
-  setOpenError,
+  setErrorModal,
 }: GoogleButtonI) => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const responseGoogle = async (
     googleResponse: any,
   ) => {
@@ -33,15 +33,21 @@ const GoogleButton = ({
     } catch (err) {
       if (err.response) {
         if (err.status === 500) {
-          setError('Something went wrong. Please try again.');
-          setOpenError(true);
+          setErrorModal({
+            open: true,
+            text: 'Something went wrong. Please try again.',
+          });
         } else {
-          setError(err.response.data.errors);
-          setOpenError(true);
+          setErrorModal({
+            open: true,
+            text: err.response.data.errors,
+          });
         }
       } else {
-        setError('Something went wrong. Please try again.');
-        setOpenError(true);
+        setErrorModal({
+          open: true,
+          text: 'Something went wrong. Please try again.',
+        });
       }
     }
     setLoading(false);
@@ -58,8 +64,10 @@ const GoogleButton = ({
           action={action}
           disabled={loading}
           onClick={() => {
-            setOpenError(false);
-            setError('');
+            setErrorModal((prevState) => ({
+              ...prevState,
+              open: false,
+            }));
             renderProps.onClick();
           }}
           variant='google'

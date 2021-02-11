@@ -3,19 +3,14 @@ import * as React from 'react';
 
 import Field from '#components/Field';
 
-import { allowResetPasswordSchema } from '#helpers/schemas';
+import { resetConfirmSchema } from '#helpers/schemas';
 
 import ModalContainer from '#components/ModalContainer';
 import GradientButton from '#components/GradientButton';
 
 import { LoadingContext } from '#contexts/LoadingContext';
 
-import { resendResetPassword } from '#helpers/api';
-
-import {
-  CancelButton,
-  CancelButtonContainer,
-} from './styles';
+import { resendConfirmation } from '#helpers/api';
 
 type Modals =
   'login'
@@ -25,12 +20,12 @@ type Modals =
   | 'validateAccount'
   | 'validateResetPassword';
 
-interface ModalForgotPasswordI {
+interface ModalResendConfirmI {
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
   setErrorModal: React.Dispatch<React.SetStateAction<{
     open: boolean;
     text: string;
-  }>>;
+  }>>
   setModals: React.Dispatch<React.SetStateAction<Modals | null>>;
 }
 
@@ -38,11 +33,11 @@ const initialValues = {
   email: '',
 };
 
-const ModalForgotPassword = ({
+const ModalResendConfirm = ({
   setCurrentEmail,
   setErrorModal,
   setModals,
-}: ModalForgotPasswordI) => {
+}: ModalResendConfirmI) => {
   const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
     initialValues,
@@ -50,9 +45,9 @@ const ModalForgotPassword = ({
       if (!loading) {
         setLoading(true);
         try {
-          await resendResetPassword(value);
+          await resendConfirmation(value);
           setCurrentEmail(value.email);
-          setModals('validateResetPassword');
+          setModals('validateAccount');
         } catch (err) {
           if (err.response) {
             if (err.status === 500) {
@@ -83,13 +78,22 @@ const ModalForgotPassword = ({
     },
     validateOnChange: false,
     validateOnBlur: true,
-    validationSchema: allowResetPasswordSchema,
+    validationSchema: resetConfirmSchema,
   });
   return (
     <ModalContainer
-      testId="modalForgotPassword"
-      title='Enter your email to reset your password'
+      testId="modalResendPassword"
+      title='Your account is not confirmed'
     >
+      <p>
+        To use Galeries, click the verification
+        button in the email we sent
+        to the email you've register.
+        This helps keep your account secure.
+      </p>
+      <p>
+        Or resend a confirmation email.
+      </p>
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
@@ -98,6 +102,7 @@ const ModalForgotPassword = ({
           errorTestId='emailError'
           fieldTestId='emailField'
           label='email'
+          marginTop={20}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           touched={formik.touched.email}
@@ -112,20 +117,8 @@ const ModalForgotPassword = ({
           title='Reset'
         />
       </form>
-      <CancelButtonContainer>
-        <CancelButton
-          testId='cancelButton'
-          onClick={() => {
-            if (!loading) {
-              setModals('login');
-            }
-          }}
-        >
-          Cancel
-        </CancelButton>
-      </CancelButtonContainer>
     </ModalContainer>
   );
 };
 
-export default ModalForgotPassword;
+export default ModalResendConfirm;

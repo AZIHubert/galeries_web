@@ -6,6 +6,7 @@ import {
 
 const loginSchema = Yup.object().shape({
   userNameOrEmail: Yup.string()
+    .trim()
     .required(REQUIRED),
   password: Yup.string()
     .required(REQUIRED),

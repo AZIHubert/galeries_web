@@ -4,23 +4,23 @@ import ModalContainer from '#components/ModalContainer';
 import ModalTimer from '#components/ModalTimer';
 import TextButton from '#components/TextButton';
 
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import { resendConfirmation } from '#helpers/api';
 
 interface ModalVerifyAccountI {
   currentEmail: string;
-  loading: boolean,
-  setError: React.Dispatch<React.SetStateAction<string>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
+  setErrorModal: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    text: string;
+  }>>;
 }
 
 const ModalVerifyAccount = ({
   currentEmail,
-  loading,
-  setError,
-  setLoading,
-  setOpenError,
+  setErrorModal,
 }: ModalVerifyAccountI) => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClose = () => setOpen(false);
   const onClick = async () => {
@@ -31,15 +31,21 @@ const ModalVerifyAccount = ({
     } catch (err) {
       if (err.response) {
         if (err.status === 500) {
-          setError('Something went wrong. Please try again');
-          setOpenError(true);
+          setErrorModal({
+            open: true,
+            text: 'Something went wrong. Please try again',
+          });
         } else {
-          setError(err.response.data);
-          setOpenError(true);
+          setErrorModal({
+            open: true,
+            text: err.response.data,
+          });
         }
       } else {
-        setError('Something went wrong. Please try again');
-        setOpenError(true);
+        setErrorModal({
+          open: true,
+          text: 'Something went wrong. Please try again',
+        });
       }
     }
     setLoading(false);

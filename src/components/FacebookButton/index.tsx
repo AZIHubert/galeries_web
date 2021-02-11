@@ -6,6 +6,8 @@ import FacebookLogin, {
 
 import SocialMediaButton from '#components/SocialMediaButton';
 
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import {
   loginFacebook,
 } from '#helpers/api';
@@ -14,19 +16,17 @@ type Action = 'login' | 'signin';
 
 interface FacebookButtonI {
   action?: Action;
-  loading: boolean;
-  setError: React.Dispatch<React.SetStateAction<string>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
+  setErrorModal: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    text: string;
+  }>>;
 }
 
 const FacebookButton = ({
   action = 'login',
-  loading = false,
-  setError,
-  setLoading,
-  setOpenError,
+  setErrorModal,
 }: FacebookButtonI) => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const responseFacebook = async (
     faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
   ) => {
@@ -38,15 +38,21 @@ const FacebookButton = ({
     } catch (err) {
       if (err.response) {
         if (err.status === 500) {
-          setError('Something went wrong. Please try again.');
-          setOpenError(true);
+          setErrorModal({
+            open: true,
+            text: 'Something went wrong. Please try again.',
+          });
         } else {
-          setError(err.response.data.errors);
-          setOpenError(true);
+          setErrorModal({
+            open: true,
+            text: err.response.data.errors,
+          });
         }
       } else {
-        setError('Something went wrong. Please try again.');
-        setOpenError(true);
+        setErrorModal({
+          open: true,
+          text: 'Something went wrong. Please try again.',
+        });
       }
     }
     setLoading(false);
@@ -56,8 +62,10 @@ const FacebookButton = ({
       appId="688539228486770"
       fields="email, gender, name, picture.type(large)"
       onClick={() => {
-        setOpenError(false);
-        setError('');
+        setErrorModal((prevState) => ({
+          ...prevState,
+          open: false,
+        }));
         setLoading(true);
       }}
       callback={responseFacebook}

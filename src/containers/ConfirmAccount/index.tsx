@@ -3,66 +3,55 @@ import {
   useParams,
   useHistory,
 } from 'react-router-dom';
-import styled from 'styled-components';
+
+import Loader from '#components/Loader';
 
 import { confirmation } from '#helpers/api';
 
-import logo from '#ressources/svg/logoG.svg';
-
 interface ConfirmAccountI {
-  setCallbackModal: React.Dispatch<React.SetStateAction<string>>;
-  setCallbackModalError: React.Dispatch<React.SetStateAction<boolean>>;
+  setCallbackModal: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    error: boolean;
+    text: string;
+  }>>
 }
-
-const Container = styled.div`
-  align-items: center;
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  width: 100%;
-  
-`;
-
-const Image = styled.img`
-  width: 200px;
-`;
 
 const ConfirmAccount = ({
   setCallbackModal,
-  setCallbackModalError,
 }: ConfirmAccountI) => {
+  const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
+  const history = useHistory();
+  const [requestFinish, setRequestFinish] = React.useState<boolean>(false);
   const { token } = useParams<{ token: string }>();
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [redirect, setRedirect] = React.useState<boolean>(false);
-  const [requestFinish, setRequestFinish] = React.useState<boolean>(false);
-  const history = useHistory();
   React.useEffect(() => {
-    timer.current = setTimeout(() => setRedirect(true), 1500);
+    timer.current = setTimeout(() => setAllowRedirect(true), 1500);
     const confimAccount = async () => {
       try {
         await confirmation(`Bearer ${token}`);
-        setCallbackModal('you\'re account has been successfully confirm, you can now log in to enjoy Galleries');
+        setCallbackModal((prevState) => ({
+          ...prevState,
+          text: 'you\'re account has been successfully confirm, you can now log in to enjoy Galleries.',
+        }));
       } catch (err) {
         const { errors } = err.response.data;
-        setCallbackModal(errors);
-        setCallbackModalError(true);
+        setCallbackModal((prevState) => ({
+          ...prevState,
+          error: true,
+          text: errors,
+        }));
       }
       setRequestFinish(true);
     };
     confimAccount();
   }, []);
   React.useEffect(() => {
-    if (redirect && requestFinish) {
+    if (allowRedirect && requestFinish) {
       history.push('/');
     }
-  }, [redirect, requestFinish]);
+  }, [allowRedirect, requestFinish]);
   return (
-    <Container>
-      <Image
-        alt='Galeries logo'
-        src={logo}
-      />
-    </Container>
+    <Loader />
   );
 };
 

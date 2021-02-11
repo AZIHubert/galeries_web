@@ -1,14 +1,27 @@
 import * as Yup from 'yup';
 
 import {
-  EMAIL_FIELD,
+  CONFIRM_PASSWORD,
+  HAS_SPACES,
+  MAX_LENGTH_THRITY,
+  MIN_LENGTH_OF_HEIGH,
+  PASSWORD,
   REQUIRED,
 } from '#helpers/formErrors';
 
 const resetPasswordSchema = Yup.object().shape({
-  email: Yup.string()
+  confirmPassword: Yup.string()
     .required(REQUIRED)
-    .email(EMAIL_FIELD),
+    .oneOf([Yup.ref('password'), null], CONFIRM_PASSWORD),
+  password: Yup.string()
+    .required(REQUIRED)
+    .matches(/^\S*$/, HAS_SPACES)
+    .min(8, MIN_LENGTH_OF_HEIGH)
+    .max(30, MAX_LENGTH_THRITY)
+    .matches(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$/,
+      PASSWORD,
+    ),
 });
 
 export default resetPasswordSchema;

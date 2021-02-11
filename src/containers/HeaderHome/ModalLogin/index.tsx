@@ -10,18 +10,19 @@ import RequiredField from '#components/RequiredField';
 import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import { login } from '#helpers/api';
 import { loginSchema } from '#helpers/schemas';
 
 import { ForgotPassword } from './styles';
 
 interface ModalLoginI {
-  loading: boolean;
-  setError: React.Dispatch<React.SetStateAction<string>>;
-  setForgotPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenError: React.Dispatch<React.SetStateAction<boolean>>;
-  switchModal: () => void;
+  setErrorModal: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    text: string;
+  }>>;
+  setModals: React.Dispatch<React.SetStateAction<'login' | 'signin' | 'resendConfirm' | 'forgotPassword' | 'validateAccount' | 'validateResetPassword' | null>>
 }
 
 const initialValues = {
@@ -30,13 +31,10 @@ const initialValues = {
 };
 
 const ModalLogin = ({
-  loading,
-  setError,
-  setForgotPassword,
-  setLoading,
-  setOpenError,
-  switchModal,
+  setErrorModal,
+  setModals,
 }: ModalLoginI) => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, { setFieldError }) => {
@@ -49,20 +47,28 @@ const ModalLogin = ({
         } catch (err) {
           if (err.response) {
             if (err.status === 500) {
-              setError('Something went wrong. Please try again');
-              setOpenError(true);
+              setErrorModal(({
+                open: true,
+                text: 'Something went wrong. Please try again',
+              }));
             } else {
               const { errors } = err.response.data;
               if (typeof errors === 'object') {
                 Object.keys(errors).map((error) => setFieldError(error, errors[error]));
+              } else if (errors === 'You\'re account need to be confimed') {
+                setModals('resendConfirm');
               } else {
-                setError(errors);
-                setOpenError(true);
+                setErrorModal(({
+                  open: true,
+                  text: errors,
+                }));
               }
             }
           } else {
-            setError('Something went wrong. Please try again');
-            setOpenError(true);
+            setErrorModal(({
+              open: true,
+              text: 'Something went wrong. Please try again',
+            }));
           }
         }
         setLoading(false);
@@ -79,17 +85,11 @@ const ModalLogin = ({
     >
       <FacebookButton
         action='signin'
-        loading={loading}
-        setError={setError}
-        setLoading={setLoading}
-        setOpenError={setOpenError}
+        setErrorModal={setErrorModal}
       />
       <GoogleButton
         action='signin'
-        loading={loading}
-        setError={setError}
-        setLoading={setLoading}
-        setOpenError={setOpenError}
+        setErrorModal={setErrorModal}
       />
       <TextSepatator
         marginBottom={9}
@@ -132,7 +132,7 @@ const ModalLogin = ({
             testId='forgotPasswordButton'
             onClick={() => {
               if (!loading) {
-                setForgotPassword(true);
+                setModals('forgotPassword');
               }
             }}
           >
@@ -152,7 +152,7 @@ const ModalLogin = ({
         disabled={loading}
         fontSize={0.65}
         justifyContent='center'
-        onClick={switchModal}
+        onClick={() => setModals('signin')}
         testId='switchToSignin'
         text='You don’t have an account yet? click'
         textButton='here'

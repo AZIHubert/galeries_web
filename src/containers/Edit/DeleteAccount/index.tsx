@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import Modal from '#components/Modal';
 
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import ModalDelete from './ModalDelete';
 
 const DeleteAccount = () => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const [openModal, setOpenModal] = React.useState<boolean>(false);
-  const [loading, setLoading] = React.useState<boolean>(false);
   const handleClose = () => {
     if (!loading) {
       setOpenModal(false);

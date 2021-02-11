@@ -5,15 +5,18 @@ import Routes from '#src/Routes';
 
 import ThemeProvider from '#contexts/ThemeContext';
 import { UserProvider } from '#contexts/UserContext';
+import { LoadingProvider } from '#contexts/LoadingContext';
 
 import GlobalStyle from '#helpers/GlobalStyle';
 
 const App = () => (
   <ThemeProvider>
     <UserProvider>
-      <GlobalStyle />
-      <Reset />
-      <Routes />
+      <LoadingProvider>
+        <GlobalStyle />
+        <Reset />
+        <Routes />
+      </LoadingProvider>
     </UserProvider>
   </ThemeProvider>
 );

@@ -4,21 +4,23 @@ import ModalContainer from '#components/ModalContainer';
 import TextButton from '#components/TextButton';
 import ModalTimer from '#components/ModalTimer';
 
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import { resendResetPassword } from '#helpers/api';
 
 interface ModalValidateResetPasswordI {
   currentEmail: string;
-  loading: boolean,
-  setError: React.Dispatch<React.SetStateAction<string>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setErrorModal: React.Dispatch<React.SetStateAction<{
+    open: boolean;
+    text: string;
+  }>>;
 }
 
 const ModalValidateResetPassword = ({
   currentEmail,
-  loading,
-  setError,
-  setLoading,
+  setErrorModal,
 }: ModalValidateResetPasswordI) => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClose = () => setOpen(false);
   const onClick = async () => {
@@ -30,13 +32,22 @@ const ModalValidateResetPassword = ({
       } catch (err) {
         if (err.response) {
           if (err.status === 500) {
-            setError('Something went wrong. Please try again');
+            setErrorModal({
+              open: true,
+              text: 'Something went wrong. Please try again',
+            });
           } else {
             const { errors } = err.response.data;
-            setError(errors);
+            setErrorModal({
+              open: true,
+              text: errors,
+            });
           }
         } else {
-          setError('Something went wrong. Please try again');
+          setErrorModal({
+            open: true,
+            text: 'Something went wrong. Please try again',
+          });
         }
       }
       setLoading(false);

@@ -1,13 +1,16 @@
 import * as React from 'react';
 
 import Modal from '#components/Modal';
+
+import { LoadingContext } from '#contexts/LoadingContext';
+
 import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
 
 import ModalTicket from './ModalTicket';
 
 const PopupProfile = () => {
   const [openModal, setOpenModal] = React.useState<boolean>(false);
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const handleClose = () => {
     if (!loading) {
       setOpenModal(false);
