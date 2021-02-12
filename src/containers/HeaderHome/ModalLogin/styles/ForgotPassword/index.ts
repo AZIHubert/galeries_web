@@ -9,12 +9,12 @@ const ForgotPassword = styled.div.attrs<ForgotPasswordI>(
     'data-testid': testId,
   }),
 )<ForgotPasswordI>`
-  color: ${({ theme }) => theme.colors.black};
-  font-size: 0.8rem;
   border: none;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.black}`};
+  color: ${({ theme }) => theme.colors.black};
   cursor: pointer;
   display: inline-block;
-  border-bottom: ${({ theme }) => `1px solid ${theme.colors.black}`};
+  font-size: 0.8rem;
 `;
 
 export default ForgotPassword;

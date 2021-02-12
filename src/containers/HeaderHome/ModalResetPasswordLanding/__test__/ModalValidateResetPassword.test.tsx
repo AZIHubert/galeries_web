@@ -3,16 +3,15 @@ import renderer from 'react-test-renderer';
 
 import ThemeProvider from '#contexts/ThemeContext';
 
-import ModalValidateResetPassword from '../index';
+import ModalResetPasswordLanding from '../index';
 
-describe('ModalValidateResetPassword', () => {
-  const mockedSetLoading = jest.fn;
+describe('ModalResetPasswordLanding', () => {
+  const mockedSetErrorModal = jest.fn;
   it('renders without crashing', () => {
     const tree = renderer.create(
       <ThemeProvider>
-        <ModalValidateResetPassword
-          loading={false}
-          setLoading={mockedSetLoading}
+        <ModalResetPasswordLanding
+          setErrorModal={mockedSetErrorModal}
           currentEmail='mockedEmail@email.com'
         />
       </ThemeProvider>,

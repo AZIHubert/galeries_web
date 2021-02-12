@@ -1,94 +1,47 @@
 import { useFormik } from 'formik';
-import styled from 'styled-components';
+import * as React from 'react';
 import {
   Link,
   useParams,
   useHistory,
 } from 'react-router-dom';
 
-import * as React from 'react';
-
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
-import RequiredField from '#components/RequiredField';
 import ModalTimer from '#components/ModalTimer';
+import RequiredField from '#components/RequiredField';
 
 import { LoadingContext } from '#contexts/LoadingContext';
 
-import { resetPasswordSchema } from '#helpers/schemas';
-
 import { resetPassword } from '#helpers/api';
+import { resetPasswordSchema } from '#helpers/schemas';
 
 import { LogoGaleries } from '#ressources/svgComponents';
 
+import {
+  Container,
+  Form,
+  Logo,
+  NavLink,
+  Title,
+} from './styles';
+
 interface ConfirmAccountI {
   setCallbackModal: React.Dispatch<React.SetStateAction<{
-    open: boolean;
     error: boolean;
+    open: boolean;
     text: string;
   }>>
 }
 
 const initialValues = {
-  password: '',
   confirmPassword: '',
+  password: '',
 };
-
-const Container = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 320px;
-`;
-
-const Logo = styled.h1`
-  width: 60%;
-  margin: 70px 0 80px 0;
-`;
-
-const Form = styled.form`
-  width: 100%;
-`;
-
-const Title = styled.h2`
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: 1.3rem;
-  margin-bottom: 40px;
-  width: 100%;
-  padding-bottom: 10px;
-  border-bottom: ${({ theme }) => (
-    `1px solid ${theme.colors.primary}`
-  )};
-`;
-
-const NavLink = styled.div`
-  margin-top: 40px;
-  text-align: right;
-  border-top: ${({ theme }) => (
-    `1px solid ${theme.colors.primary}`
-  )};
-  width: 100%;
-  padding-top: 20px;
-  & > a {
-    padding: 4px 6px;
-    font-size: 0.8rem;
-    text-decoration: none;
-    transition: color 400ms;
-    color: ${({ theme }) => theme.colors.primary};
-    &:hover {
-      color: ${({ theme }) => theme.colors.black}
-    }
-  }
-`;
 
 const ResetPassword = ({
   setCallbackModal,
 }:ConfirmAccountI) => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
-  const history = useHistory();
-  const { token } = useParams<{ token: string }>();
   const [errorModal, setErrorModal] = React.useState<{
     open: boolean;
     text: string;
@@ -96,6 +49,9 @@ const ResetPassword = ({
     open: false,
     text: '',
   });
+  const history = useHistory();
+  const { loading, setLoading } = React.useContext(LoadingContext);
+  const { token } = useParams<{ token: string }>();
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, { setFieldError }) => {
@@ -136,7 +92,6 @@ const ResetPassword = ({
   });
   return (
     <Container>
-
       <Logo>
         <LogoGaleries />
       </Logo>
@@ -176,12 +131,12 @@ const ResetPassword = ({
         />
         <RequiredField />
         <GradientButton
-          testId='submitButton'
           disabled={loading}
           marginBottom={15}
           marginTop={25}
-          type='submit'
+          testId='submitButton'
           title='Reset password'
+          type='submit'
         />
       </Form>
       <NavLink>

@@ -3,16 +3,15 @@ import renderer from 'react-test-renderer';
 
 import ThemeProvider from '#contexts/ThemeContext';
 
-import ModalVerifyAccount from '../index';
+import ModalConfirmLanding from '../index';
 
-describe('Home', () => {
+describe('ModalConfirmLanding', () => {
   it('renders without crashing', () => {
-    const mockedSetLoading = jest.fn;
+    const mockedSetErrorModal = jest.fn;
     const tree = renderer.create(
       <ThemeProvider>
-        <ModalVerifyAccount
-          loading={false}
-          setLoading={mockedSetLoading}
+        <ModalConfirmLanding
+          setErrorModal={mockedSetErrorModal}
           currentEmail='mockedEmail@email.com'
         />
       </ThemeProvider>,

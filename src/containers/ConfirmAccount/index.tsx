@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
-  useParams,
   useHistory,
+  useParams,
 } from 'react-router-dom';
 
 import Loader from '#components/Loader';
@@ -10,8 +10,8 @@ import { confirmation } from '#helpers/api';
 
 interface ConfirmAccountI {
   setCallbackModal: React.Dispatch<React.SetStateAction<{
-    open: boolean;
     error: boolean;
+    open: boolean;
     text: string;
   }>>
 }
@@ -22,8 +22,8 @@ const ConfirmAccount = ({
   const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
   const history = useHistory();
   const [requestFinish, setRequestFinish] = React.useState<boolean>(false);
-  const { token } = useParams<{ token: string }>();
   const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { token } = useParams<{ token: string }>();
   React.useEffect(() => {
     timer.current = setTimeout(() => setAllowRedirect(true), 1500);
     const confimAccount = async () => {

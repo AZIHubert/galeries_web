@@ -17,12 +17,20 @@ import { loginSchema } from '#helpers/schemas';
 
 import { ForgotPassword } from './styles';
 
+type Modals =
+  'confirmLanding'
+  | 'login'
+  | 'resendConfirm'
+  | 'resetPassword'
+  | 'resetPasswordLanding'
+  | 'signin';
+
 interface ModalLoginI {
+  setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>
   setErrorModal: React.Dispatch<React.SetStateAction<{
     open: boolean;
     text: string;
   }>>;
-  setModals: React.Dispatch<React.SetStateAction<'login' | 'signin' | 'resendConfirm' | 'forgotPassword' | 'validateAccount' | 'validateResetPassword' | null>>
 }
 
 const initialValues = {
@@ -32,7 +40,7 @@ const initialValues = {
 
 const ModalLogin = ({
   setErrorModal,
-  setModals,
+  setCurrentModal,
 }: ModalLoginI) => {
   const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
@@ -43,7 +51,6 @@ const ModalLogin = ({
         try {
           const response = await login(values);
           localStorage.setItem('authToken', response.data.token);
-          console.log(response.data);
         } catch (err) {
           if (err.response) {
             if (err.status === 500) {
@@ -56,7 +63,7 @@ const ModalLogin = ({
               if (typeof errors === 'object') {
                 Object.keys(errors).map((error) => setFieldError(error, errors[error]));
               } else if (errors === 'You\'re account need to be confimed') {
-                setModals('resendConfirm');
+                setCurrentModal('resendConfirm');
               } else {
                 setErrorModal(({
                   open: true,
@@ -129,21 +136,21 @@ const ModalLogin = ({
         <RequiredField />
         <div>
           <ForgotPassword
-            testId='forgotPasswordButton'
             onClick={() => {
               if (!loading) {
-                setModals('forgotPassword');
+                setCurrentModal('resetPassword');
               }
             }}
+            testId='forgotPasswordButton'
           >
               Forgot your password?
           </ForgotPassword>
         </div>
         <GradientButton
-          testId='submitButton'
           disabled={loading}
           marginBottom={15}
           marginTop={15}
+          testId='submitButton'
           type='submit'
           title='Log in'
         />
@@ -152,7 +159,7 @@ const ModalLogin = ({
         disabled={loading}
         fontSize={0.65}
         justifyContent='center'
-        onClick={() => setModals('signin')}
+        onClick={() => setCurrentModal('signin')}
         testId='switchToSignin'
         text='You don’t have an account yet? click'
         textButton='here'

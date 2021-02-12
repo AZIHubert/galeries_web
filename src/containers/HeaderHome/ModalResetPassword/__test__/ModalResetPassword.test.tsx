@@ -14,31 +14,25 @@ import {
 
 import ThemeProvider from '#contexts/ThemeContext';
 
-import ModalForgotPassword from '../index';
+import ModalResetPassword from '../index';
 
 const Container = () => {
-  const [loading, setLoading] = React.useState(false);
-  const setForgotPassword = () => {};
-  const switchModal = () => {};
   const setCurrentEmail = () => {};
   return (
     <ThemeProvider>
-      <ModalForgotPassword
+      <ModalResetPassword
+        setErrorModal={() => {}}
+        setModals={() => {}}
         setCurrentEmail={setCurrentEmail}
-        setForgotPassword={setForgotPassword}
-        setLoading={setLoading}
-        switchModal={switchModal}
-        loading={loading}
       />
     </ThemeProvider>
   );
 };
 
 describe('ModalLogin', () => {
-  const mockedSetForgotPassword = jest.fn;
-  const mockedSetLoading = jest.fn;
   const mockedSetCurrentEmail = jest.fn;
-  const mockedSwitchModal = jest.fn;
+  const mockedSetErrorModal = jest.fn;
+  const mockedSetModals = jest.fn;
   let emailField: HTMLElement;
   let submitButton: HTMLElement;
   afterEach(cleanup);
@@ -50,12 +44,10 @@ describe('ModalLogin', () => {
   it('renders without crashing', () => {
     const tree = renderer.create(
       <ThemeProvider>
-        <ModalForgotPassword
+        <ModalResetPassword
+          setErrorModal={mockedSetErrorModal}
+          setModals={mockedSetModals}
           setCurrentEmail={mockedSetCurrentEmail}
-          setForgotPassword={mockedSetForgotPassword}
-          setLoading={mockedSetLoading}
-          switchModal={mockedSwitchModal}
-          loading={false}
         />
       </ThemeProvider>,
     ).toJSON();

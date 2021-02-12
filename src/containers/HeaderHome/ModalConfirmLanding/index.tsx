@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 import ModalContainer from '#components/ModalContainer';
-import TextButton from '#components/TextButton';
 import ModalTimer from '#components/ModalTimer';
+import TextButton from '#components/TextButton';
 
 import { LoadingContext } from '#contexts/LoadingContext';
 
-import { resendResetPassword } from '#helpers/api';
+import { resendConfirmation } from '#helpers/api';
 
-interface ModalValidateResetPasswordI {
+interface ModalConfirmLandingI {
   currentEmail: string;
   setErrorModal: React.Dispatch<React.SetStateAction<{
     open: boolean;
@@ -16,56 +16,53 @@ interface ModalValidateResetPasswordI {
   }>>;
 }
 
-const ModalValidateResetPassword = ({
+const ModalConfirmLanding = ({
   currentEmail,
   setErrorModal,
-}: ModalValidateResetPasswordI) => {
+}: ModalConfirmLandingI) => {
   const { loading, setLoading } = React.useContext(LoadingContext);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClose = () => setOpen(false);
   const onClick = async () => {
-    if (!loading) {
-      setLoading(true);
-      try {
-        await resendResetPassword({ email: currentEmail });
-        setOpen(true);
-      } catch (err) {
-        if (err.response) {
-          if (err.status === 500) {
-            setErrorModal({
-              open: true,
-              text: 'Something went wrong. Please try again',
-            });
-          } else {
-            const { errors } = err.response.data;
-            setErrorModal({
-              open: true,
-              text: errors,
-            });
-          }
-        } else {
+    setLoading(true);
+    try {
+      await resendConfirmation({ email: currentEmail });
+      setOpen(true);
+    } catch (err) {
+      if (err.response) {
+        if (err.status === 500) {
           setErrorModal({
             open: true,
             text: 'Something went wrong. Please try again',
           });
+        } else {
+          setErrorModal({
+            open: true,
+            text: err.response.data,
+          });
         }
+      } else {
+        setErrorModal({
+          open: true,
+          text: 'Something went wrong. Please try again',
+        });
       }
-      setLoading(false);
     }
+    setLoading(false);
   };
   return (
     <ModalContainer
-      testId="modalValidateResetPassword"
-      title='Reset your password'
+      testId="modalVerifyAccount"
+      title='Verify your email'
       titleTextAlign='center'
     >
       <p
-        data-testid='validateResetPasswordBody'
+        data-testid='verifyAccountBody'
       >
-        To reset your password, click the
-        verification button in
-        the email we sent to {currentEmail}.
-        This helps keep your account secure.
+        To use Galeries, click the verification
+        button in the email we sent
+        to {currentEmail}. This helps keep
+        your account secure.
       </p>
       <TextButton
         disabled={loading}
@@ -85,4 +82,4 @@ const ModalValidateResetPassword = ({
   );
 };
 
-export default ModalValidateResetPassword;
+export default ModalConfirmLanding;

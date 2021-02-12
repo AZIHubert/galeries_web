@@ -6,9 +6,9 @@ import TextButton from '#components/TextButton';
 
 import { LoadingContext } from '#contexts/LoadingContext';
 
-import { resendConfirmation } from '#helpers/api';
+import { resendResetPassword } from '#helpers/api';
 
-interface ModalVerifyAccountI {
+interface ModalResetPasswordLandingI {
   currentEmail: string;
   setErrorModal: React.Dispatch<React.SetStateAction<{
     open: boolean;
@@ -16,53 +16,56 @@ interface ModalVerifyAccountI {
   }>>;
 }
 
-const ModalVerifyAccount = ({
+const ModalResetPasswordLanding = ({
   currentEmail,
   setErrorModal,
-}: ModalVerifyAccountI) => {
+}: ModalResetPasswordLandingI) => {
   const { loading, setLoading } = React.useContext(LoadingContext);
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClose = () => setOpen(false);
   const onClick = async () => {
-    setLoading(true);
-    try {
-      await resendConfirmation({ email: currentEmail });
-      setOpen(true);
-    } catch (err) {
-      if (err.response) {
-        if (err.status === 500) {
+    if (!loading) {
+      setLoading(true);
+      try {
+        await resendResetPassword({ email: currentEmail });
+        setOpen(true);
+      } catch (err) {
+        if (err.response) {
+          if (err.status === 500) {
+            setErrorModal({
+              open: true,
+              text: 'Something went wrong. Please try again',
+            });
+          } else {
+            const { errors } = err.response.data;
+            setErrorModal({
+              open: true,
+              text: errors,
+            });
+          }
+        } else {
           setErrorModal({
             open: true,
             text: 'Something went wrong. Please try again',
           });
-        } else {
-          setErrorModal({
-            open: true,
-            text: err.response.data,
-          });
         }
-      } else {
-        setErrorModal({
-          open: true,
-          text: 'Something went wrong. Please try again',
-        });
       }
+      setLoading(false);
     }
-    setLoading(false);
   };
   return (
     <ModalContainer
-      testId="modalVerifyAccount"
-      title='Verify your email'
+      testId="modalValidateResetPassword"
+      title='Reset your password'
       titleTextAlign='center'
     >
       <p
-        data-testid='verifyAccountBody'
+        data-testid='validateResetPasswordBody'
       >
-        To use Galeries, click the verification
-        button in the email we sent
-        to {currentEmail}. This helps keep
-        your account secure.
+        To reset your password, click the
+        verification button in
+        the email we sent to {currentEmail}.
+        This helps keep your account secure.
       </p>
       <TextButton
         disabled={loading}
@@ -82,4 +85,4 @@ const ModalVerifyAccount = ({
   );
 };
 
-export default ModalVerifyAccount;
+export default ModalResetPasswordLanding;

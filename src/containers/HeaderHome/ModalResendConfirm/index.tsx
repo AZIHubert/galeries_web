@@ -2,31 +2,29 @@ import { useFormik } from 'formik';
 import * as React from 'react';
 
 import Field from '#components/Field';
-
-import { resetConfirmSchema } from '#helpers/schemas';
-
-import ModalContainer from '#components/ModalContainer';
 import GradientButton from '#components/GradientButton';
+import ModalContainer from '#components/ModalContainer';
 
 import { LoadingContext } from '#contexts/LoadingContext';
 
 import { resendConfirmation } from '#helpers/api';
+import { resetConfirmSchema } from '#helpers/schemas';
 
 type Modals =
-  'login'
-  | 'signin'
+  'confirmLanding'
+  | 'login'
   | 'resendConfirm'
-  | 'forgotPassword'
-  | 'validateAccount'
-  | 'validateResetPassword';
+  | 'resetPassword'
+  | 'resetPasswordLanding'
+  | 'signin';
 
 interface ModalResendConfirmI {
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>;
   setErrorModal: React.Dispatch<React.SetStateAction<{
     open: boolean;
     text: string;
   }>>
-  setModals: React.Dispatch<React.SetStateAction<Modals | null>>;
 }
 
 const initialValues = {
@@ -35,8 +33,8 @@ const initialValues = {
 
 const ModalResendConfirm = ({
   setCurrentEmail,
+  setCurrentModal,
   setErrorModal,
-  setModals,
 }: ModalResendConfirmI) => {
   const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
@@ -47,7 +45,7 @@ const ModalResendConfirm = ({
         try {
           await resendConfirmation(value);
           setCurrentEmail(value.email);
-          setModals('validateAccount');
+          setCurrentModal('confirmLanding');
         } catch (err) {
           if (err.response) {
             if (err.status === 500) {

@@ -17,20 +17,20 @@ import { signin } from '#helpers/api';
 import { signinSchema } from '#helpers/schemas';
 
 type Modals =
-  'login'
-  | 'signin'
+  'confirmLanding'
+  | 'login'
   | 'resendConfirm'
-  | 'forgotPassword'
-  | 'validateAccount'
-  | 'validateResetPassword';
+  | 'resetPassword'
+  | 'resetPasswordLanding'
+  | 'signin';
 
 interface ModalSigninI {
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>;
   setErrorModal: React.Dispatch<React.SetStateAction<{
     open: boolean;
     text: string;
   }>>;
-  setModals: React.Dispatch<React.SetStateAction<Modals | null>>;
 }
 
 const initialValues = {
@@ -42,8 +42,8 @@ const initialValues = {
 
 const ModalSignin = ({
   setCurrentEmail,
+  setCurrentModal,
   setErrorModal,
-  setModals,
 }: ModalSigninI) => {
   const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
@@ -56,9 +56,8 @@ const ModalSignin = ({
           open: false,
         }));
         try {
-          const response = await signin(values);
-          console.log(response.data);
-          setModals('validateAccount');
+          await signin(values);
+          setCurrentModal('confirmLanding');
           setCurrentEmail(values.email);
         } catch (err) {
           if (err.response) {
@@ -99,15 +98,11 @@ const ModalSignin = ({
     >
       <FacebookButton
         action='signin'
-        loading={loading}
         setErrorModal={setErrorModal}
-        setLoading={setLoading}
       />
       <GoogleButton
         action='signin'
-        loading={loading}
         setErrorModal={setErrorModal}
-        setLoading={setLoading}
       />
       <TextSepatator
         marginBottom={9}
@@ -175,10 +170,10 @@ const ModalSignin = ({
         />
         <RequiredField />
         <GradientButton
-          testId='submitButton'
           disabled={loading}
           marginBottom={15}
           marginTop={15}
+          testId='submitButton'
           type='submit'
           title='Sign in'
         />
@@ -187,7 +182,7 @@ const ModalSignin = ({
         disabled={loading}
         fontSize={0.65}
         justifyContent='center'
-        onClick={() => setModals('login')}
+        onClick={() => setCurrentModal('login')}
         testId='switchToLogin'
         text='You already have an account? click'
         textButton='here'

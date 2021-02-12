@@ -24,37 +24,22 @@ import {
 import ModalSignin from '../index';
 
 const Container = () => {
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const [accountCreate, setAccountCreate] = React.useState<boolean>(false);
-  const switchModal = () => {};
   const setCurrentEmail = () => {};
   return (
     <ThemeProvider>
       <ModalSignin
-        loading={loading}
-        setLoading={setLoading}
-        setAccountCreate={setAccountCreate}
-        switchModal={switchModal}
+        setErrorModal={() => {}}
+        setModals={() => {}}
         setCurrentEmail={setCurrentEmail}
       />
-      {accountCreate
-        ? (
-          <p
-            data-testid='accountCreate'
-          >
-            accountCreate
-          </p>
-        )
-        : null}
     </ThemeProvider>
   );
 };
 
 describe('ModalSignin', () => {
-  const mockedSetLoading = jest.fn;
-  const mockedSetAccountCreate = jest.fn;
-  const mockedSwitchModal = jest.fn;
   const mockedSetCurrentEmail = jest.fn;
+  const mockedSetErrorModal = jest.fn;
+  const mockedSetModals = jest.fn;
   let confirmPasswordField: HTMLElement;
   let emailField: HTMLElement;
   let submitButton: HTMLElement;
@@ -75,11 +60,9 @@ describe('ModalSignin', () => {
     const tree = renderer.create(
       <ThemeProvider>
         <ModalSignin
-          loading={false}
-          setLoading={mockedSetLoading}
-          setAccountCreate={mockedSetAccountCreate}
-          switchModal={mockedSwitchModal}
           setCurrentEmail={mockedSetCurrentEmail}
+          setErrorModal={mockedSetErrorModal}
+          setModals={mockedSetModals}
         />
       </ThemeProvider>,
     ).toJSON();

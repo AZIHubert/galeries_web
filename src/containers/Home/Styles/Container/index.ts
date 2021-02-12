@@ -11,7 +11,9 @@ const Container = styled.div`
   )};
   min-height: 100vh;
   @media ${mediaQueries.mobileL} {
-    margin: ${({ theme }) => `0 ${theme.wrapper.margin.small}px`};
+    margin: ${({ theme }) => (
+    `0 ${theme.wrapper.margin.small}px`
+  )};
   }
   @media ${mediaQueries.laptop} {
     margin: ${({ theme }) => (
