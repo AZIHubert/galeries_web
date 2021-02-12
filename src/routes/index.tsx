@@ -1,15 +1,25 @@
 import * as React from 'react';
 import {
   BrowserRouter as Router,
+  Redirect,
 } from 'react-router-dom';
 
 import AnimatedRoute from '#components/AnimatedRoute';
+import Desktop from '#containers/Desktop';
 import Modal from '#components/Modal';
 import ModalCallback from '#components/ModalCallback';
 
 import ConfirmAccount from '#containers/ConfirmAccount';
 import Home from '#containers/Home';
 import ResetPassword from '#containers/ResetPassword';
+
+const authTokenExist = () => {
+  const token = localStorage.getItem('authToken');
+  if (token) {
+    return true;
+  }
+  return false;
+};
 
 const Routes = () => {
   const [callbackModal, setCallbackModal] = React.useState<{
@@ -27,7 +37,11 @@ const Routes = () => {
         exact
         path='/'
       >
-        <Home />
+        {authTokenExist() ? (
+          <Redirect to='/dashboard' />
+        ) : (
+          <Home />
+        )}
       </AnimatedRoute>
       <AnimatedRoute
         exact
@@ -37,9 +51,13 @@ const Routes = () => {
         }))}
         path='/confirmation/:token'
       >
-        <ConfirmAccount
-          setCallbackModal={setCallbackModal}
-        />
+        {authTokenExist() ? (
+          <Redirect to='/dashboard' />
+        ) : (
+          <ConfirmAccount
+            setCallbackModal={setCallbackModal}
+          />
+        )}
       </AnimatedRoute>
       <AnimatedRoute
         exact
@@ -49,9 +67,23 @@ const Routes = () => {
         }))}
         path='/resetPassword/:token'
       >
-        <ResetPassword
-          setCallbackModal={setCallbackModal}
-        />
+        {!authTokenExist() ? (
+          <Redirect to='/dashboard' />
+        ) : (
+          <ResetPassword
+            setCallbackModal={setCallbackModal}
+          />
+        )}
+      </AnimatedRoute>
+      <AnimatedRoute
+        exact
+        onExiting={() => setCallbackModal((prevState) => ({
+          ...prevState,
+          open: true,
+        }))}
+        path='/dashboard'
+      >
+        <Desktop />
       </AnimatedRoute>
       <Modal
         callBack={() => setCallbackModal((prevState) => ({

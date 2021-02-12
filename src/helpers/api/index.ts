@@ -1,7 +1,9 @@
 export { default as confirmation } from './confirmation';
+export { default as getMe } from './getMe';
 export { default as login } from './login';
 export { default as loginFacebook } from './loginFacebook';
 export { default as loginGoogle } from './loginGoogle';
+export { default as refreshToken } from './refreshToken';
 export { default as resendConfirmation } from './resendConfirmation';
 export { default as resendResetPassword } from './resendResetPassword';
 export { default as resetPassword } from './resetPassword';

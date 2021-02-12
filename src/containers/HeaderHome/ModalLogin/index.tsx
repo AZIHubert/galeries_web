@@ -1,5 +1,7 @@
 import { useFormik } from 'formik';
+import moment from 'moment';
 import * as React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import FacebookButton from '#components/FacebookButton';
 import Field from '#components/Field';
@@ -26,6 +28,7 @@ type Modals =
   | 'signin';
 
 interface ModalLoginI {
+  closeModal: () => void;
   setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>
   setErrorModal: React.Dispatch<React.SetStateAction<{
     open: boolean;
@@ -39,9 +42,11 @@ const initialValues = {
 };
 
 const ModalLogin = ({
+  closeModal,
   setErrorModal,
   setCurrentModal,
 }: ModalLoginI) => {
+  const history = useHistory();
   const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
     initialValues,
@@ -50,7 +55,11 @@ const ModalLogin = ({
         setLoading(true);
         try {
           const response = await login(values);
+          const expiresAt = moment().add(response.data.expiresIn);
           localStorage.setItem('authToken', response.data.token);
+          localStorage.setItem('expiresIn', JSON.stringify(expiresAt.valueOf()));
+          closeModal();
+          history.push('/dashboard');
         } catch (err) {
           if (err.response) {
             if (err.status === 500) {
