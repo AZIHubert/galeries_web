@@ -16,6 +16,7 @@ const signinSchema = Yup.object().shape({
     .required(REQUIRED)
     .oneOf([Yup.ref('password'), null], CONFIRM_PASSWORD),
   email: Yup.string()
+    .trim()
     .required(REQUIRED)
     .email(EMAIL_FIELD),
   password: Yup.string()
@@ -30,6 +31,7 @@ const signinSchema = Yup.object().shape({
   userName: Yup.string()
     .required(REQUIRED)
     .matches(/^\S*$/, HAS_SPACES)
+    .trim()
     .min(3, MIN_LENGTH_OF_THREE)
     .max(30, MAX_LENGTH_THRITY),
 });

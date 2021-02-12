@@ -31,11 +31,11 @@ const SocialMediaButton = ({
   variant = 'facebook',
 }: SocialMediaButtonI) => (
   <Button
-    testId={testId}
     disabled={disabled}
     marginBottom={marginBottom}
     marginTop={marginTop}
     onClick={onClick}
+    testId={testId}
     variant={variant}
   >
     <ImageContainer>

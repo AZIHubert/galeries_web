@@ -9,8 +9,11 @@ interface ValuesI {
   userNameOrEmail: string;
 }
 
-const login
-: (values: ValuesI) => Promise<AxiosResponse<any>> = (values: ValuesI) => new Promise((
+const login: (
+  values: ValuesI
+) => Promise<AxiosResponse<any>> = (
+  values: ValuesI,
+) => new Promise((
   resolve,
   reject,
 ) => {

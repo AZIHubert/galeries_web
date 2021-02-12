@@ -8,9 +8,9 @@ interface TitleI {
 
 const Title = styled.h3<TitleI>`
   font-size: 1.3rem;
-  text-align: ${({ textAlign }) => textAlign};
-  margin-bottom: 25px;
   line-height: 1.3rem;
+  margin-bottom: 25px;
+  text-align: ${({ textAlign }) => textAlign};
 `;
 
 Title.defaultProps = {

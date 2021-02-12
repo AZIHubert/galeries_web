@@ -1,19 +1,17 @@
 import * as React from 'react';
 import { useFormik } from 'formik';
 
-import { ticketSchema } from '#helpers/schemas';
+import { LoadingContext } from '#contexts/LoadingContext';
 
-interface ModalTicketI {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { ticketSchema } from '#helpers/schemas';
 
 const initialValues = {
   header: '',
   body: '',
 };
 
-const ModalTicket = ({ loading, setLoading }: ModalTicketI) => {
+const ModalTicket = () => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
     initialValues,
     onSubmit: () => {

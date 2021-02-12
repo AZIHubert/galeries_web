@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { useFormik } from 'formik';
 
-import { changePasswordSchema } from '#helpers/schemas';
+import { LoadingContext } from '#contexts/LoadingContext';
 
-interface ChangePasswordI {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { changePasswordSchema } from '#helpers/schemas';
 
 const initialValues = {
   currentPassword: '',
@@ -14,7 +11,8 @@ const initialValues = {
   confirmNewPassword: '',
 };
 
-const ChangePassword = ({ loading, setLoading }: ChangePasswordI) => {
+const ChangePassword = () => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
     initialValues,
     onSubmit: () => {

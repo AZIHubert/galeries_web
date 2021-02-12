@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Reset } from 'styled-reset';
 
-import Home from '#containers/Home';
+import Routes from '#src/Routes';
 
+import { LoadingProvider } from '#contexts/LoadingContext';
 import ThemeProvider from '#contexts/ThemeContext';
 import { UserProvider } from '#contexts/UserContext';
 
@@ -11,9 +12,11 @@ import GlobalStyle from '#helpers/GlobalStyle';
 const App = () => (
   <ThemeProvider>
     <UserProvider>
-      <GlobalStyle />
-      <Reset />
-      <Home />
+      <LoadingProvider>
+        <GlobalStyle />
+        <Reset />
+        <Routes />
+      </LoadingProvider>
     </UserProvider>
   </ThemeProvider>
 );

@@ -22,10 +22,10 @@ const HeaderButton = ({
   variant = 'primary',
 }: HeaderButtonI) => (
   <Button
-    testId={testId}
     marginLeft={marginLeft}
     marginRight={marginRight}
     onClick={onClick}
+    testId={testId}
     variant={variant}
   >
     {title}

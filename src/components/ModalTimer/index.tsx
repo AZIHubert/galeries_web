@@ -7,6 +7,7 @@ import { Container } from './styles';
 type Variant = 'danger' | 'primary';
 
 const modalRoot = document.getElementById('modal-root');
+
 interface ModalTimerI {
   callBack?: () => void;
   handleClose: () => void;
@@ -43,16 +44,16 @@ const ModalTimer = ({
   return (
     ReactDOM.createPortal(
       <CSSTransition
-        in={open}
         classNames='fade'
-        timeout={300}
-        unmountOnExit
+        in={open}
         onExited={() => {
           if (modalRoot) {
             modalRoot.removeChild(el.current);
           }
           if (callBack) callBack();
         }}
+        timeout={300}
+        unmountOnExit
       >
         <Container
           testId={testId}

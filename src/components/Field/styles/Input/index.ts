@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 interface InputI {
+  disabled?: boolean;
   error?: boolean;
   testId?: string;
 }
@@ -17,6 +18,7 @@ const Input = styled.input.attrs<InputI>(
   }) => `2px solid ${error ? theme.colors.danger : theme.colors.primary}`};
   color: ${({ theme }) => theme.colors.black};
   margin-bottom: 2px;
+  opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
   padding: 5px 10px;
   transition: ${({ theme }) => `border-left ${theme.transition.default} ease-in-out`};
   width: 100%;
@@ -32,5 +34,10 @@ const Input = styled.input.attrs<InputI>(
     background-color: ${({ theme }) => theme.colors.black};
   }
 `;
+
+Input.defaultProps = {
+  error: false,
+  disabled: false,
+};
 
 export default Input;

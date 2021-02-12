@@ -13,10 +13,10 @@ interface TextButtonI {
   justifyContent?: jJustifyContent;
   marginBottom?: number;
   marginTop?: number;
+  onClick: () => void
   testId?: string;
   text: string;
   textButton: string;
-  onClick: () => void
 }
 
 const TextButton = ({
@@ -39,12 +39,12 @@ const TextButton = ({
     <p>
       {`${text} `}
       <Button
-        testId={testId}
         onClick={() => {
           if (!disabled) {
             onClick();
           }
         }}
+        testId={testId}
       >
         {textButton}
       </Button>

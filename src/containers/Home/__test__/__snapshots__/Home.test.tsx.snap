@@ -3,18 +3,18 @@
 exports[`Home renders without crashing 1`] = `
 Array [
   <header
-    className="sc-bBXqnf cziRgL"
+    className="sc-cxFLnm ldAquU"
   >
     <div
-      className="sc-iwyYcG ciMMht"
+      className="sc-lmoMRL fyaycq"
     >
       <img
         alt="header logo"
-        className="sc-cxFLnm lgyAMc"
+        className="sc-iJuUWI bOKRyf"
         src={Object {}}
       />
       <div
-        className="sc-fKFyDc bWeBQP"
+        className="sc-iwyYcG gbDIOU"
       >
         <button
           className="sc-jSgupP fcXePE"
@@ -34,7 +34,7 @@ Array [
     </div>
   </header>,
   <div
-    className="sc-iJuUWI BLVsV"
+    className="sc-ezrdKe bqnLTP"
   >
     <div
       className="sc-gsTCUz VaXaZ"
@@ -195,7 +195,7 @@ Array [
     </footer>
   </div>,
   <div
-    className="sc-lmoMRL jwBubi"
+    className="sc-giIncl jNhZXJ"
   />,
 ]
 `;

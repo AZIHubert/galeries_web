@@ -34,16 +34,16 @@ const Modal = ({
   return (
     ReactDOM.createPortal(
       <CSSTransition
-        in={open}
-        classNames='fade'
-        timeout={300}
-        unmountOnExit
         onExited={() => {
           if (modalRoot) {
             modalRoot.removeChild(el.current);
           }
           if (callBack) callBack();
         }}
+        in={open}
+        classNames='fade'
+        timeout={300}
+        unmountOnExit
       >
         <Fader>
           <Container
@@ -52,8 +52,8 @@ const Modal = ({
             {children}
           </Container>
           <Background
-            testId="modalBackground"
             onClick={handleClose}
+            testId="modalBackground"
           />
         </Fader>
       </CSSTransition>,

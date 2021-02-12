@@ -24,11 +24,11 @@ const GradientButton = ({
   type = 'button',
 }: GradientButtonI) => (
   <Button
-    testId={testId}
     disabled={disabled}
     marginBottom={marginBottom}
     marginTop={marginTop}
     onClick={onClick}
+    testId={testId}
     type={type}
   >
     {disabled ? 'loading' : title}

@@ -6,13 +6,13 @@ interface BackgroundI {
 
 const Background = styled.div.attrs<BackgroundI>(
   ({ testId }) => ({
-    'data-testid': testId,
     className: 'background-modal',
+    'data-testid': testId,
   }),
 )<BackgroundI>`
   background-color: #000;
   height: 100vh;
-  transition: opacity 0.3s;
+  opacity: 0.7;
   position: fixed;
   top: 0;
   width: 100%;

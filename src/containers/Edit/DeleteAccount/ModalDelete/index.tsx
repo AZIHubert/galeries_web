@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { useFormik } from 'formik';
 
-import { deleteAccountSchema } from '#helpers/schemas';
+import { LoadingContext } from '#contexts/LoadingContext';
 
-interface ModalDeleteI {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { deleteAccountSchema } from '#helpers/schemas';
 
 const initialValues = {
   password: '',
 };
 
-const ModalDelete = ({ loading, setLoading }: ModalDeleteI) => {
+const ModalDelete = () => {
+  const { loading, setLoading } = React.useContext(LoadingContext);
   const formik = useFormik({
     initialValues,
     onSubmit: () => {

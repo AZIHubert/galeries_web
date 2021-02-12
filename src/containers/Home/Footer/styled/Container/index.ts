@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import mediaQueries from '#helpers/mediaQueries';
 
 const Container = styled.footer`
-  margin-bottom: 10px;
   font-size: 0.65rem;
   font-weight: lighter;
+  margin-bottom: 10px;
   @media ${mediaQueries.mobileL} {
     font-size: 0.7rem;
   }

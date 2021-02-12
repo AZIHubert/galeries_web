@@ -11,8 +11,11 @@ interface ValuesI {
   userName: string;
 }
 
-const signin
-: (values: ValuesI) => Promise<AxiosResponse<any>> = async (values: ValuesI) => new Promise((
+const signin: (
+  values: ValuesI
+) => Promise<AxiosResponse<any>> = async (
+  values: ValuesI,
+) => new Promise((
   resolve,
   reject,
 ) => {
