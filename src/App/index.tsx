@@ -1,3 +1,5 @@
+import './App.css';
+
 import * as React from 'react';
 import { Reset } from 'styled-reset';
 
