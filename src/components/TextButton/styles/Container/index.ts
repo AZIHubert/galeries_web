@@ -28,7 +28,6 @@ const Container = styled.div<ContainerI>`
     fontSizeL,
   }) => {
     const size = fontSizeL || fontSize;
-    console.log(size, fontSizeL);
     return (
       `${size}rem`
     );

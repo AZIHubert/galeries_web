@@ -57,7 +57,7 @@ const FacebookButton = ({
   };
   return (
     <FacebookLogin
-      appId="688539228486770"
+      appId={process.env.FACEBOOK_ID!}
       callback={responseFacebook}
       fields="email, gender, name, picture.type(large)"
       render={(renderProps) => (

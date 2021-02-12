@@ -54,7 +54,7 @@ const GoogleButton = ({
   };
   return (
     <GoogleLogin
-      clientId="863840240633-tve0cuo6hib6uhgap61j1nkq03k7k5vq.apps.googleusercontent.com"
+      clientId={process.env.GOOGLE_ID!}
       cookiePolicy={'single_host_origin'}
       onFailure={(err) => console.log(err)}
       onSuccess={responseGoogle}
