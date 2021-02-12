@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.header`
-  background-color: #FFFFF4;
+  background-color: ${({ theme }) => theme.colors.secondary};
   position: absolute;
   width: 100%;
 `;

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 const Title = styled.h2`
   border-bottom: ${({ theme }) => (
     `1px solid ${theme.colors.primary}`
@@ -10,6 +12,11 @@ const Title = styled.h2`
   margin-bottom: 40px;
   padding-bottom: 10px;
   width: 100%;
+  @media ${mediaQueries.laptopL} {
+    font-size: 1.6rem;
+    padding-bottom: 15px;
+    border-width: 2px;
+  }
 `;
 
 export default Title;

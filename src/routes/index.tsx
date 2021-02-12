@@ -31,7 +31,7 @@ const Routes = () => {
       </AnimatedRoute>
       <AnimatedRoute
         exact
-        onExisted={() => setCallbackModal((prevState) => ({
+        onExiting={() => setCallbackModal((prevState) => ({
           ...prevState,
           open: true,
         }))}
@@ -43,7 +43,7 @@ const Routes = () => {
       </AnimatedRoute>
       <AnimatedRoute
         exact
-        onExisted={() => setCallbackModal((prevState) => ({
+        onExiting={() => setCallbackModal((prevState) => ({
           ...prevState,
           open: true,
         }))}

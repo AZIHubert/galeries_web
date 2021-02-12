@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 interface ContainerI {
-  marginBottom: number;
-  marginTop: number;
+  marginBottom?: number;
+  marginBottomL?: number;
+  marginTop?: number;
+  marginTopL?: number;
 }
 
 const Container = styled.p<ContainerI>`
@@ -31,11 +35,28 @@ const Container = styled.p<ContainerI>`
     vertical-align: middle;
     width: 50%;
   }
+  @media ${mediaQueries.laptopL} {
+    font-size: 1.3rem;
+    margin: ${({
+    marginBottom,
+    marginBottomL,
+    marginTop,
+    marginTopL,
+  }) => {
+    const marginB = marginBottomL || marginBottom;
+    const marginT = marginTopL || marginTop;
+    return (
+      `${marginT}px 0 ${marginB}px`
+    );
+  }}
+  }
 `;
 
 Container.defaultProps = {
   marginBottom: 0,
+  marginBottomL: 0,
   marginTop: 0,
+  marginTopL: 0,
 };
 
 export default Container;

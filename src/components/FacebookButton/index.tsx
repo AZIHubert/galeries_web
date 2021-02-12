@@ -65,6 +65,7 @@ const FacebookButton = ({
           action={action}
           disabled={loading}
           marginBottom={10}
+          marginBottomL={13}
           onClick={() => {
             setErrorModal((prevState) => ({
               ...prevState,

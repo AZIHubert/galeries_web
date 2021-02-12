@@ -10,6 +10,7 @@ type jJustifyContent = 'center' | 'end' | 'flex-end' | 'flex-start' | 'normal' |
 interface TextButtonI {
   disabled?: boolean;
   fontSize?: number;
+  fontSizeL?: number;
   justifyContent?: jJustifyContent;
   marginBottom?: number;
   marginTop?: number;
@@ -22,6 +23,7 @@ interface TextButtonI {
 const TextButton = ({
   disabled = false,
   fontSize = 1,
+  fontSizeL = 1,
   justifyContent = 'flex-start',
   marginBottom = 0,
   marginTop = 0,
@@ -32,6 +34,7 @@ const TextButton = ({
 }: TextButtonI) => (
   <Container
     fontSize={fontSize}
+    fontSizeL={fontSizeL}
     justifyContent={justifyContent}
     marginBottom={marginBottom}
     marginTop={marginTop}

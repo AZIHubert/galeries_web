@@ -15,6 +15,7 @@ const ForgotPassword = styled.div.attrs<ForgotPasswordI>(
   cursor: pointer;
   display: inline-block;
   font-size: 0.8rem;
+  padding-bottom: 1px;
 `;
 
 export default ForgotPassword;

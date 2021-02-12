@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 const Label = styled.label`
   color: ${({ theme }) => theme.colors.primary};
   display: flex;
@@ -11,6 +13,10 @@ const Label = styled.label`
       color: ${({ theme }) => theme.colors.danger};
       margin-left: 5px;
     }
+  }
+  @media ${mediaQueries.laptopL} {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
   }
 `;
 

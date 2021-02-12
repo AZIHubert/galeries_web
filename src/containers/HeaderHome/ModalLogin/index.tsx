@@ -100,7 +100,9 @@ const ModalLogin = ({
       />
       <TextSepatator
         marginBottom={9}
+        marginBottomL={16}
         marginTop={9}
+        marginTopL={16}
         text='or'
       />
       <form onSubmit={formik.handleSubmit}>
@@ -111,6 +113,7 @@ const ModalLogin = ({
           errorTestId='userNameOrEmailError'
           fieldTestId='userNameOrEmailField'
           marginBottom={6}
+          marginBottomL={10}
           label='user name or email'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -126,6 +129,7 @@ const ModalLogin = ({
           fieldTestId='passwordField'
           label='password'
           marginBottom={12}
+          marginBottomL={15}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           required
@@ -149,7 +153,9 @@ const ModalLogin = ({
         <GradientButton
           disabled={loading}
           marginBottom={15}
+          marginBottomL={22}
           marginTop={15}
+          marginTopL={22}
           testId='submitButton'
           type='submit'
           title='Log in'
@@ -158,6 +164,7 @@ const ModalLogin = ({
       <TextButton
         disabled={loading}
         fontSize={0.65}
+        fontSizeL={0.8}
         justifyContent='center'
         onClick={() => setCurrentModal('signin')}
         testId='switchToSignin'

@@ -10,7 +10,7 @@ const Background = styled.div.attrs<BackgroundI>(
     'data-testid': testId,
   }),
 )<BackgroundI>`
-  background-color: #000;
+  background-color: ${({ theme }) => theme.colors.black};
   height: 100vh;
   opacity: 0.7;
   position: fixed;
