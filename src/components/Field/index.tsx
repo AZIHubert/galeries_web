@@ -14,7 +14,9 @@ interface FieldI {
   id: string;
   label?: string;
   marginBottom?: number;
+  marginBottomL?: number;
   marginTop?: number;
+  marginTopL?: number;
   onBlur?: ((event: React.FocusEvent<HTMLInputElement>) => void) | undefined;
   onChange?: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
   required?: boolean;
@@ -31,7 +33,9 @@ const Field = ({
   id,
   label,
   marginBottom = 0,
+  marginBottomL = 0,
   marginTop = 0,
+  marginTopL = 0,
   onBlur,
   onChange,
   required = false,
@@ -41,7 +45,9 @@ const Field = ({
 }: FieldI) => (
   <Container
     marginBottom={marginBottom}
+    marginBottomL={marginBottomL}
     marginTop={marginTop}
+    marginTopL={marginTopL}
   >
     {label ? (
       <Label

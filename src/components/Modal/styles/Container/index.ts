@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 interface ContainerI {
   testId?: string;
 }
@@ -19,6 +21,9 @@ const Container = styled.div.attrs<ContainerI>(
   transition: opacity 0.3s;
   width: 380px;
   z-index: 1;
+  @media ${mediaQueries.laptopL} {
+    width: 420px;
+  }
 `;
 
 export default Container;

@@ -101,6 +101,7 @@ const ModalResendConfirm = ({
           fieldTestId='emailField'
           label='email'
           marginTop={20}
+          marginTopL={24}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           touched={formik.touched.email}
@@ -111,6 +112,7 @@ const ModalResendConfirm = ({
           disabled={loading}
           marginBottom={20}
           marginTop={20}
+          marginTopL={24}
           type='submit'
           title='Reset'
         />

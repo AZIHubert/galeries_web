@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 type Variant = 'facebook' | 'google';
 
 interface ButtonI {
   marginBottom?: number;
+  marginBottomL?: number;
   marginTop?: number;
+  marginTopL?: number;
   testId?: string;
   variant?: Variant;
 }
@@ -58,11 +62,29 @@ const Button = styled.button.attrs<ButtonI>(
   & img {
     height: 16px;
   }
+  @media ${mediaQueries.laptopL} {
+    font-size: 1rem;
+    height: 35px;
+    margin: ${({
+    marginBottom,
+    marginBottomL,
+    marginTop,
+    marginTopL,
+  }) => {
+    const marginB = marginBottomL || marginBottom;
+    const marginT = marginTopL || marginTop;
+    return (
+      `${marginT}px 0 ${marginB}px 0`
+    );
+  }};
+  }
 `;
 
 Button.defaultProps = {
   marginBottom: 0,
+  marginBottomL: 0,
   marginTop: 0,
+  marginTopL: 0,
   variant: 'facebook',
 };
 

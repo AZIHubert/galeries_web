@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 interface InputI {
   disabled?: boolean;
   error?: boolean;
@@ -32,6 +34,10 @@ const Input = styled.input.attrs<InputI>(
   &::selection {
     color: ${({ theme }) => theme.colors.white};
     background-color: ${({ theme }) => theme.colors.black};
+  }
+  @media ${mediaQueries.laptopL} {
+    font-size: 1.02rem;
+    padding: 7px 10px;
   }
 `;
 

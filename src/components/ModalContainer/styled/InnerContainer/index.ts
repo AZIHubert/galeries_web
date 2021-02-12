@@ -15,6 +15,9 @@ const InnerContainer = styled.div`
   @media ${mediaQueries.mobileL} {
     padding: 25px 45px 15px 45px;
   }
+  @media ${mediaQueries.laptopL} {
+    padding: 35px 40px 25px 40px;
+  }
 `;
 
 export default InnerContainer;

@@ -106,6 +106,7 @@ const ModalResetPassword = ({
           disabled={loading}
           marginBottom={20}
           marginTop={20}
+          marginTopL={24}
           type='submit'
           title='Reset'
         />

@@ -57,7 +57,7 @@ const Button = styled.button.attrs<ButtonI>(
     variant,
   }) => (
     variant === 'primary'
-      ? theme.colors.primary
+      ? theme.colors.secondary
       : theme.colors.primary
   )};
     color: ${({

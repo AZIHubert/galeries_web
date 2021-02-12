@@ -6,14 +6,14 @@ import { Container } from './styles';
 
 interface AnimatedRouteI {
   exact?: boolean;
-  onExisted?: () => void;
+  onExiting?: () => void;
   path: string;
 }
 
 const AnimatedRoute: React.FC<AnimatedRouteI> = ({
   exact = false,
   children,
-  onExisted,
+  onExiting,
   path,
 }) => (
   <Route
@@ -24,9 +24,9 @@ const AnimatedRoute: React.FC<AnimatedRouteI> = ({
       <CSSTransition
         classNames='fade'
         in={match !== null}
-        onExited={() => {
-          if (onExisted) {
-            onExisted();
+        onExiting={() => {
+          if (onExiting) {
+            onExiting();
           }
         }}
         timeout={300}
