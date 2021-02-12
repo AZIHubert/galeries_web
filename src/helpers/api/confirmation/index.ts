@@ -4,8 +4,11 @@ import client from '#helpers/api/client';
 
 const endpoint = '/users/confirmation';
 
-const confirmation
-: (token: string) => Promise<AxiosResponse<any>> = (token: string) => new Promise((
+const confirmation: (
+  token: string
+) => Promise<AxiosResponse<any>> = (
+  token: string,
+) => new Promise((
   resolve,
   reject,
 ) => {

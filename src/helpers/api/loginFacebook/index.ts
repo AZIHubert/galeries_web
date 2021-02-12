@@ -7,7 +7,7 @@ const endpoint = '/users/auth/facebook';
 
 const signin: (
   values: ReactFacebookLoginInfo | ReactFacebookFailureResponse
-) =>Promise<AxiosResponse<any>> = (
+) => Promise<AxiosResponse<any>> = (
   values: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
 ) => new Promise((
   resolve,
@@ -16,6 +16,7 @@ const signin: (
   client({
     data: values,
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
     method: 'post',

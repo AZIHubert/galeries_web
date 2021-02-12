@@ -7,18 +7,18 @@ import AnimatedRoute from '#components/AnimatedRoute';
 import Modal from '#components/Modal';
 import ModalCallback from '#components/ModalCallback';
 
-import Home from '#containers/Home';
 import ConfirmAccount from '#containers/ConfirmAccount';
+import Home from '#containers/Home';
 import ResetPassword from '#containers/ResetPassword';
 
 const Routes = () => {
   const [callbackModal, setCallbackModal] = React.useState<{
-    open: boolean;
     error: boolean;
+    open: boolean;
     text: string;
   }>({
-    open: false,
     error: false,
+    open: false,
     text: '',
   });
   return (

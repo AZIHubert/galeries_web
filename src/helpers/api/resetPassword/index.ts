@@ -9,8 +9,7 @@ interface ValuesI {
   password: string;
 }
 
-const confirmation
-: (
+const confirmation: (
   token: string,
   values: ValuesI
 ) => Promise<AxiosResponse<any>> = (
