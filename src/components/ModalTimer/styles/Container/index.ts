@@ -58,6 +58,23 @@ const Container = styled.div.attrs<ContainerI>(
   @media ${mediaQueries.mobileL} {
     width: auto;
   }
+  @media ${mediaQueries.laptopL} {
+    font-size: 1rem;
+    padding: 8px 14px;
+    top: 20px;
+    &.fade-enter {
+      top: 25px;
+    }
+    &.fade-enter-active {
+      top: 20px;
+    }
+    &.fade-exit {
+      top: 20px;
+    }
+    &.fade-exit-active {
+      top: 25px;
+    }
+  }
 `;
 
 Container.defaultProps = {
