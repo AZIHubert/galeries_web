@@ -16,18 +16,24 @@ const Button = styled.button.attrs<ButtonI>(
     'data-testid': testId,
   }),
 )<ButtonI>`
-  background-color: ${({ variant }) => (
+  background-color: ${({
+    theme,
+    variant,
+  }) => (
     variant === 'primary'
-      ? '#7483FF'
-      : '#FFFFF4'
+      ? theme.colors.primary
+      : theme.colors.secondary
   )};
   border: ${({ theme }) => `2px solid ${theme.colors.primary}`};
   border-radius: 5px;
   box-shadow: ${({ theme }) => theme.boxShadow};
-  color: ${({ variant }) => (
+  color: ${({
+    theme,
+    variant,
+  }) => (
     variant === 'primary'
-      ? '#FFFFF4'
-      : '#7483FF'
+      ? theme.colors.secondary
+      : theme.colors.primary
   )};
   cursor: pointer;
   font-size: 1rem;
@@ -46,15 +52,21 @@ const Button = styled.button.attrs<ButtonI>(
     outline: none;
   }
   &:hover {
-    background-color: ${(props) => (
-    props.variant === 'primary'
-      ? '#FFFFF4'
-      : '#7483FF'
+    background-color: ${({
+    theme,
+    variant,
+  }) => (
+    variant === 'primary'
+      ? theme.colors.primary
+      : theme.colors.primary
   )};
-    color: ${(props) => (
-    props.variant === 'primary'
-      ? '#7483FF'
-      : '#FFFFF4'
+    color: ${({
+    theme,
+    variant,
+  }) => (
+    variant === 'primary'
+      ? theme.colors.primary
+      : theme.colors.secondary
   )};
   }
   @media ${mediaQueries.laptop} {

@@ -7,7 +7,7 @@ interface InnerContainerI {
 }
 
 const InnerContainer = styled.div<InnerContainerI>`
-  background-color: #FFFFF4;
+  background-color: ${({ theme }) => theme.colors.secondary};
   border: ${({
     theme,
     variant,
