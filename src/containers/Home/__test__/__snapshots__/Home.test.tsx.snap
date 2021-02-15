@@ -3,7 +3,7 @@
 exports[`Home renders without crashing 1`] = `
 Array [
   <header
-    className="sc-cxFLnm ldAquU"
+    className="sc-cxFLnm tDVpb"
   >
     <div
       className="sc-lmoMRL fyaycq"
@@ -189,7 +189,7 @@ Array [
       </div>
     </div>
     <footer
-      className="sc-eCssSg cxlGbx"
+      className="sc-eCssSg hzFWEt"
     >
       Allan Aoudji @2021
     </footer>

@@ -78,6 +78,7 @@ const Header = () => {
           <ModalLogin
             setCurrentModal={setCurrentModal}
             setErrorModal={setErrorModal}
+            closeModal={handleCloseModal}
           />
         );
       case 'resendConfirm':

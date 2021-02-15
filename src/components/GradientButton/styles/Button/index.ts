@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import mediaQueries from '#helpers/mediaQueries';
 
 interface ButtonI {
+  disabled?: boolean;
   marginBottom?: number;
   marginBottomL?: number;
   marginTop?: number;
@@ -19,6 +20,7 @@ const Button = styled.button.attrs<ButtonI>(
     `linear-gradient(90deg, ${theme.colors.tertiary} 0%, ${theme.colors.primary} 50%)`
   )};
   background-size: 200%;
+  background-position: ${({ disabled }) => (`${disabled} ? left : right`)};
   border: none;
   border-radius: 5px;
   box-shadow: ${({ theme }) => theme.boxShadow};

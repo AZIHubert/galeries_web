@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as React from 'react';
 import FacebookLogin, {
   ReactFacebookFailureResponse,
@@ -7,8 +8,12 @@ import FacebookLogin, {
 import SocialMediaButton from '#components/SocialMediaButton';
 
 import { LoadingContext } from '#contexts/LoadingContext';
+import { UserContext } from '#contexts/UserContext';
 
-import { loginFacebook } from '#helpers/api';
+import {
+  getMe,
+  loginFacebook,
+} from '#helpers/api';
 
 type Action = 'login' | 'signin';
 
@@ -24,7 +29,9 @@ const FacebookButton = ({
   action = 'login',
   setErrorModal,
 }: FacebookButtonI) => {
+  const source = React.useMemo(() => axios.CancelToken.source(), []);
   const { loading, setLoading } = React.useContext(LoadingContext);
+  const { setUser } = React.useContext(UserContext);
   const responseFacebook = async (
     faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
   ) => {
@@ -33,6 +40,8 @@ const FacebookButton = ({
       const response = await loginFacebook(faceBookResponse);
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('expiresIn', response.data.expiresIn);
+      const responseGetMe = await getMe({ source });
+      setUser(responseGetMe.data);
     } catch (err) {
       if (err.response) {
         if (err.status === 500) {
@@ -55,6 +64,9 @@ const FacebookButton = ({
     }
     setLoading(false);
   };
+  React.useEffect(() => () => {
+    source.cancel('axios request cancelled');
+  }, []);
   return (
     <FacebookLogin
       appId={process.env.FACEBOOK_ID!}
