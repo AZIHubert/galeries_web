@@ -1,11 +1,16 @@
+import axios from 'axios';
 import * as React from 'react';
 import GoogleLogin from 'react-google-login';
 
 import SocialMediaButton from '#components/SocialMediaButton';
 
 import { LoadingContext } from '#contexts/LoadingContext';
+import { UserContext } from '#contexts/UserContext';
 
-import { loginGoogle } from '#helpers/api';
+import {
+  getMe,
+  loginGoogle,
+} from '#helpers/api';
 
 type Action = 'login' | 'signin';
 
@@ -21,7 +26,9 @@ const GoogleButton = ({
   action = 'login',
   setErrorModal,
 }: GoogleButtonI) => {
+  const source = React.useMemo(() => axios.CancelToken.source(), []);
   const { loading, setLoading } = React.useContext(LoadingContext);
+  const { setUser } = React.useContext(UserContext);
   const responseGoogle = async (
     googleResponse: any,
   ) => {
@@ -30,6 +37,8 @@ const GoogleButton = ({
       const response = await loginGoogle(googleResponse.profileObj);
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('expiresIn', response.data.expiresIn);
+      const responseGetMe = await getMe({ source });
+      setUser(responseGetMe.data);
     } catch (err) {
       if (err.response) {
         if (err.status === 500) {
@@ -52,6 +61,9 @@ const GoogleButton = ({
     }
     setLoading(false);
   };
+  React.useEffect(() => () => {
+    source.cancel('axios request cancelled');
+  }, []);
   return (
     <GoogleLogin
       clientId={process.env.GOOGLE_ID!}

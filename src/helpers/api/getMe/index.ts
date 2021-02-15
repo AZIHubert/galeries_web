@@ -1,16 +1,25 @@
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, CancelTokenSource } from 'axios';
 
 import client from '#helpers/api/client';
 
 const endpoint = '/users/me';
 
-const getMe: () => Promise<AxiosResponse<any>> = () => new Promise((
+interface GetMeI {
+  source: CancelTokenSource;
+}
+
+const getMe: ({
+  source,
+}: GetMeI) => Promise<AxiosResponse<any>> = ({
+  source,
+}: GetMeI) => new Promise((
   resolve,
   reject,
 ) => {
   const token = localStorage.getItem('authToken');
   if (token) {
     client({
+      cancelToken: source.token,
       headers: {
         authorization: token,
         'Content-Type': 'application/json',

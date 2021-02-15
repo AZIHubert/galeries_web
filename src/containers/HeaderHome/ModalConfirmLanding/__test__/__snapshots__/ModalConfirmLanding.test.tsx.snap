@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home renders without crashing 1`] = `
+exports[`ModalConfirmLanding renders without crashing 1`] = `
 <div
   className="sc-gsTCUz gpRCqf"
   data-testid="modalVerifyAccount"
 >
   <div
-    className="sc-dlfnbm iCYrgf"
+    className="sc-dlfnbm erazeS"
   >
     <h3
-      className="sc-hKgILt fVwsjm"
+      className="sc-hKgILt cfzZCa"
     >
       Verify your email
     </h3>
@@ -21,13 +21,13 @@ exports[`Home renders without crashing 1`] = `
       . This helps keep your account secure.
     </p>
     <div
-      className="sc-jSgupP cTlbEJ"
+      className="sc-gKsewC hQKVAW"
       fontSize={1}
     >
       <p>
         No email in your inbox or spam folder? Let’s 
         <span
-          className="sc-eCssSg dfRMkT"
+          className="sc-jSgupP eLLNoK"
           onClick={[Function]}
         >
           resend it
@@ -37,7 +37,7 @@ exports[`Home renders without crashing 1`] = `
     </div>
   </div>
   <div
-    className="sc-bdfBwQ kHDgwz"
+    className="sc-bdfBwQ kUovzw background-container"
   />
 </div>
 `;
