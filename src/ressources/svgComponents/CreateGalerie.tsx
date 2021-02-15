@@ -1,15 +1,19 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
-function SvgCreateGalerie(props) {
+const StyledSVG = styled.svg`
+    height: 100%;
+    & path {
+        fill: ${({ theme }) => theme.colors.primary}
+    }
+`;
+
+function SvgCreateGalerie() {
   return (
-    <svg
+    <StyledSVG
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 893 893"
-      {...props}
     >
-      <defs>
-        <style>{'.createGalerie_svg__cls-1{fill:#7483ff}'}</style>
-      </defs>
       <g id="createGalerie_svg__Layer_2" data-name="Layer 2">
         <g id="createGalerie_svg__Layer_1-2" data-name="Layer 1">
           <path
@@ -22,7 +26,7 @@ function SvgCreateGalerie(props) {
           />
         </g>
       </g>
-    </svg>
+    </StyledSVG>
   );
 }
 

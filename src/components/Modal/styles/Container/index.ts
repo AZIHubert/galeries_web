@@ -20,7 +20,7 @@ const Container = styled.div.attrs<ContainerI>(
   transform: translate(-50%, -50%);
   transition: opacity 0.3s;
   width: 380px;
-  z-index: 1;
+  z-index: 11;
   @media ${mediaQueries.laptopL} {
     width: 420px;
   }

@@ -7,6 +7,7 @@ type Variant = 'primary' | 'secondary';
 interface ButtonI {
   marginLeft?: number;
   marginRight?: number;
+  small?: boolean;
   testId?: string;
   variant?: Variant;
 }
@@ -36,14 +37,14 @@ const Button = styled.button.attrs<ButtonI>(
       : theme.colors.primary
   )};
   cursor: pointer;
-  font-size: 1rem;
+  font-size: ${({ small }) => (small ? '0.7rem' : '1rem')};
   margin: ${({
     marginLeft,
     marginRight,
   }) => (
     `0 ${marginRight}px 0 ${marginLeft}px`
   )};
-  padding: 3px 15px;
+  padding: ${({ small }) => (small ? '3px 12px' : '3px 15px')};
   transition: ${({ theme }) => (
     `color ${theme.transition.default} ease-in,
     background-color ${theme.transition.slow} ease-in;`
@@ -70,20 +71,21 @@ const Button = styled.button.attrs<ButtonI>(
   )};
   }
   @media ${mediaQueries.laptop} {
-    font-size: 1.1rem;
-    padding: 5px 15px;
+    font-size: ${({ small }) => (small ? '0.8rem' : '1.1rem')};
+    padding: ${({ small }) => (small ? '3px 10px' : '5px 15px')};
   }
   @media ${mediaQueries.laptopL} {
     border: ${({ theme }) => `3px solid ${theme.colors.primary}`};
-    border-radius: 8px;
-    font-size: 1.3rem;
-    padding: 5px 20px;
+    border-radius: ${({ small }) => (small ? '6px' : '8px')};
+    font-size: ${({ small }) => (small ? '1rem' : '1.3rem')};
+    padding: ${({ small }) => (small ? '3px 12px' : '5px 20px')};
   }
 `;
 
 Button.defaultProps = {
   marginLeft: 0,
   marginRight: 0,
+  small: false,
   variant: 'primary',
 };
 

@@ -19,7 +19,13 @@ import {
   ProfileImage,
 } from './styles';
 
-const PopupProfile = () => {
+interface PopupProfileI {
+  handleOpenTicket: () => void;
+}
+
+const PopupProfile = ({
+  handleOpenTicket,
+}: PopupProfileI) => {
   const { user } = React.useContext(UserContext);
   return (
     <Container
@@ -58,6 +64,7 @@ const PopupProfile = () => {
         </Button>
         <Button
           data-testid='buttonTicketModal'
+          onClick={handleOpenTicket}
         >
           <LogoContainer>
             <Ticket />
