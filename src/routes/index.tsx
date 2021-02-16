@@ -107,7 +107,6 @@ const Routes = () => {
       >
         <Container>
           <AnimatedRoute
-            exact
             path='/'
           >
             {user ? (
@@ -117,7 +116,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            exact
             onExiting={() => setCallbackModal((prevState) => ({
               ...prevState,
               open: true,
@@ -133,7 +131,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            exact
             onExiting={() => setCallbackModal((prevState) => ({
               ...prevState,
               open: true,
@@ -149,7 +146,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            exact
             onExiting={() => setCallbackModal((prevState) => ({
               ...prevState,
               open: true,
