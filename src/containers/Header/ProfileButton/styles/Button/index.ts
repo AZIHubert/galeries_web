@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 const Button = styled.button`
   align-items: center;
   background-color: transparent;
@@ -13,13 +15,18 @@ const Button = styled.button`
   color: ${({ theme }) => theme.colors.primary};
   cursor: pointer;
   display: flex;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   justify-content: center;
-  margin-left: 40px;
-  min-width: 200px;
+  margin-left: 25px;
+  min-width: 170px;
   padding: 0 30px;
   &:focus {
     outline: none;
+  }
+  @media ${mediaQueries.laptopL} {
+    font-size: 0.9rem;
+    min-width: 190px;
+    margin-left: 35px;
   }
 `;
 

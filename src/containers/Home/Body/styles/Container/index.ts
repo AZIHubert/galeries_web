@@ -8,7 +8,7 @@ const Container = styled.div`
   flex-grow: 1;
   margin-bottom: 11vh;
   padding-top: ${({ theme }) => (
-    `${theme.header.height.medium + 20}px`
+    `${theme.header.home.height.medium + 20}px`
   )};
    @media ${mediaQueries.mobileL} {
     margin-left: 50px;

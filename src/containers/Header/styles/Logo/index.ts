@@ -4,10 +4,10 @@ import mediaQueries from '#helpers/mediaQueries';
 
 const Logo = styled.img`
   margin-right: 40px;
-  width: 22px;
+  width: ${({ theme }) => `${theme.header.dashboard.logoWidth.medium}px`};
   @media ${mediaQueries.laptopL} { 
     margin-right: 50px;
-    width: 30px;
+    width: ${({ theme }) => `${theme.header.dashboard.logoWidth.large}px`};
   }
 `;
 

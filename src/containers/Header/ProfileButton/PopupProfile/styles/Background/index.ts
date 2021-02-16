@@ -6,8 +6,8 @@ const Background = styled.div.attrs(() => ({
   background-color: ${({ theme }) => theme.colors.primary};
   height: 100%;
   position: absolute;
-  right: 6px;
-  top: 6px;
+  right: 4px;
+  top: 4px;
   width: 100%;
 `;
 

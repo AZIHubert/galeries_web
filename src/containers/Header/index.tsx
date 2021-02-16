@@ -36,12 +36,14 @@ const Header = () => (
         <Pictogram
           hoverPictogram={HomeHover}
           pictogram={Home}
-          marginRight={40}
+          marginRight={25}
+          marginRightL={35}
         />
         <Pictogram
           hoverPictogram={CreateGalerieHover}
           pictogram={CreateGalerie}
-          marginRight={40}
+          marginRight={25}
+          marginRightL={35}
         />
         <Pictogram
           hoverPictogram={NotificationHover}

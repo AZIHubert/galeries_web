@@ -2,15 +2,21 @@ import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 interface ContainerI {
   marginLeft?: number;
+  marginLeftL?: number;
   marginRight?: number;
+  marginRightL?: number;
 }
 
 interface PictogramI {
   hoverPictogram: React.ComponentType;
   marginLeft?: number;
+  marginLeftL?: number;
   marginRight?: number;
+  marginRightL?: number;
   pictogram: React.ComponentType;
 }
 
@@ -18,7 +24,7 @@ const Container = styled.div<ContainerI>`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  height: 24px;
+  height: 18px;
   margin: ${({
     marginLeft,
     marginRight,
@@ -26,7 +32,21 @@ const Container = styled.div<ContainerI>`
     `0px ${marginRight}px 0px ${marginLeft}px`
   )};
   position: relative;
-  width: 24px;
+  width: 18px;
+  @media ${mediaQueries.laptopL} {
+    height: 22px;
+    margin: ${({
+    marginLeft,
+    marginLeftL,
+    marginRight,
+    marginRightL,
+  }) => {
+    const marginL = marginLeftL || marginLeft;
+    const marginR = marginRightL || marginRight;
+    return `0px ${marginR}px 0px ${marginL}px`;
+  }};
+    width: 22px;
+  }
 `;
 
 Container.defaultProps = {
@@ -60,14 +80,18 @@ const InnerContainer = styled.div`
 const Pictogram = ({
   hoverPictogram: HoverPictogramComponent,
   marginLeft = 0,
+  marginLeftL,
   marginRight = 0,
+  marginRightL,
   pictogram: PictogramComponent,
 }: PictogramI) => {
   const [hover, setHover] = React.useState<boolean>(false);
   return (
     <Container
       marginLeft={marginLeft}
+      marginLeftL={marginLeftL}
       marginRight={marginRight}
+      marginRightL={marginRightL}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

@@ -7,18 +7,18 @@ const InnerContainer = styled.div`
     `2px solid ${theme.colors.primary}`
   )};
   display: flex;
-  height: ${({ theme }) => `${theme.header.height.small}px`};
+  height: ${({ theme }) => `${theme.header.home.height.small}px`};
   justify-content: space-between;
   margin: ${({ theme }) => `0 ${theme.wrapper.margin.smallest}px`};
   @media ${mediaQueries.mobileL} {
     margin: ${({ theme }) => `0 ${theme.wrapper.margin.small}px`};
   }
   @media ${mediaQueries.laptop} {
-    height: ${({ theme }) => `${theme.header.height.medium}px`};
+    height: ${({ theme }) => `${theme.header.home.height.medium}px`};
     margin: ${({ theme }) => `0 ${theme.wrapper.margin.medium}px`};
   }
   @media ${mediaQueries.laptopL} { 
-    height: ${({ theme }) => `${theme.header.height.large}px`};
+    height: ${({ theme }) => `${theme.header.home.height.large}px`};
     margin: ${({ theme }) => `0 ${theme.wrapper.margin.large}px`};
   }
 `;

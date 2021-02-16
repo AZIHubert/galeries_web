@@ -37,14 +37,14 @@ const Button = styled.button.attrs<ButtonI>(
       : theme.colors.primary
   )};
   cursor: pointer;
-  font-size: ${({ small }) => (small ? '0.7rem' : '1rem')};
+  font-size: ${({ small }) => (small ? '0.6rem' : '1rem')};
   margin: ${({
     marginLeft,
     marginRight,
   }) => (
     `0 ${marginRight}px 0 ${marginLeft}px`
   )};
-  padding: ${({ small }) => (small ? '3px 12px' : '3px 15px')};
+  padding: ${({ small }) => (small ? '3px 10px' : '3px 15px')};
   transition: ${({ theme }) => (
     `color ${theme.transition.default} ease-in,
     background-color ${theme.transition.slow} ease-in;`
