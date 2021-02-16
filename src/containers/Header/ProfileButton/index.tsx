@@ -1,55 +1,37 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { CSSTransition } from 'react-transition-group';
+
+import Modal from '#components/Modal';
+
+import { UserContext } from '#contexts/UserContext';
 
 import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
 
+import ModalTicket from './ModalTicket';
 import PopupProfile from './PopupProfile';
 
-const Container = styled.div`
-  position: relative;
-`;
-
-const Button = styled.button`
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  border-left: ${({ theme }) => (
-    `1px solid ${theme.colors.primary}`
-  )};
-  border-right: ${({ theme }) => (
-    `1px solid ${theme.colors.primary}`
-  )};
-  color: ${({ theme }) => theme.colors.primary};
-  cursor: pointer;
-  display: flex;
-  font-size: 1.1rem;
-  padding: 0 30px;
-  &:focus {
-    outline: none;
-  }
-`;
-
-const ProfileButtonImage = styled.img`
-  border: ${({ theme }) => (
-    `2px solid ${theme.colors.primary}`
-  )};
-  border-radius: 50%;
-  height: 36px;
-  margin-right: 20px;
-  width: 36px;
-`;
+import {
+  Button,
+  Container,
+  ProfileImage,
+} from './styles';
 
 const ProfileButton = () => {
   const [openPopupProfil, setOpenPopupProfile] = React.useState<boolean>(false);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const { user } = React.useContext(UserContext);
+  const [openTicket, setOpenTicket] = React.useState<boolean>(false);
+  const handleOpenTicket = React.useCallback(() => setOpenTicket(true), []);
+  const handleCloseTicket = React.useCallback(() => setOpenTicket(false), []);
   const handleClickOutside = (event: any) => {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
       setOpenPopupProfile(false);
     }
   };
   React.useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
+    if (!openTicket) {
+      document.addEventListener('click', handleClickOutside, true);
+    }
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
@@ -62,11 +44,11 @@ const ProfileButton = () => {
         data-testid='profilButton'
         onClick={() => setOpenPopupProfile((lastState) => !lastState)}
       >
-        <ProfileButtonImage
+        <ProfileImage
           alt='profile picture'
           src={defaultProfilePicture}
         />
-          userName
+        {user ? user.userName : 'user name'}
       </Button>
       <CSSTransition
         classNames='fade'
@@ -74,8 +56,16 @@ const ProfileButton = () => {
         timeout={500}
         unmountOnExit
       >
-        <PopupProfile />
+        <PopupProfile
+          handleOpenTicket={handleOpenTicket}
+        />
       </CSSTransition>
+      <Modal
+        handleClose={handleCloseTicket}
+        open={openTicket}
+      >
+        <ModalTicket />
+      </Modal>
     </Container>
   );
 };

@@ -19,7 +19,13 @@ import {
   ProfileImage,
 } from './styles';
 
-const PopupProfile = () => {
+interface PopupProfileI {
+  handleOpenTicket: () => void;
+}
+
+const PopupProfile = ({
+  handleOpenTicket,
+}: PopupProfileI) => {
   const { user } = React.useContext(UserContext);
   return (
     <Container
@@ -35,12 +41,14 @@ const PopupProfile = () => {
           />
           <div>
             <Text
-              fontSize={1.2}
+              fontSize={1}
+              fontSizeL={1.1}
             >
               { user ? user.userName : 'user name' }
             </Text>
             <Text
-              fontSize={0.8}
+              fontSize={0.7}
+              fontSizeL={0.8}
             >
               see your profile
             </Text>
@@ -52,23 +60,31 @@ const PopupProfile = () => {
           <LogoContainer>
             <Gear />
           </LogoContainer>
-          <Text>
+          <Text
+            fontSize={0.8}
+            fontSizeL={0.9}
+          >
             Edit your informations
           </Text>
         </Button>
         <Button
           data-testid='buttonTicketModal'
+          onClick={handleOpenTicket}
         >
           <LogoContainer>
             <Ticket />
           </LogoContainer>
           <div>
             <Text
-              fontSize={0.65}
+              fontSize={0.5}
+              fontSizeL={0.65}
             >
               Share your opinion? Find a bug?
             </Text>
-            <Text>
+            <Text
+              fontSize={0.8}
+              fontSizeL={0.9}
+            >
               send a ticket
             </Text>
           </div>

@@ -12,15 +12,29 @@ const theme: DefaultTheme = {
     white: '#FFF',
   },
   header: {
-    height: {
-      large: 110,
-      medium: 90,
-      small: 80,
+    dashboard: {
+      height: {
+        large: 70,
+        medium: 55,
+        small: 45,
+      },
+      logoWidth: {
+        large: 30,
+        medium: 22,
+        small: 17,
+      },
     },
-    logoWidth: {
-      large: 54,
-      medium: 38,
-      small: 34,
+    home: {
+      height: {
+        large: 110,
+        medium: 90,
+        small: 80,
+      },
+      logoWidth: {
+        large: 54,
+        medium: 38,
+        small: 34,
+      },
     },
   },
   transition: {

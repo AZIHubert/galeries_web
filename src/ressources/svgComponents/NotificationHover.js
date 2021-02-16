@@ -1,21 +1,21 @@
 import * as React from 'react';
 
 function SvgNotificationHover(props) {
-    return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 972.85 877.46"
-            {...props}
-        >
-            <g data-name="Layer 2">
-                <path
-                    d="M892.3 82a275 275 0 00-388.9 0l-16.27 16.22-17.68-17.67a275 275 0 10-388.9 388.9l17.67 17.68-1.42 1.41 388.92 388.92L892.3 470.87a275 275 0 000-388.87z"
-                    fill="#7483ff"
-                    data-name="Layer 1"
-                />
-            </g>
-        </svg>
-    );
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 998.13 907.88"
+      {...props}
+    >
+      <g data-name="Layer 2">
+        <path
+          d="M913.9 85.64a287.59 287.59 0 00-406.69 0l-7.44 7.44-8.85-8.85A287.57 287.57 0 1084.23 490.92l8.85 8.85-1.42 1.42 406.69 406.69L913.9 492.34a287.58 287.58 0 000-406.7z"
+          fill="#7483ff"
+          data-name="Layer 1"
+        />
+      </g>
+    </svg>
+  );
 }
 
 export default SvgNotificationHover;

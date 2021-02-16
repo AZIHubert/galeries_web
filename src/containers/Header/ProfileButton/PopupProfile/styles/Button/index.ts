@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mediaQueries from '#helpers/mediaQueries';
+
 interface ButtonI {
   borderBottom?: boolean;
 }
@@ -16,11 +18,14 @@ const Button = styled.button<ButtonI>`
   )};
   display: flex;
   cursor: pointer;
-  height: 70px;
-  padding: 12px 5px;
+  height: 50px;
+  padding: 10px 3px;
   width: 100%;
   &:focus {
     outline: none;
+  }
+  @media ${mediaQueries.laptopL} {
+    height: 65px;
   }
 `;
 

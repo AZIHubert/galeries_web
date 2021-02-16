@@ -23,6 +23,11 @@ interface HeaderLogoI {
 }
 
 interface HeaderI {
+  home: SubHeaderI;
+  dashboard: SubHeaderI;
+}
+
+interface SubHeaderI {
   height: HeaderHeightI;
   logoWidth: HeaderLogoI;
 }

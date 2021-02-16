@@ -1,9 +1,11 @@
 import * as React from 'react';
+
 import {
   Container,
   Error,
   Input,
   Label,
+  TextArea,
 } from './styles';
 
 interface FieldI {
@@ -17,8 +19,9 @@ interface FieldI {
   marginBottomL?: number;
   marginTop?: number;
   marginTopL?: number;
-  onBlur?: ((event: React.FocusEvent<HTMLInputElement>) => void) | undefined;
-  onChange?: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  multiline?: boolean;
+  onBlur?: ((event: any) => void) | undefined;
+  onChange?: ((event: any) => void) | undefined;
   required?: boolean;
   touched?: boolean | undefined;
   type?: 'password' | 'text';
@@ -36,6 +39,7 @@ const Field = ({
   marginBottomL = 0,
   marginTop = 0,
   marginTopL = 0,
+  multiline = false,
   onBlur,
   onChange,
   required = false,
@@ -63,17 +67,30 @@ const Field = ({
         )}
       </Label>
     ) : null}
-    <Input
-      disabled={disabled}
-      error={!!error && touched}
-      id={id}
-      name={id}
-      onBlur={onBlur}
-      onChange={onChange}
-      testId={fieldTestId}
-      type={type}
-      value={value}
-    />
+    {multiline ? (
+      <TextArea
+        disabled={disabled}
+        error={!!error && touched}
+        id={id}
+        name={id}
+        onBlur={onBlur}
+        onChange={onChange}
+        testId={fieldTestId}
+        value={value}
+      />
+    ) : (
+      <Input
+        disabled={disabled}
+        error={!!error && touched}
+        id={id}
+        name={id}
+        onBlur={onBlur}
+        onChange={onChange}
+        testId={fieldTestId}
+        type={type}
+        value={value}
+      />
+    )}
     {error && touched && (
       <Error
         testId={errorTestId}
