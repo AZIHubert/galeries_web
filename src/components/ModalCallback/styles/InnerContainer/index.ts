@@ -3,10 +3,15 @@ import styled from 'styled-components';
 type Variant = 'error' | 'primary';
 
 interface InnerContainerI {
+  testId?: string;
   variant?: Variant
 }
 
-const InnerContainer = styled.div<InnerContainerI>`
+const InnerContainer = styled.div.attrs<InnerContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<InnerContainerI>`
   background-color: ${({ theme }) => theme.colors.secondary};
   border: ${({
     theme,

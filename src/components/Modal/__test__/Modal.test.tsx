@@ -78,7 +78,14 @@ describe('Modal', () => {
     let modal: HTMLElement;
     let modalBackground: HTMLElement;
     beforeEach(() => {
-      const { getByTestId, getByText } = render(<Container initialOpen={true} />);
+      const {
+        getByTestId,
+        getByText,
+      } = render(
+        <Container
+          initialOpen={true}
+        />,
+      );
       child = getByText(innerText);
       modal = getByTestId('modal');
       modalBackground = getByTestId('modalBackground');
@@ -104,7 +111,11 @@ describe('Modal', () => {
     let modalBackground: HTMLElement | null;
     let openButton: HTMLElement;
     beforeEach(() => {
-      const { getByText, queryByTestId, queryByText } = render(<Container initialOpen={false} />);
+      const {
+        getByText,
+        queryByTestId,
+        queryByText,
+      } = render(<Container initialOpen={false} />);
       child = queryByText(innerText);
       modal = queryByTestId('modal');
       modalBackground = queryByTestId('modalBackground');
