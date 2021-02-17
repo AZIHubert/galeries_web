@@ -29,9 +29,9 @@ const FacebookButton = ({
   action = 'login',
   setErrorModal,
 }: FacebookButtonI) => {
-  const source = React.useMemo(() => axios.CancelToken.source(), []);
   const { loading, setLoading } = React.useContext(LoadingContext);
   const { setUser } = React.useContext(UserContext);
+  const source = React.useMemo(() => axios.CancelToken.source(), []);
   const responseFacebook = async (
     faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
   ) => {
