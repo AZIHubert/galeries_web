@@ -8,6 +8,7 @@ import theme from '#helpers/theme';
 import Field from '../index';
 
 const Component = ({
+  disabled = false,
   error,
   label,
   marginBottom,
@@ -17,6 +18,7 @@ const Component = ({
   required,
   touched,
 }: {
+  disabled?: boolean;
   error?: string;
   label?: string;
   marginBottom?: number;
@@ -29,6 +31,7 @@ const Component = ({
   <ThemeProvider>
     <Field
       containerTestId='container'
+      disabled={disabled}
       error={error}
       errorTestId='error'
       fieldTestId='field'
@@ -95,5 +98,17 @@ describe('Field', () => {
     );
     expect(getByText('error')).toBeTruthy();
     expect(getByTestId('field')).toHaveStyle(`border: 2px solid ${theme.colors.danger}`);
+  });
+  it('should be disabled', () => {
+    const {
+      getByTestId,
+    } = render(
+      <Component
+        disabled
+      />,
+    );
+    const field = getByTestId('field');
+    expect(field).toHaveStyle('opacity: 0.7');
+    expect(field).toHaveAttribute('disabled');
   });
 });
