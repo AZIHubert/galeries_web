@@ -11,30 +11,32 @@ type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-
 type TitleWeight = 'bold' | 'normal';
 
 interface ModalContainerI {
-  open?: boolean;
-  testId?: string;
+  containerTestId?: string;
   title?: string;
   titleMarginTop?: number;
   titleSize?: number;
+  titleTestId?: string;
   titleTextAlign?: TextAlign;
   titleWeight?: TitleWeight;
 }
 
 const ModalContainer: React.FC<ModalContainerI> = ({
   children,
-  testId,
+  containerTestId,
   title,
   titleMarginTop = 0,
   titleSize = 1.3,
+  titleTestId,
   titleTextAlign,
   titleWeight = 'normal',
 }) => (
   <Container
-    testId={testId}
+    testId={containerTestId}
   >
     <InnerContainer>
       {title ? (
         <Title
+          testId={titleTestId}
           textAlign={titleTextAlign}
           titleMarginTop={titleMarginTop}
           titleSize={titleSize}
