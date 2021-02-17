@@ -61,7 +61,7 @@ const Field = ({
     {label ? (
       <Label
         htmlFor={id}
-        labelTestId={labelTestId}
+        testId={labelTestId}
       >
         <p>
           {label}

@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import mediaQueries from '#helpers/mediaQueries';
 
 interface LabelI {
-  labelTestId?: string;
+  testId?: string;
 }
 
 const Label = styled.label.attrs<LabelI>(
-  ({ labelTestId }) => ({
-    'data-testid': labelTestId,
+  ({ testId }) => ({
+    'data-testid': testId,
   }),
 )<LabelI>`
   color: ${({ theme }) => theme.colors.primary};
