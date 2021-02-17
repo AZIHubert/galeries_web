@@ -7,6 +7,8 @@ import {
   screen,
 } from '@testing-library/react';
 
+import ThemeProvider from '#contexts/ThemeContext';
+
 import Modal from '../index';
 
 interface ContainerI {
@@ -20,7 +22,7 @@ const Container = ({ initialOpen }: ContainerI) => {
   const [open, setOpen] = React.useState<boolean>(initialOpen);
   const handleClose = () => setOpen(false);
   return (
-    <>
+    <ThemeProvider>
       <button
         onClick={() => setOpen(true)}
       >
@@ -29,12 +31,27 @@ const Container = ({ initialOpen }: ContainerI) => {
       <Modal
         open={open}
         handleClose={handleClose}
+        testId='modal'
       >
         <div>{innerText}</div>
       </Modal>
-    </>
+    </ThemeProvider>
   );
 };
+
+jest.mock('react-transition-group', () => {
+  const FakeTransition = jest.fn(({ children }) => children);
+  const FakeCSSTransition = jest.fn((props) => (
+    props.in ? (
+      <FakeTransition>
+        {props.children}
+      </FakeTransition>
+    ) : null));
+  return {
+    CSSTransition: FakeCSSTransition,
+    Transition: FakeTransition,
+  };
+});
 
 describe('Modal', () => {
   beforeAll(() => {
@@ -48,9 +65,11 @@ describe('Modal', () => {
   const handleClose = jest.fn;
   it('renders without crashing', () => {
     const tree = renderer.create(
-      <Modal open={true} handleClose={handleClose}>
-        <div />
-      </Modal>,
+      <ThemeProvider>
+        <Modal open={true} handleClose={handleClose}>
+          <div />
+        </Modal>
+      </ThemeProvider>,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
