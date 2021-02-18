@@ -2,12 +2,6 @@ import * as React from 'react';
 
 import { UserContext } from '#contexts/UserContext';
 
-import {
-  ImageI,
-  ProfilePictureI,
-  UserI,
-} from '#helpers/interfaces';
-
 import ProfilePictureContainer from './ProfilePictureContainer';
 
 const profilePicture

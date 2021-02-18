@@ -9,12 +9,6 @@ import renderer from 'react-test-renderer';
 
 import { UserContext, UserProvider } from '#contexts/UserContext';
 
-import {
-  ImageI,
-  ProfilePictureI,
-  UserI,
-} from '#helpers/interfaces';
-
 import ModalProfilePicture from '../index';
 
 const newImage: ImageI = {

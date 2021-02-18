@@ -11,12 +11,6 @@ import {
   UserProvider,
 } from '#contexts/UserContext';
 
-import {
-  ImageI,
-  ProfilePictureI,
-  UserI,
-} from '#helpers/interfaces';
-
 import ProfilePicture from '../index';
 
 const newImage: ImageI = {

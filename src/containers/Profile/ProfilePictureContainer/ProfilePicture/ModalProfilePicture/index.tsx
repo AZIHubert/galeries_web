@@ -3,8 +3,6 @@ import * as React from 'react';
 
 import { UserContext } from '#contexts/UserContext';
 
-import { ProfilePictureI } from '#helpers/interfaces';
-
 interface ModalProfilPictureI {
   profilePicture: ProfilePictureI;
 }

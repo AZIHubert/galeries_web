@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { UserI } from '#helpers/interfaces';
-
 export const UserContext = React.createContext<{
   setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
   user: null | UserI;

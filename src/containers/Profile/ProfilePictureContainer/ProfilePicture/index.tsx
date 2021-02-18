@@ -4,8 +4,6 @@ import Modal from '#components/Modal';
 
 import { UserContext } from '#contexts/UserContext';
 
-import { ProfilePictureI } from '#helpers/interfaces';
-
 import ModalProfilePicture from './ModalProfilePicture';
 
 interface ProfilePictureComponentI {

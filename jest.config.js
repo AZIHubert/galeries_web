@@ -30,5 +30,6 @@ module.exports = {
     '#helpers/(.*)': '<rootDir>/src/helpers/$1',
     '#ressources/(.*)': '<rootDir>/src/ressources/$1',
     '#src/(.*)': '<routDir>/src/$1',
+    '#store/(.*)': '<routDir>/src/store/$1',
   },
 };
