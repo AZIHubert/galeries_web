@@ -8,27 +8,29 @@ import {
 type jJustifyContent = 'center' | 'end' | 'flex-end' | 'flex-start' | 'normal' | 'right' | 'safe' | 'space-around' | 'space-evenly' | 'start' | 'stretch' | 'unsafe';
 
 interface TextButtonI {
+  buttonTestId?: string;
+  containerTestId?: string;
   disabled?: boolean;
   fontSize?: number;
   fontSizeL?: number;
   justifyContent?: jJustifyContent;
   marginBottom?: number;
   marginTop?: number;
-  onClick: () => void
-  testId?: string;
+  onClick?: () => void;
   text: string;
   textButton: string;
 }
 
 const TextButton = ({
+  buttonTestId,
   disabled = false,
   fontSize = 1,
-  fontSizeL = 1,
+  fontSizeL,
   justifyContent = 'flex-start',
   marginBottom = 0,
   marginTop = 0,
   onClick,
-  testId,
+  containerTestId,
   text,
   textButton,
 }: TextButtonI) => (
@@ -38,16 +40,17 @@ const TextButton = ({
     justifyContent={justifyContent}
     marginBottom={marginBottom}
     marginTop={marginTop}
+    testId={containerTestId}
   >
     <p>
       {`${text} `}
       <Button
         onClick={() => {
-          if (!disabled) {
+          if (!disabled && onClick) {
             onClick();
           }
         }}
-        testId={testId}
+        testId={buttonTestId}
       >
         {textButton}
       </Button>
