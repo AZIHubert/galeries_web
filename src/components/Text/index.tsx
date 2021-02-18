@@ -13,16 +13,18 @@ interface TextI {
   fontSizeL?: number;
   fontStyle?: FontStyle;
   fontWeight?: FontWeight;
+  testId?: string;
   textAlign?: TextAlign;
 }
 
 const Text: React.FC<TextI> = ({
   children,
-  color = 'primary',
+  color = 'black',
   fontSize = 1,
   fontSizeL,
   fontStyle = 'normal',
   fontWeight = 'normal',
+  testId,
   textAlign = 'left',
 }) => (
   <P
@@ -31,6 +33,7 @@ const Text: React.FC<TextI> = ({
     fontSizeL={fontSizeL}
     fontStyle={fontStyle}
     fontWeight={fontWeight}
+    testId={testId}
     textAlign={textAlign}
   >
     {children}
