@@ -7,9 +7,14 @@ interface ContainerI {
   marginBottomL?: number;
   marginTop?: number;
   marginTopL?: number;
+  testId?: string;
 }
 
-const Container = styled.div<ContainerI>`
+const Container = styled.div.attrs<ContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ContainerI>`
   margin: ${({
     marginBottom,
     marginTop,
@@ -28,15 +33,14 @@ const Container = styled.div<ContainerI>`
     return (
       `${marginT}px 0 ${marginB}px`
     );
-  }}
+  }};
+  background-color: 'blue'
   }
 `;
 
 Container.defaultProps = {
   marginBottom: 0,
-  marginBottomL: 0,
   marginTop: 0,
-  marginTopL: 0,
 };
 
 export default Container;

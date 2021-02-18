@@ -9,12 +9,14 @@ import {
 } from './styles';
 
 interface FieldI {
+  containerTestId?: string;
   disabled?: boolean;
   error?: string | undefined
   errorTestId?: string;
   fieldTestId?: string;
   id: string;
   label?: string;
+  labelTestId?: string;
   marginBottom?: number;
   marginBottomL?: number;
   marginTop?: number;
@@ -29,16 +31,18 @@ interface FieldI {
 }
 
 const Field = ({
+  containerTestId,
   disabled = false,
   error,
   errorTestId,
   fieldTestId,
   id,
   label,
+  labelTestId,
   marginBottom = 0,
-  marginBottomL = 0,
+  marginBottomL,
   marginTop = 0,
-  marginTopL = 0,
+  marginTopL,
   multiline = false,
   onBlur,
   onChange,
@@ -52,10 +56,12 @@ const Field = ({
     marginBottomL={marginBottomL}
     marginTop={marginTop}
     marginTopL={marginTopL}
+    testId={containerTestId}
   >
     {label ? (
       <Label
         htmlFor={id}
+        testId={labelTestId}
       >
         <p>
           {label}

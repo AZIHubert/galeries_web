@@ -12,9 +12,9 @@ interface TextSeparatorI {
 
 const TextSeparator = ({
   marginBottom = 0,
-  marginBottomL = 0,
+  marginBottomL,
   marginTop = 0,
-  marginTopL = 0,
+  marginTopL,
   text,
 }: TextSeparatorI) => (
   <Container

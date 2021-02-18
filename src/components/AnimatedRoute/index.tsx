@@ -5,19 +5,19 @@ import { CSSTransition } from 'react-transition-group';
 import { Container } from './styles';
 
 interface AnimatedRouteI {
-  exact?: boolean;
   onExiting?: () => void;
   path: string;
+  testId?: string;
 }
 
 const AnimatedRoute: React.FC<AnimatedRouteI> = ({
-  exact = false,
   children,
   onExiting,
   path,
+  testId,
 }) => (
   <Route
-    exact={exact}
+    exact
     path={path}
   >
     {({ match }) => (
@@ -32,7 +32,9 @@ const AnimatedRoute: React.FC<AnimatedRouteI> = ({
         timeout={300}
         unmountOnExit
       >
-        <Container>
+        <Container
+          testId={testId}
+        >
           {children}
         </Container>
       </CSSTransition>

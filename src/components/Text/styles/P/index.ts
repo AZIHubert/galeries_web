@@ -13,10 +13,15 @@ interface PI {
   fontSizeL?: number;
   fontStyle?: FontStyle;
   fontWeight?: FontWeight;
+  testId?: string;
   textAlign?: TextAlign;
 }
 
-const P = styled.p<PI>`
+const P = styled.p.attrs<PI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<PI>`
   color: ${({
     color,
     theme,
@@ -45,7 +50,7 @@ const P = styled.p<PI>`
 `;
 
 P.defaultProps = {
-  color: 'primary',
+  color: 'black',
   fontSize: 1,
   fontStyle: 'normal',
   fontWeight: 'normal',

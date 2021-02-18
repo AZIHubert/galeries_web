@@ -82,9 +82,7 @@ const Button = styled.button.attrs<ButtonI>(
 
 Button.defaultProps = {
   marginBottom: 0,
-  marginBottomL: 0,
   marginTop: 0,
-  marginTopL: 0,
   variant: 'facebook',
 };
 

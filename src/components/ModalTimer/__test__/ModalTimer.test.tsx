@@ -31,6 +31,19 @@ const Container = ({
 };
 
 jest.useFakeTimers();
+jest.mock('react-transition-group', () => {
+  const FakeTransition = jest.fn(({ children }) => children);
+  const FakeCSSTransition = jest.fn((props) => (
+    props.in ? (
+      <FakeTransition>
+        {props.children}
+      </FakeTransition>
+    ) : null));
+  return {
+    CSSTransition: FakeCSSTransition,
+    Transition: FakeTransition,
+  };
+});
 
 describe('Desktop', () => {
   const MockedHandleClose = jest.fn;
@@ -43,8 +56,6 @@ describe('Desktop', () => {
   afterEach(() => {
     // @ts-ignore
     ReactDOM.createPortal.mockClear();
-    // jest.runOnlyPendingTimers();
-    // jest.useRealTimers();
   });
   it('renders without crashing', () => {
     const tree = renderer.create(

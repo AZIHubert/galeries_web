@@ -13,6 +13,7 @@ interface ModalI {
   children: React.ReactNode;
   handleClose: () => void;
   open: boolean;
+  testId?: string;
 }
 
 const modalRoot = document.getElementById('modal-root');
@@ -22,6 +23,7 @@ const Modal = ({
   children,
   handleClose,
   open,
+  testId,
 }: ModalI) => {
   const el = React.useRef(document.createElement('div'));
 
@@ -47,7 +49,7 @@ const Modal = ({
       >
         <Fader>
           <Container
-            testId="modal"
+            testId={testId}
           >
             {children}
           </Container>

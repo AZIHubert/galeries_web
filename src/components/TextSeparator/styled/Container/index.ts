@@ -13,8 +13,11 @@ const Container = styled.p<ContainerI>`
   color: ${({ theme }) => theme.colors.primary};
   font-size: 1.1rem;
   font-style: italic;
-  margin: ${({ marginBottom, marginTop }) => (
-    `${marginBottom}px 0 ${marginTop}px 0`
+  margin: ${({
+    marginBottom,
+    marginTop,
+  }) => (
+    `${marginTop}px 0 ${marginBottom}px 0`
   )};
   overflow: hidden;
   text-align: center;
@@ -54,9 +57,7 @@ const Container = styled.p<ContainerI>`
 
 Container.defaultProps = {
   marginBottom: 0,
-  marginBottomL: 0,
   marginTop: 0,
-  marginTopL: 0,
 };
 
 export default Container;

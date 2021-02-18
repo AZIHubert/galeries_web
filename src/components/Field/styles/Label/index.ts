@@ -2,7 +2,15 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-const Label = styled.label`
+interface LabelI {
+  testId?: string;
+}
+
+const Label = styled.label.attrs<LabelI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<LabelI>`
   color: ${({ theme }) => theme.colors.primary};
   display: flex;
   font-family: 'HelveticaLTstd';

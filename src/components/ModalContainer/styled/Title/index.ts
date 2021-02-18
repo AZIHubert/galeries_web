@@ -4,15 +4,23 @@ type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-
 type TitleWeight = 'bold' | 'normal';
 
 interface TitleI {
-  titleMarginTop?: number;
+  testId?: string;
   textAlign?: TextAlign;
+  titleMarginTop?: number;
   titleSize?: number;
   titleWeight?: TitleWeight;
 }
 
-const Title = styled.h3<TitleI>`
+const Title = styled.h3.attrs<TitleI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<TitleI>`
   font-size: ${({ titleSize }) => (
     titleSize ? `${titleSize}rem` : '1.3rem'
+  )};
+  font-weight: ${({ titleWeight }) => (
+    titleWeight || 'normal'
   )};
   line-height: 1.3rem;
   margin-bottom: 25px;
@@ -20,9 +28,6 @@ const Title = styled.h3<TitleI>`
     `${titleMarginTop}px`
   )};
   text-align: ${({ textAlign }) => textAlign};
-  font-weight: ${({ titleWeight }) => (
-    titleWeight || 'normal'
-  )}
 `;
 
 Title.defaultProps = {
