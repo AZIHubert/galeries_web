@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 
 import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
@@ -116,6 +117,7 @@ const Header = () => {
         return null;
     }
   };
+  const dispatch = useDispatch();
   return (
     <Container>
       <InnerContainer>
@@ -126,7 +128,7 @@ const Header = () => {
         <ButtonContainer>
           <HeaderButton
             marginRight={30}
-            onClick={handleClickSignin}
+            onClick={() => dispatch({ type: '[User] Fetch' })}
             testId='openSignin'
             title='Sign in'
           />

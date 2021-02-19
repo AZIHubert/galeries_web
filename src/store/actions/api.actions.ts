@@ -1,6 +1,7 @@
 import {
   AxiosError,
   AxiosResponse,
+  Method,
 } from 'axios';
 
 export const API_ERROR = 'API_ERROR';
@@ -11,7 +12,7 @@ type Body = null;
 
 export const apiRequest = (
   body: Body,
-  method: string,
+  method: Method,
   url: string,
   entity: Entity,
 ) => ({

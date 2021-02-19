@@ -1,3 +1,3 @@
-import bookMiddleware from './user';
+import userMiddlewares from './user';
 
-export default [bookMiddleware];
+export default [...userMiddlewares];

@@ -8,7 +8,7 @@ export const setNotification = (
   notification: string,
   entity: Entity,
 ) => ({
-  type: `${entity} ${SET_NOTIFICATION}`,
+  type: SET_NOTIFICATION,
   payload: {
     data: notification,
     meta: entity,

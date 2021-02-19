@@ -4,7 +4,7 @@ const initialState = null;
 
 export default (
   user: UserI | null = initialState,
-  action: ActionUserI,
+  action: store.ActionI,
 ) => {
   const { payload } = action;
   switch (action.type) {

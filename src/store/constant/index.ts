@@ -1,4 +1,6 @@
+export const AUTH_TOKEN = 'authToken';
 export const CONFIRMATION = '/users/confirmation';
+export const EXPIRES_DATE_TOKEN = 'expiresIn';
 export const GET_ME = '/users/me';
 export const LOGIN = '/users/login';
 export const LOGIN_FACEBOOK = '/users/auth/facebook';

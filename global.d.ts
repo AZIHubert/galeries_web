@@ -1,52 +1,27 @@
 import '@testing-library/jest-dom';
 import {
-  AxiosError,
-  AxiosResponse,
+  Method,
 } from 'axios';
 
+import {
+  USER,
+  REFRESH_TOKEN,
+} from '#store/actions';
+
 declare global {
+  type Entity = typeof USER | typeof REFRESH_TOKEN;
 
-  type Entity = '[User]' | '[Notification]';
-
-  interface ActionApiI {
-    type: string;
-    payload: {
-      data: any,
-      meta: {
-        method: string;
-        url: string;
-        entity: Entity;
-      }
-    }
-  }
-
-  interface ActionUiI {
-    type: string;
-    payload: {
-      data: boolean;
-      meta?: {
-        entity: Entity;
-      }
-    };
-  }
-
-  interface ActionUserI {
-    type: string;
-    payload: {
-      data: AxiosError | AxiosResponse;
-      meta?: {
-        entity: Entity;
-      }
-    }
-  }
-
-  interface ActionNotificationI {
-    type: string;
-    payload: {
-      text: string;
-      error: boolean;
-      meta?: {
-        entity: Entity;
+  namespace store {
+    interface ActionI {
+      type: string;
+      payload: {
+        data: any;
+        meta?: {
+          entity?: string;
+          method?: Method;
+          url?: string;
+          confirmToken?: string;
+        }
       }
     }
   }

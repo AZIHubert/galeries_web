@@ -1,22 +1,15 @@
 import { SET_NOTIFICATION } from '../actions';
 
-const initialState = {
-  text: '',
-  error: false,
-};
+const initialState = '';
 
 export default (
   notification = initialState,
-  action: ActionNotificationI,
+  action: store.ActionI,
 ) => {
   const { payload } = action;
   switch (action.type) {
     case SET_NOTIFICATION:
-      return {
-        ...notification,
-        text: payload.text,
-        error: payload.error,
-      };
+      return payload.data;
     default:
       return notification;
   }

@@ -6,14 +6,14 @@ const initialState = {
 
 export default (
   ui = initialState,
-  action: ActionUiI,
+  action: store.ActionI,
 ) => {
   const { payload } = action;
   switch (action.type) {
     case SET_LOADER:
       return {
         ...ui,
-        loading: payload.data,
+        loading: payload,
       };
     default:
       return ui;
