@@ -1,12 +1,8 @@
-import { USER } from '#store/actions';
-
-export const SET_NOTIFICATION = 'SET_NOTIFICATION';
-
-type Entity = typeof USER;
+export const SET_NOTIFICATION = '[NOTIFICATION] Set';
 
 export const setNotification = (
   notification: string,
-  entity: Entity,
+  entity: store.Entity,
 ) => ({
   type: SET_NOTIFICATION,
   payload: {

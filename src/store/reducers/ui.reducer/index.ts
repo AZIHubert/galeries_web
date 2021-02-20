@@ -1,4 +1,4 @@
-import { SET_LOADER } from '../actions';
+import { SET_LOADER } from '#store/actions';
 
 const initialState = {
   loading: false,

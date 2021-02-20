@@ -11,12 +11,12 @@ import {
   setUser,
 } from '#store/actions';
 
-import { GET_ME } from '#store/constant';
+import { endpoints } from '#store/constant';
 
 const fetchUser: Middleware = ({ dispatch }) => (next) => (action) => {
   next(action);
   if (action.type === FETCH_USER) {
-    dispatch(apiRequest(null, 'GET', GET_ME, USER));
+    dispatch(apiRequest(null, 'GET', endpoints.GET_ME, USER));
     dispatch(setLoader(true));
   }
 };

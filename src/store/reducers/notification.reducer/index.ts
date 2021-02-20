@@ -1,4 +1,4 @@
-import { SET_NOTIFICATION } from '../actions';
+import { SET_NOTIFICATION } from '#store/actions';
 
 const initialState = '';
 

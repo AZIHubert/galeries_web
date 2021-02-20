@@ -9,15 +9,15 @@ import {
 } from '#store/actions';
 
 declare global {
-  type Entity = typeof USER | typeof REFRESH_TOKEN;
 
   namespace store {
+    type Entity = typeof USER | typeof REFRESH_TOKEN;
     interface ActionI {
       type: string;
       payload: {
         data: any;
         meta?: {
-          entity?: string;
+          entity?: Entity;
           method?: Method;
           url?: string;
           confirmToken?: string;

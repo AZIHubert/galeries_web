@@ -1,3 +1,3 @@
-import userMiddlewares from './user';
+import userMiddlewares from './user.middlewares';
 
 export default [...userMiddlewares];

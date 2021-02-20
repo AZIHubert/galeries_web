@@ -10,11 +10,24 @@ export const API_SUCCESS = 'API_SUCCESS';
 
 type Body = null;
 
+export const apiError = (
+  error: AxiosError,
+  entity: store.Entity,
+) => ({
+  type: `${entity} ${API_ERROR}`,
+  payload: {
+    data: error,
+    meta: {
+      entity,
+    },
+  },
+});
+
 export const apiRequest = (
   body: Body,
   method: Method,
   url: string,
-  entity: Entity,
+  entity: store.Entity,
 ) => ({
   type: `${entity} ${API_REQUEST}`,
   payload: {
@@ -29,24 +42,11 @@ export const apiRequest = (
 
 export const apiSuccess = (
   response: AxiosResponse,
-  entity: Entity,
+  entity: store.Entity,
 ) => ({
   type: `${entity} ${API_SUCCESS}`,
   payload: {
     data: response,
-    meta: {
-      entity,
-    },
-  },
-});
-
-export const apiError = (
-  error: AxiosError,
-  entity: Entity,
-) => ({
-  type: `${entity} ${API_ERROR}`,
-  payload: {
-    data: error,
     meta: {
       entity,
     },
