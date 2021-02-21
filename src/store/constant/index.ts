@@ -1,2 +1,2 @@
-export * as endpoints from './endpoints';
+export * as endPoints from './endPoints';
 export * as localStorages from './localStorages';

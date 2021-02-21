@@ -1,4 +1,4 @@
-import { SET_NOTIFICATION } from '#store/actions';
+import { NOTIFICATION_SET } from '#store/actions';
 
 const initialState = '';
 
@@ -6,10 +6,13 @@ export default (
   notification = initialState,
   action: store.ActionI,
 ) => {
-  const { payload } = action;
-  switch (action.type) {
-    case SET_NOTIFICATION:
-      return payload.data;
+  const {
+    payload: { data },
+    type,
+  } = action;
+  switch (type) {
+    case NOTIFICATION_SET:
+      return data;
     default:
       return notification;
   }

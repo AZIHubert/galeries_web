@@ -1,20 +1,20 @@
 export const USER = '[User]';
 
-export const FETCH_USER = `${USER} Fetch`;
-export const SET_USER = `${USER} Set`;
+export const USER_FETCH = `${USER} Fetch`;
+export const USER_SET = `${USER} Set`;
 
-export const fetchUser = (query: any) => ({
-  type: FETCH_USER,
+export const fetchUser = (query?: any) => ({
+  type: USER_FETCH,
   payload: {
     data: query,
   },
 });
 
 export const setUser = (
-  user: UserI,
+  data: UserI | null,
 ) => ({
-  type: SET_USER,
+  type: USER_SET,
   payload: {
-    data: user,
+    data,
   },
 });

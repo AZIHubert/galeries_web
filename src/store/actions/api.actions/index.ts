@@ -8,7 +8,7 @@ export const API_ERROR = 'API_ERROR';
 export const API_REQUEST = 'API_REQUEST';
 export const API_SUCCESS = 'API_SUCCESS';
 
-type Body = null;
+type Body = any | null ;
 
 export const apiError = (
   error: AxiosError,
@@ -28,6 +28,7 @@ export const apiRequest = (
   method: Method,
   url: string,
   entity: store.Entity,
+  confirmationToken?: string,
 ) => ({
   type: `${entity} ${API_REQUEST}`,
   payload: {
@@ -36,6 +37,7 @@ export const apiRequest = (
       method,
       url,
       entity,
+      confirmationToken,
     },
   },
 });

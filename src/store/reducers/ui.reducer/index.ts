@@ -1,4 +1,4 @@
-import { SET_LOADER } from '#store/actions';
+import { LOADER_SET } from '#store/actions';
 
 const initialState = {
   loading: false,
@@ -8,12 +8,15 @@ export default (
   ui = initialState,
   action: store.ActionI,
 ) => {
-  const { payload } = action;
-  switch (action.type) {
-    case SET_LOADER:
+  const {
+    payload: { data },
+    type,
+  } = action;
+  switch (type) {
+    case LOADER_SET:
       return {
         ...ui,
-        loading: payload,
+        loading: data,
       };
     default:
       return ui;

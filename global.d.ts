@@ -4,14 +4,32 @@ import {
 } from 'axios';
 
 import {
-  USER,
+  CONFIRMATION,
+  LOGIN,
+  LOGIN_FACEBOOK,
+  LOGIN_GOOGLE,
+  LOGOUT,
   REFRESH_TOKEN,
+  SEND_CONFIRMATION,
+  SEND_RESET_PASSWORD,
+  SIGNIN,
+  USER,
 } from '#store/actions';
 
 declare global {
 
   namespace store {
-    type Entity = typeof USER | typeof REFRESH_TOKEN;
+    type Entity =
+      typeof CONFIRMATION |
+      typeof LOGIN |
+      typeof LOGIN_FACEBOOK |
+      typeof LOGIN_GOOGLE |
+      typeof LOGOUT |
+      typeof REFRESH_TOKEN |
+      typeof SEND_CONFIRMATION |
+      typeof SEND_RESET_PASSWORD |
+      typeof SIGNIN |
+      typeof USER;
     interface ActionI {
       type: string;
       payload: {
@@ -24,6 +42,43 @@ declare global {
         }
       }
     }
+    interface ReducersI {
+      loginError: LoginI;
+      notification: NotificationI | null;
+      resetPasswordError: ResetPasswordI;
+      sendConfirmationError: SendConfirmationI;
+      sendResetPasswordError: SendResetPasswordI;
+      signinError: SigninI;
+      ui: boolean;
+      user: UserI | null;
+    }
+  }
+
+  interface SendResetPasswordI {
+    email: string;
+  }
+  interface SendConfirmationI {
+    email: string;
+  }
+
+  interface ResetPasswordI {
+    confirmPassword: string;
+    password: string;
+  }
+
+  interface NotificationI {
+    text: string;
+    error: boolean;
+  }
+  interface LoginI {
+    password: string;
+    userNameOrEmail: string;
+  }
+  interface SigninI {
+    confirmPassword: string;
+    email: string;
+    password: string;
+    userName: string;
   }
 
   interface ImageI {

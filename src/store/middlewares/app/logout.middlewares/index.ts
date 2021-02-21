@@ -1,19 +1,21 @@
 import { Middleware } from 'redux';
 
 import {
-  API_ERROR,
   API_SUCCESS,
-  USER,
-  USER_FETCH,
+  API_ERROR,
+  LOGOUT,
+  LOGOUT_FETCH,
   apiRequest,
   setLoader,
   setNotification,
   setUser,
 } from '#store/actions';
 
-import { endPoints } from '#store/constant';
+import {
+  endPoints,
+} from '#store/constant';
 
-const errorUser: Middleware = (
+const errorLogout: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -25,13 +27,13 @@ const errorUser: Middleware = (
     payload: { data },
     type,
   } = action;
-  if (type === `${USER} ${API_ERROR}`) {
-    dispatch(setNotification(data.toString(), USER));
+  if (type === `${LOGOUT} ${API_ERROR}`) {
+    dispatch(setNotification(data.errors, LOGOUT));
     dispatch(setLoader(false));
   }
 };
 
-const fetchUser: Middleware = (
+const fetchLogout: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -39,20 +41,23 @@ const fetchUser: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const { type } = action;
-  if (type === USER_FETCH) {
+  const {
+    type,
+  } = action;
+  if (type === LOGOUT_FETCH) {
     dispatch(setLoader(true));
     dispatch(
       apiRequest(
         null,
         'GET',
-        endPoints.GET_ME,
-        USER,
+        endPoints.LOGOUT,
+        LOGOUT,
       ),
     );
   }
 };
-const getUser: Middleware = (
+
+const successLogout: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -61,17 +66,17 @@ const getUser: Middleware = (
 ) => {
   next(action);
   const {
-    payload: { data },
     type,
   } = action;
-  if (type === `${USER} ${API_SUCCESS}`) {
-    dispatch(setUser(data));
+  if (type === `${LOGOUT} ${API_SUCCESS}`) {
+    localStorage.clear();
+    dispatch(setUser(null));
     dispatch(setLoader(false));
   }
 };
 
 export default [
-  errorUser,
-  fetchUser,
-  getUser,
+  errorLogout,
+  fetchLogout,
+  successLogout,
 ];

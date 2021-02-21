@@ -1,8 +1,10 @@
-export const SET_LOADER = '[UI] SET_LOADER';
+export const LOADER_SET = '[UI] SET_LOADER';
 
 export const setLoader = (
-  state: boolean,
+  data: boolean,
 ) => ({
-  type: SET_LOADER,
-  payload: state,
+  type: LOADER_SET,
+  payload: {
+    data,
+  },
 });

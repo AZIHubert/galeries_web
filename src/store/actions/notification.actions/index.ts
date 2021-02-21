@@ -1,12 +1,12 @@
-export const SET_NOTIFICATION = '[NOTIFICATION] Set';
+export const NOTIFICATION_SET = '[NOTIFICATION] Set';
 
 export const setNotification = (
-  notification: string,
+  data: string,
   entity: store.Entity,
 ) => ({
-  type: SET_NOTIFICATION,
+  type: NOTIFICATION_SET,
   payload: {
-    data: notification,
+    data,
     meta: entity,
   },
 });
