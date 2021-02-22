@@ -1,24 +1,21 @@
-import moment from 'moment';
 import { Middleware } from 'redux';
 
 import {
   API_ERROR,
   API_SUCCESS,
-  LOGIN,
-  LOGIN_FETCH,
+  SEND_TICKET,
+  SEND_TICKET_FETCH,
   apiRequest,
-  fetchUser,
   setLoader,
+  setSendTicket,
   setNotification,
-  setLogin,
 } from '#store/actions';
 
 import {
   endPoints,
-  localStorages,
 } from '#store/constant';
 
-const errorLogin: Middleware = (
+const errorSendTicket: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -30,14 +27,14 @@ const errorLogin: Middleware = (
     payload: { data },
     type,
   } = action;
-  if (type === `${LOGIN} ${API_ERROR}`) {
+  if (type === `${SEND_TICKET} ${API_ERROR}`) {
     if (typeof data.response.data.errors === 'object') {
-      dispatch(setLogin({
+      dispatch(setSendTicket({
         status: 'error',
         errors: data.response.data.errors,
       }));
     } else {
-      dispatch(setLogin({
+      dispatch(setSendTicket({
         status: 'error',
       }));
       dispatch(setNotification({
@@ -49,7 +46,30 @@ const errorLogin: Middleware = (
   }
 };
 
-const fetchLogin: Middleware = (
+const fetchSendTicket: Middleware = (
+  { dispatch },
+) => (
+  next,
+) => (
+  action: store.ActionI,
+) => {
+  next(action);
+  const {
+    type,
+  } = action;
+  if (type === `${SEND_TICKET} ${API_SUCCESS}`) {
+    dispatch(setSendTicket({
+      status: 'success',
+    }));
+    dispatch(setNotification({
+      error: false,
+      text: 'you\'re ticket has been send',
+    }));
+    dispatch(setLoader(false));
+  }
+};
+
+const successSendTicket: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -61,49 +81,21 @@ const fetchLogin: Middleware = (
     payload: { data },
     type,
   } = action;
-  if (type === LOGIN_FETCH) {
+  if (type === SEND_TICKET_FETCH) {
     dispatch(setLoader(true));
     dispatch(
       apiRequest(
         data,
         'POST',
-        endPoints.LOGIN,
-        LOGIN,
+        endPoints.TICKET,
+        SEND_TICKET,
       ),
     );
   }
 };
 
-const successLogin: Middleware = (
-  { dispatch },
-) => (
-  next,
-) => (
-  action,
-) => {
-  next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGIN} ${API_SUCCESS}`) {
-    dispatch(setLogin({
-      status: 'success',
-    }));
-    localStorage.setItem(
-      localStorages.AUTH_TOKEN,
-      data.token,
-    );
-    localStorage.setItem(
-      localStorages.EXPIRES_DATE_TOKEN,
-      JSON.stringify(moment().add(data.expiresIn, 's').valueOf()),
-    );
-    dispatch(fetchUser());
-  }
-};
-
 export default [
-  errorLogin,
-  fetchLogin,
-  successLogin,
+  errorSendTicket,
+  fetchSendTicket,
+  successSendTicket,
 ];

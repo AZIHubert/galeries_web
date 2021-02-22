@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import * as React from 'react';
 import {
   useSelector,
+  useDispatch,
 } from 'react-redux';
 
 import Field from '#components/Field';
@@ -13,16 +14,23 @@ import { ticketSchema } from '#helpers/schemas';
 
 import { loadingSelector } from '#store/selectors';
 
+import { fetchSendTicket } from '#store/actions';
+
 const initialValues = {
   header: '',
   body: '',
 };
 
 const ModalTicket = () => {
+  const dispatch = useDispatch();
   const loading = useSelector(loadingSelector);
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {},
+    onSubmit: (value) => {
+      if (!loading) {
+        dispatch(fetchSendTicket(value));
+      }
+    },
     validateOnChange: false,
     validateOnBlur: true,
     validationSchema: ticketSchema,

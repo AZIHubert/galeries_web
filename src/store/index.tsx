@@ -5,7 +5,7 @@ import { appMiddleware, coreMiddleware } from './middlewares';
 import reducers from './reducers';
 
 const composedEnhancer = composeWithDevTools(
-  applyMiddleware(...appMiddleware, ...coreMiddleware),
+  applyMiddleware(...coreMiddleware, ...appMiddleware),
 );
 
 export default createStore(

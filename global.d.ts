@@ -13,6 +13,7 @@ import {
   RESET_PASSWORD,
   SEND_CONFIRMATION,
   SEND_RESET_PASSWORD,
+  SEND_TICKET,
   SIGNIN,
   USER,
 } from '#store/actions';
@@ -30,8 +31,10 @@ declare global {
       typeof RESET_PASSWORD |
       typeof SEND_CONFIRMATION |
       typeof SEND_RESET_PASSWORD |
+      typeof SEND_TICKET |
       typeof SIGNIN |
       typeof USER;
+
     type FormStatus = 'pending' | 'success' | 'error';
     interface ActionI {
       type: string;
@@ -57,7 +60,13 @@ declare global {
         status: FormData;
         errors: SendConfirmationI;
       };
-      sendResetPassword: { errors: SendResetPasswordI };
+      sendResetPassword: {
+        errors: SendResetPasswordI;
+      };
+      sendTicket: {
+        status: FormData;
+        errors: SendTicketI;
+      }
       signin: {
         status: FormStatus;
         errors: SigninI;
@@ -68,15 +77,20 @@ declare global {
   }
 
   type HeaderModals =
-  'confirmLanding'
-  | 'login'
-  | 'resendConfirm'
-  | 'resetPassword'
-  | 'resetPasswordLanding'
-  | 'signin';
+    'confirmLanding'
+    | 'login'
+    | 'resendConfirm'
+    | 'resetPassword'
+    | 'resetPasswordLanding'
+    | 'signin';
 
   interface SendResetPasswordI {
     email: string;
+  }
+
+  interface SendTicketI {
+    body: string;
+    header: string;
   }
   interface SendConfirmationI {
     email: string;

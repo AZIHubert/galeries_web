@@ -55,6 +55,7 @@ const fetchUser: Middleware = (
     );
   }
 };
+
 const getUser: Middleware = (
   { dispatch },
 ) => (

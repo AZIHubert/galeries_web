@@ -7,3 +7,4 @@ export const LOGOUT = '/users/logout';
 export const REFRESH_TOKEN = '/users/refreshToken';
 export const RESET_PASSWORD = '/users/resetPassword';
 export const SIGNIN = '/users/signin';
+export const TICKET = '/tickets/';

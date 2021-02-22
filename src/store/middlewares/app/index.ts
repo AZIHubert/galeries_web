@@ -6,6 +6,7 @@ import logoutMiddlewares from './logout.middlewares';
 import resetPasswordMiddlewares from './resetPassword.middlewares';
 import sendConfirmationMiddlewares from './sendConfirmation.middlewares';
 import sendResetPasswordMiddlewares from './sendResetPassword.middlewares';
+import sendTicketMiddlewares from './sendTicket.middlewares';
 import signinMiddlewares from './signin.middlewares';
 import userMiddlewares from './user.middlewares';
 
@@ -19,5 +20,6 @@ export default [
   ...signinMiddlewares,
   ...sendConfirmationMiddlewares,
   ...sendResetPasswordMiddlewares,
+  ...sendTicketMiddlewares,
   ...userMiddlewares,
 ];

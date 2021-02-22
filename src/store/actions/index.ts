@@ -9,6 +9,7 @@ export * from './refreshToken.actions';
 export * from './resetPassword.action';
 export * from './sendConfirmation.actions';
 export * from './sendResetPassword.actions';
+export * from './sendTicket.actions';
 export * from './signin.actions';
 export * from './ui.actions';
 export * from './user.actions';
