@@ -31,7 +31,10 @@ const errorResetPassword: Middleware = (
     if (typeof data.errors === 'object') {
       dispatch(setResetPasswordError(data.errors));
     } else {
-      dispatch(setNotification(data.errors, RESET_PASSWORD));
+      dispatch(setNotification({
+        error: true,
+        text: data.errors,
+      }));
     }
     dispatch(setLoader(false));
   }

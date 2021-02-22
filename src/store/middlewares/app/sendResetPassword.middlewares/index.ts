@@ -8,7 +8,7 @@ import {
   apiRequest,
   setLoader,
   setNotification,
-  setResetPasswordError,
+  setSendResetPasswordError,
 } from '#store/actions';
 
 import {
@@ -28,10 +28,17 @@ const errorSendResetPassword: Middleware = (
     type,
   } = action;
   if (type === `${SEND_RESET_PASSWORD} ${API_ERROR}`) {
-    if (typeof data.errors === 'object') {
-      setResetPasswordError(data.errors);
+    if (typeof data.response.data.errors === 'object') {
+      dispatch(
+        setSendResetPasswordError(data.response.data.errors),
+      );
     } else {
-      setNotification(data.errors, SEND_RESET_PASSWORD);
+      dispatch(
+        setNotification({
+          error: true,
+          text: data.response.data.errors,
+        }),
+      );
     }
     dispatch(setLoader(false));
   }

@@ -1,1 +1,1 @@
-export default (state: store.ReducersI) => state.signinError;
+export default (state: store.ReducersI) => state.signin.errors;

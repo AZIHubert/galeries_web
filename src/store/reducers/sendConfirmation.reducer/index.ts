@@ -1,24 +1,38 @@
-import { SEND_CONFIRMATION_ERROR } from '#store/actions';
+import { SEND_CONFIRMATION_SET } from '#store/actions';
 
-const initialState = {
-  email: '',
+interface InitialStateI {
+  status: store.FormStatus;
+  errors: {
+    email: string | null;
+  }
+}
+
+const initialState: InitialStateI = {
+  status: 'pending',
+  errors: {
+    email: null,
+  },
 };
 
 export default (
-  sendConfirmation = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
-    payload: { data },
+    payload,
     type,
   } = action;
   switch (type) {
-    case SEND_CONFIRMATION_ERROR:
+    case SEND_CONFIRMATION_SET:
       return {
-        ...sendConfirmation,
-        email: data.email,
+        ...state,
+        ...payload.data,
+        errors: {
+          ...state.errors,
+          ...payload.data.errors,
+        },
       };
     default:
-      return sendConfirmation;
+      return state;
   }
 };

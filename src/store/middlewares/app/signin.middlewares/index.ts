@@ -9,7 +9,7 @@ import {
   fetchSendConfirmation,
   setLoader,
   setNotification,
-  setSigninError,
+  setSignin,
 } from '#store/actions';
 
 import {
@@ -25,16 +25,25 @@ const errorSignin: Middleware = (
 ) => {
   next(action);
   const {
-    type,
     payload: { data },
+    type,
   } = action;
   if (type === `${SIGNIN} ${API_ERROR}`) {
-    if (typeof data.errors === 'object') {
-      dispatch(setSigninError(data.errors));
-      dispatch(setLoader(false));
+    if (typeof data.response.data.errors === 'object') {
+      dispatch(setSignin({
+        status: 'error',
+        errors: data.response.data.errors,
+      }));
     } else {
-      dispatch(setNotification(data.errors, SIGNIN));
+      dispatch(setSignin({
+        status: 'error',
+      }));
+      dispatch(setNotification({
+        error: true,
+        text: data.response.data.errors,
+      }));
     }
+    dispatch(setLoader(false));
   }
 };
 
@@ -58,6 +67,7 @@ const fetchSignin: Middleware = (
         'POST',
         endPoints.SIGNIN,
         SIGNIN,
+        undefined,
       ),
     );
   }
@@ -76,8 +86,9 @@ const successSignin: Middleware = (
     payload: { data },
   } = action;
   if (type === `${SIGNIN} ${API_SUCCESS}`) {
+    dispatch(setSignin({ status: 'success' }));
     dispatch(
-      fetchSendConfirmation(data.email),
+      fetchSendConfirmation({ email: data.email }),
     );
   }
 };

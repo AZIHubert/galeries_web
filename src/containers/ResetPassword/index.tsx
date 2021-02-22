@@ -1,22 +1,27 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import {
   Link,
   useParams,
-  useHistory,
 } from 'react-router-dom';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
-import ModalTimer from '#components/ModalTimer';
 import RequiredField from '#components/RequiredField';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
-import { resetPassword } from '#helpers/api';
 import { resetPasswordSchema } from '#helpers/schemas';
 
 import { LogoGaleries } from '#ressources/svgComponents';
+
+import { fetchResetPassword } from '#store/actions';
+import {
+  resetPasswordErrorSelector,
+  uiSelector,
+} from '#store/selectors';
 
 import {
   Container,
@@ -26,65 +31,23 @@ import {
   Title,
 } from './styles';
 
-interface ConfirmAccountI {
-  setCallbackModal: React.Dispatch<React.SetStateAction<{
-    error: boolean;
-    open: boolean;
-    text: string;
-  }>>
-}
-
 const initialValues = {
   confirmPassword: '',
   password: '',
 };
 
-const ResetPassword = ({
-  setCallbackModal,
-}:ConfirmAccountI) => {
-  const [errorModal, setErrorModal] = React.useState<{
-    open: boolean;
-    text: string;
-  }>({
-    open: false,
-    text: '',
-  });
-  const history = useHistory();
-  const { loading, setLoading } = React.useContext(LoadingContext);
+const ResetPassword = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector(uiSelector);
+  const resetPasswordError = useSelector(resetPasswordErrorSelector);
   const { token } = useParams<{ token: string }>();
   const formik = useFormik({
     initialValues,
-    onSubmit: async (values, { setFieldError }) => {
-      if (!loading) {
-        setLoading(true);
-        try {
-          await resetPassword(token, values);
-          setCallbackModal((prevState) => ({
-            ...prevState,
-            text: 'you\'re password has been successfully changed.',
-          }));
-          history.push('/');
-        } catch (err) {
-          if (err.response) {
-            if (err.status === 500) {
-              setErrorModal({
-                open: true,
-                text: err.response.data.errors,
-              });
-            } else {
-              const { errors } = err.response.data;
-              if (typeof errors === 'object') {
-                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
-              } else {
-                setErrorModal({
-                  open: true,
-                  text: err.response.data.errors,
-                });
-              }
-            }
-          }
-        }
-      }
+    onSubmit: async (values) => {
+      dispatch(fetchResetPassword({
+        ...values,
+        confirmationToken: token,
+      }));
     },
     validateOnBlur: true,
     validateOnChange: false,
@@ -102,9 +65,9 @@ const ResetPassword = ({
         <Field
           disabled={loading}
           id='password'
-          error={formik.errors.password}
-          errorTestId='passwordError'
-          fieldTestId='passwordField'
+          error={
+            formik.errors.password || resetPasswordError.password
+          }
           marginBottom={6}
           marginBottomL={10}
           label='password'
@@ -118,9 +81,9 @@ const ResetPassword = ({
         <Field
           disabled={loading}
           id='confirmPassword'
-          error={formik.errors.confirmPassword}
-          errorTestId='confirmPasswordError'
-          fieldTestId='confirmPasswordField'
+          error={
+            formik.errors.confirmPassword || resetPasswordError.confirmPassword
+          }
           marginBottom={12}
           label='confirm password'
           onBlur={formik.handleBlur}
@@ -136,7 +99,6 @@ const ResetPassword = ({
           marginBottom={15}
           marginTop={25}
           marginTopL={35}
-          testId='submitButton'
           title='Reset password'
           type='submit'
         />
@@ -148,19 +110,6 @@ const ResetPassword = ({
           HOME
         </Link>
       </NavLink>
-      <ModalTimer
-        callBack={() => setErrorModal((prevState) => ({
-          ...prevState,
-          text: '',
-        }))}
-        handleClose={() => setErrorModal((prevState) => ({
-          ...prevState,
-          open: false,
-        }))}
-        open={errorModal.open}
-        text={errorModal.text}
-        variant='danger'
-      />
     </Container>
   );
 };

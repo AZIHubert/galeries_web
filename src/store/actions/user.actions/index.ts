@@ -1,7 +1,7 @@
 export const USER = '[User]';
 
-export const USER_FETCH = `${USER} Fetch`;
-export const USER_SET = `${USER} Set`;
+export const USER_FETCH = `${USER} fetch`;
+export const USER_SET = `${USER} set`;
 
 export const fetchUser = (query?: any) => ({
   type: USER_FETCH,

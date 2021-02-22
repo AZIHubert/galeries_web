@@ -1,13 +1,16 @@
 import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 
 import Modal from '#components/Modal';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
 import ModalDelete from './ModalDelete';
 
+import { loadingSelector } from '#store/selectors';
+
 const DeleteAccount = () => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const loading = useSelector(loadingSelector);
   const [openModal, setOpenModal] = React.useState<boolean>(false);
   const handleClose = () => {
     if (!loading) {
@@ -30,10 +33,7 @@ const DeleteAccount = () => {
         open={openModal}
         handleClose={handleClose}
       >
-        <ModalDelete
-          loading={loading}
-          setLoading={setLoading}
-        />
+        <ModalDelete />
       </Modal>
     </div>
   );

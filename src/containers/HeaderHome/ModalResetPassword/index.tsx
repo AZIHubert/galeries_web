@@ -1,14 +1,21 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
 import ModalContainer from '#components/ModalContainer';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
-import { resendResetPassword } from '#helpers/api';
 import { allowResetPasswordSchema } from '#helpers/schemas';
+
+import { fetchSendResetPassword } from '#store/actions';
+import {
+  loadingSelector,
+  sendResetPasswordErrorSelector,
+} from '#store/selectors';
 
 import {
   CancelButton,
@@ -24,12 +31,7 @@ type Modals =
   | 'signin';
 
 interface ModalResetPasswordI {
-  setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
   setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>;
-  setErrorModal: React.Dispatch<React.SetStateAction<{
-    open: boolean;
-    text: string;
-  }>>;
 }
 
 const initialValues = {
@@ -37,47 +39,15 @@ const initialValues = {
 };
 
 const ModalResetPassword = ({
-  setCurrentEmail,
   setCurrentModal,
-  setErrorModal,
 }: ModalResetPasswordI) => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const loading = useSelector(loadingSelector);
+  const resetPasswordError = useSelector(sendResetPasswordErrorSelector);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: async (value, { setFieldError }) => {
-      if (!loading) {
-        setLoading(true);
-        try {
-          await resendResetPassword(value);
-          setCurrentEmail(value.email);
-          setCurrentModal('resetPasswordLanding');
-        } catch (err) {
-          if (err.response) {
-            if (err.status === 500) {
-              setErrorModal({
-                open: true,
-                text: 'Something went wrong. Please try again',
-              });
-            } else {
-              const { errors } = err.response.data;
-              if (typeof errors === 'object') {
-                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
-              } else {
-                setErrorModal({
-                  open: true,
-                  text: errors,
-                });
-              }
-            }
-          } else {
-            setErrorModal({
-              open: true,
-              text: 'Something went wrong. Please try again',
-            });
-          }
-        }
-        setLoading(false);
-      }
+    onSubmit: async (value) => {
+      dispatch(fetchSendResetPassword(value));
     },
     validateOnChange: false,
     validateOnBlur: true,
@@ -85,16 +55,15 @@ const ModalResetPassword = ({
   });
   return (
     <ModalContainer
-      testId="modalForgotPassword"
       title='Enter your email to reset your password'
     >
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
           id='email'
-          error={formik.errors.email}
-          errorTestId='emailError'
-          fieldTestId='emailField'
+          error={
+            formik.errors.email || resetPasswordError.email
+          }
           label='email'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -102,7 +71,6 @@ const ModalResetPassword = ({
           value={formik.values.email}
         />
         <GradientButton
-          testId='submitButton'
           disabled={loading}
           marginBottom={20}
           marginTop={20}
@@ -118,7 +86,6 @@ const ModalResetPassword = ({
               setCurrentModal('login');
             }
           }}
-          testId='cancelButton'
         >
           Cancel
         </CancelButton>

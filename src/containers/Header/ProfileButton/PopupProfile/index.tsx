@@ -1,14 +1,17 @@
 import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 
 import Text from '#components/Text';
-
-import { UserContext } from '#contexts/UserContext';
 
 import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
 import {
   Gear,
   Ticket,
 } from '#ressources/svgComponents';
+
+import { userSelector } from '#store/selectors';
 
 import {
   Background,
@@ -26,7 +29,7 @@ interface PopupProfileI {
 const PopupProfile = ({
   handleOpenTicket,
 }: PopupProfileI) => {
-  const { user } = React.useContext(UserContext);
+  const user = useSelector(userSelector);
   return (
     <Container
       data-testid='popupProfil'

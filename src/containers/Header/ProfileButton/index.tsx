@@ -1,11 +1,14 @@
 import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
 import Modal from '#components/Modal';
 
-import { UserContext } from '#contexts/UserContext';
-
 import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
+
+import { userSelector } from '#store/selectors';
 
 import ModalTicket from './ModalTicket';
 import PopupProfile from './PopupProfile';
@@ -18,8 +21,8 @@ import {
 
 const ProfileButton = () => {
   const [openPopupProfil, setOpenPopupProfile] = React.useState<boolean>(false);
+  const user = useSelector(userSelector);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
-  const { user } = React.useContext(UserContext);
   const [openTicket, setOpenTicket] = React.useState<boolean>(false);
   const handleOpenTicket = React.useCallback(() => setOpenTicket(true), []);
   const handleCloseTicket = React.useCallback(() => setOpenTicket(false), []);

@@ -29,10 +29,10 @@ const errorFacebook: Middleware = (
   } = action;
   if (type === `${LOGIN_FACEBOOK} ${API_ERROR}`) {
     dispatch(
-      setNotification(
-        'Something went wrong. Please try again.',
-        LOGIN_FACEBOOK,
-      ),
+      setNotification({
+        error: true,
+        text: 'Something went wrong. Please try again.',
+      }),
     );
     dispatch(setLoader(false));
   }

@@ -26,7 +26,10 @@ const errorUser: Middleware = (
     type,
   } = action;
   if (type === `${USER} ${API_ERROR}`) {
-    dispatch(setNotification(data.toString(), USER));
+    dispatch(setNotification({
+      error: true,
+      text: data.response.data.errors,
+    }));
     dispatch(setLoader(false));
   }
 };
@@ -41,6 +44,7 @@ const fetchUser: Middleware = (
   next(action);
   const { type } = action;
   if (type === USER_FETCH) {
+    console.log(USER_FETCH);
     dispatch(setLoader(true));
     dispatch(
       apiRequest(

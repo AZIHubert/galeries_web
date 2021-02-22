@@ -1,26 +1,30 @@
-import { RESET_PASSWORD_ERROR } from '#store/actions';
+import { RESET_PASSWORD_SET_ERRORS } from '#store/actions';
 
 const initialState = {
-  confirmPassword: null,
-  password: null,
+  errors: {
+    confirmPassword: null,
+    password: null,
+  },
 };
 
 export default (
-  resetPassword = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
-    payload: { data },
+    payload,
     type,
   } = action;
   switch (type) {
-    case RESET_PASSWORD_ERROR:
+    case RESET_PASSWORD_SET_ERRORS:
       return {
-        ...resetPassword,
-        confirmPassword: data.password,
-        password: data.userNameOrEmail,
+        ...state,
+        errors: {
+          ...state.errors,
+          ...payload.data,
+        },
       };
     default:
-      return resetPassword;
+      return state;
   }
 };

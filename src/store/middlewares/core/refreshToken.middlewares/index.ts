@@ -2,7 +2,7 @@ import moment from 'moment';
 import { Middleware } from 'redux';
 
 import {
-  endpoints,
+  endPoints,
   localStorages,
 } from '#store/constant';
 
@@ -33,19 +33,31 @@ const fetchToken: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const token = localStorage.getItem(localStorages.AUTH_TOKEN);
-  const expiresIn = localStorage.getItem(localStorages.EXPIRES_DATE_TOKEN);
-  if (token && expiresIn) {
-    const expiresAt = JSON.parse(expiresIn);
-    const isExpired = moment().isAfter(moment(expiresAt));
-    if (isExpired) {
-      dispatch(setLoader(true));
-      dispatch(apiRequest(null, 'GET', endpoints.REFRESH_TOKEN, REFRESH_TOKEN));
+  const {
+    type,
+  } = action;
+  if (type.includes('fetch')) {
+    const token = localStorage.getItem(localStorages.AUTH_TOKEN);
+    const expiresIn = localStorage.getItem(localStorages.EXPIRES_DATE_TOKEN);
+    if (token && expiresIn) {
+      const expiresAt = JSON.parse(expiresIn);
+      const isExpired = moment().isAfter(moment(expiresAt));
+      if (isExpired) {
+        dispatch(setLoader(true));
+        dispatch(
+          apiRequest(
+            null,
+            'GET',
+            endPoints.REFRESH_TOKEN,
+            REFRESH_TOKEN,
+          ),
+        );
+      }
     }
   }
 };
 
-const getToken: Middleware = () => (
+const setToken: Middleware = () => (
   next,
 ) => (
   action: store.ActionI,
@@ -66,5 +78,5 @@ const getToken: Middleware = () => (
 export default [
   errorToken,
   fetchToken,
-  getToken,
+  setToken,
 ];

@@ -28,7 +28,10 @@ const errorLogout: Middleware = (
     type,
   } = action;
   if (type === `${LOGOUT} ${API_ERROR}`) {
-    dispatch(setNotification(data.errors, LOGOUT));
+    dispatch(setNotification({
+      error: true,
+      text: data.errors,
+    }));
     dispatch(setLoader(false));
   }
 };

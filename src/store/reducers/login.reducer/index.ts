@@ -1,26 +1,40 @@
-import { LOGIN_ERROR } from '#store/actions';
+import { LOGIN_SET } from '#store/actions';
 
-const initialState = {
-  password: null,
-  userNameOrEmail: null,
+interface InitialStateI {
+  status: store.FormStatus,
+  errors: {
+    password: string | null;
+    userNameOrEmail: string | null;
+  },
+}
+
+const initialState: InitialStateI = {
+  status: 'pending',
+  errors: {
+    password: null,
+    userNameOrEmail: null,
+  },
 };
 
 export default (
-  login = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
-    payload: { data },
+    payload,
     type,
   } = action;
   switch (type) {
-    case LOGIN_ERROR:
+    case LOGIN_SET:
       return {
-        ...login,
-        password: data.password,
-        userNameOrEmail: data.userNameOrEmail,
+        ...state,
+        ...payload.data,
+        errors: {
+          ...state.errors,
+          ...payload.data.errors,
+        },
       };
     default:
-      return login;
+      return state;
   }
 };

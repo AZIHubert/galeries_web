@@ -4,7 +4,7 @@ export const LOGIN_FACEBOOK = '[FACEBOOK LOGIN]';
 
 export const LOGIN_FACEBOOK_FETCH = `${LOGIN_FACEBOOK} fetch`;
 
-export const fetchFacebook = (
+export const fetchLoginFacebook = (
   data: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
 ) => ({
   type: LOGIN_FACEBOOK_FETCH,

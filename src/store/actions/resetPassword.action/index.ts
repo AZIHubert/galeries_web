@@ -1,16 +1,16 @@
 export const RESET_PASSWORD = '[RESET PASSWORD]';
 
-export const RESET_PASSWORD_ERROR = `${RESET_PASSWORD} error`;
+export const RESET_PASSWORD_SET_ERRORS = `${RESET_PASSWORD} set error`;
 export const RESET_PASSWORD_FETCH = `${RESET_PASSWORD} fetch`;
 
 interface FetchDataI {
   confirmPassword: string;
+  confirmationToken: string;
   password: string;
 }
 
 interface ErrorDataI {
   confirmPassword: string;
-  confirmationToken: string;
   password: string;
 }
 
@@ -26,7 +26,7 @@ export const fetchResetPassword = (
 export const setResetPasswordError = (
   data: ErrorDataI,
 ) => ({
-  type: RESET_PASSWORD_ERROR,
+  type: RESET_PASSWORD_SET_ERRORS,
   payload: {
     data,
   },

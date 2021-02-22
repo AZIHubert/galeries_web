@@ -29,10 +29,10 @@ const errorLoginGoogle: Middleware = (
   } = action;
   if (type === `${LOGIN_GOOGLE} ${API_ERROR}`) {
     dispatch(
-      setNotification(
-        'Something went wrong. Please try again.',
-        LOGIN_GOOGLE,
-      ),
+      setNotification({
+        error: true,
+        text: 'Something went wrong. Please try again.',
+      }),
     );
     dispatch(setLoader(false));
   }

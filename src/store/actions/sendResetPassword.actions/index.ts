@@ -14,7 +14,7 @@ export const fetchSendResetPassword = (data: DataI) => ({
   },
 });
 
-export const setResetPasswordError = (data: DataI) => ({
+export const setSendResetPasswordError = (data: DataI) => ({
   type: SEND_RESET_PASSWORD_ERROR,
   payload: {
     data,

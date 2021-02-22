@@ -10,6 +10,7 @@ import {
   LOGIN_GOOGLE,
   LOGOUT,
   REFRESH_TOKEN,
+  RESET_PASSWORD,
   SEND_CONFIRMATION,
   SEND_RESET_PASSWORD,
   SIGNIN,
@@ -26,10 +27,12 @@ declare global {
       typeof LOGIN_GOOGLE |
       typeof LOGOUT |
       typeof REFRESH_TOKEN |
+      typeof RESET_PASSWORD |
       typeof SEND_CONFIRMATION |
       typeof SEND_RESET_PASSWORD |
       typeof SIGNIN |
       typeof USER;
+    type FormStatus = 'pending' | 'success' | 'error';
     interface ActionI {
       type: string;
       payload: {
@@ -39,20 +42,38 @@ declare global {
           method?: Method;
           url?: string;
           confirmToken?: string;
+          callback?: () => void;
         }
       }
     }
     interface ReducersI {
-      loginError: LoginI;
-      notification: NotificationI | null;
-      resetPasswordError: ResetPasswordI;
-      sendConfirmationError: SendConfirmationI;
-      sendResetPasswordError: SendResetPasswordI;
-      signinError: SigninI;
-      ui: boolean;
+      login: {
+        status: FormStatus;
+        errors: LoginI;
+      };
+      notification: NotificationI;
+      resetPassword: ResetPasswordI;
+      sendConfirmation: {
+        status: FormData;
+        errors: SendConfirmationI;
+      };
+      sendResetPassword: { errors: SendResetPasswordI };
+      signin: {
+        status: FormStatus;
+        errors: SigninI;
+      };
+      ui: { loading: boolean; };
       user: UserI | null;
     }
   }
+
+  type HeaderModals =
+  'confirmLanding'
+  | 'login'
+  | 'resendConfirm'
+  | 'resetPassword'
+  | 'resetPasswordLanding'
+  | 'signin';
 
   interface SendResetPasswordI {
     email: string;

@@ -23,6 +23,7 @@ const apiMiddleware: Middleware = ({ dispatch }) => (next) => (action: store.Act
         url,
       } = payload.meta;
       client({
+        data: payload.data,
         headers: {
           authorization: token,
           'Content-Type': 'application/json',
@@ -31,8 +32,19 @@ const apiMiddleware: Middleware = ({ dispatch }) => (next) => (action: store.Act
         method,
         url,
       })
-        .then((data) => dispatch(apiSuccess(data, entity)))
-        .catch((err: AxiosError) => dispatch(apiError(err, entity)));
+        .then((data) => {
+          dispatch(
+            apiSuccess(
+              data.data,
+              entity,
+              payload.meta && payload.meta.callback ? payload.meta.callback : undefined,
+            ),
+          );
+        })
+        .catch((err: AxiosError) => {
+          console.log(err);
+          dispatch(apiError(err, entity));
+        });
     }
   }
 };

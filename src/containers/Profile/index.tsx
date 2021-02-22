@@ -1,6 +1,9 @@
 import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 
-import { UserContext } from '#contexts/UserContext';
+import { userSelector } from '#store/selectors';
 
 import ProfilePictureContainer from './ProfilePictureContainer';
 
@@ -18,41 +21,9 @@ const profilePicture
 const Profile = () => {
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
-  const { setUser, user } = React.useContext(UserContext);
+  const user = useSelector(userSelector);
   React.useEffect(() => {
-    if (selectedFile) {
-      const newImage: ImageI = {
-        bucketName: 'bucketName',
-        fileName: selectedFile.name,
-        format: 'jpg',
-        height: 2340,
-        id: '2',
-        signedUrl: 'http://newprofilepicture.com/',
-        size: 100857,
-        width: 1080,
-      };
-      const newProfilePicture: ProfilePictureI = {
-        createdAt: new Date(),
-        cropedImage: newImage,
-        id: '2',
-        originalImage: newImage,
-        pendingImage: newImage,
-      };
-      setUser((prevState) => {
-        if (prevState) {
-          return {
-            ...prevState,
-            currentProfilePictureId: newProfilePicture.id,
-            currentProfilePicture: newProfilePicture,
-            profilePictures: [
-              newProfilePicture,
-              ...prevState.profilePictures,
-            ],
-          };
-        }
-        return null;
-      });
-    }
+    if (selectedFile) {}
   }, [selectedFile]);
   const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {

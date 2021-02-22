@@ -9,7 +9,7 @@ import {
   fetchUser,
   setLoader,
   setNotification,
-  setLoginError,
+  setLogin,
 } from '#store/actions';
 
 import {
@@ -30,10 +30,19 @@ const errorLogin: Middleware = (
     type,
   } = action;
   if (type === `${LOGIN} ${API_ERROR}`) {
-    if (typeof data.errors === 'object') {
-      dispatch(setLoginError(data.errors));
+    if (typeof data.response.data.errors === 'object') {
+      dispatch(setLogin({
+        status: 'error',
+        errors: data.response.data.errors,
+      }));
     } else {
-      dispatch(setNotification(data.errors, LOGIN));
+      dispatch(setLogin({
+        status: 'error',
+      }));
+      dispatch(setNotification({
+        text: data.response.data.errors,
+        error: true,
+      }));
     }
     dispatch(setLoader(false));
   }
@@ -77,6 +86,9 @@ const successLogin: Middleware = (
     type,
   } = action;
   if (type === `${LOGIN} ${API_SUCCESS}`) {
+    dispatch(setLogin({
+      status: 'success',
+    }));
     localStorage.setItem(
       localStorages.AUTH_TOKEN,
       data.token,

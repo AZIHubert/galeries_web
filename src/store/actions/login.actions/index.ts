@@ -1,10 +1,13 @@
 export const LOGIN = '[LOGIN]';
 
-export const LOGIN_ERROR = `${LOGIN} error`;
+export const LOGIN_SET = `${LOGIN} set`;
 export const LOGIN_FETCH = `${LOGIN} Fetch`;
 
-export const setLoginError = (data: LoginI) => ({
-  type: LOGIN_ERROR,
+export const setLogin = (data: {
+  status?: store.FormStatus;
+  errors?: LoginI;
+}) => ({
+  type: LOGIN_SET,
   payload: {
     data,
   },

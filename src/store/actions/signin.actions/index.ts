@@ -1,10 +1,10 @@
 export const SIGNIN = '[SIGNIN]';
 
-export const SIGNIN_ERROR = `${SIGNIN} error`;
+export const SIGNIN_SET = `${SIGNIN} set`;
 export const SIGNIN_FETCH = `${SIGNIN} fetch`;
 
-export const setSigninError = (data: SigninI) => ({
-  type: SIGNIN_ERROR,
+export const setSignin = (data: any) => ({
+  type: SIGNIN_SET,
   payload: {
     data,
   },

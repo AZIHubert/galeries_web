@@ -1,14 +1,17 @@
-import * as React from 'react';
 import { useFormik } from 'formik';
+import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
 import ModalContainer from '#components/ModalContainer';
 import RequiredField from '#components/RequiredField';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
 import { ticketSchema } from '#helpers/schemas';
+
+import { loadingSelector } from '#store/selectors';
 
 const initialValues = {
   header: '',
@@ -16,12 +19,10 @@ const initialValues = {
 };
 
 const ModalTicket = () => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const loading = useSelector(loadingSelector);
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {
-      if (!loading) { setLoading(true); }
-    },
+    onSubmit: () => {},
     validateOnChange: false,
     validateOnBlur: true,
     validationSchema: ticketSchema,

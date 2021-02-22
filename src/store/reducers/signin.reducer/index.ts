@@ -1,28 +1,44 @@
-import { SIGNIN_ERROR } from '#store/actions';
+import { SIGNIN_SET } from '#store/actions';
 
-const initialState = {
-  confirmPassword: null,
-  email: null,
-  password: null,
-  userName: null,
+interface InitialStateI {
+  status: 'pending' | 'error' | 'success';
+  errors: {
+    confirmPassword: string | null;
+    email: string | null;
+    password: string | null;
+    userName: string | null;
+  }
+}
+
+const initialState: InitialStateI = {
+  status: 'pending',
+  errors: {
+    confirmPassword: null,
+    email: null,
+    password: null,
+    userName: null,
+  },
 };
 
 export default (
-  signin = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
-    payload: { data },
+    payload,
     type,
   } = action;
   switch (type) {
-    case SIGNIN_ERROR:
+    case SIGNIN_SET:
       return {
-        ...signin,
-        password: data.password,
-        userNameOrEmail: data.userNameOrEmail,
+        ...state,
+        ...payload.data,
+        errors: {
+          ...state.errors,
+          ...payload.data.errors,
+        },
       };
     default:
-      return signin;
+      return state;
   }
 };

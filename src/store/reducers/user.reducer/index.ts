@@ -7,12 +7,12 @@ export default (
   action: store.ActionI,
 ) => {
   const {
-    payload: { data },
+    payload,
     type,
   } = action;
   switch (type) {
     case USER_SET:
-      return data;
+      return payload.data;
     default:
       return user;
   }

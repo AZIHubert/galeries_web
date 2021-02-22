@@ -29,6 +29,7 @@ export const apiRequest = (
   url: string,
   entity: store.Entity,
   confirmationToken?: string,
+  callback?: () => void,
 ) => ({
   type: `${entity} ${API_REQUEST}`,
   payload: {
@@ -38,6 +39,7 @@ export const apiRequest = (
       url,
       entity,
       confirmationToken,
+      callback,
     },
   },
 });
@@ -45,12 +47,14 @@ export const apiRequest = (
 export const apiSuccess = (
   response: AxiosResponse,
   entity: store.Entity,
+  callback?: () => void,
 ) => ({
   type: `${entity} ${API_SUCCESS}`,
   payload: {
     data: response,
     meta: {
       entity,
+      callback,
     },
   },
 });

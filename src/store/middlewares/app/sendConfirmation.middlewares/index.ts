@@ -7,7 +7,8 @@ import {
   apiRequest,
   setLoader,
   setNotification,
-  setSendConfirmationError,
+  setSendConfirmation,
+  API_SUCCESS,
 } from '#store/actions';
 
 import {
@@ -27,10 +28,19 @@ const errorSendConfirmation: Middleware = (
     type,
   } = action;
   if (type === `${SEND_CONFIRMATION} ${API_ERROR}`) {
-    if (typeof data.errors === 'object') {
-      setSendConfirmationError(data.errors);
+    if (typeof data.response.data.errors === 'object') {
+      dispatch(setSendConfirmation({
+        status: 'error',
+        errors: data.response.data.errors,
+      }));
     } else {
-      setNotification(data.errors, SEND_CONFIRMATION);
+      dispatch(setSendConfirmation({
+        status: 'error',
+      }));
+      dispatch(setNotification({
+        text: data.response.data.errors,
+        error: true,
+      }));
     }
     dispatch(setLoader(false));
   }
@@ -72,7 +82,14 @@ const successSendConfirmation: Middleware = (
   const {
     type,
   } = action;
-  if (type === SEND_CONFIRMATION_FETCH) {
+  if (type === `${SEND_CONFIRMATION} ${API_SUCCESS}`) {
+    dispatch(setSendConfirmation({
+      status: 'success',
+    }));
+    dispatch(setNotification({
+      text: 'an email has been sent to you',
+      error: false,
+    }));
     dispatch(setLoader(false));
   }
 };

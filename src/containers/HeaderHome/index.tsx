@@ -1,13 +1,20 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
 import ModalTimer from '#components/ModalTimer';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
 import logo from '#ressources/svg/logoG.svg';
+
+import { setNotification } from '#store/actions';
+import {
+  loadingSelector,
+  notificationSelector,
+} from '#store/selectors';
 
 import ModalConfirmLanding from './ModalConfirmLanding';
 import ModalLogin from './ModalLogin';
@@ -23,26 +30,20 @@ import {
   Logo,
 } from './styles';
 
-type Modals =
-  'confirmLanding'
-  | 'login'
-  | 'resendConfirm'
-  | 'resetPassword'
-  | 'resetPasswordLanding'
-  | 'signin';
-
 const Header = () => {
   const [currentEmail, setCurrentEmail] = React.useState<string>('');
-  const [currentModal, setCurrentModal] = React.useState<Modals | null>(null);
-  const [errorModal, setErrorModal] = React.useState<{
-    open: boolean;
-    text: string;
-  }>({
-    open: false,
-    text: '',
-  });
-  const { loading } = React.useContext(LoadingContext);
+  const [currentModal, setCurrentModal] = React.useState<HeaderModals | null>(null);
+  const loading = useSelector(loadingSelector);
+  const notification = useSelector(notificationSelector);
   const [openModal, setOpenModal] = React.useState<boolean>(false);
+  const [openModalTimer, setOpenModalTimer] = React.useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const handleCloseModalTimer = React.useCallback(() => setOpenModalTimer(false), []);
+
+  React.useLayoutEffect(() => {
+    if (notification.text) setOpenModalTimer(true);
+  }, [notification]);
 
   const handleClickLogin = () => {
     if (!loading) {
@@ -59,10 +60,7 @@ const Header = () => {
   const handleCloseModal = () => {
     if (!loading) {
       setOpenModal(false);
-      setErrorModal((prevState) => ({
-        ...prevState,
-        open: false,
-      }));
+      handleCloseModalTimer();
     }
   };
   const handleCurrentModal = () => {
@@ -71,38 +69,29 @@ const Header = () => {
         return (
           <ModalConfirmLanding
             currentEmail={currentEmail}
-            setErrorModal={setErrorModal}
           />
         );
       case 'login':
         return (
           <ModalLogin
+            setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
-            closeModal={handleCloseModal}
           />
         );
       case 'resendConfirm':
         return (
-          <ModalResendConfirm
-            setCurrentEmail={setCurrentEmail}
-            setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
-          />
+          <ModalResendConfirm />
         );
       case 'resetPassword':
         return (
           <ModalResetPassword
-            setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
           />
         );
       case 'resetPasswordLanding':
         return (
           <ModalResetPasswordLanding
             currentEmail={currentEmail}
-            setErrorModal={setErrorModal}
           />
         );
       case 'signin':
@@ -110,14 +99,12 @@ const Header = () => {
           <ModalSignin
             setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
           />
         );
       default:
         return null;
     }
   };
-  const dispatch = useDispatch();
   return (
     <Container>
       <InnerContainer>
@@ -128,7 +115,7 @@ const Header = () => {
         <ButtonContainer>
           <HeaderButton
             marginRight={30}
-            onClick={() => dispatch({ type: '[User] Fetch' })}
+            onClick={handleClickSignin}
             testId='openSignin'
             title='Sign in'
           />
@@ -146,17 +133,16 @@ const Header = () => {
         >
           {handleCurrentModal()}
           <ModalTimer
-            callBack={() => setErrorModal((prevState) => ({
-              ...prevState,
-              text: '',
-            }))}
-            handleClose={() => setErrorModal((prevState) => ({
-              ...prevState,
-              open: false,
-            }))}
-            open={errorModal.open}
-            text={errorModal.text}
-            variant='danger'
+            callBack={() => {
+              dispatch(setNotification({
+                error: false,
+                text: '',
+              }));
+            }}
+            handleClose={handleCloseModalTimer}
+            open={openModalTimer}
+            text={notification.text}
+            variant={notification.error ? 'danger' : 'primary'}
           />
         </Modal>
       </InnerContainer>

@@ -27,7 +27,10 @@ const errorConfirmation: Middleware = (
     type,
   } = action;
   if (type === `${CONFIRMATION} ${API_ERROR}`) {
-    dispatch(setNotification(data.errors, CONFIRMATION));
+    dispatch(setNotification({
+      error: true,
+      text: data.errors,
+    }));
     dispatch(setLoader(false));
   }
 };

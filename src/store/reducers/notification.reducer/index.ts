@@ -1,19 +1,25 @@
 import { NOTIFICATION_SET } from '#store/actions';
 
-const initialState = '';
+const initialState = {
+  text: '',
+  error: false,
+};
 
 export default (
-  notification = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
-    payload: { data },
+    payload,
     type,
   } = action;
   switch (type) {
     case NOTIFICATION_SET:
-      return data;
+      return {
+        ...state,
+        ...payload.data,
+      };
     default:
-      return notification;
+      return state;
   }
 };

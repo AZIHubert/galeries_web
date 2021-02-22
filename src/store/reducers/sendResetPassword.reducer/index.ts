@@ -1,24 +1,29 @@
 import { SEND_RESET_PASSWORD_ERROR } from '#store/actions';
 
 const initialState = {
-  email: null,
+  errors: {
+    email: null,
+  },
 };
 
 export default (
-  sendResetPassword = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
-    payload: { data },
+    payload,
     type,
   } = action;
   switch (type) {
     case SEND_RESET_PASSWORD_ERROR:
       return {
-        ...sendResetPassword,
-        email: data.email,
+        ...state,
+        errors: {
+          ...state.errors,
+          ...payload.data,
+        },
       };
     default:
-      return sendResetPassword;
+      return state;
   }
 };

@@ -1,5 +1,8 @@
-import axios from 'axios';
 import * as React from 'react';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -17,10 +20,15 @@ import ConfirmAccount from '#containers/ConfirmAccount';
 import Home from '#containers/Home';
 import ResetPassword from '#containers/ResetPassword';
 
-import { UserContext } from '#contexts/UserContext';
+import { fetchUser } from '#store/actions';
+import {
+  userSelector,
+  uiSelector,
+} from '#store/selectors';
 
-import { getMe } from '#helpers/api';
-import verifyTokens from '#helpers/verifyTokens';
+import {
+  localStorages,
+} from '#store/constant';
 
 const Container = styled.div`
   left: 0;
@@ -42,15 +50,13 @@ const Container = styled.div`
   }
 `;
 
-const authTokenExist = () => {
-  const token = localStorage.getItem('authToken');
-  if (token) {
-    return true;
-  }
-  return false;
-};
+const token = localStorage.getItem(localStorages.AUTH_TOKEN);
+const expiresIn = localStorage.getItem(localStorages.EXPIRES_DATE_TOKEN);
 
 const Routes = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector(uiSelector);
+  const user = useSelector(userSelector);
   const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
   const [callbackModal, setCallbackModal] = React.useState<{
     error: boolean;
@@ -61,37 +67,18 @@ const Routes = () => {
     open: false,
     text: '',
   });
-  const [requestFinish, setRequestFinish] = React.useState<boolean>(false);
-  const { setUser, user } = React.useContext(UserContext);
   React.useEffect(() => {
-    const source = axios.CancelToken.source();
     const timer = setTimeout(() => setAllowRedirect(true), 2000);
-    const handleMe = async () => {
-      try {
-        await verifyTokens();
-        const response = await getMe({ source });
-        setUser(response.data);
-      } catch (err) {
-        localStorage.clear();
-      }
-      setRequestFinish(true);
-    };
-    if (!authTokenExist()) {
-      setRequestFinish(true);
-    } else {
-      handleMe();
+    if (token && expiresIn) {
+      dispatch(fetchUser());
     }
-    return () => {
-      console.log('unmount');
-      source.cancel('axios request cancelled');
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
   return (
     <Router>
       <CSSTransition
         classNames='fade'
-        in={!allowRedirect || !requestFinish}
+        in={!allowRedirect || !loading}
         timeout={300}
         unmountOnExit
       >
@@ -101,7 +88,7 @@ const Routes = () => {
       </CSSTransition>
       <CSSTransition
         classNames='fade'
-        in={allowRedirect && requestFinish}
+        in={allowRedirect && loading}
         timeout={300}
         unmountOnExit
       >
@@ -125,9 +112,7 @@ const Routes = () => {
             {user ? (
               <Redirect to='/dashboard' />
             ) : (
-              <ConfirmAccount
-                setCallbackModal={setCallbackModal}
-              />
+              <ConfirmAccount />
             )}
           </AnimatedRoute>
           <AnimatedRoute
@@ -140,9 +125,7 @@ const Routes = () => {
             {user ? (
               <Redirect to='/dashboard' />
             ) : (
-              <ResetPassword
-                setCallbackModal={setCallbackModal}
-              />
+              <ResetPassword />
             )}
           </AnimatedRoute>
           <AnimatedRoute
