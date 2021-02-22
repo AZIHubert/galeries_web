@@ -44,12 +44,14 @@ const PopupProfile = ({
           />
           <div>
             <Text
+              color='primary'
               fontSize={1}
               fontSizeL={1.1}
             >
               { user ? user.userName : 'user name' }
             </Text>
             <Text
+              color='primary'
               fontSize={0.7}
               fontSizeL={0.8}
             >
@@ -64,6 +66,7 @@ const PopupProfile = ({
             <Gear />
           </LogoContainer>
           <Text
+            color='primary'
             fontSize={0.8}
             fontSizeL={0.9}
           >
@@ -79,12 +82,14 @@ const PopupProfile = ({
           </LogoContainer>
           <div>
             <Text
+              color='primary'
               fontSize={0.5}
               fontSizeL={0.65}
             >
               Share your opinion? Find a bug?
             </Text>
             <Text
+              color='primary'
               fontSize={0.8}
               fontSizeL={0.9}
             >

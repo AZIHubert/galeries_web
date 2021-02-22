@@ -7,7 +7,10 @@ import {
 
 import SocialMediaButton from '#components/SocialMediaButton';
 
-import { fetchLoginGoogle } from '#store/actions';
+import {
+  fetchLoginGoogle,
+  setNotification,
+} from '#store/actions';
 import { loadingSelector } from '#store/selectors';
 
 type Action = 'login' | 'signin';
@@ -24,14 +27,16 @@ const GoogleButton = ({
   const responseGoogle = async (
     googleResponse: any,
   ) => {
-    console.log(googleResponse.profileObj);
     dispatch(fetchLoginGoogle(googleResponse.profileObj));
   };
   return (
     <GoogleLogin
       clientId={process.env.GOOGLE_ID!}
       cookiePolicy={'single_host_origin'}
-      onFailure={(err) => console.log(err)}
+      onFailure={(err) => dispatch(setNotification({
+        error: true,
+        text: err,
+      }))}
       onSuccess={responseGoogle}
       render={(renderProps) => (
         <SocialMediaButton

@@ -41,10 +41,7 @@ const apiMiddleware: Middleware = ({ dispatch }) => (next) => (action: store.Act
             ),
           );
         })
-        .catch((err: AxiosError) => {
-          console.log(err);
-          dispatch(apiError(err, entity));
-        });
+        .catch((err: AxiosError) => dispatch(apiError(err, entity)));
     }
   }
 };

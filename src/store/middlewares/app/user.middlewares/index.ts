@@ -44,7 +44,6 @@ const fetchUser: Middleware = (
   next(action);
   const { type } = action;
   if (type === USER_FETCH) {
-    console.log(USER_FETCH);
     dispatch(setLoader(true));
     dispatch(
       apiRequest(

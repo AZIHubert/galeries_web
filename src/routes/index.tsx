@@ -23,7 +23,7 @@ import ResetPassword from '#containers/ResetPassword';
 import { fetchUser } from '#store/actions';
 import {
   userSelector,
-  uiSelector,
+  loadingSelector,
 } from '#store/selectors';
 
 import {
@@ -55,7 +55,7 @@ const expiresIn = localStorage.getItem(localStorages.EXPIRES_DATE_TOKEN);
 
 const Routes = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(uiSelector);
+  const loading = useSelector(loadingSelector);
   const user = useSelector(userSelector);
   const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
   const [callbackModal, setCallbackModal] = React.useState<{
@@ -78,7 +78,7 @@ const Routes = () => {
     <Router>
       <CSSTransition
         classNames='fade'
-        in={!allowRedirect || !loading}
+        in={!allowRedirect || loading}
         timeout={300}
         unmountOnExit
       >
@@ -88,7 +88,7 @@ const Routes = () => {
       </CSSTransition>
       <CSSTransition
         classNames='fade'
-        in={allowRedirect && loading}
+        in={allowRedirect && !loading}
         timeout={300}
         unmountOnExit
       >
