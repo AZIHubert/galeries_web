@@ -8,7 +8,7 @@ import {
 import SocialMediaButton from '#components/SocialMediaButton';
 
 import { fetchLoginGoogle } from '#store/actions';
-import { uiSelector } from '#store/selectors';
+import { loadingSelector } from '#store/selectors';
 
 type Action = 'login' | 'signin';
 
@@ -20,10 +20,11 @@ const GoogleButton = ({
   action = 'login',
 }: GoogleButtonI) => {
   const dispatch = useDispatch();
-  const loading = useSelector(uiSelector);
+  const loading = useSelector(loadingSelector);
   const responseGoogle = async (
     googleResponse: any,
   ) => {
+    console.log(googleResponse.profileObj);
     dispatch(fetchLoginGoogle(googleResponse.profileObj));
   };
   return (

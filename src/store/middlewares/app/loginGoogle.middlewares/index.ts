@@ -25,15 +25,25 @@ const errorLoginGoogle: Middleware = (
 ) => {
   next(action);
   const {
+    payload: { data },
     type,
   } = action;
   if (type === `${LOGIN_GOOGLE} ${API_ERROR}`) {
-    dispatch(
-      setNotification({
-        error: true,
-        text: 'Something went wrong. Please try again.',
-      }),
-    );
+    if (data.response && data.status !== 500) {
+      dispatch(
+        setNotification({
+          error: true,
+          text: data.response.data.errors,
+        }),
+      );
+    } else {
+      dispatch(
+        setNotification({
+          error: true,
+          text: 'Something went wrong. Please try again.',
+        }),
+      );
+    }
     dispatch(setLoader(false));
   }
 };
@@ -51,10 +61,16 @@ const fetchLoginGoogle: Middleware = (
     type,
   } = action;
   if (type === LOGIN_GOOGLE_FETCH) {
+    const requestData = {
+      email: data.email,
+      id: data.googleId,
+      imageUrl: data.photoUrl,
+      name: data.name,
+    };
     dispatch(setLoader(true));
     dispatch(
       apiRequest(
-        data,
+        requestData,
         'POST',
         endPoints.LOGIN_GOOGLE,
         LOGIN_GOOGLE,

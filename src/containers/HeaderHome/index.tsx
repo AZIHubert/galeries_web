@@ -42,7 +42,10 @@ const Header = () => {
   const handleCloseModalTimer = React.useCallback(() => setOpenModalTimer(false), []);
 
   React.useLayoutEffect(() => {
-    if (notification.text) setOpenModalTimer(true);
+    if (notification.text) {
+      handleCloseModalTimer();
+      setOpenModalTimer(true);
+    }
   }, [notification]);
 
   const handleClickLogin = () => {

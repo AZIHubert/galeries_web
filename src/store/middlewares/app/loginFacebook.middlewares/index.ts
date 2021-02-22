@@ -25,15 +25,25 @@ const errorFacebook: Middleware = (
 ) => {
   next(action);
   const {
+    payload: { data },
     type,
   } = action;
   if (type === `${LOGIN_FACEBOOK} ${API_ERROR}`) {
-    dispatch(
-      setNotification({
-        error: true,
-        text: 'Something went wrong. Please try again.',
-      }),
-    );
+    if (data.response && data.status !== 500) {
+      dispatch(
+        setNotification({
+          error: true,
+          text: data.response.data.errors,
+        }),
+      );
+    } else {
+      dispatch(
+        setNotification({
+          error: true,
+          text: 'Something went wrong. Please try again.',
+        }),
+      );
+    }
     dispatch(setLoader(false));
   }
 };
