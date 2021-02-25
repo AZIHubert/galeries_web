@@ -7,17 +7,14 @@ import {
   Title,
 } from './styled';
 
-type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
-type TitleWeight = 'bold' | 'normal';
-
 interface ModalContainerI {
   containerTestId?: string;
   title?: string;
   titleMarginTop?: number;
   titleSize?: number;
   titleTestId?: string;
-  titleTextAlign?: TextAlign;
-  titleWeight?: TitleWeight;
+  titleTextAlign?: style.TextAlign;
+  titleWeight?: style.FontWeight;
 }
 
 const ModalContainer: React.FC<ModalContainerI> = ({

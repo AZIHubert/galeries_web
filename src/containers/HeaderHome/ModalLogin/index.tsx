@@ -34,7 +34,7 @@ interface ModalLoginI {
   setCurrentModal: React.Dispatch<React.SetStateAction<HeaderModals | null>>;
 }
 
-const initialValues = {
+const initialValues: form.LoginI = {
   password: '',
   userNameOrEmail: '',
 };
@@ -42,27 +42,25 @@ const initialValues = {
 const ModalLogin = ({
   setCurrentModal,
 }: ModalLoginI) => {
-  const loginError = useSelector(loginErrorSelector);
-  const loading = useSelector(loadingSelector);
-  const notification = useSelector(notificationSelector);
-  const loginStatus = useSelector(loginStatusSelector);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      dispatch(fetchLogin(values));
+      if (!loading) {
+        resetForm();
+        dispatch(fetchLogin(values));
+      }
     },
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: loginSchema,
   });
+  const loading = useSelector(loadingSelector);
+  const loginError = useSelector(loginErrorSelector);
+  const loginStatus = useSelector(loginStatusSelector);
+  const notification = useSelector(notificationSelector);
 
-  React.useEffect(() => () => {
-    dispatch(setLogin({
-      status: 'pending',
-      errors: initialValues,
-    }));
-  }, []);
+  React.useEffect(() => () => resetForm(), []);
 
   React.useEffect(() => {
     if (
@@ -72,6 +70,13 @@ const ModalLogin = ({
       setCurrentModal('resendConfirm');
     }
   });
+
+  const resetForm = () => {
+    dispatch(setLogin({
+      status: 'pending',
+      errors: initialValues,
+    }));
+  };
 
   return (
     <ModalContainer>
@@ -91,30 +96,50 @@ const ModalLogin = ({
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
-          id='userNameOrEmail'
           error={
             formik.errors.userNameOrEmail || loginError.userNameOrEmail
           }
+          id='userNameOrEmail'
           marginBottom={6}
           marginBottomL={10}
           label='user name or email'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (loginError.userNameOrEmail) {
+              dispatch(setLogin({
+                errors: {
+                  ...loginError,
+                  userNameOrEmail: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.userNameOrEmail}
           value={formik.values.userNameOrEmail}
         />
         <Field
           disabled={loading}
-          id='password'
           error={
             formik.errors.password || loginError.password
           }
+          id='password'
           label='password'
           marginBottom={12}
           marginBottomL={15}
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (loginError.password) {
+              dispatch(setLogin({
+                errors: {
+                  ...loginError,
+                  password: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.password}
           type='password'

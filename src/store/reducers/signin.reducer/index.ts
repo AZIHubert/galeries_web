@@ -1,23 +1,18 @@
 import { SIGNIN_SET } from '#store/actions';
 
 interface InitialStateI {
-  status: 'pending' | 'error' | 'success';
-  errors: {
-    confirmPassword: string | null;
-    email: string | null;
-    password: string | null;
-    userName: string | null;
-  }
+  errors: form.SigninI;
+  status: store.FormStatus;
 }
 
 const initialState: InitialStateI = {
-  status: 'pending',
   errors: {
-    confirmPassword: null,
-    email: null,
-    password: null,
-    userName: null,
+    confirmPassword: '',
+    email: '',
+    password: '',
+    userName: '',
   },
+  status: 'pending',
 };
 
 export default (

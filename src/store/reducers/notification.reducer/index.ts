@@ -1,8 +1,8 @@
 import { NOTIFICATION_SET } from '#store/actions';
 
-const initialState = {
-  text: '',
+const initialState: store.NotificationI = {
   error: false,
+  text: '',
 };
 
 export default (

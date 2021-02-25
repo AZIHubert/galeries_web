@@ -8,7 +8,7 @@ import {
   apiRequest,
   setLoader,
   setNotification,
-  setSendResetPasswordError,
+  setSendResetPassword,
 } from '#store/actions';
 
 import {
@@ -28,15 +28,19 @@ const errorSendResetPassword: Middleware = (
     type,
   } = action;
   if (type === `${SEND_RESET_PASSWORD} ${API_ERROR}`) {
-    if (typeof data.response.data.errors === 'object') {
+    if (typeof data === 'object') {
       dispatch(
-        setSendResetPasswordError(data.response.data.errors),
+        setSendResetPassword({
+          errors: data,
+          status: 'error',
+        }),
       );
     } else {
+      dispatch(setSendResetPassword({ status: 'error' }));
       dispatch(
         setNotification({
           error: true,
-          text: data.response.data.errors,
+          text: data,
         }),
       );
     }
@@ -58,6 +62,7 @@ const fetchSendResetPassword: Middleware = (
   } = action;
   if (type === SEND_RESET_PASSWORD_FETCH) {
     dispatch(setLoader(true));
+    dispatch(setSendResetPassword({ status: 'pending' }));
     dispatch(
       apiRequest(
         data,
@@ -81,6 +86,11 @@ const successSendResetPassword: Middleware = (
     type,
   } = action;
   if (type === `${SEND_RESET_PASSWORD} ${API_SUCCESS}`) {
+    dispatch(setSendResetPassword({ status: 'success' }));
+    dispatch(setNotification({
+      text: 'an email has been sent to you',
+      error: false,
+    }));
     dispatch(setLoader(false));
   }
 };

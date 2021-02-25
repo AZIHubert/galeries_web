@@ -6,15 +6,17 @@ import {
   LOGIN_FACEBOOK,
   LOGIN_FACEBOOK_FETCH,
   apiRequest,
+  fetchUser,
   setLoader,
   setNotification,
-  fetchUser,
 } from '#store/actions';
 
+import { endPoints } from '#store/constant';
+
 import {
-  endPoints,
-  localStorages,
-} from '#store/constant';
+  setAuthToken,
+  setExpiresToken,
+} from '#store/helpers';
 
 const errorFacebook: Middleware = (
   { dispatch },
@@ -29,21 +31,12 @@ const errorFacebook: Middleware = (
     type,
   } = action;
   if (type === `${LOGIN_FACEBOOK} ${API_ERROR}`) {
-    if (data.response && data.status !== 500) {
-      dispatch(
-        setNotification({
-          error: true,
-          text: data.response.data.errors,
-        }),
-      );
-    } else {
-      dispatch(
-        setNotification({
-          error: true,
-          text: 'Something went wrong. Please try again.',
-        }),
-      );
-    }
+    dispatch(
+      setNotification({
+        error: true,
+        text: data,
+      }),
+    );
     dispatch(setLoader(false));
   }
 };
@@ -61,7 +54,6 @@ const fetchFacebook: Middleware = (
     type,
   } = action;
   if (type === LOGIN_FACEBOOK_FETCH) {
-    dispatch(setLoader(true));
     dispatch(
       apiRequest(
         data,
@@ -86,14 +78,8 @@ const successFacebook: Middleware = (
     type,
   } = action;
   if (type === `${LOGIN_FACEBOOK} ${API_SUCCESS}`) {
-    localStorage.setItem(
-      localStorages.AUTH_TOKEN,
-      data.data.token,
-    );
-    localStorage.setItem(
-      localStorages.EXPIRES_DATE_TOKEN,
-      data.data.expiresIn,
-    );
+    setAuthToken(data.token);
+    setExpiresToken(data.expiresIn);
     dispatch(fetchUser());
   }
 };

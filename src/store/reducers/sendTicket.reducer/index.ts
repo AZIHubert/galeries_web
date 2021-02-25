@@ -1,19 +1,16 @@
 import { SEND_TICKET_SET } from '#store/actions';
 
 interface InitialStateI {
+  errors: form.SendTicketI,
   status: store.FormStatus,
-  errors: {
-    body: string | null;
-    header: string | null;
-  },
 }
 
 const initialState: InitialStateI = {
-  status: 'pending',
   errors: {
-    body: null,
-    header: null,
+    body: '',
+    header: '',
   },
+  status: 'pending',
 };
 
 export default (

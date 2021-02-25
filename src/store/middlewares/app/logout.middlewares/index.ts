@@ -28,21 +28,12 @@ const errorLogout: Middleware = (
     type,
   } = action;
   if (type === `${LOGOUT} ${API_ERROR}`) {
-    if (data.response && data.status !== 500) {
-      dispatch(
-        setNotification({
-          error: true,
-          text: data.response.data.errors,
-        }),
-      );
-    } else {
-      dispatch(
-        setNotification({
-          error: true,
-          text: 'Something went wrong. Please try again.',
-        }),
-      );
-    }
+    dispatch(
+      setNotification({
+        error: true,
+        text: data,
+      }),
+    );
     dispatch(setLoader(false));
   }
 };
@@ -59,7 +50,6 @@ const fetchLogout: Middleware = (
     type,
   } = action;
   if (type === LOGOUT_FETCH) {
-    dispatch(setLoader(true));
     dispatch(
       apiRequest(
         null,

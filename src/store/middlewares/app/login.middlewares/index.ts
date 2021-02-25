@@ -9,8 +9,8 @@ import {
   apiRequest,
   fetchUser,
   setLoader,
-  setNotification,
   setLogin,
+  setNotification,
 } from '#store/actions';
 
 import {
@@ -31,20 +31,21 @@ const errorLogin: Middleware = (
     type,
   } = action;
   if (type === `${LOGIN} ${API_ERROR}`) {
-    if (typeof data.response.data.errors === 'object') {
+    if (typeof data === 'object') {
       dispatch(setLogin({
+        errors: data,
         status: 'error',
-        errors: data.response.data.errors,
       }));
     } else {
       dispatch(setLogin({
         status: 'error',
       }));
       dispatch(setNotification({
-        text: data.response.data.errors,
         error: true,
+        text: data,
       }));
     }
+
     dispatch(setLoader(false));
   }
 };
@@ -62,7 +63,7 @@ const fetchLogin: Middleware = (
     type,
   } = action;
   if (type === LOGIN_FETCH) {
-    dispatch(setLoader(true));
+    dispatch(setLogin({ status: 'pending' }));
     dispatch(
       apiRequest(
         data,

@@ -11,10 +11,14 @@ import ModalContainer from '#components/ModalContainer';
 
 import { allowResetPasswordSchema } from '#helpers/schemas';
 
-import { fetchSendResetPassword } from '#store/actions';
+import {
+  fetchSendResetPassword,
+  setSendResetPassword,
+} from '#store/actions';
 import {
   loadingSelector,
   sendResetPasswordErrorSelector,
+  sendResetPasswordStatusSelector,
 } from '#store/selectors';
 
 import {
@@ -31,28 +35,51 @@ type Modals =
   | 'signin';
 
 interface ModalResetPasswordI {
+  setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
   setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>;
 }
 
-const initialValues = {
+const initialValues: form.SendResetPasswordI = {
   email: '',
 };
 
 const ModalResetPassword = ({
+  setCurrentEmail,
   setCurrentModal,
 }: ModalResetPasswordI) => {
-  const loading = useSelector(loadingSelector);
-  const resetPasswordError = useSelector(sendResetPasswordErrorSelector);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: async (value) => {
-      dispatch(fetchSendResetPassword(value));
+      if (!loading) {
+        resetForm();
+        dispatch(fetchSendResetPassword(value));
+      }
     },
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: allowResetPasswordSchema,
   });
+  const loading = useSelector(loadingSelector);
+  const sendResetPasswordError = useSelector(sendResetPasswordErrorSelector);
+  const sendResetPasswordStatus = useSelector(sendResetPasswordStatusSelector);
+
+  React.useEffect(() => {
+    if (sendResetPasswordStatus === 'success') {
+      setCurrentEmail(formik.values.email);
+      setCurrentModal('resetPasswordLanding');
+    }
+  }, [sendResetPasswordStatus]);
+
+  React.useEffect(() => () => resetForm(), []);
+
+  const resetForm = () => {
+    dispatch(setSendResetPassword({
+      errors: initialValues,
+      status: 'pending',
+    }));
+  };
+
   return (
     <ModalContainer
       title='Enter your email to reset your password'
@@ -62,11 +89,21 @@ const ModalResetPassword = ({
           disabled={loading}
           id='email'
           error={
-            formik.errors.email || resetPasswordError.email
+            formik.errors.email || sendResetPasswordError.email
           }
           label='email'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (sendResetPasswordError.email) {
+              dispatch(setSendResetPassword({
+                errors: {
+                  ...sendResetPasswordError,
+                  email: '',
+                },
+              }));
+            }
+          }}
           touched={formik.touched.email}
           value={formik.values.email}
         />

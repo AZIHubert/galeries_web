@@ -7,7 +7,10 @@ import {
 import ModalContainer from '#components/ModalContainer';
 import TextButton from '#components/TextButton';
 
-import { fetchSendConfirmation } from '#store/actions';
+import {
+  setSendConfirmation,
+  fetchSendConfirmation,
+} from '#store/actions';
 import { loadingSelector } from '#store/selectors';
 
 interface ModalConfirmLandingI {
@@ -20,9 +23,18 @@ const ModalConfirmLanding = ({
   const dispatch = useDispatch();
   const loading = useSelector(loadingSelector);
 
+  React.useEffect(() => () => {
+    dispatch(setSendConfirmation({
+      errors: { email: '' },
+      status: 'pending',
+    }));
+  }, []);
+
   const onClick = () => {
     if (!loading) {
-      dispatch(fetchSendConfirmation({ email: currentEmail }));
+      dispatch(fetchSendConfirmation({
+        email: currentEmail,
+      }));
     }
   };
 

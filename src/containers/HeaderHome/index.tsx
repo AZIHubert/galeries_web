@@ -1,20 +1,12 @@
 import * as React from 'react';
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
-import ModalTimer from '#components/ModalTimer';
 
 import logo from '#ressources/svg/logoG.svg';
 
-import { setNotification } from '#store/actions';
-import {
-  loadingSelector,
-  notificationSelector,
-} from '#store/selectors';
+import { loadingSelector } from '#store/selectors';
 
 import ModalConfirmLanding from './ModalConfirmLanding';
 import ModalLogin from './ModalLogin';
@@ -31,22 +23,10 @@ import {
 } from './styles';
 
 const Header = () => {
+  const loading = useSelector(loadingSelector);
   const [currentEmail, setCurrentEmail] = React.useState<string>('');
   const [currentModal, setCurrentModal] = React.useState<HeaderModals | null>(null);
-  const loading = useSelector(loadingSelector);
-  const notification = useSelector(notificationSelector);
   const [openModal, setOpenModal] = React.useState<boolean>(false);
-  const [openModalTimer, setOpenModalTimer] = React.useState<boolean>(false);
-  const dispatch = useDispatch();
-
-  const handleCloseModalTimer = React.useCallback(() => setOpenModalTimer(false), []);
-
-  React.useLayoutEffect(() => {
-    if (notification.text) {
-      handleCloseModalTimer();
-      setOpenModalTimer(true);
-    }
-  }, [notification]);
 
   const handleClickLogin = () => {
     if (!loading) {
@@ -63,7 +43,6 @@ const Header = () => {
   const handleCloseModal = () => {
     if (!loading) {
       setOpenModal(false);
-      handleCloseModalTimer();
     }
   };
   const handleCurrentModal = () => {
@@ -88,6 +67,7 @@ const Header = () => {
       case 'resetPassword':
         return (
           <ModalResetPassword
+            setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
           />
         );
@@ -119,12 +99,10 @@ const Header = () => {
           <HeaderButton
             marginRight={30}
             onClick={handleClickSignin}
-            testId='openSignin'
             title='Sign in'
           />
           <HeaderButton
             onClick={handleClickLogin}
-            testId='openLogin'
             title='Log in'
             variant='secondary'
           />
@@ -135,18 +113,6 @@ const Header = () => {
           open={openModal}
         >
           {handleCurrentModal()}
-          <ModalTimer
-            callBack={() => {
-              dispatch(setNotification({
-                error: false,
-                text: '',
-              }));
-            }}
-            handleClose={handleCloseModalTimer}
-            open={openModalTimer}
-            text={notification.text}
-            variant={notification.error ? 'danger' : 'primary'}
-          />
         </Modal>
       </InnerContainer>
     </Container>

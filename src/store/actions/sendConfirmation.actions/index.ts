@@ -1,29 +1,25 @@
 export const SEND_CONFIRMATION = '[SEND CONFIRMATION]';
 
-export const SEND_CONFIRMATION_SET = `${SEND_CONFIRMATION} set`;
-export const SEND_CONFIRMATION_FETCH = `${SEND_CONFIRMATION} fetch`;
+export const SEND_CONFIRMATION_FETCH = `${SEND_CONFIRMATION} Fetch`;
+export const SEND_CONFIRMATION_SET = `${SEND_CONFIRMATION} Set`;
 
-export const fetchSendConfirmation = (
-  data: {
-    email: string;
-  },
+export const fetchSendConfirmation: (
+  data: form.SendConfirmationI,
+) => store.ActionI = (
+  data,
 ) => ({
+  payload: { data },
   type: SEND_CONFIRMATION_FETCH,
-  payload: {
-    data,
-  },
 });
 
-export const setSendConfirmation = (
+export const setSendConfirmation: (
   data: {
+    errors?: form.SendConfirmationI;
     status?: store.FormStatus;
-    errors?: {
-      email: string;
-    }
   },
+) => store.ActionI = (
+  data,
 ) => ({
+  payload: { data },
   type: SEND_CONFIRMATION_SET,
-  payload: {
-    data,
-  },
 });

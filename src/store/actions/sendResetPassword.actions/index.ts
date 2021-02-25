@@ -1,22 +1,25 @@
 export const SEND_RESET_PASSWORD = '[SEND RESET PASSWORD]';
 
-export const SEND_RESET_PASSWORD_ERROR = `${SEND_RESET_PASSWORD} error`;
-export const SEND_RESET_PASSWORD_FETCH = `${SEND_RESET_PASSWORD} fetch`;
+export const SEND_RESET_PASSWORD_FETCH = `${SEND_RESET_PASSWORD} Fetch`;
+export const SEND_RESET_PASSWORD_SET = `${SEND_RESET_PASSWORD} Set`;
 
-interface DataI {
-  email: string;
-}
-
-export const fetchSendResetPassword = (data: DataI) => ({
+export const fetchSendResetPassword: (
+  data: form.SendResetPasswordI,
+) => store.ActionI = (
+  data,
+) => ({
+  payload: { data },
   type: SEND_RESET_PASSWORD_FETCH,
-  payload: {
-    data,
-  },
 });
 
-export const setSendResetPasswordError = (data: DataI) => ({
-  type: SEND_RESET_PASSWORD_ERROR,
-  payload: {
-    data,
+export const setSendResetPassword: (
+  data: {
+    errors?: form.SendResetPasswordI;
+    status?: store.FormStatus;
   },
+) => store.ActionI = (
+  data,
+) => ({
+  payload: { data },
+  type: SEND_RESET_PASSWORD_SET,
 });

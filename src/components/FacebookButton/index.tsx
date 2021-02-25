@@ -24,11 +24,13 @@ const FacebookButton = ({
 }: FacebookButtonI) => {
   const dispatch = useDispatch();
   const loading = useSelector(loadingSelector);
+
   const responseFacebook = async (
     faceBookResponse: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
   ) => {
     dispatch(fetchLoginFacebook(faceBookResponse));
   };
+
   return (
     <FacebookLogin
       appId={process.env.FACEBOOK_ID!}
@@ -40,9 +42,7 @@ const FacebookButton = ({
           disabled={loading}
           marginBottom={10}
           marginBottomL={13}
-          onClick={() => {
-            renderProps.onClick();
-          }}
+          onClick={renderProps.onClick}
         />
       )}
     />

@@ -11,29 +11,45 @@ import ModalContainer from '#components/ModalContainer';
 
 import { resetConfirmSchema } from '#helpers/schemas';
 
-import { fetchSendConfirmation } from '#store/actions';
+import {
+  setSendConfirmation,
+  fetchSendConfirmation,
+} from '#store/actions';
 import {
   loadingSelector,
   sendConfirmationErrorSelector,
 } from '#store/selectors';
 
-const initialValues = {
+const initialValues: form.SendConfirmationI = {
   email: '',
 };
 
 const ModalResendConfirm = () => {
-  const loading = useSelector(loadingSelector);
-  const confirmationError = useSelector(sendConfirmationErrorSelector);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: async (value) => {
-      dispatch(fetchSendConfirmation(value));
+      if (!loading) {
+        resetForm();
+        dispatch(fetchSendConfirmation(value));
+      }
     },
     validateOnChange: false,
     validateOnBlur: true,
     validationSchema: resetConfirmSchema,
   });
+  const sendConfirmationError = useSelector(sendConfirmationErrorSelector);
+  const loading = useSelector(loadingSelector);
+
+  React.useEffect(() => () => resetForm(), []);
+
+  const resetForm = () => {
+    dispatch(setSendConfirmation({
+      errors: initialValues,
+      status: 'pending',
+    }));
+  };
+
   return (
     <ModalContainer
       title='Your account is not confirmed'
@@ -50,15 +66,25 @@ const ModalResendConfirm = () => {
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
-          id='email'
           error={
-            formik.errors.email || confirmationError.email
+            formik.errors.email || sendConfirmationError.email
           }
+          id='email'
           label='email'
           marginTop={20}
           marginTopL={24}
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (sendConfirmationError.email) {
+              dispatch(setSendConfirmation({
+                errors: {
+                  ...sendConfirmationError,
+                  email: '',
+                },
+              }));
+            }
+          }}
           touched={formik.touched.email}
           value={formik.values.email}
         />

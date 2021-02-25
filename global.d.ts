@@ -19,7 +19,32 @@ import {
 } from '#store/actions';
 
 declare global {
-
+  namespace form {
+    interface LoginI {
+      password: string;
+      userNameOrEmail: string;
+    }
+    interface ResetPasswordI {
+      confirmPassword: string;
+      password: string;
+    }
+    interface SendConfirmationI {
+      email: string;
+    }
+    interface SendResetPasswordI {
+      email: string;
+    }
+    interface SendTicketI {
+      body: string;
+      header: string;
+    }
+    interface SigninI {
+      confirmPassword: string;
+      email: string;
+      password: string;
+      userName: string;
+    }
+  }
   namespace store {
     type Entity =
       typeof CONFIRMATION |
@@ -36,6 +61,7 @@ declare global {
       typeof USER;
 
     type FormStatus = 'pending' | 'success' | 'error';
+
     interface ActionI {
       type: string;
       payload: {
@@ -49,23 +75,33 @@ declare global {
         }
       }
     }
+
+    interface NotificationI {
+      text: string;
+      error: boolean;
+    }
+
     interface ReducersI {
       login: {
         status: FormStatus;
-        errors: LoginI;
+        errors: form.LoginI;
       };
       notification: NotificationI;
-      resetPassword: ResetPasswordI;
+      resetPassword: {
+        status: FormStatus;
+        errors: form.ResetPasswordI
+      };
       sendConfirmation: {
-        status: FormData;
-        errors: SendConfirmationI;
+        status: FormStatus;
+        errors: form.SendConfirmationI;
       };
       sendResetPassword: {
-        errors: SendResetPasswordI;
+        status: FormStatus;
+        errors: form.SendResetPasswordI;
       };
       sendTicket: {
-        status: FormData;
-        errors: SendTicketI;
+        status: FormStatus;
+        errors: form.SendTicketI;
       }
       signin: {
         status: FormStatus;
@@ -76,6 +112,44 @@ declare global {
     }
   }
 
+  namespace style {
+    type Color =
+      'black' |
+      'danger' |
+      'primary' |
+      'secondary' |
+      'tertiary' |
+      'white';
+    type FontStyle =
+      'lighter' |
+      'normal';
+    type FontWeight =
+      'bold' |
+      'normal';
+    type JustifyContent =
+      'center' |
+      'end' |
+      'flex-end' |
+      'flex-start' |
+      'normal' |
+      'right' |
+      'safe' |
+      'space-around' |
+      'space-evenly' |
+      'start' |
+      'stretch' |
+      'unsafe';
+    type TextAlign =
+      'center' |
+      'end' |
+      'justify' |
+      'justify-all' |
+      'left' |
+      'match-parent' |
+      'right' |
+      'start';
+  }
+
   type HeaderModals =
     'confirmLanding'
     | 'login'
@@ -83,38 +157,6 @@ declare global {
     | 'resetPassword'
     | 'resetPasswordLanding'
     | 'signin';
-
-  interface SendResetPasswordI {
-    email: string;
-  }
-
-  interface SendTicketI {
-    body: string;
-    header: string;
-  }
-  interface SendConfirmationI {
-    email: string;
-  }
-
-  interface ResetPasswordI {
-    confirmPassword: string;
-    password: string;
-  }
-
-  interface NotificationI {
-    text: string;
-    error: boolean;
-  }
-  interface LoginI {
-    password: string;
-    userNameOrEmail: string;
-  }
-  interface SigninI {
-    confirmPassword: string;
-    email: string;
-    password: string;
-    userName: string;
-  }
 
   interface ImageI {
     bucketName: string;

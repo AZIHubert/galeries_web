@@ -1,31 +1,25 @@
 export const SEND_TICKET = '[SEND TICKET]';
 
-export const SEND_TICKET_FETCH = `${SEND_TICKET} fetch`;
-export const SEND_TICKET_SET = `${SEND_TICKET} set`;
+export const SEND_TICKET_FETCH = `${SEND_TICKET} Fetch`;
+export const SEND_TICKET_SET = `${SEND_TICKET} Set`;
 
-interface DataSetI {
-  status?: store.FormStatus;
-  errors?: SendTicketI;
-}
+export const fetchSendTicket: (
+  data: form.SendTicketI
+) => store.ActionI = (
+  data: form.SendTicketI,
+) => ({
+  payload: { data },
+  type: SEND_TICKET_FETCH,
+});
 
 export const setSendTicket: (
-  data: DataSetI
+  data: {
+    errors?: form.SendTicketI;
+    status?: store.FormStatus;
+  }
 ) => store.ActionI = (
   data,
 ) => ({
+  payload: { data },
   type: SEND_TICKET_SET,
-  payload: {
-    data,
-  },
-});
-
-export const fetchSendTicket: (
-  data: SendTicketI
-) => store.ActionI = (
-  data: SendTicketI,
-) => ({
-  type: SEND_TICKET_FETCH,
-  payload: {
-    data,
-  },
 });

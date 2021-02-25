@@ -1,11 +1,15 @@
 import { LOADER_SET } from '#store/actions';
 
-const initialState = {
+interface InitialStateI {
+  loading: boolean;
+}
+
+const initialState: InitialStateI = {
   loading: false,
 };
 
 export default (
-  ui = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
@@ -15,10 +19,10 @@ export default (
   switch (type) {
     case LOADER_SET:
       return {
-        ...ui,
-        loading: payload.data,
+        ...state,
+        ...payload.data,
       };
     default:
-      return ui;
+      return state;
   }
 };

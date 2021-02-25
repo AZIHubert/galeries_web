@@ -2,19 +2,14 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-type Color = 'black' | 'danger' | 'primary' | 'secondary' | 'tertiary' | 'white';
-type FontStyle = 'lighter' | 'normal';
-type FontWeight = 'bold' | 'normal';
-type TextAlign = 'center' | 'justify' | 'left' | 'right';
-
 interface PI {
-  color?: Color;
+  color?: style.Color;
   fontSize?: number;
   fontSizeL?: number;
-  fontStyle?: FontStyle;
-  fontWeight?: FontWeight;
+  fontStyle?: style.FontStyle;
+  fontWeight?: style.FontWeight;
   testId?: string;
-  textAlign?: TextAlign;
+  textAlign?: style.TextAlign;
 }
 
 const P = styled.p.attrs<PI>(

@@ -1,9 +1,9 @@
 import { USER_SET } from '#store/actions';
 
-const initialState = null;
+const initialState: UserI | null = null;
 
 export default (
-  user: UserI | null = initialState,
+  state = initialState,
   action: store.ActionI,
 ) => {
   const {
@@ -14,6 +14,6 @@ export default (
     case USER_SET:
       return payload.data;
     default:
-      return user;
+      return state;
   }
 };

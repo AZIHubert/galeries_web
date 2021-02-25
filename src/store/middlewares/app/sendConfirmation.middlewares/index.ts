@@ -2,13 +2,13 @@ import { Middleware } from 'redux';
 
 import {
   API_ERROR,
+  API_SUCCESS,
   SEND_CONFIRMATION,
   SEND_CONFIRMATION_FETCH,
   apiRequest,
   setLoader,
   setNotification,
   setSendConfirmation,
-  API_SUCCESS,
 } from '#store/actions';
 
 import {
@@ -28,17 +28,15 @@ const errorSendConfirmation: Middleware = (
     type,
   } = action;
   if (type === `${SEND_CONFIRMATION} ${API_ERROR}`) {
-    if (typeof data.response.data.errors === 'object') {
+    if (typeof data === 'object') {
       dispatch(setSendConfirmation({
         status: 'error',
-        errors: data.response.data.errors,
+        errors: data,
       }));
     } else {
-      dispatch(setSendConfirmation({
-        status: 'error',
-      }));
+      dispatch(setSendConfirmation({ status: 'error' }));
       dispatch(setNotification({
-        text: data.response.data.errors,
+        text: data,
         error: true,
       }));
     }
@@ -60,6 +58,7 @@ const fetchSendConfirmation: Middleware = (
   } = action;
   if (type === SEND_CONFIRMATION_FETCH) {
     dispatch(setLoader(true));
+    dispatch(setSendConfirmation({ status: 'pending' }));
     dispatch(
       apiRequest(
         data,
@@ -83,9 +82,7 @@ const successSendConfirmation: Middleware = (
     type,
   } = action;
   if (type === `${SEND_CONFIRMATION} ${API_SUCCESS}`) {
-    dispatch(setSendConfirmation({
-      status: 'success',
-    }));
+    dispatch(setSendConfirmation({ status: 'success' }));
     dispatch(setNotification({
       text: 'an email has been sent to you',
       error: false,

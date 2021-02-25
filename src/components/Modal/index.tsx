@@ -11,9 +11,10 @@ import {
 interface ModalI {
   callBack?: () => void;
   children: React.ReactNode;
+  containerTestId?: string;
   handleClose: () => void;
+  modalTestId?: string;
   open: boolean;
-  testId?: string;
 }
 
 const modalRoot = document.getElementById('modal-root');
@@ -21,41 +22,40 @@ const modalRoot = document.getElementById('modal-root');
 const Modal = ({
   callBack,
   children,
+  containerTestId,
   handleClose,
+  modalTestId,
   open,
-  testId,
 }: ModalI) => {
   const el = React.useRef(document.createElement('div'));
 
   React.useEffect(() => {
-    if (modalRoot && open) {
-      modalRoot.appendChild(el.current);
-    }
+    if (modalRoot && open) modalRoot.appendChild(el.current);
   }, [open]);
 
   return (
     ReactDOM.createPortal(
       <CSSTransition
+        classNames='fade'
+        in={open}
         onExited={() => {
           if (modalRoot) {
             modalRoot.removeChild(el.current);
           }
           if (callBack) callBack();
         }}
-        in={open}
-        classNames='fade'
         timeout={300}
         unmountOnExit
       >
         <Fader>
           <Container
-            testId={testId}
+            testId={containerTestId}
           >
             {children}
           </Container>
           <Background
             onClick={handleClose}
-            testId="modalBackground"
+            testId={modalTestId}
           />
         </Fader>
       </CSSTransition>,

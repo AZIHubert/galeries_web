@@ -29,18 +29,16 @@ const errorSignin: Middleware = (
     type,
   } = action;
   if (type === `${SIGNIN} ${API_ERROR}`) {
-    if (typeof data.response.data.errors === 'object') {
+    if (typeof data === 'object') {
       dispatch(setSignin({
         status: 'error',
-        errors: data.response.data.errors,
+        errors: data,
       }));
     } else {
-      dispatch(setSignin({
-        status: 'error',
-      }));
+      dispatch(setSignin({ status: 'error' }));
       dispatch(setNotification({
         error: true,
-        text: data.response.data.errors,
+        text: data,
       }));
     }
     dispatch(setLoader(false));
@@ -61,6 +59,7 @@ const fetchSignin: Middleware = (
   } = action;
   if (type === SIGNIN_FETCH) {
     dispatch(setLoader(true));
+    dispatch(setSignin({ status: 'pending' }));
     dispatch(
       apiRequest(
         data,
@@ -87,9 +86,7 @@ const successSignin: Middleware = (
   } = action;
   if (type === `${SIGNIN} ${API_SUCCESS}`) {
     dispatch(setSignin({ status: 'success' }));
-    dispatch(
-      fetchSendConfirmation({ email: data.email }),
-    );
+    dispatch(fetchSendConfirmation({ email: data.email }));
   }
 };
 

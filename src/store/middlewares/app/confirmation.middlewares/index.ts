@@ -2,13 +2,19 @@ import { Middleware } from 'redux';
 
 import {
   API_ERROR,
+  API_SUCCESS,
   CONFIRMATION,
   CONFIRMATION_FETCH,
-  setNotification,
   apiRequest,
+  fetchUser,
   setLoader,
-  API_SUCCESS,
+  setNotification,
 } from '#store/actions';
+
+import {
+  setAuthToken,
+  setExpiresToken,
+} from '#store/helpers';
 
 import {
   endPoints,
@@ -29,7 +35,7 @@ const errorConfirmation: Middleware = (
   if (type === `${CONFIRMATION} ${API_ERROR}`) {
     dispatch(setNotification({
       error: true,
-      text: data.errors,
+      text: data,
     }));
     dispatch(setLoader(false));
   }
@@ -57,7 +63,6 @@ const fetchConfirmation: Middleware = (
         data,
       ),
     );
-    dispatch(setLoader(false));
   }
 };
 
@@ -70,10 +75,13 @@ const successConfiramtion: Middleware = (
 ) => {
   next(action);
   const {
+    payload: { data },
     type,
   } = action;
   if (type === `${CONFIRMATION} ${API_SUCCESS}`) {
-    dispatch(setLoader(false));
+    setAuthToken(data.token);
+    setExpiresToken(data.expiresIn);
+    dispatch(fetchUser());
   }
 };
 

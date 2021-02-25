@@ -11,10 +11,12 @@ import {
   setNotification,
 } from '#store/actions';
 
+import { endPoints } from '#store/constant';
+
 import {
-  endPoints,
-  localStorages,
-} from '#store/constant';
+  setAuthToken,
+  setExpiresToken,
+} from '#store/helpers';
 
 const errorLoginGoogle: Middleware = (
   { dispatch },
@@ -29,21 +31,12 @@ const errorLoginGoogle: Middleware = (
     type,
   } = action;
   if (type === `${LOGIN_GOOGLE} ${API_ERROR}`) {
-    if (data.response && data.status !== 500) {
-      dispatch(
-        setNotification({
-          error: true,
-          text: data.response.data.errors,
-        }),
-      );
-    } else {
-      dispatch(
-        setNotification({
-          error: true,
-          text: 'Something went wrong. Please try again.',
-        }),
-      );
-    }
+    dispatch(
+      setNotification({
+        error: true,
+        text: data,
+      }),
+    );
     dispatch(setLoader(false));
   }
 };
@@ -67,7 +60,6 @@ const fetchLoginGoogle: Middleware = (
       imageUrl: data.photoUrl,
       name: data.name,
     };
-    dispatch(setLoader(true));
     dispatch(
       apiRequest(
         requestData,
@@ -92,14 +84,8 @@ const successLoginGoogle: Middleware = (
     type,
   } = action;
   if (type === `${LOGIN_GOOGLE} ${API_SUCCESS}`) {
-    localStorage.setItem(
-      localStorages.AUTH_TOKEN,
-      data.data.token,
-    );
-    localStorage.setItem(
-      localStorages.EXPIRES_DATE_TOKEN,
-      data.data.expiresIn,
-    );
+    setAuthToken(data.token);
+    setExpiresToken(data.expiresIn);
     dispatch(fetchUser());
   }
 };

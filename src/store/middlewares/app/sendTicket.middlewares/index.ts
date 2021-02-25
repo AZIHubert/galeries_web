@@ -7,8 +7,8 @@ import {
   SEND_TICKET_FETCH,
   apiRequest,
   setLoader,
-  setSendTicket,
   setNotification,
+  setSendTicket,
 } from '#store/actions';
 
 import {
@@ -28,17 +28,17 @@ const errorSendTicket: Middleware = (
     type,
   } = action;
   if (type === `${SEND_TICKET} ${API_ERROR}`) {
-    if (typeof data.response.data.errors === 'object') {
+    if (typeof data === 'object') {
       dispatch(setSendTicket({
         status: 'error',
-        errors: data.response.data.errors,
+        errors: data,
       }));
     } else {
       dispatch(setSendTicket({
         status: 'error',
       }));
       dispatch(setNotification({
-        text: data.response.data.errors,
+        text: data,
         error: true,
       }));
     }
@@ -55,17 +55,20 @@ const fetchSendTicket: Middleware = (
 ) => {
   next(action);
   const {
+    payload: { data },
     type,
   } = action;
-  if (type === `${SEND_TICKET} ${API_SUCCESS}`) {
-    dispatch(setSendTicket({
-      status: 'success',
-    }));
-    dispatch(setNotification({
-      error: false,
-      text: 'you\'re ticket has been send',
-    }));
-    dispatch(setLoader(false));
+  if (type === SEND_TICKET_FETCH) {
+    dispatch(setLoader(true));
+    dispatch(setSendTicket({ status: 'pending' }));
+    dispatch(
+      apiRequest(
+        data,
+        'POST',
+        endPoints.TICKET,
+        SEND_TICKET,
+      ),
+    );
   }
 };
 
@@ -78,19 +81,15 @@ const successSendTicket: Middleware = (
 ) => {
   next(action);
   const {
-    payload: { data },
     type,
   } = action;
-  if (type === SEND_TICKET_FETCH) {
-    dispatch(setLoader(true));
-    dispatch(
-      apiRequest(
-        data,
-        'POST',
-        endPoints.TICKET,
-        SEND_TICKET,
-      ),
-    );
+  if (type === `${SEND_TICKET} ${API_SUCCESS}`) {
+    dispatch(setSendTicket({ status: 'success' }));
+    dispatch(setNotification({
+      error: false,
+      text: 'you\'re ticket has been send',
+    }));
+    dispatch(setLoader(false));
   }
 };
 

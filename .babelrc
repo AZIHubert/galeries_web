@@ -16,7 +16,7 @@
               "react-facebook-login":  "react-facebook-login/dist/facebook-login-render-props",
               "#ressources": "./src/ressources",
               "#src": "./src",
-              "#store": "./src/store",
+              "#store": "./src/store"
             }
          }]
     ]

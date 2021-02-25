@@ -8,7 +8,7 @@ module.exports = {
     },
   },
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.(tsx?|ts?)$': 'ts-jest',
     '^.+\\.svg$': '<rootDir>/svgTransform.js',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
   },
@@ -22,14 +22,14 @@ module.exports = {
   ],
   testPathIgnorePatterns: ['<rootDir>/cypress/'],
   testMatch: null,
-  testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?)$',
   moduleNameMapper: {
     '#components/(.*)': '<rootDir>/src/components/$1',
     '#contexts/(.*)': '<rootDir>/src/contexts/$1',
     '#containers/(.*)': '<rootDir>/src/containers/$1',
     '#helpers/(.*)': '<rootDir>/src/helpers/$1',
     '#ressources/(.*)': '<rootDir>/src/ressources/$1',
-    '#src/(.*)': '<routDir>/src/$1',
-    '#store/(.*)': '<routDir>/src/store/$1',
+    '#src/(.*)': '<rootDir>/src/$1',
+    '#store/(.*)': '<rootDir>/src/store/$1',
   },
 };

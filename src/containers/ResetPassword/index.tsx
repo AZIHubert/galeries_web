@@ -6,6 +6,7 @@ import {
 } from 'react-redux';
 import {
   Link,
+  useHistory,
   useParams,
 } from 'react-router-dom';
 
@@ -17,10 +18,14 @@ import { resetPasswordSchema } from '#helpers/schemas';
 
 import { LogoGaleries } from '#ressources/svgComponents';
 
-import { fetchResetPassword } from '#store/actions';
+import {
+  fetchResetPassword,
+  setResetPassword,
+} from '#store/actions';
 import {
   resetPasswordErrorSelector,
-  uiSelector,
+  resetPasswordStatusSelector,
+  loadingSelector,
 } from '#store/selectors';
 
 import {
@@ -31,28 +36,49 @@ import {
   Title,
 } from './styles';
 
-const initialValues = {
+const initialValues: form.ResetPasswordI = {
   confirmPassword: '',
   password: '',
 };
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(uiSelector);
-  const resetPasswordError = useSelector(resetPasswordErrorSelector);
-  const { token } = useParams<{ token: string }>();
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      dispatch(fetchResetPassword({
-        ...values,
-        confirmationToken: token,
-      }));
+      if (!loading) {
+        resetForm();
+        dispatch(fetchResetPassword({
+          ...values,
+          confirmToken: `Bearer ${token}`,
+        }));
+      }
     },
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: resetPasswordSchema,
   });
+  const history = useHistory();
+  const { token } = useParams<{ token: string }>();
+  const loading = useSelector(loadingSelector);
+  const resetPasswordError = useSelector(resetPasswordErrorSelector);
+  const resetPasswordStatus = useSelector(resetPasswordStatusSelector);
+
+  React.useEffect(() => {
+    if (resetPasswordStatus === 'success') {
+      history.push('/');
+    }
+  }, [resetPasswordStatus]);
+
+  React.useEffect(() => () => resetForm(), []);
+
+  const resetForm = () => {
+    dispatch(setResetPassword({
+      errors: initialValues,
+      status: 'pending',
+    }));
+  };
+
   return (
     <Container>
       <Logo>
@@ -64,15 +90,25 @@ const ResetPassword = () => {
       <Form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
-          id='password'
           error={
             formik.errors.password || resetPasswordError.password
           }
+          id='password'
           marginBottom={6}
           marginBottomL={10}
           label='password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (resetPasswordError.password) {
+              dispatch(setResetPassword({
+                errors: {
+                  ...resetPasswordError,
+                  password: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.password}
           type='password'
@@ -80,14 +116,24 @@ const ResetPassword = () => {
         />
         <Field
           disabled={loading}
-          id='confirmPassword'
           error={
             formik.errors.confirmPassword || resetPasswordError.confirmPassword
           }
+          id='confirmPassword'
           marginBottom={12}
           label='confirm password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (resetPasswordError.confirmPassword) {
+              dispatch(setResetPassword({
+                errors: {
+                  ...resetPasswordError,
+                  confirmPassword: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.confirmPassword}
           type='password'

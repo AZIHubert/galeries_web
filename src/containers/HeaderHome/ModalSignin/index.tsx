@@ -31,7 +31,7 @@ interface ModalSigninI {
   setCurrentModal: React.Dispatch<React.SetStateAction<HeaderModals | null>>;
 }
 
-const initialValues = {
+const initialValues: form.SigninI = {
   confirmPassword: '',
   email: '',
   password: '',
@@ -43,9 +43,21 @@ const ModalSignin = ({
   setCurrentModal,
 }: ModalSigninI) => {
   const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      if (!loading) {
+        resetForm();
+        dispatch(fetchSignin(values));
+      }
+    },
+    validateOnBlur: true,
+    validateOnChange: false,
+    validationSchema: signinSchema,
+  });
+  const loading = useSelector(loadingSelector);
   const signinError = useSelector(signinErrorSelector);
   const signinStatus = useSelector(signinStatusSelector);
-  const loading = useSelector(loadingSelector);
 
   React.useEffect(() => {
     if (signinStatus === 'success') {
@@ -53,27 +65,14 @@ const ModalSignin = ({
       setCurrentModal('confirmLanding');
     }
   }, [signinStatus]);
+  React.useEffect(() => () => resetForm(), []);
 
-  React.useEffect(() => () => {
+  const resetForm = () => {
     dispatch(setSignin({
       status: 'pending',
       errors: initialValues,
     }));
-  }, []);
-
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values) => {
-      dispatch(setSignin({
-        status: 'pending',
-        errors: initialValues,
-      }));
-      dispatch(fetchSignin(values));
-    },
-    validateOnBlur: true,
-    validateOnChange: false,
-    validationSchema: signinSchema,
-  });
+  };
 
   return (
     <ModalContainer>
@@ -93,10 +92,10 @@ const ModalSignin = ({
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
-          id='userName'
           error={
             formik.errors.userName || signinError.userName
           }
+          id='userName'
           marginBottom={6}
           marginBottomL={10}
           label='user name'
@@ -118,10 +117,10 @@ const ModalSignin = ({
         />
         <Field
           disabled={loading}
-          id='email'
           error={
             formik.errors.email || signinError.email
           }
+          id='email'
           marginBottom={6}
           marginBottomL={10}
           label='email'
@@ -143,10 +142,10 @@ const ModalSignin = ({
         />
         <Field
           disabled={loading}
-          id='password'
           error={
             formik.errors.password || signinError.password
           }
+          id='password'
           marginBottom={6}
           marginBottomL={10}
           label='password'
@@ -169,10 +168,10 @@ const ModalSignin = ({
         />
         <Field
           disabled={loading}
-          id='confirmPassword'
           error={
             formik.errors.confirmPassword || signinError.confirmPassword
           }
+          id='confirmPassword'
           marginBottom={12}
           marginBottomL={15}
           label='confirm password'

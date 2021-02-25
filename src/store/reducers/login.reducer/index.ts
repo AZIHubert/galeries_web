@@ -1,19 +1,16 @@
 import { LOGIN_SET } from '#store/actions';
 
 interface InitialStateI {
+  errors: form.LoginI,
   status: store.FormStatus,
-  errors: {
-    password: string | null;
-    userNameOrEmail: string | null;
-  },
 }
 
 const initialState: InitialStateI = {
-  status: 'pending',
   errors: {
-    password: null,
-    userNameOrEmail: null,
+    password: '',
+    userNameOrEmail: '',
   },
+  status: 'pending',
 };
 
 export default (

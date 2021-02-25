@@ -1,9 +1,15 @@
-import { SEND_RESET_PASSWORD_ERROR } from '#store/actions';
+import { SEND_RESET_PASSWORD_SET } from '#store/actions';
 
-const initialState = {
+interface InitialStateI {
+  errors: form.SendResetPasswordI;
+  status: store.FormStatus;
+}
+
+const initialState: InitialStateI = {
   errors: {
-    email: null,
+    email: '',
   },
+  status: 'pending',
 };
 
 export default (
@@ -15,12 +21,13 @@ export default (
     type,
   } = action;
   switch (type) {
-    case SEND_RESET_PASSWORD_ERROR:
+    case SEND_RESET_PASSWORD_SET:
       return {
         ...state,
+        ...payload.data,
         errors: {
           ...state.errors,
-          ...payload.data,
+          ...payload.data.errors,
         },
       };
     default:

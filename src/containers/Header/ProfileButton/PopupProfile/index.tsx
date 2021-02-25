@@ -30,10 +30,9 @@ const PopupProfile = ({
   handleOpenTicket,
 }: PopupProfileI) => {
   const user = useSelector(userSelector);
+
   return (
-    <Container
-      data-testid='popupProfil'
-    >
+    <Container>
       <InnerContainer>
         <Button
           borderBottom
@@ -74,7 +73,6 @@ const PopupProfile = ({
           </Text>
         </Button>
         <Button
-          data-testid='buttonTicketModal'
           onClick={handleOpenTicket}
         >
           <LogoContainer>

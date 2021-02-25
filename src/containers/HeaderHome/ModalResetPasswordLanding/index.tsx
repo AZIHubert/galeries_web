@@ -8,9 +8,12 @@ import ModalContainer from '#components/ModalContainer';
 import ModalTimer from '#components/ModalTimer';
 import TextButton from '#components/TextButton';
 
-import { fetchSendResetPassword } from '#store/actions';
 import {
-  uiSelector,
+  fetchSendResetPassword,
+  setSendResetPassword,
+} from '#store/actions';
+import {
+  loadingSelector,
 } from '#store/selectors';
 
 interface ModalResetPasswordLandingI {
@@ -21,12 +24,27 @@ const ModalResetPasswordLanding = ({
   currentEmail,
 }: ModalResetPasswordLandingI) => {
   const dispatch = useDispatch();
-  const loading = useSelector(uiSelector);
+  const loading = useSelector(loadingSelector);
   const [open, setOpen] = React.useState<boolean>(false);
+
+  React.useEffect(() => () => resetForm(), []);
+
   const handleClose = () => setOpen(false);
   const onClick = async () => {
-    dispatch(fetchSendResetPassword({ email: currentEmail }));
+    if (!loading) {
+      dispatch(fetchSendResetPassword({ email: currentEmail }));
+    }
   };
+
+  const resetForm = () => {
+    dispatch(setSendResetPassword({
+      errors: {
+        email: '',
+      },
+      status: 'pending',
+    }));
+  };
+
   return (
     <ModalContainer
       title='Reset your password'

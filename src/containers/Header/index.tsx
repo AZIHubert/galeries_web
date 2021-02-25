@@ -29,28 +29,29 @@ import {
 
 const Header = () => {
   const dispatch = useDispatch();
+
   return (
     <Container>
       <InnerContainer>
         <HeaderPart>
           <Logo
-            src={logo}
             alt="header logo"
+            src={logo}
           />
           <SearchBar />
         </HeaderPart>
         <HeaderPart>
           <Pictogram
             hoverPictogram={HomeHover}
-            pictogram={Home}
             marginRight={25}
             marginRightL={35}
+            pictogram={Home}
           />
           <Pictogram
             hoverPictogram={CreateGalerieHover}
-            pictogram={CreateGalerie}
             marginRight={25}
             marginRightL={35}
+            pictogram={CreateGalerie}
           />
           <Pictogram
             hoverPictogram={NotificationHover}

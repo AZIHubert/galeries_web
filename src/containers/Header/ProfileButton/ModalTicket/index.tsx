@@ -12,32 +12,29 @@ import RequiredField from '#components/RequiredField';
 
 import { ticketSchema } from '#helpers/schemas';
 
+import { fetchSendTicket } from '#store/actions';
 import { loadingSelector } from '#store/selectors';
 
-import { fetchSendTicket } from '#store/actions';
-
-const initialValues = {
-  header: '',
+const initialValues: form.SendTicketI = {
   body: '',
+  header: '',
 };
 
 const ModalTicket = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(loadingSelector);
   const formik = useFormik({
     initialValues,
     onSubmit: (value) => {
-      if (!loading) {
-        dispatch(fetchSendTicket(value));
-      }
+      if (!loading) dispatch(fetchSendTicket(value));
     },
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: ticketSchema,
   });
+  const loading = useSelector(loadingSelector);
+
   return (
     <ModalContainer
-      data-testid='ticketModal'
       title='Send a ticket'
       titleMarginTop={20}
       titleTextAlign='center'
@@ -47,8 +44,6 @@ const ModalTicket = () => {
           disabled={loading}
           id='header'
           error={formik.errors.header}
-          errorTestId='headerError'
-          fieldTestId='headerField'
           marginBottom={6}
           marginBottomL={10}
           label='title'
@@ -62,8 +57,6 @@ const ModalTicket = () => {
           disabled={loading}
           id='body'
           error={formik.errors.body}
-          errorTestId='bodyError'
-          fieldTestId='bodyField'
           marginBottom={12}
           marginBottomL={15}
           multiline
@@ -81,7 +74,6 @@ const ModalTicket = () => {
           marginBottomL={22}
           marginTop={15}
           marginTopL={22}
-          testId='submitButton'
           type='submit'
           title='send'
         />

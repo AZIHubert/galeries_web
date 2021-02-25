@@ -8,7 +8,7 @@ import {
   apiRequest,
   setLoader,
   setNotification,
-  setResetPasswordError,
+  setResetPassword,
 } from '#store/actions';
 
 import {
@@ -28,12 +28,18 @@ const errorResetPassword: Middleware = (
     type,
   } = action;
   if (type === `${RESET_PASSWORD} ${API_ERROR}`) {
-    if (typeof data.errors === 'object') {
-      dispatch(setResetPasswordError(data.errors));
+    if (typeof data === 'object') {
+      dispatch(
+        setResetPassword({
+          errors: data,
+          status: 'error',
+        }),
+      );
     } else {
+      dispatch(setResetPassword({ status: 'error' }));
       dispatch(setNotification({
         error: true,
-        text: data.errors,
+        text: data,
       }));
     }
     dispatch(setLoader(false));
@@ -54,6 +60,7 @@ const fetchResetPassword: Middleware = (
   } = action;
   if (type === RESET_PASSWORD_FETCH) {
     dispatch(setLoader(true));
+    dispatch(setResetPassword({ status: 'pending' }));
     dispatch(
       apiRequest(
         {
@@ -63,7 +70,7 @@ const fetchResetPassword: Middleware = (
         'PUT',
         endPoints.RESET_PASSWORD,
         RESET_PASSWORD,
-        data.confirmationToken,
+        data.confirmToken,
       ),
     );
   }
@@ -81,6 +88,11 @@ const successResetPassword: Middleware = (
     type,
   } = action;
   if (type === `${RESET_PASSWORD} ${API_SUCCESS}`) {
+    dispatch(setResetPassword({ status: 'success' }));
+    dispatch(setNotification({
+      error: false,
+      text: 'you\'re password has been successfully changed.',
+    }));
     dispatch(setLoader(false));
   }
 };

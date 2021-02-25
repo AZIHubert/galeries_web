@@ -1,1 +1,1 @@
-export default (state: store.ReducersI) => state.resetPasswordError;
+export default (state: store.ReducersI) => state.resetPassword.errors;

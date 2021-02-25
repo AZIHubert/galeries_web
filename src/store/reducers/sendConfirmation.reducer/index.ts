@@ -1,17 +1,15 @@
 import { SEND_CONFIRMATION_SET } from '#store/actions';
 
 interface InitialStateI {
+  errors: form.SendConfirmationI;
   status: store.FormStatus;
-  errors: {
-    email: string | null;
-  }
 }
 
 const initialState: InitialStateI = {
-  status: 'pending',
   errors: {
-    email: null,
+    email: '',
   },
+  status: 'pending',
 };
 
 export default (
