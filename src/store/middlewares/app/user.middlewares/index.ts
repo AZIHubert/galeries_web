@@ -21,14 +21,10 @@ const errorUser: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${USER} ${API_ERROR}`) {
+  if (action.type === `${USER} ${API_ERROR}`) {
     dispatch(setNotification({
       error: true,
-      text: data,
+      text: action.payload ? action.payload.data : 'Something went wrong.',
     }));
     dispatch(setLoader(false));
   }
@@ -42,8 +38,7 @@ const fetchUser: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const { type } = action;
-  if (type === USER_FETCH) {
+  if (action.type === USER_FETCH) {
     dispatch(
       apiRequest(
         null,
@@ -63,12 +58,8 @@ const getUser: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${USER} ${API_SUCCESS}`) {
-    dispatch(setUser(data));
+  if (action.type === `${USER} ${API_SUCCESS}`) {
+    dispatch(setUser(action.payload ? action.payload.data : undefined));
     dispatch(setLoader(false));
   }
 };

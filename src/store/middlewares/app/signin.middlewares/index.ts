@@ -24,21 +24,27 @@ const errorSignin: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${SIGNIN} ${API_ERROR}`) {
-    if (typeof data === 'object') {
+  if (action.type === `${SIGNIN} ${API_ERROR}`) {
+    if (action.payload) {
+      if (typeof action.payload.data === 'object') {
+        dispatch(setSignin({
+          status: 'error',
+          errors: action.payload.data,
+        }));
+      } else {
+        dispatch(setSignin({ status: 'error' }));
+        dispatch(setNotification({
+          error: true,
+          text: action.payload.data,
+        }));
+      }
+    } else {
       dispatch(setSignin({
         status: 'error',
-        errors: data,
       }));
-    } else {
-      dispatch(setSignin({ status: 'error' }));
       dispatch(setNotification({
         error: true,
-        text: data,
+        text: 'Something went wrong.',
       }));
     }
     dispatch(setLoader(false));
@@ -53,15 +59,11 @@ const fetchSignin: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    type,
-    payload: { data },
-  } = action;
-  if (type === SIGNIN_FETCH) {
+  if (action.type === SIGNIN_FETCH) {
     dispatch(setSignin({ status: 'pending' }));
     dispatch(
       apiRequest(
-        data,
+        action.payload ? action.payload.data : undefined,
         'POST',
         endPoints.SIGNIN,
         SIGNIN,
@@ -79,13 +81,11 @@ const successSignin: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    type,
-    payload: { data },
-  } = action;
-  if (type === `${SIGNIN} ${API_SUCCESS}`) {
+  if (action.type === `${SIGNIN} ${API_SUCCESS}`) {
     dispatch(setSignin({ status: 'success' }));
-    dispatch(fetchSendConfirmation({ email: data.email }));
+    dispatch(fetchSendConfirmation({
+      email: action.payload ? action.payload.data.email : undefined,
+    }));
   }
 };
 

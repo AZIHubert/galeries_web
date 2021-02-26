@@ -26,15 +26,11 @@ const errorLoginGoogle: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGIN_GOOGLE} ${API_ERROR}`) {
+  if (action.type === `${LOGIN_GOOGLE} ${API_ERROR}`) {
     dispatch(
       setNotification({
         error: true,
-        text: data,
+        text: action.payload ? action.payload.data : 'Something went wrong.',
       }),
     );
     dispatch(setLoader(false));
@@ -49,16 +45,12 @@ const fetchLoginGoogle: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === LOGIN_GOOGLE_FETCH) {
+  if (action.type === LOGIN_GOOGLE_FETCH) {
     const requestData = {
-      email: data.email,
-      id: data.googleId,
-      imageUrl: data.photoUrl,
-      name: data.name,
+      email: action.payload ? action.payload.data.email : undefined,
+      id: action.payload ? action.payload.data.googleId : undefined,
+      imageUrl: action.payload ? action.payload.data.photoUrl : undefined,
+      name: action.payload ? action.payload.data.name : undefined,
     };
     dispatch(
       apiRequest(
@@ -79,13 +71,11 @@ const successLoginGoogle: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGIN_GOOGLE} ${API_SUCCESS}`) {
-    setAuthToken(data.token);
-    setExpiresToken(data.expiresIn);
+  if (action.type === `${LOGIN_GOOGLE} ${API_SUCCESS}`) {
+    if (action.payload) {
+      setAuthToken(action.payload.data.token);
+      setExpiresToken(action.payload.data.expiresIn);
+    }
     dispatch(fetchUser());
   }
 };

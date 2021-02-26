@@ -23,23 +23,29 @@ const errorResetPassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${RESET_PASSWORD} ${API_ERROR}`) {
-    if (typeof data === 'object') {
-      dispatch(
-        setResetPassword({
-          errors: data,
-          status: 'error',
-        }),
-      );
+  if (action.type === `${RESET_PASSWORD} ${API_ERROR}`) {
+    if (action.payload) {
+      if (typeof action.payload.data === 'object') {
+        dispatch(
+          setResetPassword({
+            errors: action.payload.data,
+            status: 'error',
+          }),
+        );
+      } else {
+        dispatch(setResetPassword({ status: 'error' }));
+        dispatch(setNotification({
+          error: true,
+          text: action.payload.data,
+        }));
+      }
     } else {
-      dispatch(setResetPassword({ status: 'error' }));
+      dispatch(setResetPassword({
+        status: 'error',
+      }));
       dispatch(setNotification({
         error: true,
-        text: data,
+        text: 'Something went wrong.',
       }));
     }
     dispatch(setLoader(false));
@@ -54,22 +60,18 @@ const fetchResetPassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === RESET_PASSWORD_FETCH) {
+  if (action.type === RESET_PASSWORD_FETCH) {
     dispatch(setResetPassword({ status: 'pending' }));
     dispatch(
       apiRequest(
         {
-          confirmPassword: data.confirmPassword,
-          password: data.password,
+          confirmPassword: action.payload ? action.payload.data.confirmPassword : undefined,
+          password: action.payload ? action.payload.data.password : undefined,
         },
         'PUT',
         endPoints.RESET_PASSWORD,
         RESET_PASSWORD,
-        data.confirmToken,
+        action.payload ? action.payload.data.confirmToken : undefined,
       ),
     );
   }
@@ -83,10 +85,7 @@ const successResetPassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    type,
-  } = action;
-  if (type === `${RESET_PASSWORD} ${API_SUCCESS}`) {
+  if (action.type === `${RESET_PASSWORD} ${API_SUCCESS}`) {
     dispatch(setResetPassword({ status: 'success' }));
     dispatch(setNotification({
       error: false,

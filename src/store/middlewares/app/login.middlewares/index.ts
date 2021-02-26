@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { Middleware } from 'redux';
 
 import {
@@ -13,10 +12,12 @@ import {
   setNotification,
 } from '#store/actions';
 
+import { endPoints } from '#store/constant';
+
 import {
-  endPoints,
-  localStorages,
-} from '#store/constant';
+  setAuthToken,
+  setExpiresToken,
+} from '#store/helpers';
 
 const errorLogin: Middleware = (
   { dispatch },
@@ -26,23 +27,29 @@ const errorLogin: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGIN} ${API_ERROR}`) {
-    if (typeof data === 'object') {
-      dispatch(setLogin({
-        errors: data,
-        status: 'error',
-      }));
+  if (action.type === `${LOGIN} ${API_ERROR}`) {
+    if (action.payload) {
+      if (typeof action.payload.data === 'object') {
+        dispatch(setLogin({
+          errors: action.payload.data,
+          status: 'error',
+        }));
+      } else {
+        dispatch(setLogin({
+          status: 'error',
+        }));
+        dispatch(setNotification({
+          error: true,
+          text: action.payload.data,
+        }));
+      }
     } else {
       dispatch(setLogin({
         status: 'error',
       }));
       dispatch(setNotification({
         error: true,
-        text: data,
+        text: 'Something went wrong.',
       }));
     }
 
@@ -58,15 +65,11 @@ const fetchLogin: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === LOGIN_FETCH) {
+  if (action.type === LOGIN_FETCH) {
     dispatch(setLogin({ status: 'pending' }));
     dispatch(
       apiRequest(
-        data,
+        action.payload ? action.payload.data : undefined,
         'POST',
         endPoints.LOGIN,
         LOGIN,
@@ -80,25 +83,17 @@ const successLogin: Middleware = (
 ) => (
   next,
 ) => (
-  action,
+  action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGIN} ${API_SUCCESS}`) {
+  if (action.type === `${LOGIN} ${API_SUCCESS}`) {
     dispatch(setLogin({
       status: 'success',
     }));
-    localStorage.setItem(
-      localStorages.AUTH_TOKEN,
-      data.token,
-    );
-    localStorage.setItem(
-      localStorages.EXPIRES_DATE_TOKEN,
-      JSON.stringify(moment().add(data.expiresIn, 's').valueOf()),
-    );
+    if (action.payload) {
+      setAuthToken(action.payload.data.token);
+      setExpiresToken(action.payload.data.expiresIn);
+    }
     dispatch(fetchUser());
   }
 };

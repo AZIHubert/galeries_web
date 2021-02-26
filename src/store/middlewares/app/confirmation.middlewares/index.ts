@@ -28,14 +28,10 @@ const errorConfirmation: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${CONFIRMATION} ${API_ERROR}`) {
+  if (action.type === `${CONFIRMATION} ${API_ERROR}`) {
     dispatch(setNotification({
       error: true,
-      text: data,
+      text: action.payload ? action.payload.data : 'Something went wrong',
     }));
     dispatch(setLoader(false));
   }
@@ -49,18 +45,14 @@ const fetchConfirmation: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === CONFIRMATION_FETCH) {
+  if (action.type === CONFIRMATION_FETCH) {
     dispatch(
       apiRequest(
         null,
         'PUT',
         endPoints.CONFIRMATION,
         CONFIRMATION,
-        data,
+        action.payload ? action.payload.data : undefined,
       ),
     );
   }
@@ -74,13 +66,11 @@ const successConfiramtion: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${CONFIRMATION} ${API_SUCCESS}`) {
-    setAuthToken(data.token);
-    setExpiresToken(data.expiresIn);
+  if (action.type === `${CONFIRMATION} ${API_SUCCESS}`) {
+    if (action.payload) {
+      setAuthToken(action.payload.data.token);
+      setExpiresToken(action.payload.data.expiresIn);
+    }
     dispatch(fetchUser());
   }
 };

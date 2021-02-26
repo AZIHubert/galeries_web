@@ -23,26 +23,32 @@ const errorSendResetPassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${SEND_RESET_PASSWORD} ${API_ERROR}`) {
-    if (typeof data === 'object') {
-      dispatch(
-        setSendResetPassword({
-          errors: data,
-          status: 'error',
-        }),
-      );
+  if (action.type === `${SEND_RESET_PASSWORD} ${API_ERROR}`) {
+    if (action.payload) {
+      if (typeof action.payload.data === 'object') {
+        dispatch(
+          setSendResetPassword({
+            errors: action.payload.data,
+            status: 'error',
+          }),
+        );
+      } else {
+        dispatch(setSendResetPassword({ status: 'error' }));
+        dispatch(
+          setNotification({
+            error: true,
+            text: action.payload.data,
+          }),
+        );
+      }
     } else {
-      dispatch(setSendResetPassword({ status: 'error' }));
-      dispatch(
-        setNotification({
-          error: true,
-          text: data,
-        }),
-      );
+      dispatch(setSendResetPassword({
+        status: 'error',
+      }));
+      dispatch(setNotification({
+        error: true,
+        text: 'Something went wrong.',
+      }));
     }
     dispatch(setLoader(false));
   }
@@ -56,15 +62,11 @@ const fetchSendResetPassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === SEND_RESET_PASSWORD_FETCH) {
+  if (action.type === SEND_RESET_PASSWORD_FETCH) {
     dispatch(setSendResetPassword({ status: 'pending' }));
     dispatch(
       apiRequest(
-        data,
+        action.payload ? action.payload.data : undefined,
         'POST',
         endPoints.RESET_PASSWORD,
         SEND_RESET_PASSWORD,

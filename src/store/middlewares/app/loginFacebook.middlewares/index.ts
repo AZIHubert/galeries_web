@@ -26,15 +26,11 @@ const errorFacebook: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGIN_FACEBOOK} ${API_ERROR}`) {
+  if (action.type === `${LOGIN_FACEBOOK} ${API_ERROR}`) {
     dispatch(
       setNotification({
         error: true,
-        text: data,
+        text: action.payload ? action.payload.data : 'Something went wrong.',
       }),
     );
     dispatch(setLoader(false));
@@ -49,14 +45,10 @@ const fetchFacebook: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === LOGIN_FACEBOOK_FETCH) {
+  if (action.type === LOGIN_FACEBOOK_FETCH) {
     dispatch(
       apiRequest(
-        data,
+        action.payload ? action.payload.data : undefined,
         'POST',
         endPoints.LOGIN_FACEBOOK,
         LOGIN_FACEBOOK,
@@ -73,13 +65,11 @@ const successFacebook: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGIN_FACEBOOK} ${API_SUCCESS}`) {
-    setAuthToken(data.token);
-    setExpiresToken(data.expiresIn);
+  if (action.type === `${LOGIN_FACEBOOK} ${API_SUCCESS}`) {
+    if (action.payload) {
+      setAuthToken(action.payload.data.token);
+      setExpiresToken(action.payload.data.expiresIn);
+    }
     dispatch(fetchUser());
   }
 };

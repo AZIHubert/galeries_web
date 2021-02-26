@@ -23,15 +23,11 @@ const errorLogout: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${LOGOUT} ${API_ERROR}`) {
+  if (action.type === `${LOGOUT} ${API_ERROR}`) {
     dispatch(
       setNotification({
         error: true,
-        text: data,
+        text: action.payload ? action.payload.data : 'Something went wrong.',
       }),
     );
     dispatch(setLoader(false));
@@ -46,10 +42,7 @@ const fetchLogout: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    type,
-  } = action;
-  if (type === LOGOUT_FETCH) {
+  if (action.type === LOGOUT_FETCH) {
     dispatch(
       apiRequest(
         null,
@@ -69,10 +62,7 @@ const successLogout: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    type,
-  } = action;
-  if (type === `${LOGOUT} ${API_SUCCESS}`) {
+  if (action.type === `${LOGOUT} ${API_SUCCESS}`) {
     localStorage.clear();
     dispatch(setUser(null));
     dispatch(setLoader(false));

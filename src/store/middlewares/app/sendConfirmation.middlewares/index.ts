@@ -23,21 +23,27 @@ const errorSendConfirmation: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === `${SEND_CONFIRMATION} ${API_ERROR}`) {
-    if (typeof data === 'object') {
+  if (action.type === `${SEND_CONFIRMATION} ${API_ERROR}`) {
+    if (action.payload) {
+      if (typeof action.payload.data === 'object') {
+        dispatch(setSendConfirmation({
+          status: 'error',
+          errors: action.payload.data,
+        }));
+      } else {
+        dispatch(setSendConfirmation({ status: 'error' }));
+        dispatch(setNotification({
+          text: action.payload.data,
+          error: true,
+        }));
+      }
+    } else {
       dispatch(setSendConfirmation({
         status: 'error',
-        errors: data,
       }));
-    } else {
-      dispatch(setSendConfirmation({ status: 'error' }));
       dispatch(setNotification({
-        text: data,
         error: true,
+        text: 'Something went wrong.',
       }));
     }
     dispatch(setLoader(false));
@@ -52,15 +58,11 @@ const fetchSendConfirmation: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    payload: { data },
-    type,
-  } = action;
-  if (type === SEND_CONFIRMATION_FETCH) {
+  if (action.type === SEND_CONFIRMATION_FETCH) {
     dispatch(setSendConfirmation({ status: 'pending' }));
     dispatch(
       apiRequest(
-        data,
+        action.payload ? action.payload.data : undefined,
         'POST',
         endPoints.CONFIRMATION,
         SEND_CONFIRMATION,
@@ -77,10 +79,7 @@ const successSendConfirmation: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  const {
-    type,
-  } = action;
-  if (type === `${SEND_CONFIRMATION} ${API_SUCCESS}`) {
+  if (action.type === `${SEND_CONFIRMATION} ${API_SUCCESS}`) {
     dispatch(setSendConfirmation({ status: 'success' }));
     dispatch(setNotification({
       text: 'an email has been sent to you',
