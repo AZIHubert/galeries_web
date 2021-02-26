@@ -9,15 +9,11 @@ export default (
   state = initialState,
   action: store.ActionI,
 ) => {
-  const {
-    payload,
-    type,
-  } = action;
-  switch (type) {
+  switch (action.type) {
     case NOTIFICATION_SET:
       return {
         ...state,
-        ...payload.data,
+        ...action.payload ? action.payload.data : undefined,
       };
     default:
       return state;
