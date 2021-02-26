@@ -59,7 +59,6 @@ const fetchSendTicket: Middleware = (
     type,
   } = action;
   if (type === SEND_TICKET_FETCH) {
-    dispatch(setLoader(true));
     dispatch(setSendTicket({ status: 'pending' }));
     dispatch(
       apiRequest(
