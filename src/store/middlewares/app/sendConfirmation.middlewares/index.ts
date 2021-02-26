@@ -57,7 +57,6 @@ const fetchSendConfirmation: Middleware = (
     type,
   } = action;
   if (type === SEND_CONFIRMATION_FETCH) {
-    dispatch(setLoader(true));
     dispatch(setSendConfirmation({ status: 'pending' }));
     dispatch(
       apiRequest(
