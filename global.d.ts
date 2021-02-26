@@ -8,6 +8,7 @@ import {
   LOGIN,
   LOGIN_FACEBOOK,
   LOGIN_GOOGLE,
+  LOGIN_SET,
   LOGOUT,
   REFRESH_TOKEN,
   RESET_PASSWORD,
@@ -51,6 +52,7 @@ declare global {
       typeof LOGIN |
       typeof LOGIN_FACEBOOK |
       typeof LOGIN_GOOGLE |
+      typeof LOGIN_SET |
       typeof LOGOUT |
       typeof REFRESH_TOKEN |
       typeof RESET_PASSWORD |
@@ -64,7 +66,7 @@ declare global {
 
     interface ActionI {
       type: string;
-      payload: {
+      payload?: {
         data: any;
         meta?: {
           entity?: Entity;
