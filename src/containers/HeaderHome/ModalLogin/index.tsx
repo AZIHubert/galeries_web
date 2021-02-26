@@ -1,7 +1,9 @@
 import { useFormik } from 'formik';
-import moment from 'moment';
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import FacebookButton from '#components/FacebookButton';
 import Field from '#components/Field';
@@ -12,100 +14,77 @@ import RequiredField from '#components/RequiredField';
 import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
-import { login } from '#helpers/api';
 import { loginSchema } from '#helpers/schemas';
+
+import {
+  fetchLogin,
+  setLogin,
+} from '#store/actions';
+import {
+  loadingSelector,
+  loginErrorSelector,
+  loginStatusSelector,
+  notificationSelector,
+} from '#store/selectors';
 
 import { ForgotPassword } from './styles';
 
-type Modals =
-  'confirmLanding'
-  | 'login'
-  | 'resendConfirm'
-  | 'resetPassword'
-  | 'resetPasswordLanding'
-  | 'signin';
-
 interface ModalLoginI {
-  closeModal: () => void;
-  setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>
-  setErrorModal: React.Dispatch<React.SetStateAction<{
-    open: boolean;
-    text: string;
-  }>>;
+  setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentModal: React.Dispatch<React.SetStateAction<HeaderModals | null>>;
 }
 
-const initialValues = {
+const initialValues: form.LoginI = {
   password: '',
   userNameOrEmail: '',
 };
 
 const ModalLogin = ({
-  closeModal,
-  setErrorModal,
   setCurrentModal,
 }: ModalLoginI) => {
-  const history = useHistory();
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: async (values, { setFieldError }) => {
+    onSubmit: async (values) => {
       if (!loading) {
-        setLoading(true);
-        try {
-          const response = await login(values);
-          const expiresAt = moment().add(response.data.expiresIn);
-          localStorage.setItem('authToken', response.data.token);
-          localStorage.setItem('expiresIn', JSON.stringify(expiresAt.valueOf()));
-          closeModal();
-          history.push('/dashboard');
-        } catch (err) {
-          if (err.response) {
-            if (err.status === 500) {
-              setErrorModal(({
-                open: true,
-                text: 'Something went wrong. Please try again',
-              }));
-            } else {
-              const { errors } = err.response.data;
-              if (typeof errors === 'object') {
-                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
-              } else if (errors === 'You\'re account need to be confimed') {
-                setCurrentModal('resendConfirm');
-              } else {
-                setErrorModal(({
-                  open: true,
-                  text: errors,
-                }));
-              }
-            }
-          } else {
-            setErrorModal(({
-              open: true,
-              text: 'Something went wrong. Please try again',
-            }));
-          }
-        }
-        setLoading(false);
+        resetForm();
+        dispatch(fetchLogin(values));
       }
     },
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: loginSchema,
   });
+  const loading = useSelector(loadingSelector);
+  const loginError = useSelector(loginErrorSelector);
+  const loginStatus = useSelector(loginStatusSelector);
+  const notification = useSelector(notificationSelector);
+
+  React.useEffect(() => () => resetForm(), []);
+
+  React.useEffect(() => {
+    if (
+      loginStatus === 'error'
+      && notification.text === 'You\'re account need to be confimed'
+    ) {
+      setCurrentModal('resendConfirm');
+    }
+  });
+
+  const resetForm = () => {
+    dispatch(setLogin({
+      status: 'pending',
+      errors: initialValues,
+    }));
+  };
 
   return (
-    <ModalContainer
-      testId='loginModal'
-    >
+    <ModalContainer>
       <FacebookButton
         action='signin'
-        setErrorModal={setErrorModal}
       />
       <GoogleButton
         action='signin'
-        setErrorModal={setErrorModal}
       />
       <TextSepatator
         marginBottom={9}
@@ -117,30 +96,50 @@ const ModalLogin = ({
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
+          error={
+            formik.errors.userNameOrEmail || loginError.userNameOrEmail
+          }
           id='userNameOrEmail'
-          error={formik.errors.userNameOrEmail}
-          errorTestId='userNameOrEmailError'
-          fieldTestId='userNameOrEmailField'
           marginBottom={6}
           marginBottomL={10}
           label='user name or email'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (loginError.userNameOrEmail) {
+              dispatch(setLogin({
+                errors: {
+                  ...loginError,
+                  userNameOrEmail: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.userNameOrEmail}
           value={formik.values.userNameOrEmail}
         />
         <Field
           disabled={loading}
+          error={
+            formik.errors.password || loginError.password
+          }
           id='password'
-          error={formik.errors.password}
-          errorTestId='passwordError'
-          fieldTestId='passwordField'
           label='password'
           marginBottom={12}
           marginBottomL={15}
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (loginError.password) {
+              dispatch(setLogin({
+                errors: {
+                  ...loginError,
+                  password: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.password}
           type='password'
@@ -165,7 +164,6 @@ const ModalLogin = ({
           marginBottomL={22}
           marginTop={15}
           marginTopL={22}
-          testId='submitButton'
           type='submit'
           title='Log in'
         />
@@ -176,7 +174,6 @@ const ModalLogin = ({
         fontSizeL={0.8}
         justifyContent='center'
         onClick={() => setCurrentModal('signin')}
-        testId='switchToSignin'
         text='You don’t have an account yet? click'
         textButton='here'
       />

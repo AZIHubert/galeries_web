@@ -9,8 +9,9 @@ import {
 } from './styles';
 
 const SearchBar = () => {
-  const [searchBarIsFocused, setSearchBarIsFocused] = React.useState<boolean>(false);
   const searchInputRef = React.useRef<HTMLInputElement | null>(null);
+  const [searchBarIsFocused, setSearchBarIsFocused] = React.useState<boolean>(false);
+
   return (
     <Container
       focused={searchBarIsFocused}

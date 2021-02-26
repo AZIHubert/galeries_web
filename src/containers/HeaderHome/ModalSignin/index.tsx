@@ -1,5 +1,9 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import FacebookButton from '#components/FacebookButton';
 import Field from '#components/Field';
@@ -10,30 +14,24 @@ import RequiredField from '#components/RequiredField';
 import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
-import { signin } from '#helpers/api';
-
 import { signinSchema } from '#helpers/schemas';
 
-type Modals =
-  'confirmLanding'
-  | 'login'
-  | 'resendConfirm'
-  | 'resetPassword'
-  | 'resetPasswordLanding'
-  | 'signin';
+import {
+  setSignin,
+  fetchSignin,
+} from '#store/actions';
+import {
+  loadingSelector,
+  signinErrorSelector,
+  signinStatusSelector,
+} from '#store/selectors';
 
 interface ModalSigninI {
   setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
-  setCurrentModal: React.Dispatch<React.SetStateAction<Modals | null>>;
-  setErrorModal: React.Dispatch<React.SetStateAction<{
-    open: boolean;
-    text: string;
-  }>>;
+  setCurrentModal: React.Dispatch<React.SetStateAction<HeaderModals | null>>;
 }
 
-const initialValues = {
+const initialValues: form.SigninI = {
   confirmPassword: '',
   email: '',
   password: '',
@@ -43,66 +41,46 @@ const initialValues = {
 const ModalSignin = ({
   setCurrentEmail,
   setCurrentModal,
-  setErrorModal,
 }: ModalSigninI) => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: async (values, { setFieldError }) => {
+    onSubmit: (values) => {
       if (!loading) {
-        setLoading(true);
-        setErrorModal((prevState) => ({
-          ...prevState,
-          open: false,
-        }));
-        try {
-          await signin(values);
-          setCurrentModal('confirmLanding');
-          setCurrentEmail(values.email);
-        } catch (err) {
-          if (err.response) {
-            if (err.status === 500) {
-              setErrorModal({
-                open: false,
-                text: 'Something went wrong. Please try again',
-              });
-            } else {
-              const { errors } = err.response.data;
-              if (typeof errors === 'object') {
-                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
-              } else {
-                setErrorModal({
-                  open: false,
-                  text: errors,
-                });
-              }
-            }
-          } else {
-            setErrorModal({
-              open: false,
-              text: 'Something went wrong. Please try again',
-            });
-          }
-        }
-        setLoading(false);
+        resetForm();
+        dispatch(fetchSignin(values));
       }
     },
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: signinSchema,
   });
+  const loading = useSelector(loadingSelector);
+  const signinError = useSelector(signinErrorSelector);
+  const signinStatus = useSelector(signinStatusSelector);
+
+  React.useEffect(() => {
+    if (signinStatus === 'success') {
+      setCurrentEmail(formik.values.email);
+      setCurrentModal('confirmLanding');
+    }
+  }, [signinStatus]);
+  React.useEffect(() => () => resetForm(), []);
+
+  const resetForm = () => {
+    dispatch(setSignin({
+      status: 'pending',
+      errors: initialValues,
+    }));
+  };
 
   return (
-    <ModalContainer
-      testId='modalSignin'
-    >
+    <ModalContainer>
       <FacebookButton
         action='signin'
-        setErrorModal={setErrorModal}
       />
       <GoogleButton
         action='signin'
-        setErrorModal={setErrorModal}
       />
       <TextSepatator
         marginBottom={9}
@@ -114,45 +92,75 @@ const ModalSignin = ({
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
+          error={
+            formik.errors.userName || signinError.userName
+          }
           id='userName'
-          error={formik.errors.userName}
-          errorTestId='userNameError'
-          fieldTestId='userNameField'
           marginBottom={6}
           marginBottomL={10}
           label='user name'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (signinError.userName) {
+              dispatch(setSignin({
+                errors: {
+                  ...signinError,
+                  userName: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.userName}
           value={formik.values.userName}
         />
         <Field
           disabled={loading}
+          error={
+            formik.errors.email || signinError.email
+          }
           id='email'
-          error={formik.errors.email}
-          errorTestId='emailError'
-          fieldTestId='emailField'
           marginBottom={6}
           marginBottomL={10}
           label='email'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (signinError.email) {
+              dispatch(setSignin({
+                errors: {
+                  ...signinError,
+                  email: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.email}
           value={formik.values.email}
         />
         <Field
           disabled={loading}
+          error={
+            formik.errors.password || signinError.password
+          }
           id='password'
-          error={formik.errors.password}
-          errorTestId='passwordError'
-          fieldTestId='passwordField'
           marginBottom={6}
           marginBottomL={10}
           label='password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (signinError.password) {
+              dispatch(setSignin({
+                errors: {
+                  ...signinError,
+                  password: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.password}
           type='password'
@@ -160,15 +168,25 @@ const ModalSignin = ({
         />
         <Field
           disabled={loading}
+          error={
+            formik.errors.confirmPassword || signinError.confirmPassword
+          }
           id='confirmPassword'
-          error={formik.errors.confirmPassword}
-          errorTestId='confirmPasswordError'
-          fieldTestId='confirmPasswordField'
           marginBottom={12}
           marginBottomL={15}
           label='confirm password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (signinError.confirmPassword) {
+              dispatch(setSignin({
+                errors: {
+                  ...signinError,
+                  confirmPassword: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.confirmPassword}
           type='password'
@@ -181,7 +199,6 @@ const ModalSignin = ({
           marginBottomL={22}
           marginTop={15}
           marginTopL={22}
-          testId='submitButton'
           type='submit'
           title='Sign in'
         />
@@ -192,7 +209,6 @@ const ModalSignin = ({
         fontSizeL={0.8}
         justifyContent='center'
         onClick={() => setCurrentModal('login')}
-        testId='switchToLogin'
         text='You already have an account? click'
         textButton='here'
       />

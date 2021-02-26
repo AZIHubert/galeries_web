@@ -52,7 +52,8 @@
       "#containers/*": ["./src/containers/*"],
       "#helpers/*": ["./src/helpers/*"],
       "#ressources/*": ["./src/ressources/*"],
-      "#src/*": ["src/*"]
+      "#src/*": ["src/*"],
+      "#store/*": ["./src/store/*"],
     },                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     "typeRoots": [

@@ -5,15 +5,13 @@ import {
   Container,
 } from './styles';
 
-type jJustifyContent = 'center' | 'end' | 'flex-end' | 'flex-start' | 'normal' | 'right' | 'safe' | 'space-around' | 'space-evenly' | 'start' | 'stretch' | 'unsafe';
-
 interface TextButtonI {
   buttonTestId?: string;
   containerTestId?: string;
   disabled?: boolean;
   fontSize?: number;
   fontSizeL?: number;
-  justifyContent?: jJustifyContent;
+  justifyContent?: style.JustifyContent;
   marginBottom?: number;
   marginTop?: number;
   onClick?: () => void;

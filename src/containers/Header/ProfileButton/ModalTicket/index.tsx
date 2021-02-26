@@ -1,34 +1,40 @@
-import * as React from 'react';
 import { useFormik } from 'formik';
+import * as React from 'react';
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
 import ModalContainer from '#components/ModalContainer';
 import RequiredField from '#components/RequiredField';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
 import { ticketSchema } from '#helpers/schemas';
 
-const initialValues = {
-  header: '',
+import { fetchSendTicket } from '#store/actions';
+import { loadingSelector } from '#store/selectors';
+
+const initialValues: form.SendTicketI = {
   body: '',
+  header: '',
 };
 
 const ModalTicket = () => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {
-      if (!loading) { setLoading(true); }
+    onSubmit: (value) => {
+      if (!loading) dispatch(fetchSendTicket(value));
     },
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: ticketSchema,
   });
+  const loading = useSelector(loadingSelector);
+
   return (
     <ModalContainer
-      data-testid='ticketModal'
       title='Send a ticket'
       titleMarginTop={20}
       titleTextAlign='center'
@@ -38,8 +44,6 @@ const ModalTicket = () => {
           disabled={loading}
           id='header'
           error={formik.errors.header}
-          errorTestId='headerError'
-          fieldTestId='headerField'
           marginBottom={6}
           marginBottomL={10}
           label='title'
@@ -53,8 +57,6 @@ const ModalTicket = () => {
           disabled={loading}
           id='body'
           error={formik.errors.body}
-          errorTestId='bodyError'
-          fieldTestId='bodyField'
           marginBottom={12}
           marginBottomL={15}
           multiline
@@ -72,7 +74,6 @@ const ModalTicket = () => {
           marginBottomL={22}
           marginTop={15}
           marginTopL={22}
-          testId='submitButton'
           type='submit'
           title='send'
         />

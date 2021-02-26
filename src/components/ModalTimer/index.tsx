@@ -6,8 +6,6 @@ import { Container } from './styles';
 
 type Variant = 'danger' | 'primary';
 
-const modalRoot = document.getElementById('modal-root');
-
 interface ModalTimerI {
   callBack?: () => void;
   handleClose: () => void;
@@ -16,6 +14,8 @@ interface ModalTimerI {
   text: string;
   variant?: Variant;
 }
+
+const modalRoot = document.getElementById('modal-root');
 
 const ModalTimer = ({
   callBack,
@@ -31,16 +31,13 @@ const ModalTimer = ({
   React.useEffect(() => {
     if (open) {
       timer.current = setTimeout(() => handleClose(), 3000);
-      if (modalRoot) {
-        modalRoot.appendChild(el.current);
-      }
+      if (modalRoot) modalRoot.appendChild(el.current);
     }
     return () => {
-      if (timer.current) {
-        clearTimeout(timer.current);
-      }
+      if (timer.current) clearTimeout(timer.current);
     };
   }, [open]);
+
   return (
     ReactDOM.createPortal(
       <CSSTransition

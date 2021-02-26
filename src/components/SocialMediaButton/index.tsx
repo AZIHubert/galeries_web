@@ -53,7 +53,7 @@ const SocialMediaButton = ({
     {`${action === 'login'
       ? 'Log in'
       : 'Sign in'}
-      with
+        with
     ${variant === 'facebook'
     ? 'Facebook'
     : 'Google'

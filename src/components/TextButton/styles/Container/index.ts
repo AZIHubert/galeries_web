@@ -2,12 +2,10 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-type jJustifyContent = 'center' | 'end' | 'flex-end' | 'flex-start' | 'normal' | 'right' | 'safe' | 'space-around' | 'space-evenly' | 'start' | 'stretch' | 'unsafe';
-
 interface ContainerI {
   fontSize?: number;
   fontSizeL?: number;
-  justifyContent?: jJustifyContent;
+  justifyContent?: style.JustifyContent;
   marginBottom?: number;
   marginTop?: number;
   testId?: string;

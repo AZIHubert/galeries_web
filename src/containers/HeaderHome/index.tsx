@@ -1,12 +1,12 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 import HeaderButton from '#components/HeaderButton';
 import Modal from '#components/Modal';
-import ModalTimer from '#components/ModalTimer';
-
-import { LoadingContext } from '#contexts/LoadingContext';
 
 import logo from '#ressources/svg/logoG.svg';
+
+import { loadingSelector } from '#store/selectors';
 
 import ModalConfirmLanding from './ModalConfirmLanding';
 import ModalLogin from './ModalLogin';
@@ -22,25 +22,10 @@ import {
   Logo,
 } from './styles';
 
-type Modals =
-  'confirmLanding'
-  | 'login'
-  | 'resendConfirm'
-  | 'resetPassword'
-  | 'resetPasswordLanding'
-  | 'signin';
-
 const Header = () => {
+  const loading = useSelector(loadingSelector);
   const [currentEmail, setCurrentEmail] = React.useState<string>('');
-  const [currentModal, setCurrentModal] = React.useState<Modals | null>(null);
-  const [errorModal, setErrorModal] = React.useState<{
-    open: boolean;
-    text: string;
-  }>({
-    open: false,
-    text: '',
-  });
-  const { loading } = React.useContext(LoadingContext);
+  const [currentModal, setCurrentModal] = React.useState<HeaderModals | null>(null);
   const [openModal, setOpenModal] = React.useState<boolean>(false);
 
   const handleClickLogin = () => {
@@ -58,10 +43,6 @@ const Header = () => {
   const handleCloseModal = () => {
     if (!loading) {
       setOpenModal(false);
-      setErrorModal((prevState) => ({
-        ...prevState,
-        open: false,
-      }));
     }
   };
   const handleCurrentModal = () => {
@@ -70,38 +51,30 @@ const Header = () => {
         return (
           <ModalConfirmLanding
             currentEmail={currentEmail}
-            setErrorModal={setErrorModal}
           />
         );
       case 'login':
         return (
           <ModalLogin
+            setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
-            closeModal={handleCloseModal}
           />
         );
       case 'resendConfirm':
         return (
-          <ModalResendConfirm
-            setCurrentEmail={setCurrentEmail}
-            setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
-          />
+          <ModalResendConfirm />
         );
       case 'resetPassword':
         return (
           <ModalResetPassword
             setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
           />
         );
       case 'resetPasswordLanding':
         return (
           <ModalResetPasswordLanding
             currentEmail={currentEmail}
-            setErrorModal={setErrorModal}
           />
         );
       case 'signin':
@@ -109,7 +82,6 @@ const Header = () => {
           <ModalSignin
             setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
-            setErrorModal={setErrorModal}
           />
         );
       default:
@@ -127,12 +99,10 @@ const Header = () => {
           <HeaderButton
             marginRight={30}
             onClick={handleClickSignin}
-            testId='openSignin'
             title='Sign in'
           />
           <HeaderButton
             onClick={handleClickLogin}
-            testId='openLogin'
             title='Log in'
             variant='secondary'
           />
@@ -143,19 +113,6 @@ const Header = () => {
           open={openModal}
         >
           {handleCurrentModal()}
-          <ModalTimer
-            callBack={() => setErrorModal((prevState) => ({
-              ...prevState,
-              text: '',
-            }))}
-            handleClose={() => setErrorModal((prevState) => ({
-              ...prevState,
-              open: false,
-            }))}
-            open={errorModal.open}
-            text={errorModal.text}
-            variant='danger'
-          />
         </Modal>
       </InnerContainer>
     </Container>

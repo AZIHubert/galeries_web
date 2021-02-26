@@ -3,53 +3,32 @@ import {
   useHistory,
   useParams,
 } from 'react-router-dom';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import Loader from '#components/Loader';
 
-import { confirmation } from '#helpers/api';
+import { fetchConfirmation } from '#store/actions';
+import { uiSelector } from '#store/selectors';
 
-interface ConfirmAccountI {
-  setCallbackModal: React.Dispatch<React.SetStateAction<{
-    error: boolean;
-    open: boolean;
-    text: string;
-  }>>
-}
-
-const ConfirmAccount = ({
-  setCallbackModal,
-}: ConfirmAccountI) => {
-  const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
+const ConfirmAccount = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [requestFinish, setRequestFinish] = React.useState<boolean>(false);
-  const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const { token } = useParams<{ token: string }>();
+  const loading = useSelector(uiSelector);
+  const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
+
   React.useEffect(() => {
-    timer.current = setTimeout(() => setAllowRedirect(true), 1500);
-    const confimAccount = async () => {
-      try {
-        await confirmation(`Bearer ${token}`);
-        setCallbackModal((prevState) => ({
-          ...prevState,
-          text: 'you\'re account has been successfully confirm, you can now log in to enjoy Galleries.',
-        }));
-      } catch (err) {
-        const { errors } = err.response.data;
-        setCallbackModal((prevState) => ({
-          ...prevState,
-          error: true,
-          text: errors,
-        }));
-      }
-      setRequestFinish(true);
-    };
-    confimAccount();
+    const timer = setTimeout(() => setAllowRedirect(true), 1500);
+    dispatch(fetchConfirmation(`Bearer ${token}`));
+    return () => clearInterval(timer);
   }, []);
   React.useEffect(() => {
-    if (allowRedirect && requestFinish) {
-      history.push('/');
-    }
-  }, [allowRedirect, requestFinish]);
+    if (allowRedirect && loading) history.push('/');
+  }, [allowRedirect, loading]);
+
   return (
     <Loader />
   );

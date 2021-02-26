@@ -1,21 +1,22 @@
-import * as React from 'react';
 import { useFormik } from 'formik';
-
-import { LoadingContext } from '#contexts/LoadingContext';
+import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 
 import { changeEmailSchema } from '#helpers/schemas';
+
+import { loadingSelector } from '#store/selectors';
 
 const initialValues = {
   password: '',
 };
 
 const ChangeEmail = () => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const loading = useSelector(loadingSelector);
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {
-      if (!loading) { setLoading(true); }
-    },
+    onSubmit: () => {},
     validateOnChange: false,
     validateOnBlur: true,
     validationSchema: changeEmailSchema,

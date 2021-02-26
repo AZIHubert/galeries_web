@@ -1,61 +1,52 @@
 import * as React from 'react';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import ModalContainer from '#components/ModalContainer';
 import ModalTimer from '#components/ModalTimer';
 import TextButton from '#components/TextButton';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
-import { resendResetPassword } from '#helpers/api';
+import {
+  fetchSendResetPassword,
+  setSendResetPassword,
+} from '#store/actions';
+import {
+  loadingSelector,
+} from '#store/selectors';
 
 interface ModalResetPasswordLandingI {
   currentEmail: string;
-  setErrorModal: React.Dispatch<React.SetStateAction<{
-    open: boolean;
-    text: string;
-  }>>;
 }
 
 const ModalResetPasswordLanding = ({
   currentEmail,
-  setErrorModal,
 }: ModalResetPasswordLandingI) => {
-  const { loading, setLoading } = React.useContext(LoadingContext);
+  const dispatch = useDispatch();
+  const loading = useSelector(loadingSelector);
   const [open, setOpen] = React.useState<boolean>(false);
+
+  React.useEffect(() => () => resetForm(), []);
+
   const handleClose = () => setOpen(false);
   const onClick = async () => {
     if (!loading) {
-      setLoading(true);
-      try {
-        await resendResetPassword({ email: currentEmail });
-        setOpen(true);
-      } catch (err) {
-        if (err.response) {
-          if (err.status === 500) {
-            setErrorModal({
-              open: true,
-              text: 'Something went wrong. Please try again',
-            });
-          } else {
-            const { errors } = err.response.data;
-            setErrorModal({
-              open: true,
-              text: errors,
-            });
-          }
-        } else {
-          setErrorModal({
-            open: true,
-            text: 'Something went wrong. Please try again',
-          });
-        }
-      }
-      setLoading(false);
+      dispatch(fetchSendResetPassword({ email: currentEmail }));
     }
   };
+
+  const resetForm = () => {
+    dispatch(setSendResetPassword({
+      errors: {
+        email: '',
+      },
+      status: 'pending',
+    }));
+  };
+
   return (
     <ModalContainer
-      testId="modalValidateResetPassword"
       title='Reset your password'
       titleTextAlign='center'
     >

@@ -1,22 +1,32 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
+import {
   Link,
-  useParams,
   useHistory,
+  useParams,
 } from 'react-router-dom';
 
 import Field from '#components/Field';
 import GradientButton from '#components/GradientButton';
-import ModalTimer from '#components/ModalTimer';
 import RequiredField from '#components/RequiredField';
 
-import { LoadingContext } from '#contexts/LoadingContext';
-
-import { resetPassword } from '#helpers/api';
 import { resetPasswordSchema } from '#helpers/schemas';
 
 import { LogoGaleries } from '#ressources/svgComponents';
+
+import {
+  fetchResetPassword,
+  setResetPassword,
+} from '#store/actions';
+import {
+  resetPasswordErrorSelector,
+  resetPasswordStatusSelector,
+  loadingSelector,
+} from '#store/selectors';
 
 import {
   Container,
@@ -26,70 +36,49 @@ import {
   Title,
 } from './styles';
 
-interface ConfirmAccountI {
-  setCallbackModal: React.Dispatch<React.SetStateAction<{
-    error: boolean;
-    open: boolean;
-    text: string;
-  }>>
-}
-
-const initialValues = {
+const initialValues: form.ResetPasswordI = {
   confirmPassword: '',
   password: '',
 };
 
-const ResetPassword = ({
-  setCallbackModal,
-}:ConfirmAccountI) => {
-  const [errorModal, setErrorModal] = React.useState<{
-    open: boolean;
-    text: string;
-  }>({
-    open: false,
-    text: '',
-  });
-  const history = useHistory();
-  const { loading, setLoading } = React.useContext(LoadingContext);
-  const { token } = useParams<{ token: string }>();
+const ResetPassword = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: async (values, { setFieldError }) => {
+    onSubmit: async (values) => {
       if (!loading) {
-        setLoading(true);
-        try {
-          await resetPassword(token, values);
-          setCallbackModal((prevState) => ({
-            ...prevState,
-            text: 'you\'re password has been successfully changed.',
-          }));
-          history.push('/');
-        } catch (err) {
-          if (err.response) {
-            if (err.status === 500) {
-              setErrorModal({
-                open: true,
-                text: err.response.data.errors,
-              });
-            } else {
-              const { errors } = err.response.data;
-              if (typeof errors === 'object') {
-                Object.keys(errors).map((error) => setFieldError(error, errors[error]));
-              } else {
-                setErrorModal({
-                  open: true,
-                  text: err.response.data.errors,
-                });
-              }
-            }
-          }
-        }
+        resetForm();
+        dispatch(fetchResetPassword({
+          ...values,
+          confirmToken: `Bearer ${token}`,
+        }));
       }
     },
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: resetPasswordSchema,
   });
+  const history = useHistory();
+  const { token } = useParams<{ token: string }>();
+  const loading = useSelector(loadingSelector);
+  const resetPasswordError = useSelector(resetPasswordErrorSelector);
+  const resetPasswordStatus = useSelector(resetPasswordStatusSelector);
+
+  React.useEffect(() => {
+    if (resetPasswordStatus === 'success') {
+      history.push('/');
+    }
+  }, [resetPasswordStatus]);
+
+  React.useEffect(() => () => resetForm(), []);
+
+  const resetForm = () => {
+    dispatch(setResetPassword({
+      errors: initialValues,
+      status: 'pending',
+    }));
+  };
+
   return (
     <Container>
       <Logo>
@@ -101,15 +90,25 @@ const ResetPassword = ({
       <Form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
+          error={
+            formik.errors.password || resetPasswordError.password
+          }
           id='password'
-          error={formik.errors.password}
-          errorTestId='passwordError'
-          fieldTestId='passwordField'
           marginBottom={6}
           marginBottomL={10}
           label='password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (resetPasswordError.password) {
+              dispatch(setResetPassword({
+                errors: {
+                  ...resetPasswordError,
+                  password: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.password}
           type='password'
@@ -117,14 +116,24 @@ const ResetPassword = ({
         />
         <Field
           disabled={loading}
+          error={
+            formik.errors.confirmPassword || resetPasswordError.confirmPassword
+          }
           id='confirmPassword'
-          error={formik.errors.confirmPassword}
-          errorTestId='confirmPasswordError'
-          fieldTestId='confirmPasswordField'
           marginBottom={12}
           label='confirm password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (resetPasswordError.confirmPassword) {
+              dispatch(setResetPassword({
+                errors: {
+                  ...resetPasswordError,
+                  confirmPassword: '',
+                },
+              }));
+            }
+          }}
           required
           touched={formik.touched.confirmPassword}
           type='password'
@@ -136,7 +145,6 @@ const ResetPassword = ({
           marginBottom={15}
           marginTop={25}
           marginTopL={35}
-          testId='submitButton'
           title='Reset password'
           type='submit'
         />
@@ -148,19 +156,6 @@ const ResetPassword = ({
           HOME
         </Link>
       </NavLink>
-      <ModalTimer
-        callBack={() => setErrorModal((prevState) => ({
-          ...prevState,
-          text: '',
-        }))}
-        handleClose={() => setErrorModal((prevState) => ({
-          ...prevState,
-          open: false,
-        }))}
-        open={errorModal.open}
-        text={errorModal.text}
-        variant='danger'
-      />
     </Container>
   );
 };

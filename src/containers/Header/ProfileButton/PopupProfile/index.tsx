@@ -1,14 +1,17 @@
 import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 
 import Text from '#components/Text';
-
-import { UserContext } from '#contexts/UserContext';
 
 import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
 import {
   Gear,
   Ticket,
 } from '#ressources/svgComponents';
+
+import { userSelector } from '#store/selectors';
 
 import {
   Background,
@@ -26,11 +29,10 @@ interface PopupProfileI {
 const PopupProfile = ({
   handleOpenTicket,
 }: PopupProfileI) => {
-  const { user } = React.useContext(UserContext);
+  const user = useSelector(userSelector);
+
   return (
-    <Container
-      data-testid='popupProfil'
-    >
+    <Container>
       <InnerContainer>
         <Button
           borderBottom
@@ -41,12 +43,14 @@ const PopupProfile = ({
           />
           <div>
             <Text
+              color='primary'
               fontSize={1}
               fontSizeL={1.1}
             >
               { user ? user.userName : 'user name' }
             </Text>
             <Text
+              color='primary'
               fontSize={0.7}
               fontSizeL={0.8}
             >
@@ -61,6 +65,7 @@ const PopupProfile = ({
             <Gear />
           </LogoContainer>
           <Text
+            color='primary'
             fontSize={0.8}
             fontSizeL={0.9}
           >
@@ -68,7 +73,6 @@ const PopupProfile = ({
           </Text>
         </Button>
         <Button
-          data-testid='buttonTicketModal'
           onClick={handleOpenTicket}
         >
           <LogoContainer>
@@ -76,12 +80,14 @@ const PopupProfile = ({
           </LogoContainer>
           <div>
             <Text
+              color='primary'
               fontSize={0.5}
               fontSizeL={0.65}
             >
               Share your opinion? Find a bug?
             </Text>
             <Text
+              color='primary'
               fontSize={0.8}
               fontSizeL={0.9}
             >

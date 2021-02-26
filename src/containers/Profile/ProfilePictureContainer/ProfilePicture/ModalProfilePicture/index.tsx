@@ -1,9 +1,10 @@
 import moment from 'moment';
 import * as React from 'react';
+import {
+  useSelector,
+} from 'react-redux';
 
-import { UserContext } from '#contexts/UserContext';
-
-import { ProfilePictureI } from '#helpers/interfaces';
+import { userSelector } from '#store/selectors';
 
 interface ModalProfilPictureI {
   profilePicture: ProfilePictureI;
@@ -18,6 +19,7 @@ const formatBytes = (a: number, b = 2) => {
 const ModalProfilPicture = ({
   profilePicture,
 }: ModalProfilPictureI) => {
+  const user = useSelector(userSelector);
   const {
     createdAt,
     originalImage: {
@@ -27,27 +29,7 @@ const ModalProfilPicture = ({
       width,
     },
   } = profilePicture;
-  const { setUser, user } = React.useContext(UserContext);
-  const switchCurrent = () => {
-    setUser((prevState) => {
-      if (prevState) {
-        const { currentProfilePicture } = prevState;
-        if (currentProfilePicture && currentProfilePicture.id === profilePicture.id) {
-          return {
-            ...prevState,
-            currentProfilePicture: null,
-            currentProfilePictureId: null,
-          };
-        }
-        return {
-          ...prevState,
-          currentProfilePicture: profilePicture,
-          currentProfilePictureId: profilePicture.id,
-        };
-      }
-      return null;
-    });
-  };
+  const switchCurrent = () => {};
   const current = user
     ? user.currentProfilePictureId === profilePicture.id
     : null;

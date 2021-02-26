@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 
-type TextAlign = 'center' | 'end' | 'justify' | 'justify-all' | 'left' | 'match-parent' | 'right' | 'start';
-type TitleWeight = 'bold' | 'normal';
-
 interface TitleI {
   testId?: string;
-  textAlign?: TextAlign;
+  textAlign?: style.TextAlign;
   titleMarginTop?: number;
   titleSize?: number;
-  titleWeight?: TitleWeight;
+  titleWeight?: style.FontWeight;
 }
 
 const Title = styled.h3.attrs<TitleI>(
