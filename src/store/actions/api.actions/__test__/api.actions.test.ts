@@ -11,7 +11,7 @@ const mockApi = jest.fn();
 
 jest.mock('#store/middlewares/core/api.middlewares', () => mockApi);
 
-describe('confirmation', () => {
+describe('api', () => {
   describe('action', () => {
     it('should create an apiError action', () => {
       const entity = 'user';

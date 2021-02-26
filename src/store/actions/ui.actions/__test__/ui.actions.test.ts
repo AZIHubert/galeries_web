@@ -6,14 +6,16 @@ import {
 describe('ui', () => {
   describe('actions', () => {
     it('should create a set actions', () => {
-      const data = true;
+      const loading = true;
       const expectedAction = {
         payload: {
-          data,
+          data: {
+            loading,
+          },
         },
         type: LOADER_SET,
       };
-      expect(setLoader(data)).toEqual(expectedAction);
+      expect(setLoader(loading)).toEqual(expectedAction);
     });
   });
 });

@@ -31,7 +31,8 @@ const Container = ({ initialOpen }: ContainerI) => {
       <Modal
         open={open}
         handleClose={handleClose}
-        testId='modal'
+        modalTestId='modal'
+        backgroundTestId='background'
       >
         <div>{innerText}</div>
       </Modal>
@@ -88,7 +89,7 @@ describe('Modal', () => {
       );
       child = getByText(innerText);
       modal = getByTestId('modal');
-      modalBackground = getByTestId('modalBackground');
+      modalBackground = getByTestId('background');
     });
     it('should be open', () => {
       expect(child).not.toBeNull();

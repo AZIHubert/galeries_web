@@ -66,13 +66,17 @@ describe('user', () => {
         expect(actions[0].type).toEqual(USER_FETCH);
         expect(actions[1].type).toEqual(`${USER} ${API_REQUEST}`);
         expect(actions[2].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[2].type).toEqual(LOADER_SET);
         expect(actions[3].type).toEqual(`${USER} ${API_SUCCESS}`);
         expect(actions[4].type).toEqual(USER_SET);
         expect(actions[5].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[5].type).toEqual(LOADER_SET);
       });
@@ -105,7 +109,9 @@ describe('user', () => {
         expect(actions[0].type).toEqual(USER_FETCH);
         expect(actions[1].type).toEqual(`${USER} ${API_REQUEST}`);
         expect(actions[2].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[2].type).toEqual(LOADER_SET);
         expect(actions[3].type).toEqual(`${USER} ${API_ERROR}`);
@@ -117,7 +123,9 @@ describe('user', () => {
         });
         expect(actions[4].type).toEqual(NOTIFICATION_SET);
         expect(actions[5].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[5].type).toEqual(LOADER_SET);
       });

@@ -9,9 +9,9 @@ import {
 } from './styles';
 
 interface ModalI {
+  backgroundTestId?: string;
   callBack?: () => void;
   children: React.ReactNode;
-  containerTestId?: string;
   handleClose: () => void;
   modalTestId?: string;
   open: boolean;
@@ -20,9 +20,9 @@ interface ModalI {
 const modalRoot = document.getElementById('modal-root');
 
 const Modal = ({
+  backgroundTestId,
   callBack,
   children,
-  containerTestId,
   handleClose,
   modalTestId,
   open,
@@ -49,13 +49,13 @@ const Modal = ({
       >
         <Fader>
           <Container
-            testId={containerTestId}
+            testId={modalTestId}
           >
             {children}
           </Container>
           <Background
             onClick={handleClose}
-            testId={modalTestId}
+            testId={backgroundTestId}
           />
         </Fader>
       </CSSTransition>,

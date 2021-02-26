@@ -84,7 +84,9 @@ describe('sendResetPassword', () => {
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
         expect(actions[2].type).toEqual(`${SEND_RESET_PASSWORD} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[3].type).toEqual(LOADER_SET);
         expect(actions[4].type).toEqual(`${SEND_RESET_PASSWORD} ${API_SUCCESS}`);
@@ -102,7 +104,9 @@ describe('sendResetPassword', () => {
         });
         expect(actions[6].type).toEqual(NOTIFICATION_SET);
         expect(actions[7].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[7].type).toEqual(LOADER_SET);
       });
@@ -141,7 +145,9 @@ describe('sendResetPassword', () => {
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
         expect(actions[2].type).toEqual(`${SEND_RESET_PASSWORD} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[3].type).toEqual(LOADER_SET);
         expect(actions[4].type).toEqual(`${SEND_RESET_PASSWORD} ${API_ERROR}`);
@@ -159,7 +165,9 @@ describe('sendResetPassword', () => {
         });
         expect(actions[6].type).toEqual(NOTIFICATION_SET);
         expect(actions[7].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[7].type).toEqual(LOADER_SET);
       });
@@ -202,7 +210,9 @@ describe('sendResetPassword', () => {
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
         expect(actions[2].type).toEqual(`${SEND_RESET_PASSWORD} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[3].type).toEqual(LOADER_SET);
         expect(actions[4].type).toEqual(`${SEND_RESET_PASSWORD} ${API_ERROR}`);
@@ -216,7 +226,9 @@ describe('sendResetPassword', () => {
         });
         expect(actions[5].type).toEqual(SEND_RESET_PASSWORD_SET);
         expect(actions[6].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[6].type).toEqual(LOADER_SET);
       });

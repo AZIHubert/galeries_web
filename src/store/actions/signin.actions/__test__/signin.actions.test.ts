@@ -90,7 +90,9 @@ describe('signin', () => {
         expect(actions[1].type).toEqual(SIGNIN_SET);
         expect(actions[2].type).toEqual(`${SIGNIN} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[3].type).toEqual(LOADER_SET);
         expect(actions[4].type).toEqual(`${SIGNIN} ${API_SUCCESS}`);
@@ -109,7 +111,9 @@ describe('signin', () => {
         expect(actions[7].type).toEqual(SEND_CONFIRMATION_SET);
         expect(actions[8].type).toEqual(`${SEND_CONFIRMATION} ${API_REQUEST}`);
         expect(actions[9].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[9].type).toEqual(LOADER_SET);
         expect(actions[10].type).toEqual(`${SEND_CONFIRMATION} ${API_SUCCESS}`);
@@ -127,7 +131,9 @@ describe('signin', () => {
         });
         expect(actions[12].type).toEqual(NOTIFICATION_SET);
         expect(actions[13].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[13].type).toEqual(LOADER_SET);
       });
@@ -166,7 +172,9 @@ describe('signin', () => {
         expect(actions[1].type).toEqual(SIGNIN_SET);
         expect(actions[2].type).toEqual(`${SIGNIN} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[3].type).toEqual(LOADER_SET);
         expect(actions[4].type).toEqual(`${SIGNIN} ${API_ERROR}`);
@@ -184,7 +192,9 @@ describe('signin', () => {
         });
         expect(actions[6].type).toEqual(NOTIFICATION_SET);
         expect(actions[7].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[7].type).toEqual(LOADER_SET);
       });
@@ -227,7 +237,9 @@ describe('signin', () => {
         expect(actions[1].type).toEqual(SIGNIN_SET);
         expect(actions[2].type).toEqual(`${SIGNIN} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
-          data: true,
+          data: {
+            loading: true,
+          },
         });
         expect(actions[3].type).toEqual(LOADER_SET);
         expect(actions[4].type).toEqual(`${SIGNIN} ${API_ERROR}`);
@@ -241,7 +253,9 @@ describe('signin', () => {
         });
         expect(actions[5].type).toEqual(SIGNIN_SET);
         expect(actions[6].payload).toEqual({
-          data: false,
+          data: {
+            loading: false,
+          },
         });
         expect(actions[6].type).toEqual(LOADER_SET);
       });
