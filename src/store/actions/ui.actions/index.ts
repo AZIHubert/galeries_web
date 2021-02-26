@@ -5,6 +5,10 @@ export const setLoader: (
 ) => store.ActionI = (
   data,
 ) => ({
-  payload: { data },
+  payload: {
+    data: {
+      loading: data,
+    },
+  },
   type: LOADER_SET,
 });
