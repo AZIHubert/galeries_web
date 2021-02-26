@@ -59,7 +59,6 @@ const fetchResetPassword: Middleware = (
     type,
   } = action;
   if (type === RESET_PASSWORD_FETCH) {
-    dispatch(setLoader(true));
     dispatch(setResetPassword({ status: 'pending' }));
     dispatch(
       apiRequest(
