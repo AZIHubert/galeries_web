@@ -6,13 +6,9 @@ export default (
   state = initialState,
   action: store.ActionI,
 ) => {
-  const {
-    payload,
-    type,
-  } = action;
-  switch (type) {
+  switch (action.type) {
     case USER_SET:
-      return payload.data;
+      return action.payload ? action.payload.data : undefined;
     default:
       return state;
   }

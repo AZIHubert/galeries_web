@@ -16,7 +16,7 @@ import {
   SEND_RESET_PASSWORD,
   SEND_TICKET,
   SIGNIN,
-  USER,
+  USER_SET,
 } from '#store/actions';
 
 declare global {
@@ -60,7 +60,7 @@ declare global {
       typeof SEND_RESET_PASSWORD |
       typeof SEND_TICKET |
       typeof SIGNIN |
-      typeof USER;
+      typeof USER_SET;
 
     type FormStatus = 'pending' | 'success' | 'error';
 
