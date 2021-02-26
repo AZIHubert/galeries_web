@@ -6,12 +6,15 @@ import {
   API_SUCCESS,
   LOADER_SET,
   NOTIFICATION_SET,
-  SEND_TICKET,
-  SEND_TICKET_FETCH,
-  SEND_TICKET_SET,
-  fetchSendTicket,
+  SEND_CONFIRMATION,
+  SEND_CONFIRMATION_FETCH,
+  SEND_CONFIRMATION_SET,
+  SIGNIN,
+  SIGNIN_FETCH,
+  SIGNIN_SET,
+  fetchSignin,
   setLoader,
-  setSendTicket,
+  setSignin,
 } from '#store/actions';
 
 import { appMiddleware } from '#store/middlewares';
@@ -19,38 +22,40 @@ import apiMiddleware from '#store/middlewares/core/api.middlewares';
 
 jest.mock('#store/middlewares/core/api.middlewares', () => jest.fn());
 
-describe('sendTicket', () => {
-  describe('actions', () => {
+describe('signin', () => {
+  describe('action', () => {
     const data = {
-      body: 'body',
-      header: 'header',
+      confirmPassword: 'confirmPassword',
+      email: 'email',
+      password: 'password',
+      userName: 'userName',
     };
-    it('should create a fetch action', () => {
+    it('should create fetch action', () => {
       const expectedAction = {
         payload: {
           data,
         },
-        type: SEND_TICKET_FETCH,
+        type: SIGNIN_FETCH,
       };
-      expect(fetchSendTicket(data)).toEqual(expectedAction);
+      expect(fetchSignin(data)).toEqual(expectedAction);
     });
-    it('should create a set actions', () => {
+    it('should create set action', () => {
       const setData = {
         errors: data,
         status: 'pending',
       } as {
-        errors?: form.SendTicketI;
+        errors?: form.SigninI
         status?: store.FormStatus;
       };
       const expectedAction = {
         payload: {
           data: setData,
         },
-        type: SEND_TICKET_SET,
+        type: SIGNIN_SET,
       };
-      expect(setSendTicket(setData)).toEqual(expectedAction);
+      expect(setSignin(setData)).toEqual(expectedAction);
     });
-    describe('should fetch sendTicket', () => {
+    describe('should fetch signin', () => {
       it('success', () => {
         (apiMiddleware as jest.Mock).mockImplementation((
           { dispatch },
@@ -74,38 +79,57 @@ describe('sendTicket', () => {
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
-        store.dispatch(fetchSendTicket(data));
+        store.dispatch(fetchSignin(data));
         const actions = store.getActions();
-        expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
+        expect(actions[0].type).toEqual(SIGNIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
             status: 'pending',
           },
         });
-        expect(actions[1].type).toEqual(SEND_TICKET_SET);
-        expect(actions[2].type).toEqual(`${SEND_TICKET} ${API_REQUEST}`);
+        expect(actions[1].type).toEqual(SIGNIN_SET);
+        expect(actions[2].type).toEqual(`${SIGNIN} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
           data: true,
         });
         expect(actions[3].type).toEqual(LOADER_SET);
-        expect(actions[4].type).toEqual(`${SEND_TICKET} ${API_SUCCESS}`);
+        expect(actions[4].type).toEqual(`${SIGNIN} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
             status: 'success',
           },
         });
-        expect(actions[5].type).toEqual(SEND_TICKET_SET);
-        expect(actions[6].payload).toEqual({
+        expect(actions[5].type).toEqual(SIGNIN_SET);
+        expect(actions[6].type).toEqual(SEND_CONFIRMATION_FETCH);
+        expect(actions[7].payload).toEqual({
           data: {
-            error: false,
-            text: 'you\'re ticket has been send',
+            status: 'pending',
           },
         });
-        expect(actions[6].type).toEqual(NOTIFICATION_SET);
-        expect(actions[7].payload).toEqual({
+        expect(actions[7].type).toEqual(SEND_CONFIRMATION_SET);
+        expect(actions[8].type).toEqual(`${SEND_CONFIRMATION} ${API_REQUEST}`);
+        expect(actions[9].payload).toEqual({
+          data: true,
+        });
+        expect(actions[9].type).toEqual(LOADER_SET);
+        expect(actions[10].type).toEqual(`${SEND_CONFIRMATION} ${API_SUCCESS}`);
+        expect(actions[11].payload).toEqual({
+          data: {
+            status: 'success',
+          },
+        });
+        expect(actions[11].type).toEqual(SEND_CONFIRMATION_SET);
+        expect(actions[12].payload).toEqual({
+          data: {
+            error: false,
+            text: 'an email has been sent to you',
+          },
+        });
+        expect(actions[12].type).toEqual(NOTIFICATION_SET);
+        expect(actions[13].payload).toEqual({
           data: false,
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[13].type).toEqual(LOADER_SET);
       });
       it('global error', () => {
         const globalError = 'global error';
@@ -131,27 +155,27 @@ describe('sendTicket', () => {
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
-        store.dispatch(fetchSendTicket(data));
+        store.dispatch(fetchSignin(data));
         const actions = store.getActions();
-        expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
+        expect(actions[0].type).toEqual(SIGNIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
             status: 'pending',
           },
         });
-        expect(actions[1].type).toEqual(SEND_TICKET_SET);
-        expect(actions[2].type).toEqual(`${SEND_TICKET} ${API_REQUEST}`);
+        expect(actions[1].type).toEqual(SIGNIN_SET);
+        expect(actions[2].type).toEqual(`${SIGNIN} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
           data: true,
         });
         expect(actions[3].type).toEqual(LOADER_SET);
-        expect(actions[4].type).toEqual(`${SEND_TICKET} ${API_ERROR}`);
+        expect(actions[4].type).toEqual(`${SIGNIN} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
             status: 'error',
           },
         });
-        expect(actions[5].type).toEqual(SEND_TICKET_SET);
+        expect(actions[5].type).toEqual(SIGNIN_SET);
         expect(actions[6].payload).toEqual({
           data: {
             error: true,
@@ -165,7 +189,7 @@ describe('sendTicket', () => {
         expect(actions[7].type).toEqual(LOADER_SET);
       });
       it('field error', () => {
-        const headerError = 'header error';
+        const userNameError = 'user name error';
         (apiMiddleware as jest.Mock).mockImplementation((
           { dispatch },
         ) => (
@@ -183,7 +207,7 @@ describe('sendTicket', () => {
             dispatch({
               payload: {
                 data: {
-                  header: headerError,
+                  userName: userNameError,
                 },
               },
               type: `${payload.meta.entity} ${API_ERROR}`,
@@ -192,30 +216,30 @@ describe('sendTicket', () => {
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
-        store.dispatch(fetchSendTicket(data));
+        store.dispatch(fetchSignin(data));
         const actions = store.getActions();
-        expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
+        expect(actions[0].type).toEqual(SIGNIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
             status: 'pending',
           },
         });
-        expect(actions[1].type).toEqual(SEND_TICKET_SET);
-        expect(actions[2].type).toEqual(`${SEND_TICKET} ${API_REQUEST}`);
+        expect(actions[1].type).toEqual(SIGNIN_SET);
+        expect(actions[2].type).toEqual(`${SIGNIN} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
           data: true,
         });
         expect(actions[3].type).toEqual(LOADER_SET);
-        expect(actions[4].type).toEqual(`${SEND_TICKET} ${API_ERROR}`);
+        expect(actions[4].type).toEqual(`${SIGNIN} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
             errors: {
-              header: headerError,
+              userName: userNameError,
             },
             status: 'error',
           },
         });
-        expect(actions[5].type).toEqual(SEND_TICKET_SET);
+        expect(actions[5].type).toEqual(SIGNIN_SET);
         expect(actions[6].payload).toEqual({
           data: false,
         });

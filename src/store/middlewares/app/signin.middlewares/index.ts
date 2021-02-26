@@ -58,7 +58,6 @@ const fetchSignin: Middleware = (
     payload: { data },
   } = action;
   if (type === SIGNIN_FETCH) {
-    dispatch(setLoader(true));
     dispatch(setSignin({ status: 'pending' }));
     dispatch(
       apiRequest(
