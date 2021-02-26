@@ -16,18 +16,14 @@ export default (
   state = initialState,
   action: store.ActionI,
 ) => {
-  const {
-    payload,
-    type,
-  } = action;
-  switch (type) {
+  switch (action.type) {
     case SEND_CONFIRMATION_SET:
       return {
         ...state,
-        ...payload.data,
+        ...action.payload ? action.payload.data : undefined,
         errors: {
           ...state.errors,
-          ...payload.data.errors,
+          ...action.payload ? action.payload.data.errors : undefined,
         },
       };
     default:
