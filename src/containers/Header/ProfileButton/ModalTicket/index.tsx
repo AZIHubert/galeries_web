@@ -42,8 +42,9 @@ const ModalTicket = () => {
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
-          id='header'
+          fieldTestId='header'
           error={formik.errors.header}
+          id='header'
           marginBottom={6}
           marginBottomL={10}
           label='title'
@@ -55,8 +56,9 @@ const ModalTicket = () => {
         />
         <Field
           disabled={loading}
-          id='body'
           error={formik.errors.body}
+          fieldTestId='body'
+          id='body'
           marginBottom={12}
           marginBottomL={15}
           multiline

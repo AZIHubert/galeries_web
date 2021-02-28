@@ -8,7 +8,15 @@ import {
   Logotype,
 } from './styles';
 
-const SearchBar = () => {
+interface SearchBarI {
+  containerTestId?: string;
+  inputTestId?: string;
+}
+
+const SearchBar = ({
+  containerTestId,
+  inputTestId,
+}: SearchBarI) => {
   const searchInputRef = React.useRef<HTMLInputElement | null>(null);
   const [searchBarIsFocused, setSearchBarIsFocused] = React.useState<boolean>(false);
 
@@ -20,6 +28,7 @@ const SearchBar = () => {
           searchInputRef.current.focus();
         }
       }}
+      testId={containerTestId}
     >
       <Logotype
         alt='search pictogram'
@@ -31,6 +40,7 @@ const SearchBar = () => {
         onFocus={() => setSearchBarIsFocused(true)}
         placeholder={searchBarIsFocused ? '' : 'search on Galeries'}
         ref={searchInputRef}
+        testId={inputTestId}
       />
     </Container>
   );

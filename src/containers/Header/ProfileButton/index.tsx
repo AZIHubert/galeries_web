@@ -18,7 +18,15 @@ import {
   ProfileImage,
 } from './styles';
 
-const ProfileButton = () => {
+interface ProfileButtonI {
+  modalTestId?: string;
+  popupProfileTestId?: string;
+}
+
+const ProfileButton = ({
+  modalTestId,
+  popupProfileTestId,
+}: ProfileButtonI) => {
   const handleCloseTicket = React.useCallback(() => setOpenTicket(false), []);
   const handleOpenTicket = React.useCallback(() => setOpenTicket(true), []);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -45,8 +53,8 @@ const ProfileButton = () => {
     <Container
       ref={containerRef}
     >
+      {openTicket ? 'open' : 'close'}
       <Button
-        data-testid='profilButton'
         onClick={() => setOpenPopupProfile((lastState) => !lastState)}
       >
         <ProfileImage
@@ -63,9 +71,11 @@ const ProfileButton = () => {
       >
         <PopupProfile
           handleOpenTicket={handleOpenTicket}
+          testId={popupProfileTestId}
         />
       </CSSTransition>
       <Modal
+        modalTestId={modalTestId}
         handleClose={handleCloseTicket}
         open={openTicket}
       >

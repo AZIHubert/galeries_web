@@ -26,7 +26,7 @@ const ConfirmAccount = () => {
     return () => clearInterval(timer);
   }, []);
   React.useEffect(() => {
-    if (allowRedirect && loading) history.push('/');
+    if (allowRedirect && !loading) history.push('/');
   }, [allowRedirect, loading]);
 
   return (

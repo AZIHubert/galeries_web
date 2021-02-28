@@ -2,7 +2,15 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-const Input = styled.input`
+interface InputI {
+  testId?: string;
+}
+
+const Input = styled.input.attrs<InputI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<InputI>`
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.colors.secondary};

@@ -4,6 +4,7 @@ import {
   useSelector,
 } from 'react-redux';
 
+import Field from '#components/Field';
 import { changePasswordSchema } from '#helpers/schemas';
 
 import { loadingSelector } from '#store/selectors';
@@ -15,88 +16,56 @@ const initialValues = {
 };
 
 const ChangePassword = () => {
-  const loading = useSelector(loadingSelector);
   const formik = useFormik({
     initialValues,
     onSubmit: () => {},
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: changePasswordSchema,
   });
+  const loading = useSelector(loadingSelector);
   return (
     <div>
       <p>
         change password
       </p>
       <form onSubmit={formik.handleSubmit}>
-        <label
-          htmlFor="currentPassword"
-        >
-          current password
-        </label>
-        <input
-          data-testid='currentPasswordField'
+        <Field
           disabled={loading}
+          error={formik.errors.currentPassword}
+          fieldTestId='currentPassword'
           id='currentPassword'
-          name='currentPassword'
+          label='current password'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          touched={formik.touched.currentPassword}
           type='password'
           value={formik.values.currentPassword}
         />
-        {formik.errors.currentPassword
-          && formik.touched.currentPassword && (
-          <div
-            data-testid='currentPasswordError'
-          >
-            {formik.errors.currentPassword}
-          </div>
-        )}
-        <label
-          htmlFor="newPassword"
-        >
-          new password
-        </label>
-        <input
-          data-testid='newPasswordField'
+        <Field
           disabled={loading}
+          error={formik.errors.newPassword}
+          fieldTestId='newPassword'
           id='newPassword'
-          name='newPassword'
+          label='new password'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          touched={formik.touched.newPassword}
           type='password'
           value={formik.values.newPassword}
         />
-        {formik.errors.newPassword && formik.touched.newPassword && (
-          <div
-            data-testid='newPasswordError'
-          >
-            {formik.errors.newPassword}
-          </div>
-        )}
-        <label
-          htmlFor="confirmNewPassword"
-        >
-          confirm new password
-        </label>
-        <input
-          data-testid='confirmNewPasswordField'
+        <Field
           disabled={loading}
+          error={formik.errors.confirmNewPassword}
+          fieldTestId='confirmNewPassword'
           id='confirmNewPassword'
-          name='confirmNewPassword'
+          label='confirm new password'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          touched={formik.touched.confirmNewPassword}
           type='password'
           value={formik.values.confirmNewPassword}
         />
-        {formik.errors.confirmNewPassword
-          && formik.touched.confirmNewPassword && (
-          <div
-            data-testid='confirmNewPasswordError'
-          >
-            {formik.errors.confirmNewPassword}
-          </div>
-        )}
         <button
           disabled={loading}
           data-testid='submitButton'

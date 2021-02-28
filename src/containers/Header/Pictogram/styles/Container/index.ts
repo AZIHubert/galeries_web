@@ -7,9 +7,14 @@ interface ContainerI {
   marginLeftL?: number;
   marginRight?: number;
   marginRightL?: number;
+  testId?: string;
 }
 
-const Container = styled.div<ContainerI>`
+const Container = styled.div.attrs<ContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ContainerI>`
   background-color: transparent;
   border: none;
   cursor: pointer;

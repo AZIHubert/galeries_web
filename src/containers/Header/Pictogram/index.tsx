@@ -7,21 +7,27 @@ import {
 } from './styles';
 
 interface PictogramI {
+  containerTestId?: string;
   hoverPictogram: React.ComponentType;
+  hoverPictogramTestId?: string;
   marginLeft?: number;
   marginLeftL?: number;
   marginRight?: number;
   marginRightL?: number;
   pictogram: React.ComponentType;
+  pictogramTestId?: string;
 }
 
 const Pictogram = ({
+  containerTestId,
   hoverPictogram: HoverPictogramComponent,
+  hoverPictogramTestId,
   marginLeft = 0,
   marginLeftL,
   marginRight = 0,
   marginRightL,
   pictogram: PictogramComponent,
+  pictogramTestId,
 }: PictogramI) => {
   const [hover, setHover] = React.useState<boolean>(false);
   return (
@@ -32,6 +38,7 @@ const Pictogram = ({
       marginRightL={marginRightL}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      testId={containerTestId}
     >
       <CSSTransition
         classNames='fade'
@@ -39,7 +46,9 @@ const Pictogram = ({
         timeout={300}
         unmountOnExit
       >
-        <InnerContainer>
+        <InnerContainer
+          testId={hoverPictogramTestId}
+        >
           <HoverPictogramComponent />
         </InnerContainer>
       </CSSTransition>
@@ -49,7 +58,9 @@ const Pictogram = ({
         timeout={300}
         unmountOnExit
       >
-        <InnerContainer>
+        <InnerContainer
+          testId={pictogramTestId}
+        >
           <PictogramComponent />
         </InnerContainer>
       </CSSTransition>

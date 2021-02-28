@@ -4,9 +4,14 @@ import mediaQueries from '#helpers/mediaQueries';
 
 interface ButtonI {
   borderBottom?: boolean;
+  testId?: string;
 }
 
-const Button = styled.button<ButtonI>`
+const Button = styled.button.attrs<ButtonI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ButtonI>`
   align-items: center;
   background-color: transparent;
   border: none;

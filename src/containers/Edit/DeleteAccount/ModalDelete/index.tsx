@@ -4,6 +4,8 @@ import {
   useSelector,
 } from 'react-redux';
 
+import Field from '#components/Field';
+
 import { deleteAccountSchema } from '#helpers/schemas';
 
 import { loadingSelector } from '#store/selectors';
@@ -13,46 +15,32 @@ const initialValues = {
 };
 
 const ModalDelete = () => {
-  const loading = useSelector(loadingSelector);
   const formik = useFormik({
     initialValues,
     onSubmit: () => {},
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: deleteAccountSchema,
   });
+  const loading = useSelector(loadingSelector);
   return (
-    <div
-      data-testid='deleteModal'
-    >
+    <div>
       <p>
-        Are you sure you want
-        to do this?
+        Are you sure you want to do this?
       </p>
       <form onSubmit={formik.handleSubmit}>
-        <label
-          htmlFor="password"
-        >
-          confirm yout password
-        </label>
-        <input
-          data-testid='passwordField'
+        <Field
           disabled={loading}
+          error={formik.errors.password}
+          fieldTestId='field'
           id='password'
-          name='password'
+          label='confirm your password'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          touched={formik.touched.password}
           type='password'
           value={formik.values.password}
         />
-        {formik.errors.password
-        && formik.touched.password && (
-          <div
-            data-testid='passwordError'
-          >
-            {formik.errors.password}
-          </div>
-        )}
         <button
           disabled={loading}
           data-testid='submitButton'

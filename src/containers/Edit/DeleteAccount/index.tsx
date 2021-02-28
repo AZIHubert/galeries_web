@@ -26,10 +26,10 @@ const DeleteAccount = () => {
         Once you delete your account, there is no going back. Please be certain.
       </p>
       <button
-        data-testid='buttonDeleteModal'
         onClick={() => setOpenModal((nextState) => !nextState)}
       />
       <Modal
+        modalTestId='modal'
         open={openModal}
         handleClose={handleClose}
       >

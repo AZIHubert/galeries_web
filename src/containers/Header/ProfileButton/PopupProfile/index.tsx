@@ -24,15 +24,19 @@ import {
 
 interface PopupProfileI {
   handleOpenTicket: () => void;
+  testId?: string;
 }
 
 const PopupProfile = ({
   handleOpenTicket,
+  testId,
 }: PopupProfileI) => {
   const user = useSelector(userSelector);
 
   return (
-    <Container>
+    <Container
+      testId={testId}
+    >
       <InnerContainer>
         <Button
           borderBottom

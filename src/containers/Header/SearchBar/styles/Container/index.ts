@@ -4,9 +4,14 @@ import mediaQueries from '#helpers/mediaQueries';
 
 interface SearchBarI {
   focused?: boolean;
+  testId?: string;
 }
 
-const Container = styled.div<SearchBarI>`
+const Container = styled.div.attrs<SearchBarI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<SearchBarI>`
   background-color: #a1a1a1;
   border-radius: 10px;
   box-shadow: ${({ theme }) => theme.boxShadow};

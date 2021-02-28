@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-const InnerContainer = styled.div`
+interface InnerContainerI {
+  testId?: string;
+}
+
+const InnerContainer = styled.div.attrs<InnerContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<InnerContainerI>`
   display: flex;
   height: 100%;
   justify-content: center;

@@ -2,7 +2,15 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-const Container = styled.div`
+interface ContainerI {
+  testId?: string;
+}
+
+const Container = styled.div.attrs<ContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ContainerI>`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.secondary};
   border: ${({ theme }) => (

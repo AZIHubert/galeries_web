@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+interface ContainerI {
+  testId?: string;
+}
+
+const Container = styled.div.attrs<ContainerI>(
+  ({ testId }) => ({
+    'data-testid': testId,
+  }),
+)<ContainerI>`
   position: relative;
 `;
 
