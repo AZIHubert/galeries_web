@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders without crashing 1`] = `
+<footer
+  className="sc-bdfBwQ exOUdb"
+>
+  Allan Aoudji @2021
+</footer>
+`;

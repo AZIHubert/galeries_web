@@ -13,6 +13,7 @@ import {
   SIGNIN_FETCH,
   SIGNIN_SET,
   fetchSignin,
+  resetSignin,
   setLoader,
   setSignin,
 } from '#store/actions';
@@ -30,6 +31,23 @@ describe('signin', () => {
       password: 'password',
       userName: 'userName',
     };
+    it('should create a reset action', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            errors: {
+              confirmPassword: '',
+              email: '',
+              password: '',
+              userName: '',
+            },
+            status: 'pending',
+          },
+        },
+        type: SIGNIN_SET,
+      };
+      expect(resetSignin()).toEqual(expectedAction);
+    });
     it('should create fetch action', () => {
       const expectedAction = {
         payload: {

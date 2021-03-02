@@ -16,6 +16,19 @@ export const fetchResetPassword: (
   type: RESET_PASSWORD_FETCH,
 });
 
+export const resetResetPassword: () => store.ActionI = () => ({
+  payload: {
+    data: {
+      error: {
+        confirmPassword: '',
+        password: '',
+      },
+      status: 'pending',
+    },
+  },
+  type: RESET_PASSWORD_SET,
+});
+
 export const setResetPassword: (
   data: {
     errors?: form.ResetPasswordI;

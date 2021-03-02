@@ -18,6 +18,7 @@ import { loginSchema } from '#helpers/schemas';
 
 import {
   fetchLogin,
+  resetLogin,
   setLogin,
 } from '#store/actions';
 import {
@@ -30,7 +31,6 @@ import {
 import { ForgotPassword } from './styles';
 
 interface ModalLoginI {
-  setCurrentEmail: React.Dispatch<React.SetStateAction<string>>;
   setCurrentModal: React.Dispatch<React.SetStateAction<HeaderModals | null>>;
 }
 
@@ -72,14 +72,13 @@ const ModalLogin = ({
   });
 
   const resetForm = () => {
-    dispatch(setLogin({
-      status: 'pending',
-      errors: initialValues,
-    }));
+    dispatch(resetLogin());
   };
 
   return (
-    <ModalContainer>
+    <ModalContainer
+      containerTestId='login'
+    >
       <FacebookButton
         action='signin'
       />
@@ -93,12 +92,16 @@ const ModalLogin = ({
         marginTopL={16}
         text='or'
       />
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={formik.handleSubmit}
+        data-testid='form'
+      >
         <Field
           disabled={loading}
           error={
             formik.errors.userNameOrEmail || loginError.userNameOrEmail
           }
+          fieldTestId='userNameOrEmail'
           id='userNameOrEmail'
           marginBottom={6}
           marginBottomL={10}
@@ -124,6 +127,7 @@ const ModalLogin = ({
           error={
             formik.errors.password || loginError.password
           }
+          fieldTestId='password'
           id='password'
           label='password'
           marginBottom={12}
@@ -164,6 +168,7 @@ const ModalLogin = ({
           marginBottomL={22}
           marginTop={15}
           marginTopL={22}
+          testId='button'
           type='submit'
           title='Log in'
         />

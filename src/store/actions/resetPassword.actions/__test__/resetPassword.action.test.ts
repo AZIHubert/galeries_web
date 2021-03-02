@@ -10,6 +10,7 @@ import {
   RESET_PASSWORD_FETCH,
   RESET_PASSWORD_SET,
   fetchResetPassword,
+  resetResetPassword,
   setLoader,
   setResetPassword,
 } from '#store/actions';
@@ -35,7 +36,22 @@ describe('resetPassword', () => {
       };
       expect(fetchResetPassword(data)).toEqual(expectedAction);
     });
-    it('shoudl create a set action', () => {
+    it('should create a reset action', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            error: {
+              confirmPassword: '',
+              password: '',
+            },
+            status: 'pending',
+          },
+        },
+        type: RESET_PASSWORD_SET,
+      };
+      expect(resetResetPassword()).toEqual(expectedAction);
+    });
+    it('should create a set action', () => {
       const dataSet = {
         errors: {
           confirmPassword: 'confirmPassword',

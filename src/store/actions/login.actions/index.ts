@@ -12,6 +12,18 @@ export const fetchLogin: (
   type: LOGIN_FETCH,
 });
 
+export const resetLogin: () => store.ActionI = () => ({
+  payload: {
+    data: {
+      errors: {
+        password: '',
+        userNameOrEmail: '',
+      },
+    },
+  },
+  type: LOGIN_SET,
+});
+
 export const setLogin: (
   data: {
     errors?: form.LoginI;

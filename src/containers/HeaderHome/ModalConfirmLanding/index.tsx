@@ -8,8 +8,8 @@ import ModalContainer from '#components/ModalContainer';
 import TextButton from '#components/TextButton';
 
 import {
-  setSendConfirmation,
   fetchSendConfirmation,
+  resetSendConfirmation,
 } from '#store/actions';
 import { loadingSelector } from '#store/selectors';
 
@@ -24,10 +24,7 @@ const ModalConfirmLanding = ({
   const loading = useSelector(loadingSelector);
 
   React.useEffect(() => () => {
-    dispatch(setSendConfirmation({
-      errors: { email: '' },
-      status: 'pending',
-    }));
+    dispatch(resetSendConfirmation());
   }, []);
 
   const onClick = () => {
@@ -43,14 +40,13 @@ const ModalConfirmLanding = ({
       title='Verify your email'
       titleTextAlign='center'
     >
-      <p
-        data-testid='verifyAccountBody'
-      >
+      <p>
         To use Galeries, click the verification
         button in the email we sent
         to {currentEmail}. This helps keep
         your account secure.
       </p>
+      {loading ? 'loading' : 'not loading'}
       <TextButton
         disabled={loading}
         justifyContent='center'

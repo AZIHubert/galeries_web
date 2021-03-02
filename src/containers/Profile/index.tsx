@@ -23,7 +23,9 @@ const Profile = () => {
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const user = useSelector(userSelector);
   React.useEffect(() => {
-    if (selectedFile) {}
+    if (selectedFile) {
+      // selectedFile
+    }
   }, [selectedFile]);
   const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {

@@ -26,3 +26,17 @@ const App = () => (
 );
 
 export default App;
+
+/*
+import React from 'react';
+
+const MyComponents = {
+  DatePicker: function DatePicker(props) {
+    return <div>Imaginez un sélecteur de dates {props.color} ici.</div>;
+  }
+}
+
+function BlueDatePicker() {
+  return <MyComponents.DatePicker color="blue" />;
+}
+*/
