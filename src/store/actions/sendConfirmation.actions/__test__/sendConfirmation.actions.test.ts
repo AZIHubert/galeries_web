@@ -10,6 +10,7 @@ import {
   SEND_CONFIRMATION_FETCH,
   SEND_CONFIRMATION_SET,
   fetchSendConfirmation,
+  resetSendConfirmation,
   setLoader,
   setSendConfirmation,
 } from '#store/actions';
@@ -32,6 +33,21 @@ describe('sendConfirmation', () => {
         type: SEND_CONFIRMATION_FETCH,
       };
       expect(fetchSendConfirmation(data)).toEqual(expectedAction);
+    });
+    it('should create a reset action', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            errors: {
+              confirmPassword: '',
+              password: '',
+            },
+            status: 'pending',
+          },
+        },
+        type: SEND_CONFIRMATION_SET,
+      };
+      expect(resetSendConfirmation()).toEqual(expectedAction);
     });
     it('shoudl create a set action', () => {
       const setData = {

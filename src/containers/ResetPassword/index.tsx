@@ -20,6 +20,7 @@ import { LogoGaleries } from '#ressources/svgComponents';
 
 import {
   fetchResetPassword,
+  resetResetPassword,
   setResetPassword,
 } from '#store/actions';
 import {
@@ -73,10 +74,7 @@ const ResetPassword = () => {
   React.useEffect(() => () => resetForm(), []);
 
   const resetForm = () => {
-    dispatch(setResetPassword({
-      errors: initialValues,
-      status: 'pending',
-    }));
+    dispatch(resetResetPassword());
   };
 
   return (
@@ -93,6 +91,7 @@ const ResetPassword = () => {
           error={
             formik.errors.password || resetPasswordError.password
           }
+          fieldTestId='password'
           id='password'
           marginBottom={6}
           marginBottomL={10}
@@ -119,6 +118,7 @@ const ResetPassword = () => {
           error={
             formik.errors.confirmPassword || resetPasswordError.confirmPassword
           }
+          fieldTestId='confirmPassword'
           id='confirmPassword'
           marginBottom={12}
           label='confirm password'

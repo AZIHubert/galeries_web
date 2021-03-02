@@ -6,18 +6,14 @@ import {
 
 import ModalTimer from '#components/ModalTimer';
 
-import {
-  setNotification,
-} from '#store/actions';
-import {
-  notificationSelector,
-} from '#store/selectors';
+import { resetNotification } from '#store/actions';
+import { notificationSelector } from '#store/selectors';
 
 const Notification = () => {
   const dispatch = useDispatch();
-  const [openModalTimer, setOpenModalTimer] = React.useState<boolean>(false);
-  const notification = useSelector(notificationSelector);
   const handleCloseModalTimer = React.useCallback(() => setOpenModalTimer(false), []);
+  const notification = useSelector(notificationSelector);
+  const [openModalTimer, setOpenModalTimer] = React.useState<boolean>(false);
 
   React.useLayoutEffect(() => {
     if (notification.text) {
@@ -29,13 +25,11 @@ const Notification = () => {
   return (
     <ModalTimer
       callBack={() => {
-        dispatch(setNotification({
-          error: false,
-          text: '',
-        }));
+        dispatch(resetNotification());
       }}
       handleClose={handleCloseModalTimer}
       open={openModalTimer}
+      testId='modal'
       text={notification.text}
       variant={notification.error ? 'danger' : 'primary'}
     />

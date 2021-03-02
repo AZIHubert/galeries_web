@@ -13,6 +13,7 @@ import {
   USER_FETCH,
   USER_SET,
   fetchLogin,
+  resetLogin,
   setLoader,
   setLogin,
 } from '#store/actions';
@@ -33,6 +34,20 @@ describe('login', () => {
         payload: { data },
       };
       expect(fetchLogin(data)).toEqual(expectedAction);
+    });
+    it('should create a reset action', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            errors: {
+              password: '',
+              userNameOrEmail: '',
+            },
+          },
+        },
+        type: LOGIN_SET,
+      };
+      expect(resetLogin()).toEqual(expectedAction);
     });
     it('should create a set action', () => {
       const data = {

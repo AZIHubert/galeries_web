@@ -56,7 +56,6 @@ const Header = () => {
       case 'login':
         return (
           <ModalLogin
-            setCurrentEmail={setCurrentEmail}
             setCurrentModal={setCurrentModal}
           />
         );

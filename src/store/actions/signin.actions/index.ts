@@ -12,6 +12,21 @@ export const fetchSignin: (
   payload: { data },
 });
 
+export const resetSignin: () => store.ActionI = () => ({
+  payload: {
+    data: {
+      errors: {
+        confirmPassword: '',
+        email: '',
+        password: '',
+        userName: '',
+      },
+      status: 'pending',
+    },
+  },
+  type: SIGNIN_SET,
+});
+
 export const setSignin: (
   data: {
     errors?: form.SigninI

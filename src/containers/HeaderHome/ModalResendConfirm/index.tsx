@@ -12,8 +12,9 @@ import ModalContainer from '#components/ModalContainer';
 import { resetConfirmSchema } from '#helpers/schemas';
 
 import {
-  setSendConfirmation,
   fetchSendConfirmation,
+  resetSendConfirmation,
+  setSendConfirmation,
 } from '#store/actions';
 import {
   loadingSelector,
@@ -44,10 +45,7 @@ const ModalResendConfirm = () => {
   React.useEffect(() => () => resetForm(), []);
 
   const resetForm = () => {
-    dispatch(setSendConfirmation({
-      errors: initialValues,
-      status: 'pending',
-    }));
+    dispatch(resetSendConfirmation());
   };
 
   return (
@@ -63,12 +61,16 @@ const ModalResendConfirm = () => {
       <p>
         Or resend a confirmation email.
       </p>
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={formik.handleSubmit}
+        data-testid='form'
+      >
         <Field
           disabled={loading}
           error={
             formik.errors.email || sendConfirmationError.email
           }
+          fieldTestId='email'
           id='email'
           label='email'
           marginTop={20}

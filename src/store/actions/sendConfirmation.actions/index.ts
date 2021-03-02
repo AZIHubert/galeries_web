@@ -12,6 +12,19 @@ export const fetchSendConfirmation: (
   type: SEND_CONFIRMATION_FETCH,
 });
 
+export const resetSendConfirmation: () => store.ActionI = () => ({
+  payload: {
+    data: {
+      errors: {
+        confirmPassword: '',
+        password: '',
+      },
+      status: 'pending',
+    },
+  },
+  type: SEND_CONFIRMATION_SET,
+});
+
 export const setSendConfirmation: (
   data: {
     errors?: form.SendConfirmationI;

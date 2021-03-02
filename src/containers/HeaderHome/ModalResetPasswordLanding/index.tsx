@@ -5,12 +5,11 @@ import {
 } from 'react-redux';
 
 import ModalContainer from '#components/ModalContainer';
-import ModalTimer from '#components/ModalTimer';
 import TextButton from '#components/TextButton';
 
 import {
   fetchSendResetPassword,
-  setSendResetPassword,
+  resetSendResetPassword,
 } from '#store/actions';
 import {
   loadingSelector,
@@ -25,24 +24,18 @@ const ModalResetPasswordLanding = ({
 }: ModalResetPasswordLandingI) => {
   const dispatch = useDispatch();
   const loading = useSelector(loadingSelector);
-  const [open, setOpen] = React.useState<boolean>(false);
 
   React.useEffect(() => () => resetForm(), []);
 
-  const handleClose = () => setOpen(false);
   const onClick = async () => {
     if (!loading) {
+      resetForm();
       dispatch(fetchSendResetPassword({ email: currentEmail }));
     }
   };
 
   const resetForm = () => {
-    dispatch(setSendResetPassword({
-      errors: {
-        email: '',
-      },
-      status: 'pending',
-    }));
+    dispatch(resetSendResetPassword());
   };
 
   return (
@@ -50,9 +43,7 @@ const ModalResetPasswordLanding = ({
       title='Reset your password'
       titleTextAlign='center'
     >
-      <p
-        data-testid='validateResetPasswordBody'
-      >
+      <p>
         To reset your password, click the
         verification button in
         the email we sent to {currentEmail}.
@@ -66,11 +57,6 @@ const ModalResetPasswordLanding = ({
         marginTop={20}
         text='No email in your inbox or spam folder? Let’s'
         textButton='resend it'
-      />
-      <ModalTimer
-        handleClose={handleClose}
-        open={open}
-        text='email resend'
       />
     </ModalContainer>
   );

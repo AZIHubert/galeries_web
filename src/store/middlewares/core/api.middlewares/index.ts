@@ -26,7 +26,8 @@ const apiMiddleware: Middleware = (
     dispatch(setLoader(true));
     refreshToken();
     if (
-      payload.meta
+      payload
+      && payload.meta
       && payload.meta.method
       && payload.meta.url
       && payload.meta.entity

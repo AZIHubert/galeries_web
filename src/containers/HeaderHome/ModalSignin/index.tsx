@@ -17,8 +17,9 @@ import TextSepatator from '#components/TextSeparator';
 import { signinSchema } from '#helpers/schemas';
 
 import {
-  setSignin,
   fetchSignin,
+  resetSignin,
+  setSignin,
 } from '#store/actions';
 import {
   loadingSelector,
@@ -68,14 +69,13 @@ const ModalSignin = ({
   React.useEffect(() => () => resetForm(), []);
 
   const resetForm = () => {
-    dispatch(setSignin({
-      status: 'pending',
-      errors: initialValues,
-    }));
+    dispatch(resetSignin());
   };
 
   return (
-    <ModalContainer>
+    <ModalContainer
+      containerTestId='signin'
+    >
       <FacebookButton
         action='signin'
       />
@@ -89,12 +89,16 @@ const ModalSignin = ({
         marginTopL={16}
         text='or'
       />
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={formik.handleSubmit}
+        data-testid='form'
+      >
         <Field
           disabled={loading}
           error={
             formik.errors.userName || signinError.userName
           }
+          fieldTestId='userName'
           id='userName'
           marginBottom={6}
           marginBottomL={10}
@@ -120,6 +124,7 @@ const ModalSignin = ({
           error={
             formik.errors.email || signinError.email
           }
+          fieldTestId='email'
           id='email'
           marginBottom={6}
           marginBottomL={10}
@@ -145,6 +150,7 @@ const ModalSignin = ({
           error={
             formik.errors.password || signinError.password
           }
+          fieldTestId='password'
           id='password'
           marginBottom={6}
           marginBottomL={10}
@@ -171,6 +177,7 @@ const ModalSignin = ({
           error={
             formik.errors.confirmPassword || signinError.confirmPassword
           }
+          fieldTestId='confirmPassword'
           id='confirmPassword'
           marginBottom={12}
           marginBottomL={15}

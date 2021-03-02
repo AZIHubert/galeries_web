@@ -13,6 +13,7 @@ import { allowResetPasswordSchema } from '#helpers/schemas';
 
 import {
   fetchSendResetPassword,
+  resetSendResetPassword,
   setSendResetPassword,
 } from '#store/actions';
 import {
@@ -74,23 +75,24 @@ const ModalResetPassword = ({
   React.useEffect(() => () => resetForm(), []);
 
   const resetForm = () => {
-    dispatch(setSendResetPassword({
-      errors: initialValues,
-      status: 'pending',
-    }));
+    dispatch(resetSendResetPassword());
   };
 
   return (
     <ModalContainer
       title='Enter your email to reset your password'
     >
-      <form onSubmit={formik.handleSubmit}>
+      <form
+        onSubmit={formik.handleSubmit}
+        data-testid='form'
+      >
         <Field
           disabled={loading}
-          id='email'
           error={
             formik.errors.email || sendResetPasswordError.email
           }
+          fieldTestId='email'
+          id='email'
           label='email'
           onBlur={formik.handleBlur}
           onChange={(e) => {

@@ -10,6 +10,7 @@ import {
   SEND_RESET_PASSWORD_FETCH,
   SEND_RESET_PASSWORD_SET,
   fetchSendResetPassword,
+  resetSendResetPassword,
   setLoader,
   setSendResetPassword,
 } from '#store/actions';
@@ -32,6 +33,20 @@ describe('sendResetPassword', () => {
         type: SEND_RESET_PASSWORD_FETCH,
       };
       expect(fetchSendResetPassword(data)).toEqual(expectedAction);
+    });
+    it('should create a reset action', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            errors: {
+              email: '',
+            },
+            status: 'pending',
+          },
+        },
+        type: SEND_RESET_PASSWORD_SET,
+      };
+      expect(resetSendResetPassword()).toEqual(expectedAction);
     });
     it('should create a set action', () => {
       const setData = {
