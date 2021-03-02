@@ -9,7 +9,7 @@ export { default as sendResetPasswordErrorSelector } from './sendResetPasswordEr
 export { default as sendResetPasswordStatusSelector } from './sendResetPasswordStatus.selector';
 export { default as sendConfitmationStatusSelector } from './sendConfitmationStatus.selector';
 export { default as sendTicketErrorSelector } from './sendTicketError.selector';
-export { default as sendTicketStateSelector } from './sendTicketState.selector';
+export { default as sendTicketStatusSelector } from './sendTicketStatus.selector';
 export { default as signinErrorSelector } from './signinError.selector';
 export { default as signinStatusSelector } from './signinStatus.selector';
 export { default as uiSelector } from './ui.selector';

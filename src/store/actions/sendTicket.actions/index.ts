@@ -12,6 +12,19 @@ export const fetchSendTicket: (
   type: SEND_TICKET_FETCH,
 });
 
+export const resetSendTicket: () => store.ActionI = () => ({
+  payload: {
+    data: {
+      errors: {
+        body: '',
+        header: '',
+      },
+      status: 'pending',
+    },
+  },
+  type: SEND_TICKET_SET,
+});
+
 export const setSendTicket: (
   data: {
     errors?: form.SendTicketI;

@@ -53,7 +53,6 @@ const ProfileButton = ({
     <Container
       ref={containerRef}
     >
-      {openTicket ? 'open' : 'close'}
       <Button
         onClick={() => setOpenPopupProfile((lastState) => !lastState)}
       >
@@ -79,7 +78,9 @@ const ProfileButton = ({
         handleClose={handleCloseTicket}
         open={openTicket}
       >
-        <ModalTicket />
+        <ModalTicket
+          handleClose={handleCloseTicket}
+        />
       </Modal>
     </Container>
   );

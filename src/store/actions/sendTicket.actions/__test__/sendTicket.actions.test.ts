@@ -10,6 +10,7 @@ import {
   SEND_TICKET_FETCH,
   SEND_TICKET_SET,
   fetchSendTicket,
+  resetSendTicket,
   setLoader,
   setSendTicket,
 } from '#store/actions';
@@ -33,6 +34,21 @@ describe('sendTicket', () => {
         type: SEND_TICKET_FETCH,
       };
       expect(fetchSendTicket(data)).toEqual(expectedAction);
+    });
+    it('should create a reset actions', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            errors: {
+              body: '',
+              header: '',
+            },
+            status: 'pending',
+          },
+        },
+        type: SEND_TICKET_SET,
+      };
+      expect(resetSendTicket()).toEqual(expectedAction);
     });
     it('should create a set actions', () => {
       const setData = {
