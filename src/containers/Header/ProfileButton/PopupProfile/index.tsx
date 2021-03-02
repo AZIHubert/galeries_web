@@ -5,7 +5,8 @@ import {
 
 import Text from '#components/Text';
 
-import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
+import selectProfilePicture from '#helpers/selectProfilePicture';
+
 import {
   Gear,
   Ticket,
@@ -43,7 +44,7 @@ const PopupProfile = ({
         >
           <ProfileImage
             alt='profile picture'
-            src={defaultProfilePicture}
+            src={selectProfilePicture(user)}
           />
           <div>
             <Text

@@ -6,7 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Modal from '#components/Modal';
 
-import defaultProfilePicture from '#ressources/svg/defaultProfilePicture.svg';
+import selectProfilePicture from '#helpers/selectProfilePicture';
 
 import { userSelector } from '#store/selectors';
 
@@ -59,7 +59,7 @@ const ProfileButton = ({
       >
         <ProfileImage
           alt='profile picture'
-          src={defaultProfilePicture}
+          src={selectProfilePicture(user)}
         />
         {user ? user.userName : 'user name'}
       </Button>
