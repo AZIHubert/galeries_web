@@ -4,7 +4,7 @@ export const PROFILE_PICTURE_FETCH = `${PROFILE_PICTURE} Fetch`;
 export const PROFILE_PICTURE_SET = `${PROFILE_PICTURE} Set`;
 
 export const fetchProfilePicture: (
-  data: File
+  data: FormData
 ) => store.ActionI = (
   data,
 ) => ({

@@ -62,6 +62,8 @@ const fetchProfilePicture: Middleware = (
         'POST',
         endPoints.PROFILE_PICTURE,
         PROFILE_PICTURE,
+        undefined,
+        'application/json',
       ),
     );
   }

@@ -35,6 +35,7 @@ const apiMiddleware: Middleware = (
       const token = getAuthToken();
       const {
         confirmToken,
+        contentType,
         entity,
         method,
         url,
@@ -45,6 +46,7 @@ const apiMiddleware: Middleware = (
         url,
         token,
         confirmToken,
+        contentType,
       )
         .then((response) => {
           dispatch(

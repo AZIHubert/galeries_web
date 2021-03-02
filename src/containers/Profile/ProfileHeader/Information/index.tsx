@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 
 import Button from '#components/Button';
 import Text from '#components/Text';
 
+import { fetchProfilePicture } from '#store/actions';
 import { userSelector } from '#store/selectors';
 
 import {
@@ -12,12 +16,16 @@ import {
 } from './styles';
 
 const Information = () => {
+  const dispatch = useDispatch();
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const user = useSelector(userSelector);
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
 
   React.useEffect(() => {
     if (selectedFile) {
+      const formData = new FormData();
+      formData.append('image', selectedFile, selectedFile.name);
+      dispatch(fetchProfilePicture(formData));
       // selectedFile
     }
   }, [selectedFile]);

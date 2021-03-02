@@ -8,6 +8,7 @@ export default (
   url: string,
   token?: string | null,
   confirmToken?: string,
+  contentType?: string,
 ) => axios.request({
   data: body,
   method,
@@ -15,7 +16,7 @@ export default (
   url,
   headers: {
     authorization: token,
-    'Content-Type': 'application/json',
+    'Content-Type': contentType || 'application/json',
     confirmation: confirmToken,
   },
   withCredentials: true,

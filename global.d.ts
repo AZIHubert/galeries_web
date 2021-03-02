@@ -77,7 +77,7 @@ declare global {
           method?: Method;
           url?: string;
           confirmToken?: string;
-          callback?: () => void;
+          contentType?: string;
         }
       }
     }

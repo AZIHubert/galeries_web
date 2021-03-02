@@ -4,6 +4,7 @@ import {
 } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Image from '#components/Image';
 import Text from '#components/Text';
 
 import selectProfilePicture from '#helpers/selectProfilePicture';
@@ -25,15 +26,19 @@ import {
 } from './styles';
 
 interface PopupProfileI {
+  handleClose: () => void;
   handleOpenTicket: () => void;
   testId?: string;
 }
 
 const PopupProfile = ({
+  handleClose,
   handleOpenTicket,
   testId,
 }: PopupProfileI) => {
   const user = useSelector(userSelector);
+
+  const { croped, pending } = selectProfilePicture(user);
 
   return (
     <Container
@@ -43,11 +48,16 @@ const PopupProfile = ({
         <Button
           borderBottom
         >
-          <ProfileImage
-            alt='profile picture'
-            src={selectProfilePicture(user)}
-          />
-          <Link to='/profile'>
+          <ProfileImage>
+            <Image
+              original={croped}
+              pending={pending}
+            />
+          </ProfileImage>
+          <Link
+            onClick={handleClose}
+            to='/profile'
+          >
             <Text
               color='primary'
               fontSize={1}
@@ -79,7 +89,10 @@ const PopupProfile = ({
           </Text>
         </Button>
         <Button
-          onClick={handleOpenTicket}
+          onClick={() => {
+            handleOpenTicket();
+            handleClose();
+          }}
         >
           <LogoContainer>
             <Ticket />

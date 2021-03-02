@@ -29,17 +29,20 @@ export const apiRequest: (
   url: string,
   entity: store.Entity,
   confirmToken?: string,
+  contentType?: string,
 ) => store.ActionI = (
   body,
   method,
   url,
   entity,
   confirmToken?,
+  contentType?,
 ) => ({
   payload: {
     data: body,
     meta: {
       confirmToken,
+      contentType,
       entity,
       method,
       url,

@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  Link,
-  useHistory,
-} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   useDispatch,
 } from 'react-redux';
@@ -29,6 +26,7 @@ import {
   HeaderPart,
   InnerContainer,
   Logo,
+  StyledLink,
 } from './styles';
 
 const Header = () => {
@@ -41,12 +39,14 @@ const Header = () => {
     <Container>
       <InnerContainer>
         <HeaderPart>
-          <Link to='/'>
+          <StyledLink
+            to='/'
+          >
             <Logo
               alt="header logo"
               src={logo}
             />
-          </Link>
+          </StyledLink>
           <SearchBar />
         </HeaderPart>
         <HeaderPart>

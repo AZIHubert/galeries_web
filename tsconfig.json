@@ -51,6 +51,7 @@
       "#contexts/*": ["./src/contexts/*"],
       "#containers/*": ["./src/containers/*"],
       "#helpers/*": ["./src/helpers/*"],
+      "#hooks/*": ["./src/hooks/*"],
       "#ressources/*": ["./src/ressources/*"],
       "#src/*": ["src/*"],
       "#store/*": ["./src/store/*"],

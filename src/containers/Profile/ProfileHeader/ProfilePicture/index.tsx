@@ -1,25 +1,26 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 
+import Image from '#components/Image';
+
 import selectProfilePicture from '#helpers/selectProfilePicture';
 
 import { userSelector } from '#store/selectors';
 
 import {
   Container,
-  Image,
   InnerContainer,
 } from './styles';
 
 const ProfilePicture = () => {
   const user = useSelector(userSelector);
+  const { croped, pending } = selectProfilePicture(user);
   return (
     <Container>
       <InnerContainer>
         <Image
-          data-testid='currentProfilePicture'
-          src={selectProfilePicture(user)}
-          alt='current profile picture'
+          original={croped}
+          pending={pending}
         />
       </InnerContainer>
     </Container>

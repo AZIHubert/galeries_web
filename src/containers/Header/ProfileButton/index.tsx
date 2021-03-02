@@ -4,6 +4,7 @@ import {
 } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
+import Image from '#components/Image';
 import Modal from '#components/Modal';
 
 import selectProfilePicture from '#helpers/selectProfilePicture';
@@ -34,9 +35,13 @@ const ProfileButton = ({
   const [openPopupProfil, setOpenPopupProfile] = React.useState<boolean>(false);
   const [openTicket, setOpenTicket] = React.useState<boolean>(false);
 
+  const { croped, pending } = selectProfilePicture(user);
+
+  const handleClosePopup = () => setOpenPopupProfile(false);
+
   const handleClickOutside = (event: any) => {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
-      setOpenPopupProfile(false);
+      handleClosePopup();
     }
   };
 
@@ -56,10 +61,12 @@ const ProfileButton = ({
       <Button
         onClick={() => setOpenPopupProfile((lastState) => !lastState)}
       >
-        <ProfileImage
-          alt='profile picture'
-          src={selectProfilePicture(user)}
-        />
+        <ProfileImage>
+          <Image
+            original={croped}
+            pending={pending}
+          />
+        </ProfileImage>
         {user ? user.userName : 'user name'}
       </Button>
       <CSSTransition
@@ -70,6 +77,7 @@ const ProfileButton = ({
       >
         <PopupProfile
           handleOpenTicket={handleOpenTicket}
+          handleClose={handleClosePopup}
           testId={popupProfileTestId}
         />
       </CSSTransition>

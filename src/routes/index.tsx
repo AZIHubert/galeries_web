@@ -66,6 +66,7 @@ const Routes = () => {
     }
     return () => clearTimeout(timer);
   }, []);
+  console.log('allowRedirect', allowRedirect);
   return (
     <Router>
       <CSSTransition
@@ -80,7 +81,7 @@ const Routes = () => {
       </CSSTransition>
       <CSSTransition
         classNames='fade'
-        in={allowRedirect && !loading}
+        in={allowRedirect}
         timeout={300}
         unmountOnExit
       >

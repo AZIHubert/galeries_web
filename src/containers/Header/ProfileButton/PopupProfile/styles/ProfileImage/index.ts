@@ -2,10 +2,7 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-const ProfileImage = styled.img`
-  border: ${({ theme }) => (
-    `1px solid ${theme.colors.primary}`
-  )};
+const ProfileImage = styled.div`
   border-radius: 14px;
   height: 28px;
   margin-right: 22px;
