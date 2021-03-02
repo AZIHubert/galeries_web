@@ -5,6 +5,7 @@ import {
   screen,
 } from '@testing-library/react';
 import * as React from 'react';
+import ReactRouterDOM from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -43,6 +44,11 @@ const Container = () => (
     </ThemeProvider>
   </Provider>
 );
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom') as typeof ReactRouterDOM,
+  Link: jest.fn(({ children }) => children),
+}));
 
 describe('ProfileButton', () => {
   afterEach(cleanup);

@@ -46,7 +46,6 @@ const P = styled.p.attrs<PI>(
     textAlignL,
   }) => {
     const textA = textAlignL || textAlign;
-    console.log(textA);
     return textA;
   }}
   }

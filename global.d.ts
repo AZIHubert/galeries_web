@@ -10,6 +10,8 @@ import {
   LOGIN_GOOGLE,
   LOGIN_SET,
   LOGOUT,
+  PROFILE_PICTURE_FETCH,
+  PROFILE_PICTURE_SET,
   REFRESH_TOKEN,
   RESET_PASSWORD,
   SEND_CONFIRMATION,
@@ -54,6 +56,8 @@ declare global {
       typeof LOGIN_GOOGLE |
       typeof LOGIN_SET |
       typeof LOGOUT |
+      typeof PROFILE_PICTURE_FETCH |
+      typeof PROFILE_PICTURE_SET |
       typeof REFRESH_TOKEN |
       typeof RESET_PASSWORD |
       typeof SEND_CONFIRMATION |
@@ -89,6 +93,9 @@ declare global {
         errors: form.LoginI;
       };
       notification: NotificationI;
+      profilePicture: {
+        status: FormStatus;
+      };
       resetPassword: {
         status: FormStatus;
         errors: form.ResetPasswordI

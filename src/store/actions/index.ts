@@ -5,6 +5,7 @@ export * from './loginGoogle.actions';
 export * from './login.actions';
 export * from './logout.actions';
 export * from './notification.actions';
+export * from './ProfilePicture.actions';
 export * from './resetPassword.actions';
 export * from './sendConfirmation.actions';
 export * from './sendResetPassword.actions';

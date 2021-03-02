@@ -2,10 +2,10 @@
 
 exports[`Header renders without crashing 1`] = `
 <header
-  className="sc-hiSbYr eqKIme"
+  className="sc-hiSbYr hnDwTm"
 >
   <div
-    className="sc-cBNfnY gHYVda"
+    className="sc-cBNfnY ixfRRJ"
   >
     <div
       className="sc-gWHgXt jJAlgF"
@@ -41,22 +41,26 @@ exports[`Header renders without crashing 1`] = `
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-jrAGrp ivaCqA"
+          onClick={[Function]}
         >
-          <svg
-            className="sc-eCssSg iqMPPy"
-            viewBox="0 0 784.16 904.91"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            className="sc-jrAGrp ivaCqA"
           >
-            <g
-              data-name="Layer 2"
+            <svg
+              className="sc-eCssSg iqMPPy"
+              viewBox="0 0 784.16 904.91"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M784.16 904.91H450.91V665.59H332.57v239.32H0V336.39L392.08 0l392.08 336.39zm-258.25-75h183.25v-459l-317.08-272L75 370.86v459.05h182.57V590.59h268.34z"
-                data-name="Layer 1"
-              />
-            </g>
-          </svg>
+              <g
+                data-name="Layer 2"
+              >
+                <path
+                  d="M784.16 904.91H450.91V665.59H332.57v239.32H0V336.39L392.08 0l392.08 336.39zm-258.25-75h183.25v-459l-317.08-272L75 370.86v459.05h182.57V590.59h268.34z"
+                  data-name="Layer 1"
+                />
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
       <div
@@ -65,32 +69,36 @@ exports[`Header renders without crashing 1`] = `
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-jrAGrp ivaCqA"
+          onClick={[Function]}
         >
-          <svg
-            className="sc-gsTCUz fEpsDE"
-            viewBox="0 0 893 893"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            className="sc-jrAGrp ivaCqA"
           >
-            <g
-              data-name="Layer 2"
-              id="createGalerie_svg__Layer_2"
+            <svg
+              className="sc-gsTCUz fEpsDE"
+              viewBox="0 0 893 893"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <g
-                data-name="Layer 1"
-                id="createGalerie_svg__Layer_1-2"
+                data-name="Layer 2"
+                id="createGalerie_svg__Layer_2"
               >
-                <path
-                  className="createGalerie_svg__cls-1"
-                  d="M711.5 0h-530C81.42 0 0 81.42 0 181.5v530C0 811.58 81.42 893 181.5 893h530C811.58 893 893 811.58 893 711.5v-530C893 81.42 811.58 0 711.5 0zM818 711.5A106.63 106.63 0 01711.5 818h-530A106.63 106.63 0 0175 711.5v-530A106.63 106.63 0 01181.5 75h530A106.63 106.63 0 01818 181.5z"
-                />
-                <path
-                  className="createGalerie_svg__cls-1"
-                  d="M484 222.94h-75V409H222.94v75H409v186.06h75V484h186.06v-75H484V222.94z"
-                />
+                <g
+                  data-name="Layer 1"
+                  id="createGalerie_svg__Layer_1-2"
+                >
+                  <path
+                    className="createGalerie_svg__cls-1"
+                    d="M711.5 0h-530C81.42 0 0 81.42 0 181.5v530C0 811.58 81.42 893 181.5 893h530C811.58 893 893 811.58 893 711.5v-530C893 81.42 811.58 0 711.5 0zM818 711.5A106.63 106.63 0 01711.5 818h-530A106.63 106.63 0 0175 711.5v-530A106.63 106.63 0 01181.5 75h530A106.63 106.63 0 01818 181.5z"
+                  />
+                  <path
+                    className="createGalerie_svg__cls-1"
+                    d="M484 222.94h-75V409H222.94v75H409v186.06h75V484h186.06v-75H484V222.94z"
+                  />
+                </g>
               </g>
-            </g>
-          </svg>
+            </svg>
+          </div>
         </div>
       </div>
       <div
@@ -99,28 +107,31 @@ exports[`Header renders without crashing 1`] = `
         onMouseLeave={[Function]}
       >
         <div
-          className="sc-jrAGrp ivaCqA"
+          onClick={[Function]}
         >
-          <svg
-            className="sc-gKsewC imXVUy"
-            viewBox="0 0 998.13 907.88"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            className="sc-jrAGrp ivaCqA"
           >
-            <g
-              data-name="Layer 2"
+            <svg
+              className="sc-gKsewC imXVUy"
+              viewBox="0 0 998.13 907.88"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M498.35 907.88L91.66 501.19l1.42-1.42-8.85-8.85A287.57 287.57 0 11490.92 84.23l8.85 8.85 7.44-7.44a287.59 287.59 0 01406.69 0 287.58 287.58 0 010 406.7zM197.73 501.19l300.63 300.63 362.51-362.51c82.88-82.89 82.88-217.75 0-300.63s-217.75-82.89-300.63 0l-60.47 60.47-61.88-61.89c-82.88-82.88-217.75-82.88-300.63 0a212.58 212.58 0 000 300.63l61.89 61.88z"
-                data-name="Layer 1"
-              />
-            </g>
-          </svg>
+              <g
+                data-name="Layer 2"
+              >
+                <path
+                  d="M498.35 907.88L91.66 501.19l1.42-1.42-8.85-8.85A287.57 287.57 0 11490.92 84.23l8.85 8.85 7.44-7.44a287.59 287.59 0 01406.69 0 287.58 287.58 0 010 406.7zM197.73 501.19l300.63 300.63 362.51-362.51c82.88-82.89 82.88-217.75 0-300.63s-217.75-82.89-300.63 0l-60.47 60.47-61.88-61.89c-82.88-82.88-217.75-82.88-300.63 0a212.58 212.58 0 000 300.63l61.89 61.88z"
+                  data-name="Layer 1"
+                />
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
       <div
         className="sc-ezrdKe dznMkn"
       >
-        close
         <button
           className="sc-giIncl dmlCtF"
           onClick={[Function]}

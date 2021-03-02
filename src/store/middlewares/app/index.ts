@@ -3,6 +3,7 @@ import loginFacebookMiddlewares from './loginFacebook.middlewares';
 import loginGoogleMiddlewares from './loginGoogle.middlewares';
 import loginMiddlewares from './login.middlewares';
 import logoutMiddlewares from './logout.middlewares';
+import profilePictureMiddlewares from './profilePicture.middlewares';
 import resetPasswordMiddlewares from './resetPassword.middlewares';
 import sendConfirmationMiddlewares from './sendConfirmation.middlewares';
 import sendResetPasswordMiddlewares from './sendResetPassword.middlewares';
@@ -16,6 +17,7 @@ export default [
   ...loginGoogleMiddlewares,
   ...loginMiddlewares,
   ...logoutMiddlewares,
+  ...profilePictureMiddlewares,
   ...resetPasswordMiddlewares,
   ...signinMiddlewares,
   ...sendConfirmationMiddlewares,

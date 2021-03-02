@@ -4,6 +4,7 @@ import {
 } from '@testing-library/react';
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import ReactRouterDOM from 'react-router-dom';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
@@ -26,6 +27,11 @@ const Container = ({
     </ThemeProvider>
   </Provider>
 );
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom') as typeof ReactRouterDOM,
+  Link: jest.fn(({ children }) => children),
+}));
 
 const mockedHandleOpenTicket = jest.fn();
 

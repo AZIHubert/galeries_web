@@ -2,14 +2,14 @@
 
 exports[`App renders without crashing 1`] = `
 <div
-  className="sc-jHVexB imkrkj"
+  className="sc-bTvRPi fvTaHT"
 >
   <div
-    className="sc-bZSQDF bioVkm"
+    className="sc-cOajty gJpcrI"
   >
     <img
       alt="Galeries logo"
-      className="sc-iUuytg YFkqG"
+      className="sc-AzgDb ckDcWz"
       src={Object {}}
     />
   </div>
