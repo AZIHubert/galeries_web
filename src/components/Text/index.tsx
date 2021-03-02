@@ -10,6 +10,7 @@ interface TextI {
   fontWeight?: style.FontWeight;
   testId?: string;
   textAlign?: style.TextAlign;
+  textAlignL?: style.TextAlign;
 }
 
 const Text: React.FC<TextI> = ({
@@ -21,6 +22,7 @@ const Text: React.FC<TextI> = ({
   fontWeight = 'normal',
   testId,
   textAlign = 'left',
+  textAlignL,
 }) => (
   <P
     color={color}
@@ -30,6 +32,7 @@ const Text: React.FC<TextI> = ({
     fontWeight={fontWeight}
     testId={testId}
     textAlign={textAlign}
+    textAlignL={textAlignL}
   >
     {children}
   </P>

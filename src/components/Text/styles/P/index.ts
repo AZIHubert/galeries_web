@@ -10,6 +10,7 @@ interface PI {
   fontWeight?: style.FontWeight;
   testId?: string;
   textAlign?: style.TextAlign;
+  textAlignL?: style.TextAlign;
 }
 
 const P = styled.p.attrs<PI>(
@@ -30,16 +31,23 @@ const P = styled.p.attrs<PI>(
   font-weight: ${({ fontWeight }) => (
     fontWeight || 'normal'
   )};
-  text-align: ${({ textAlign }) => (
-    textAlign || 'left'
-  )};
-  @media ${mediaQueries.laptopL} {
+  text-align: ${({ textAlign }) => textAlign};
+  text-decoration: none;
+  @media ${mediaQueries.tablet} {
     font-size: ${({
     fontSize,
     fontSizeL,
   }) => {
     const fontS = fontSizeL || fontSize;
     return `${fontS}rem`;
+  }};
+    text-align: ${({
+    textAlign,
+    textAlignL,
+  }) => {
+    const textA = textAlignL || textAlign;
+    console.log(textA);
+    return textA;
   }}
   }
 `;

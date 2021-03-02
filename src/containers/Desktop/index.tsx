@@ -1,9 +1,7 @@
 import * as React from 'react';
 
-import Header from '#containers/Header';
-
 const Desktop = () => (
-  <Header />
+  <div />
 );
 
 export default Desktop;

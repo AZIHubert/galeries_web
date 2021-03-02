@@ -16,7 +16,7 @@ const apiMiddleware: Middleware = (
   { dispatch },
 ) => (
   next,
-) => (
+) => async (
   action: store.ActionI,
 ) => {
   const {
@@ -24,7 +24,7 @@ const apiMiddleware: Middleware = (
   } = action;
   if (action.type.includes(API_REQUEST)) {
     dispatch(setLoader(true));
-    refreshToken();
+    await refreshToken();
     if (
       payload
       && payload.meta

@@ -1,5 +1,9 @@
 import * as React from 'react';
 import {
+  Link,
+  useHistory,
+} from 'react-router-dom';
+import {
   useDispatch,
 } from 'react-redux';
 
@@ -29,15 +33,20 @@ import {
 
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleClickHome = () => history.push('/');
 
   return (
     <Container>
       <InnerContainer>
         <HeaderPart>
-          <Logo
-            alt="header logo"
-            src={logo}
-          />
+          <Link to='/'>
+            <Logo
+              alt="header logo"
+              src={logo}
+            />
+          </Link>
           <SearchBar />
         </HeaderPart>
         <HeaderPart>
@@ -45,6 +54,7 @@ const Header = () => {
             hoverPictogram={HomeHover}
             marginRight={25}
             marginRightL={35}
+            onClick={handleClickHome}
             pictogram={Home}
           />
           <Pictogram
@@ -71,3 +81,11 @@ const Header = () => {
 };
 
 export default Header;
+
+/*
+LS.NavFixedItem_LINK = styled(Link)`
+  display: flex;
+  justify-content: ${props => props.$tempLeftProp ? 'flex-start' : 'center'}; // '$' added
+  align-items: center;
+`;
+*/

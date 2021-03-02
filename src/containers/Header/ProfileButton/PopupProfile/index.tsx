@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   useSelector,
 } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Text from '#components/Text';
 
@@ -46,7 +47,7 @@ const PopupProfile = ({
             alt='profile picture'
             src={selectProfilePicture(user)}
           />
-          <div>
+          <Link to='/profile'>
             <Text
               color='primary'
               fontSize={1}
@@ -61,7 +62,7 @@ const PopupProfile = ({
             >
               see your profile
             </Text>
-          </div>
+          </Link>
         </Button>
         <Button
           borderBottom

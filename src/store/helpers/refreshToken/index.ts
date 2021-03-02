@@ -10,24 +10,24 @@ import {
   setExpiresToken,
 } from '#store/helpers';
 
-export default () => {
+export default async () => {
   const token = getAuthToken();
   const expiresIn = getExpiresToken();
   if (token && expiresIn) {
     const isExpired = moment().isAfter(JSON.parse(expiresIn));
     if (isExpired) {
-      request(
-        null,
-        'GET',
-        endPoints.REFRESH_TOKEN,
-        token,
-      )
-        .then((response) => {
-          setAuthToken(response.data.token);
-          setExpiresToken(response.data.expiresIn);
-        }).catch(() => {
-          localStorage.clear();
-        });
+      try {
+        const response = await request(
+          null,
+          'GET',
+          endPoints.REFRESH_TOKEN,
+          token,
+        );
+        setAuthToken(response.data.token);
+        setExpiresToken(response.data.expiresIn);
+      } catch (err) {
+        localStorage.clear();
+      }
     }
   }
 };

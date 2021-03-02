@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
 import {
@@ -14,6 +15,7 @@ interface PictogramI {
   marginLeftL?: number;
   marginRight?: number;
   marginRightL?: number;
+  onClick?: () => void;
   pictogram: React.ComponentType;
   pictogramTestId?: string;
 }
@@ -26,6 +28,7 @@ const Pictogram = ({
   marginLeftL,
   marginRight = 0,
   marginRightL,
+  onClick,
   pictogram: PictogramComponent,
   pictogramTestId,
 }: PictogramI) => {
@@ -40,30 +43,36 @@ const Pictogram = ({
       onMouseLeave={() => setHover(false)}
       testId={containerTestId}
     >
-      <CSSTransition
-        classNames='fade'
-        in={hover}
-        timeout={300}
-        unmountOnExit
+      <div
+        onClick={() => {
+          if (onClick) onClick();
+        }}
       >
-        <InnerContainer
-          testId={hoverPictogramTestId}
+        <CSSTransition
+          classNames='fade'
+          in={hover}
+          timeout={300}
+          unmountOnExit
         >
-          <HoverPictogramComponent />
-        </InnerContainer>
-      </CSSTransition>
-      <CSSTransition
-        classNames='fade'
-        in={!hover}
-        timeout={300}
-        unmountOnExit
-      >
-        <InnerContainer
-          testId={pictogramTestId}
+          <InnerContainer
+            testId={hoverPictogramTestId}
+          >
+            <HoverPictogramComponent />
+          </InnerContainer>
+        </CSSTransition>
+        <CSSTransition
+          classNames='fade'
+          in={!hover}
+          timeout={300}
+          unmountOnExit
         >
-          <PictogramComponent />
-        </InnerContainer>
-      </CSSTransition>
+          <InnerContainer
+            testId={pictogramTestId}
+          >
+            <PictogramComponent />
+          </InnerContainer>
+        </CSSTransition>
+      </div>
     </Container>
   );
 };

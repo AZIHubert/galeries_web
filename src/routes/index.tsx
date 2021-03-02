@@ -8,13 +8,14 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-
 import styled from 'styled-components';
+
 import AnimatedRoute from '#components/AnimatedRoute';
 import Desktop from '#containers/Desktop';
+import Header from '#containers/Header';
+import Profile from '#containers/Profile';
+
 import Loader from '#components/Loader';
-import Modal from '#components/Modal';
-import ModalCallback from '#components/ModalCallback';
 
 import ConfirmAccount from '#containers/ConfirmAccount';
 import Home from '#containers/Home';
@@ -58,15 +59,6 @@ const Routes = () => {
   const loading = useSelector(loadingSelector);
   const user = useSelector(userSelector);
   const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
-  const [callbackModal, setCallbackModal] = React.useState<{
-    error: boolean;
-    open: boolean;
-    text: string;
-  }>({
-    error: false,
-    open: false,
-    text: '',
-  });
   React.useEffect(() => {
     const timer = setTimeout(() => setAllowRedirect(true), 2000);
     if (token && expiresIn) {
@@ -103,10 +95,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            onExiting={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: true,
-            }))}
             path='/confirmation/:token'
           >
             {user ? (
@@ -116,10 +104,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            onExiting={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: true,
-            }))}
             path='/resetPassword/:token'
           >
             {user ? (
@@ -128,35 +112,24 @@ const Routes = () => {
               <ResetPassword />
             )}
           </AnimatedRoute>
-          <AnimatedRoute
-            onExiting={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: true,
-            }))}
-            path='/dashboard'
-          >
-            {!user ? (
-              <Redirect to='/' />
-            ) : (
-              <Desktop />
-            )}
-          </AnimatedRoute>
-          <Modal
-            callBack={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              text: '',
-            }))}
-            handleClose={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: false,
-            }))}
-            open={callbackModal.open && !!callbackModal.text}
-          >
-            <ModalCallback
-              text={callbackModal.text}
-              variant={callbackModal.error ? 'error' : 'primary'}
-            />
-          </Modal>
+          {!user ? (
+            <Redirect to='/' />
+          ) : (
+            <>
+              <Header />
+              <AnimatedRoute
+                path='/dashboard'
+              >
+
+                <Desktop />
+              </AnimatedRoute>
+              <AnimatedRoute
+                path='/profile'
+              >
+                <Profile />
+              </AnimatedRoute>
+            </>
+          )}
         </Container>
       </CSSTransition>
     </Router>
