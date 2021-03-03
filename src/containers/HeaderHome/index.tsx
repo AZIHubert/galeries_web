@@ -106,13 +106,13 @@ const Header = () => {
             variant='secondary'
           />
         </ButtonContainer>
-        <Modal
+        <Modal.Portal
           callBack={() => setCurrentModal(null)}
           handleClose={handleCloseModal}
           open={openModal}
         >
           {handleCurrentModal()}
-        </Modal>
+        </Modal.Portal>
       </InnerContainer>
     </Container>
   );

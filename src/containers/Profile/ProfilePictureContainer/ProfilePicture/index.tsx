@@ -32,14 +32,14 @@ const ProfilePicture = ({
           src={profilePicture.originalImage.signedUrl}
         />
       </button>
-      <Modal
+      <Modal.Portal
         open={openModal}
         handleClose={handleClose}
       >
         <ModalProfilePicture
           profilePicture={profilePicture}
         />
-      </Modal>
+      </Modal.Portal>
     </div>
   );
 };

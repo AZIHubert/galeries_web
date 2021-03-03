@@ -7,7 +7,7 @@ import {
 
 import Field from '#components/Field';
 import Button from '#components/Button';
-import ModalContainer from '#components/ModalContainer';
+import Modal from '#components/Modal';
 import RequiredField from '#components/RequiredField';
 
 import { ticketSchema } from '#helpers/schemas';
@@ -22,6 +22,8 @@ import {
   sendTicketErrorSelector,
   sendTicketStatusSelector,
 } from '#store/selectors';
+
+import ModalTicketTitle from './ModalTicketTitle';
 
 const initialValues: form.SendTicketI = {
   body: '',
@@ -64,10 +66,8 @@ const ModalTicket = ({
   };
 
   return (
-    <ModalContainer
-      title='Send a ticket'
-      titleMarginTop={20}
-      titleTextAlign='center'
+    <Modal.Container
+      title={<ModalTicketTitle />}
     >
       <form
         data-testid='form'
@@ -137,7 +137,7 @@ const ModalTicket = ({
           title='send'
         />
       </form>
-    </ModalContainer>
+    </Modal.Container>
   );
 };
 

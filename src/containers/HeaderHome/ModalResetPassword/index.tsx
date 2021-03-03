@@ -5,9 +5,10 @@ import {
   useSelector,
 } from 'react-redux';
 
-import Field from '#components/Field';
 import Button from '#components/Button';
-import ModalContainer from '#components/ModalContainer';
+import Field from '#components/Field';
+import Modal from '#components/Modal';
+import Text from '#components/Text';
 
 import { allowResetPasswordSchema } from '#helpers/schemas';
 
@@ -79,8 +80,12 @@ const ModalResetPassword = ({
   };
 
   return (
-    <ModalContainer
-      title='Enter your email to reset your password'
+    <Modal.Container
+      title={(
+        <Text>
+          Enter your email to reset your password
+        </Text>
+      )}
     >
       <form
         onSubmit={formik.handleSubmit}
@@ -129,7 +134,7 @@ const ModalResetPassword = ({
           Cancel
         </CancelButton>
       </CancelButtonContainer>
-    </ModalContainer>
+    </Modal.Container>
   );
 };
 

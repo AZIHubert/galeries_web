@@ -7,7 +7,7 @@ import {
 
 import Button from '#components/Button';
 import Field from '#components/Field';
-import ModalContainer from '#components/ModalContainer';
+import Modal from '#components/Modal';
 import RequiredField from '#components/RequiredField';
 import TextSepatator from '#components/TextSeparator';
 
@@ -70,7 +70,7 @@ const ModalSignin = ({
   };
 
   return (
-    <ModalContainer
+    <Modal.Container
       containerTestId='signin'
     >
       <Button.Facebook
@@ -216,7 +216,7 @@ const ModalSignin = ({
         text='You already have an account? click'
         textButton='here'
       />
-    </ModalContainer>
+    </Modal.Container>
   );
 };
 

@@ -7,7 +7,8 @@ import {
 
 import Field from '#components/Field';
 import Button from '#components/Button';
-import ModalContainer from '#components/ModalContainer';
+import Modal from '#components/Modal';
+import Text from '#components/Text';
 
 import { resetConfirmSchema } from '#helpers/schemas';
 
@@ -49,8 +50,12 @@ const ModalResendConfirm = () => {
   };
 
   return (
-    <ModalContainer
-      title='Your account is not confirmed'
+    <Modal.Container
+      title={(
+        <Text>
+          Your account is not confirmed
+        </Text>
+      )}
     >
       <p>
         To use Galeries, click the verification
@@ -99,7 +104,7 @@ const ModalResendConfirm = () => {
           title='Reset'
         />
       </form>
-    </ModalContainer>
+    </Modal.Container>
   );
 };
 

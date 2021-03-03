@@ -81,7 +81,7 @@ const ProfileButton = ({
           testId={popupProfileTestId}
         />
       </CSSTransition>
-      <Modal
+      <Modal.Portal
         modalTestId={modalTestId}
         handleClose={handleCloseTicket}
         open={openTicket}
@@ -89,7 +89,7 @@ const ProfileButton = ({
         <ModalTicket
           handleClose={handleCloseTicket}
         />
-      </Modal>
+      </Modal.Portal>
     </Container>
   );
 };

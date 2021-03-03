@@ -4,8 +4,9 @@ import {
   useSelector,
 } from 'react-redux';
 
-import ModalContainer from '#components/ModalContainer';
+import Modal from '#components/Modal';
 import Button from '#components/Button';
+import Text from '#components/Text';
 
 import {
   fetchSendConfirmation,
@@ -36,9 +37,12 @@ const ModalConfirmLanding = ({
   };
 
   return (
-    <ModalContainer
-      title='Verify your email'
-      titleTextAlign='center'
+    <Modal.Container
+      title={<Text
+        textAlign='center'
+      >
+          Verify your email
+      </Text>}
     >
       <p>
         To use Galeries, click the verification
@@ -56,7 +60,7 @@ const ModalConfirmLanding = ({
         text='No email in your inbox or spam folder? Let’s'
         textButton='resend it'
       />
-    </ModalContainer>
+    </Modal.Container>
   );
 };
 

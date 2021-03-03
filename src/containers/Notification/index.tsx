@@ -4,7 +4,7 @@ import {
   useSelector,
 } from 'react-redux';
 
-import ModalTimer from '#components/ModalTimer';
+import Modal from '#components/Modal';
 
 import { resetNotification } from '#store/actions';
 import { notificationSelector } from '#store/selectors';
@@ -23,7 +23,7 @@ const Notification = () => {
   }, [notification]);
 
   return (
-    <ModalTimer
+    <Modal.Timer
       callBack={() => {
         dispatch(resetNotification());
       }}

@@ -2,30 +2,30 @@
 
 exports[`Header renders without crashing 1`] = `
 <header
-  className="sc-cTkwdZ iRizHA"
+  className="sc-jNMdTA ftMkVh"
 >
   <div
-    className="sc-dOSReg gVZaIr"
+    className="sc-bBrOnJ bPmExC"
   >
     <div
-      className="sc-jNMdTA kXGdiC"
+      className="sc-dOSReg lbwhOS"
     >
       <img
         alt="header logo"
-        className="sc-bBrOnJ krBxzu"
+        className="sc-cOajty gRnTCl"
         src={Object {}}
       />
       <div
-        className="sc-iUuytg iQfWhs"
+        className="sc-iBaPrD eDwboj"
         onClick={[Function]}
       >
         <img
           alt="search pictogram"
-          className="sc-eggNIi klieJE"
+          className="sc-cTkwdZ oNOZO"
           src={Object {}}
         />
         <input
-          className="sc-iBaPrD eOCwrv"
+          className="sc-eggNIi hzVEBY"
           onBlur={[Function]}
           onFocus={[Function]}
           placeholder="search on Galeries"
@@ -33,7 +33,7 @@ exports[`Header renders without crashing 1`] = `
       </div>
     </div>
     <div
-      className="sc-jNMdTA kXGdiC"
+      className="sc-dOSReg lbwhOS"
     >
       <div
         className="sc-bqyKva bOOLZl"
@@ -130,14 +130,14 @@ exports[`Header renders without crashing 1`] = `
         </div>
       </div>
       <div
-        className="sc-jcVebW cXFNeD"
+        className="sc-bZSQDF flxYng"
       >
         <button
-          className="sc-citwmv iIqJMh"
+          className="sc-jcVebW dQyFic"
           onClick={[Function]}
         >
           <div
-            className="sc-bZSQDF fuzsoG"
+            className="sc-iUuytg chJtDV"
           >
             <div
               className="sc-hBEYos kFjApp"

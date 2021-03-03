@@ -4,8 +4,9 @@ import {
   useSelector,
 } from 'react-redux';
 
-import ModalContainer from '#components/ModalContainer';
 import Button from '#components/Button';
+import Modal from '#components/Modal';
+import Text from '#components/Text';
 
 import {
   fetchSendResetPassword,
@@ -39,9 +40,14 @@ const ModalResetPasswordLanding = ({
   };
 
   return (
-    <ModalContainer
-      title='Reset your password'
-      titleTextAlign='center'
+    <Modal.Container
+      title={(
+        <Text
+          textAlign='center'
+        >
+          Reset your password
+        </Text>
+      )}
     >
       <p>
         To reset your password, click the
@@ -58,7 +64,7 @@ const ModalResetPasswordLanding = ({
         text='No email in your inbox or spam folder? Let’s'
         textButton='resend it'
       />
-    </ModalContainer>
+    </Modal.Container>
   );
 };
 
