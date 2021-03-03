@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   useSelector,
 } from 'react-redux';
+import styled from 'styled-components';
 
 import Image from '#components/Image';
 import Text from '#components/Text';
@@ -26,6 +27,26 @@ import {
   ProfileImage,
 } from './styles';
 
+interface LinkContainerI {
+  borderBottom: boolean;
+}
+
+const LinkContainer = styled.div<LinkContainerI>`
+  align-items: center;
+  border-bottom: ${({
+    borderBottom,
+    theme,
+  }) => (
+    borderBottom && `1px solid ${theme.colors.primary}`
+  )};
+  display: flex;
+  padding: 10px 3px;
+`;
+
+LinkContainer.defaultProps = {
+  borderBottom: false,
+};
+
 interface PopupProfileI {
   handleClose: () => void;
   handleOpenTicket: () => void;
@@ -48,30 +69,33 @@ const PopupProfile = ({
         <Link
           onClick={handleClose}
           to='/profile'
-          borderBottom
         >
-          <ProfileImage>
-            <Image
-              original={croped}
-              pending={pending}
-            />
-          </ProfileImage>
-          <div>
-            <Text
-              color='primary'
-              fontSize={1}
-              fontSizeL={1.1}
-            >
-              { user ? user.userName : 'user name' }
-            </Text>
-            <Text
-              color='primary'
-              fontSize={0.7}
-              fontSizeL={0.8}
-            >
+          <LinkContainer
+            borderBottom
+          >
+            <ProfileImage>
+              <Image
+                original={croped}
+                pending={pending}
+              />
+            </ProfileImage>
+            <div>
+              <Text
+                color='primary'
+                fontSize={1}
+                fontSizeL={1.1}
+              >
+                { user ? user.userName : 'user name' }
+              </Text>
+              <Text
+                color='primary'
+                fontSize={0.7}
+                fontSizeL={0.8}
+              >
               see your profile
-            </Text>
-          </div>
+              </Text>
+            </div>
+          </LinkContainer>
         </Link>
         <Button
           borderBottom

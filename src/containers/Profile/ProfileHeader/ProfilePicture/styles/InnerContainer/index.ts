@@ -2,17 +2,13 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-interface InnerContainerI {
-  isPending?: boolean;
-}
-
-const InnerContainer = styled.div<InnerContainerI>`
+const InnerContainer = styled.div`
   border-radius: 50%;
   height: 120px;
-  opacity: ${({ isPending }) => (isPending ? 0.25 : 1)};
   overflow: hidden;
   transition: ${({ theme }) => theme.transition.default};
   width: 120px;
+  position: relative;
   @media ${mediaQueries.tablet} {
     height: 160px;
     width: 160px;
@@ -22,9 +18,5 @@ const InnerContainer = styled.div<InnerContainerI>`
     width: 190px;
   }
 `;
-
-InnerContainer.defaultProps = {
-  isPending: false,
-};
 
 export default InnerContainer;

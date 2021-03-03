@@ -23,7 +23,7 @@ const Container = styled.div<ContainerI>`
     uri,
   }) => (
     uri ? theme.colors.secondary : 'none'
-  )}
+  )};
 `;
 const Img = styled.img`
   width: 100%;

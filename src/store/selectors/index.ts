@@ -4,6 +4,8 @@ export { default as loginErrorSelector } from './loginError.selector';
 export { default as loginStatusSelector } from './loginStatus.selector';
 export { default as notificationSelector } from './notification.selector';
 export { default as profilePictureCurrentSelector } from './profilePictureCurrent.selector';
+export { default as profilePicturesSelector } from './profilePictures.selector';
+export { default as profilePicturesStatusSelector } from './profilePicturesStatus.selector';
 export { default as profilePictureStatusSelector } from './profilePictureStatus.selector';
 export { default as resetPasswordErrorSelector } from './resetPasswordError.selector';
 export { default as resetPasswordStatusSelector } from './resetPasswordStatus.selector';

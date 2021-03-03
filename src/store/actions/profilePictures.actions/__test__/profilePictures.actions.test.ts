@@ -5,14 +5,13 @@ import {
   API_REQUEST,
   API_SUCCESS,
   NOTIFICATION_SET,
-  PROFILE_PICTURE,
-  PROFILE_PICTURE_FETCH,
-  PROFILE_PICTURE_SET,
+  PROFILE_PICTURES,
+  PROFILE_PICTURES_FETCH,
+  PROFILE_PICTURES_SET,
   UI_SET,
-  fetchProfilePicture,
-  resetProfilePicture,
+  fetchProfilePictures,
   setLoader,
-  setProfilePicture,
+  setProfilePictures,
 } from '#store/actions';
 
 import { appMiddleware } from '#store/middlewares';
@@ -20,40 +19,31 @@ import apiMiddleware from '#store/middlewares/core/api.middlewares';
 
 jest.mock('#store/middlewares/core/api.middlewares', () => jest.fn());
 
-describe('profilePicture', () => {
-  describe('actions', () => {
-    const data = new FormData();
+describe('profilePictures', () => {
+  describe('action', () => {
     it('should create a fetch action', () => {
       const expectedAction = {
-        payload: { data },
-        type: PROFILE_PICTURE_FETCH,
+        type: PROFILE_PICTURES_FETCH,
       };
-      expect(fetchProfilePicture(data)).toEqual(expectedAction);
-    });
-    it('should create a reset action', () => {
-      const expectedAction = {
-        payload: {
-          data: {
-            status: 'pending',
-          },
-        },
-        type: PROFILE_PICTURE_SET,
-      };
-      expect(resetProfilePicture()).toEqual(expectedAction);
+      expect(fetchProfilePictures()).toEqual(expectedAction);
     });
     it('should create a set action', () => {
-      const setData = {
+      const data = {
+        profilePictures: [],
         status: 'pending',
       } as {
-        status?: store.FormStatus;
+        profilePictures: ProfilePictureI[];
+        status: store.FormStatus;
       };
       const expectedAction = {
-        payload: { data: setData },
-        type: PROFILE_PICTURE_SET,
+        payload: {
+          data,
+        },
+        type: PROFILE_PICTURES_SET,
       };
-      expect(setProfilePicture(setData)).toEqual(expectedAction);
+      expect(setProfilePictures(data)).toEqual(expectedAction);
     });
-    describe('should fetch profilePicture', () => {
+    describe('should fetch profilePictures', () => {
       it('success', () => {
         (apiMiddleware as jest.Mock).mockImplementation((
           { dispatch },
@@ -76,34 +66,31 @@ describe('profilePicture', () => {
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
-        store.dispatch(fetchProfilePicture(data));
+        store.dispatch(fetchProfilePictures());
         const actions = store.getActions();
-        expect(actions[0].type).toEqual(PROFILE_PICTURE_FETCH);
+        expect(actions[0].type).toEqual(PROFILE_PICTURES_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
+            profilePictures: [],
             status: 'fetching',
           },
         });
-        expect(actions[1].type).toEqual(PROFILE_PICTURE_SET);
-        expect(actions[2].type).toEqual(`${PROFILE_PICTURE} ${API_REQUEST}`);
+        expect(actions[1].type).toEqual(PROFILE_PICTURES_SET);
+        expect(actions[2].type).toEqual(`${PROFILE_PICTURES} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
           data: {
             loading: true,
           },
         });
         expect(actions[3].type).toEqual(UI_SET);
-        expect(actions[4].type).toEqual(`${PROFILE_PICTURE} ${API_SUCCESS}`);
+        expect(actions[4].type).toEqual(`${PROFILE_PICTURES} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
+            profilePictures: [],
             status: 'success',
-            current: {
-              croped: undefined,
-              original: undefined,
-              pending: undefined,
-            },
           },
         });
-        expect(actions[5].type).toEqual(PROFILE_PICTURE_SET);
+        expect(actions[5].type).toEqual(PROFILE_PICTURES_SET);
         expect(actions[6].payload).toEqual({
           data: {
             loading: false,
@@ -135,30 +122,32 @@ describe('profilePicture', () => {
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
-        store.dispatch(fetchProfilePicture(data));
+        store.dispatch(fetchProfilePictures());
         const actions = store.getActions();
-        expect(actions[0].type).toEqual(PROFILE_PICTURE_FETCH);
+        expect(actions[0].type).toEqual(PROFILE_PICTURES_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
+            profilePictures: [],
             status: 'fetching',
           },
         });
-        expect(actions[1].type).toEqual(PROFILE_PICTURE_SET);
-        expect(actions[2].type).toEqual(`${PROFILE_PICTURE} ${API_REQUEST}`);
+        expect(actions[1].type).toEqual(PROFILE_PICTURES_SET);
+        expect(actions[2].type).toEqual(`${PROFILE_PICTURES} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
           data: {
             loading: true,
           },
         });
         expect(actions[3].type).toEqual(UI_SET);
-        expect(actions[4].type).toEqual(`${PROFILE_PICTURE} ${API_ERROR}`);
-        expect(actions[5].payload).toEqual({
+        expect(actions[4].type).toEqual(`${PROFILE_PICTURES} ${API_ERROR}`);
+        expect(actions[5].type).toEqual(NOTIFICATION_SET);
+        expect(actions[6].payload).toEqual({
           data: {
+            profilePictures: [],
             status: 'error',
           },
         });
-        expect(actions[5].type).toEqual(PROFILE_PICTURE_SET);
-        expect(actions[6].type).toEqual(NOTIFICATION_SET);
+        expect(actions[6].type).toEqual(PROFILE_PICTURES_SET);
         expect(actions[7].payload).toEqual({
           data: {
             loading: false,

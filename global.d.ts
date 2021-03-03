@@ -12,6 +12,7 @@ import {
   LOGOUT,
   PROFILE_PICTURE_FETCH,
   PROFILE_PICTURE_SET,
+  PROFILE_PICTURES,
   REFRESH_TOKEN,
   RESET_PASSWORD,
   SEND_CONFIRMATION,
@@ -56,6 +57,7 @@ declare global {
       typeof LOGIN_GOOGLE |
       typeof LOGIN_SET |
       typeof LOGOUT |
+      typeof PROFILE_PICTURES |
       typeof PROFILE_PICTURE_FETCH |
       typeof PROFILE_PICTURE_SET |
       typeof REFRESH_TOKEN |
@@ -105,6 +107,10 @@ declare global {
           pending: string;
         }
       };
+      profilePictures: {
+        status: FormStatus;
+        profilePictures: ProfilePictureI[];
+      }
       resetPassword: {
         status: FormStatus;
         errors: form.ResetPasswordI
