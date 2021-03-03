@@ -4,11 +4,11 @@ import {
   API_ERROR,
   API_REQUEST,
   API_SUCCESS,
-  LOADER_SET,
   NOTIFICATION_SET,
   SEND_CONFIRMATION,
   SEND_CONFIRMATION_FETCH,
   SEND_CONFIRMATION_SET,
+  UI_SET,
   fetchSendConfirmation,
   resetSendConfirmation,
   setLoader,
@@ -94,7 +94,7 @@ describe('sendConfirmation', () => {
         expect(actions[0].type).toEqual(SEND_CONFIRMATION_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(SEND_CONFIRMATION_SET);
@@ -104,7 +104,7 @@ describe('sendConfirmation', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_CONFIRMATION} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -124,7 +124,7 @@ describe('sendConfirmation', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('global error', () => {
         const globalError = 'global error';
@@ -155,7 +155,7 @@ describe('sendConfirmation', () => {
         expect(actions[0].type).toEqual(SEND_CONFIRMATION_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(SEND_CONFIRMATION_SET);
@@ -165,7 +165,7 @@ describe('sendConfirmation', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_CONFIRMATION} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -185,7 +185,7 @@ describe('sendConfirmation', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('field error', () => {
         const emailError = 'password error';
@@ -220,7 +220,7 @@ describe('sendConfirmation', () => {
         expect(actions[0].type).toEqual(SEND_CONFIRMATION_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(SEND_CONFIRMATION_SET);
@@ -230,7 +230,7 @@ describe('sendConfirmation', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_CONFIRMATION} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -246,7 +246,7 @@ describe('sendConfirmation', () => {
             loading: false,
           },
         });
-        expect(actions[6].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
       });
     });
   });

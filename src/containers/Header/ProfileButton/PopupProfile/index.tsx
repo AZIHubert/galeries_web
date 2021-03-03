@@ -2,25 +2,26 @@ import * as React from 'react';
 import {
   useSelector,
 } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Image from '#components/Image';
 import Text from '#components/Text';
-
-import selectProfilePicture from '#helpers/selectProfilePicture';
 
 import {
   Gear,
   Ticket,
 } from '#ressources/svgComponents';
 
-import { userSelector } from '#store/selectors';
+import {
+  profilePictureCurrentSelector,
+  userSelector,
+} from '#store/selectors';
 
 import {
   Background,
   Button,
   Container,
   InnerContainer,
+  Link,
   LogoContainer,
   ProfileImage,
 } from './styles';
@@ -36,16 +37,17 @@ const PopupProfile = ({
   handleOpenTicket,
   testId,
 }: PopupProfileI) => {
+  const { croped, pending } = useSelector(profilePictureCurrentSelector);
   const user = useSelector(userSelector);
-
-  const { croped, pending } = selectProfilePicture(user);
 
   return (
     <Container
       testId={testId}
     >
       <InnerContainer>
-        <Button
+        <Link
+          onClick={handleClose}
+          to='/profile'
           borderBottom
         >
           <ProfileImage>
@@ -54,10 +56,7 @@ const PopupProfile = ({
               pending={pending}
             />
           </ProfileImage>
-          <Link
-            onClick={handleClose}
-            to='/profile'
-          >
+          <div>
             <Text
               color='primary'
               fontSize={1}
@@ -72,8 +71,8 @@ const PopupProfile = ({
             >
               see your profile
             </Text>
-          </Link>
-        </Button>
+          </div>
+        </Link>
         <Button
           borderBottom
         >

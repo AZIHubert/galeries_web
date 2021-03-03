@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 
-import HeaderButton from '#components/HeaderButton';
+import Button from '#components/Button';
 import Modal from '#components/Modal';
 
 import logo from '#ressources/svg/logoG.svg';
@@ -95,12 +95,12 @@ const Header = () => {
           src={logo}
         />
         <ButtonContainer>
-          <HeaderButton
+          <Button.Header
             marginRight={30}
             onClick={handleClickSignin}
             title='Sign in'
           />
-          <HeaderButton
+          <Button.Header
             onClick={handleClickLogin}
             title='Log in'
             variant='secondary'

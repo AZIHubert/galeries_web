@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 
 import Image from '#components/Image';
 
-import selectProfilePicture from '#helpers/selectProfilePicture';
-
-import { userSelector } from '#store/selectors';
+import {
+  profilePictureCurrentSelector,
+  profilePictureStatusSelector,
+} from '#store/selectors';
 
 import {
   Container,
@@ -13,11 +14,16 @@ import {
 } from './styles';
 
 const ProfilePicture = () => {
-  const user = useSelector(userSelector);
-  const { croped, pending } = selectProfilePicture(user);
+  const { croped, pending } = useSelector(profilePictureCurrentSelector);
+  const profilePictureStatus = useSelector(profilePictureStatusSelector);
+
+  const isPending = profilePictureStatus === 'fetching';
+
   return (
     <Container>
-      <InnerContainer>
+      <InnerContainer
+        isPending={isPending}
+      >
         <Image
           original={croped}
           pending={pending}

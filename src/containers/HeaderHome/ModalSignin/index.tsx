@@ -5,13 +5,10 @@ import {
   useSelector,
 } from 'react-redux';
 
-import FacebookButton from '#components/FacebookButton';
+import Button from '#components/Button';
 import Field from '#components/Field';
-import GoogleButton from '#components/GoogleButton';
-import GradientButton from '#components/GradientButton';
 import ModalContainer from '#components/ModalContainer';
 import RequiredField from '#components/RequiredField';
-import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
 import { signinSchema } from '#helpers/schemas';
@@ -76,10 +73,10 @@ const ModalSignin = ({
     <ModalContainer
       containerTestId='signin'
     >
-      <FacebookButton
+      <Button.Facebook
         action='signin'
       />
-      <GoogleButton
+      <Button.Google
         action='signin'
       />
       <TextSepatator
@@ -200,7 +197,7 @@ const ModalSignin = ({
           value={formik.values.confirmPassword}
         />
         <RequiredField />
-        <GradientButton
+        <Button.Gradiant
           disabled={loading}
           marginBottom={15}
           marginBottomL={22}
@@ -210,7 +207,7 @@ const ModalSignin = ({
           title='Sign in'
         />
       </form>
-      <TextButton
+      <Button.Text
         disabled={loading}
         fontSize={0.65}
         fontSizeL={0.8}

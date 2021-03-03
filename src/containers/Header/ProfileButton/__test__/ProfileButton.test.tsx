@@ -80,14 +80,4 @@ describe('ProfileButton', () => {
     fireEvent.click(document);
     expect(screen.queryByTestId(popupProfile)).toBeFalsy();
   });
-  it('should not close PopupProfile if modal ticket is open', () => {
-    const {
-      getByTestId,
-      getByText,
-    } = render(<Container />);
-    fireEvent.click(getByText('user name'));
-    fireEvent.click(getByText('Share your opinion? Find a bug?'));
-    fireEvent.click(document);
-    expect(getByTestId(popupProfile)).toBeTruthy();
-  });
 });

@@ -5,7 +5,7 @@ import {
 } from 'react-redux';
 
 import ModalContainer from '#components/ModalContainer';
-import TextButton from '#components/TextButton';
+import Button from '#components/Button';
 
 import {
   fetchSendConfirmation,
@@ -47,7 +47,7 @@ const ModalConfirmLanding = ({
         your account secure.
       </p>
       {loading ? 'loading' : 'not loading'}
-      <TextButton
+      <Button.Text
         disabled={loading}
         justifyContent='center'
         onClick={onClick}

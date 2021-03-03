@@ -4,11 +4,11 @@ import {
   API_ERROR,
   API_REQUEST,
   API_SUCCESS,
-  LOADER_SET,
   NOTIFICATION_SET,
   SEND_RESET_PASSWORD,
   SEND_RESET_PASSWORD_FETCH,
   SEND_RESET_PASSWORD_SET,
+  UI_SET,
   fetchSendResetPassword,
   resetSendResetPassword,
   setLoader,
@@ -93,7 +93,7 @@ describe('sendResetPassword', () => {
         expect(actions[0].type).toEqual(SEND_RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
@@ -103,7 +103,7 @@ describe('sendResetPassword', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_RESET_PASSWORD} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -123,7 +123,7 @@ describe('sendResetPassword', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('global error', () => {
         const globalError = 'global error';
@@ -154,7 +154,7 @@ describe('sendResetPassword', () => {
         expect(actions[0].type).toEqual(SEND_RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
@@ -164,7 +164,7 @@ describe('sendResetPassword', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_RESET_PASSWORD} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -184,7 +184,7 @@ describe('sendResetPassword', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('field error', () => {
         const emailError = 'password error';
@@ -219,7 +219,7 @@ describe('sendResetPassword', () => {
         expect(actions[0].type).toEqual(SEND_RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
@@ -229,7 +229,7 @@ describe('sendResetPassword', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_RESET_PASSWORD} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -245,7 +245,7 @@ describe('sendResetPassword', () => {
             loading: false,
           },
         });
-        expect(actions[6].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
       });
     });
   });

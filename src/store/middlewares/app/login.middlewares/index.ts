@@ -52,7 +52,6 @@ const errorLogin: Middleware = (
         text: 'Something went wrong.',
       }));
     }
-
     dispatch(setLoader(false));
   }
 };
@@ -66,7 +65,7 @@ const fetchLogin: Middleware = (
 ) => {
   next(action);
   if (action.type === LOGIN_FETCH) {
-    dispatch(setLogin({ status: 'pending' }));
+    dispatch(setLogin({ status: 'fetching' }));
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,

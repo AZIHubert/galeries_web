@@ -21,15 +21,11 @@ import ConfirmAccount from '#containers/ConfirmAccount';
 import Home from '#containers/Home';
 import ResetPassword from '#containers/ResetPassword';
 
-import { fetchUser } from '#store/actions';
+import { fetchInitUser } from '#store/actions';
 import {
   userSelector,
-  loadingSelector,
+  initSelector,
 } from '#store/selectors';
-
-import {
-  localStorages,
-} from '#store/constant';
 
 const Container = styled.div`
   left: 0;
@@ -51,27 +47,23 @@ const Container = styled.div`
   }
 `;
 
-const token = localStorage.getItem(localStorages.AUTH_TOKEN);
-const expiresIn = localStorage.getItem(localStorages.EXPIRES_DATE_TOKEN);
-
 const Routes = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(loadingSelector);
+  const init = useSelector(initSelector);
   const user = useSelector(userSelector);
   const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
+
   React.useEffect(() => {
     const timer = setTimeout(() => setAllowRedirect(true), 2000);
-    if (token && expiresIn) {
-      dispatch(fetchUser());
-    }
+    dispatch(fetchInitUser());
     return () => clearTimeout(timer);
   }, []);
-  console.log('allowRedirect', allowRedirect);
+
   return (
     <Router>
       <CSSTransition
         classNames='fade'
-        in={!allowRedirect || loading}
+        in={init || !allowRedirect}
         timeout={300}
         unmountOnExit
       >
@@ -86,33 +78,27 @@ const Routes = () => {
         unmountOnExit
       >
         <Container>
-          <AnimatedRoute
-            path='/'
-          >
-            {user ? (
-              <Redirect to='/dashboard' />
-            ) : (
-              <Home />
-            )}
-          </AnimatedRoute>
-          <AnimatedRoute
-            path='/confirmation/:token'
-          >
-            {user ? (
-              <Redirect to='/dashboard' />
-            ) : (
-              <ConfirmAccount />
-            )}
-          </AnimatedRoute>
-          <AnimatedRoute
-            path='/resetPassword/:token'
-          >
-            {user ? (
-              <Redirect to='/dashboard' />
-            ) : (
-              <ResetPassword />
-            )}
-          </AnimatedRoute>
+          {user ? (
+            <Redirect to='/dashboard' />
+          ) : (
+            <>
+              <AnimatedRoute
+                path='/'
+              >
+                <Home />
+              </AnimatedRoute>
+              <AnimatedRoute
+                path='/confirmation/:token'
+              >
+                <ConfirmAccount />
+              </AnimatedRoute>
+              <AnimatedRoute
+                path='/resetPassword/:token'
+              >
+                <ResetPassword />
+              </AnimatedRoute>
+            </>
+          )}
           {!user ? (
             <Redirect to='/' />
           ) : (

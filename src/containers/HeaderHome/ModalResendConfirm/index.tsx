@@ -6,7 +6,7 @@ import {
 } from 'react-redux';
 
 import Field from '#components/Field';
-import GradientButton from '#components/GradientButton';
+import Button from '#components/Button';
 import ModalContainer from '#components/ModalContainer';
 
 import { resetConfirmSchema } from '#helpers/schemas';
@@ -90,7 +90,7 @@ const ModalResendConfirm = () => {
           touched={formik.touched.email}
           value={formik.values.email}
         />
-        <GradientButton
+        <Button.Gradiant
           disabled={loading}
           marginBottom={20}
           marginTop={20}

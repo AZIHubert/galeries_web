@@ -28,13 +28,13 @@ const DeleteAccount = () => {
       <button
         onClick={() => setOpenModal((nextState) => !nextState)}
       />
-      <Modal
+      <Modal.Portal
         modalTestId='modal'
         open={openModal}
         handleClose={handleClose}
       >
         <ModalDelete />
-      </Modal>
+      </Modal.Portal>
     </div>
   );
 };

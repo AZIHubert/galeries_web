@@ -5,13 +5,10 @@ import {
   useSelector,
 } from 'react-redux';
 
-import FacebookButton from '#components/FacebookButton';
+import Button from '#components/Button';
 import Field from '#components/Field';
-import GoogleButton from '#components/GoogleButton';
-import GradientButton from '#components/GradientButton';
 import ModalContainer from '#components/ModalContainer';
 import RequiredField from '#components/RequiredField';
-import TextButton from '#components/TextButton';
 import TextSepatator from '#components/TextSeparator';
 
 import { loginSchema } from '#helpers/schemas';
@@ -79,10 +76,10 @@ const ModalLogin = ({
     <ModalContainer
       containerTestId='login'
     >
-      <FacebookButton
+      <Button.Facebook
         action='signin'
       />
-      <GoogleButton
+      <Button.Google
         action='signin'
       />
       <TextSepatator
@@ -162,7 +159,7 @@ const ModalLogin = ({
               Forgot your password?
           </ForgotPassword>
         </div>
-        <GradientButton
+        <Button.Gradiant
           disabled={loading}
           marginBottom={15}
           marginBottomL={22}
@@ -173,7 +170,7 @@ const ModalLogin = ({
           title='Log in'
         />
       </form>
-      <TextButton
+      <Button.Text
         disabled={loading}
         fontSize={0.65}
         fontSizeL={0.8}

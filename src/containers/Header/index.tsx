@@ -4,7 +4,7 @@ import {
   useDispatch,
 } from 'react-redux';
 
-import HeaderButton from '#components/HeaderButton';
+import Button from '#components/Button';
 
 import logo from '#ressources/svg/logoG.svg';
 import {
@@ -68,7 +68,7 @@ const Header = () => {
             pictogram={Notification}
           />
           <ProfileButton />
-          <HeaderButton
+          <Button.Header
             marginLeft={40}
             onClick={() => dispatch(fetchLogout())}
             small
@@ -81,11 +81,3 @@ const Header = () => {
 };
 
 export default Header;
-
-/*
-LS.NavFixedItem_LINK = styled(Link)`
-  display: flex;
-  justify-content: ${props => props.$tempLeftProp ? 'flex-start' : 'center'}; // '$' added
-  align-items: center;
-`;
-*/

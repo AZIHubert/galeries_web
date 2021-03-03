@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 
 import Field from '#components/Field';
-import GradientButton from '#components/GradientButton';
+import Button from '#components/Button';
 import RequiredField from '#components/RequiredField';
 
 import { resetPasswordSchema } from '#helpers/schemas';
@@ -140,7 +140,7 @@ const ResetPassword = () => {
           value={formik.values.confirmPassword}
         />
         <RequiredField />
-        <GradientButton
+        <Button.Gradiant
           disabled={loading}
           marginBottom={15}
           marginTop={25}

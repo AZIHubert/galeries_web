@@ -6,7 +6,7 @@ import {
 } from 'react-redux';
 
 import Field from '#components/Field';
-import GradientButton from '#components/GradientButton';
+import Button from '#components/Button';
 import ModalContainer from '#components/ModalContainer';
 import RequiredField from '#components/RequiredField';
 
@@ -127,7 +127,7 @@ const ModalTicket = ({
           value={formik.values.body}
         />
         <RequiredField />
-        <GradientButton
+        <Button.Gradiant
           disabled={loading}
           marginBottom={15}
           marginBottomL={22}

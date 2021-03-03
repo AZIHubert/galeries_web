@@ -1,11 +1,21 @@
 import { PROFILE_PICTURE_SET } from '#store/actions';
 
 interface InitialStateI {
-  status: store.FormStatus,
+  status: store.FormStatus;
+  current: {
+    croped: string;
+    original: string;
+    pending: string;
+  }
 }
 
 const initialState: InitialStateI = {
   status: 'pending',
+  current: {
+    croped: '',
+    original: '',
+    pending: '',
+  },
 };
 
 export default (
@@ -17,6 +27,10 @@ export default (
       return {
         ...state,
         ...action.payload ? action.payload.data : undefined,
+        current: {
+          ...state.current,
+          ...action.payload ? action.payload.data.current : undefined,
+        },
       };
     default:
       return state;

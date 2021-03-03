@@ -4,8 +4,9 @@ import {
   API_ERROR,
   API_REQUEST,
   API_SUCCESS,
-  LOADER_SET,
   NOTIFICATION_SET,
+  PROFILE_PICTURE_SET,
+  UI_SET,
   USER,
   USER_FETCH,
   USER_SET,
@@ -70,15 +71,22 @@ describe('user', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${USER} ${API_SUCCESS}`);
         expect(actions[4].type).toEqual(USER_SET);
-        expect(actions[5].payload).toEqual({
+        expect(actions[5].type).toEqual(PROFILE_PICTURE_SET);
+        expect(actions[6].payload).toEqual({
+          data: {
+            init: false,
+          },
+        });
+        expect(actions[6].type).toEqual(UI_SET);
+        expect(actions[7].payload).toEqual({
           data: {
             loading: false,
           },
         });
-        expect(actions[5].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('error', () => {
         const globalError = 'global error';
@@ -113,7 +121,7 @@ describe('user', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${USER} ${API_ERROR}`);
         expect(actions[4].payload).toEqual({
           data: {
@@ -124,10 +132,16 @@ describe('user', () => {
         expect(actions[4].type).toEqual(NOTIFICATION_SET);
         expect(actions[5].payload).toEqual({
           data: {
+            init: false,
+          },
+        });
+        expect(actions[5].type).toEqual(UI_SET);
+        expect(actions[6].payload).toEqual({
+          data: {
             loading: false,
           },
         });
-        expect(actions[5].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
       });
     });
   });

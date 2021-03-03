@@ -66,7 +66,11 @@ declare global {
       typeof SIGNIN |
       typeof USER_SET;
 
-    type FormStatus = 'pending' | 'success' | 'error';
+    type FormStatus =
+      'error' |
+      'fetching' |
+      'pending' |
+      'success';
 
     interface ActionI {
       type: string;
@@ -95,6 +99,11 @@ declare global {
       notification: NotificationI;
       profilePicture: {
         status: FormStatus;
+        current: {
+          croped: string;
+          original: string;
+          pending: string;
+        }
       };
       resetPassword: {
         status: FormStatus;
@@ -116,7 +125,10 @@ declare global {
         status: FormStatus;
         errors: SigninI;
       };
-      ui: { loading: boolean; };
+      ui: {
+        init: boolean;
+        loading: boolean;
+      };
       user: UserI | null;
     }
   }

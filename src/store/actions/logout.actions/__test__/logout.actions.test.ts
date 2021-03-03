@@ -4,10 +4,10 @@ import {
   API_ERROR,
   API_REQUEST,
   API_SUCCESS,
-  LOADER_SET,
   LOGOUT,
   LOGOUT_FETCH,
   NOTIFICATION_SET,
+  UI_SET,
   USER,
   fetchLogout,
   setLoader,
@@ -60,7 +60,7 @@ describe('logout', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${LOGOUT} ${API_SUCCESS}`);
         expect(actions[4].payload).toEqual({ data: null });
         expect(actions[4].type).toEqual(`${USER} Set`);
@@ -69,7 +69,7 @@ describe('logout', () => {
             loading: false,
           },
         });
-        expect(actions[5].type).toEqual(LOADER_SET);
+        expect(actions[5].type).toEqual(UI_SET);
       });
       it('success', () => {
         const globalError = 'global error';
@@ -104,7 +104,7 @@ describe('logout', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${LOGOUT} ${API_ERROR}`);
         expect(actions[4].payload).toEqual({
           data: {
@@ -118,7 +118,7 @@ describe('logout', () => {
             loading: false,
           },
         });
-        expect(actions[5].type).toEqual(LOADER_SET);
+        expect(actions[5].type).toEqual(UI_SET);
       });
     });
   });

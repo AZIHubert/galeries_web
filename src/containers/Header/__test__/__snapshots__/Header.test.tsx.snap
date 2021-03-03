@@ -2,30 +2,30 @@
 
 exports[`Header renders without crashing 1`] = `
 <header
-  className="sc-hiSbYr hnDwTm"
+  className="sc-cTkwdZ iRizHA"
 >
   <div
-    className="sc-cBNfnY ixfRRJ"
+    className="sc-dOSReg gVZaIr"
   >
     <div
-      className="sc-gWHgXt jJAlgF"
+      className="sc-jNMdTA kXGdiC"
     >
       <img
         alt="header logo"
-        className="sc-citwmv jRGwlw"
+        className="sc-bBrOnJ krBxzu"
         src={Object {}}
       />
       <div
-        className="sc-kLgntA rRIHY"
+        className="sc-iUuytg iQfWhs"
         onClick={[Function]}
       >
         <img
           alt="search pictogram"
-          className="sc-jJEJSO cksvgA"
+          className="sc-eggNIi klieJE"
           src={Object {}}
         />
         <input
-          className="sc-iktFzd jZBAPx"
+          className="sc-iBaPrD eOCwrv"
           onBlur={[Function]}
           onFocus={[Function]}
           placeholder="search on Galeries"
@@ -33,10 +33,10 @@ exports[`Header renders without crashing 1`] = `
       </div>
     </div>
     <div
-      className="sc-gWHgXt jJAlgF"
+      className="sc-jNMdTA kXGdiC"
     >
       <div
-        className="sc-pFZIQ kvYjwn"
+        className="sc-bqyKva bOOLZl"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -44,10 +44,10 @@ exports[`Header renders without crashing 1`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-jrAGrp ivaCqA"
+            className="sc-kstrdz eogjpQ"
           >
             <svg
-              className="sc-eCssSg iqMPPy"
+              className="sc-jrAGrp xQKQQ"
               viewBox="0 0 784.16 904.91"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -64,7 +64,7 @@ exports[`Header renders without crashing 1`] = `
         </div>
       </div>
       <div
-        className="sc-pFZIQ kvYjwn"
+        className="sc-bqyKva bOOLZl"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -72,10 +72,10 @@ exports[`Header renders without crashing 1`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-jrAGrp ivaCqA"
+            className="sc-kstrdz eogjpQ"
           >
             <svg
-              className="sc-gsTCUz fEpsDE"
+              className="sc-iBPRYJ iBHXVy"
               viewBox="0 0 893 893"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -102,7 +102,7 @@ exports[`Header renders without crashing 1`] = `
         </div>
       </div>
       <div
-        className="sc-pFZIQ icCVWe"
+        className="sc-bqyKva LLOXI"
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
       >
@@ -110,10 +110,10 @@ exports[`Header renders without crashing 1`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-jrAGrp ivaCqA"
+            className="sc-kstrdz eogjpQ"
           >
             <svg
-              className="sc-gKsewC imXVUy"
+              className="sc-iqHYGH gpBMoq"
               viewBox="0 0 998.13 907.88"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -130,22 +130,24 @@ exports[`Header renders without crashing 1`] = `
         </div>
       </div>
       <div
-        className="sc-ezrdKe dznMkn"
+        className="sc-jcVebW cXFNeD"
       >
         <button
-          className="sc-giIncl dmlCtF"
+          className="sc-citwmv iIqJMh"
           onClick={[Function]}
         >
-          <img
-            alt="profile picture"
-            className="sc-bYEvPH bQNHEA"
-            src={Object {}}
-          />
+          <div
+            className="sc-bZSQDF fuzsoG"
+          >
+            <div
+              className="sc-hBEYos kFjApp"
+            />
+          </div>
           user name
         </button>
       </div>
       <button
-        className="sc-bdfBwQ cHOYwL"
+        className="sc-eCssSg cQDgxF"
         onClick={[Function]}
       >
         logout

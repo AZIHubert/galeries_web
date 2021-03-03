@@ -9,8 +9,9 @@ import {
   API_ERROR,
   CONFIRMATION,
   CONFIRMATION_FETCH,
-  LOADER_SET,
   NOTIFICATION_SET,
+  PROFILE_PICTURE_SET,
+  UI_SET,
   USER,
   USER_FETCH,
   USER_SET,
@@ -65,7 +66,7 @@ describe('confirmation', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${CONFIRMATION} ${API_SUCCESS}`);
         expect(actions[4].type).toEqual(USER_FETCH);
         expect(actions[5].type).toEqual(`${USER} ${API_REQUEST}`);
@@ -74,15 +75,22 @@ describe('confirmation', () => {
             loading: true,
           },
         });
-        expect(actions[6].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
         expect(actions[7].type).toEqual(`${USER} ${API_SUCCESS}`);
         expect(actions[8].type).toEqual(USER_SET);
-        expect(actions[9].payload).toEqual({
+        expect(actions[9].type).toEqual(PROFILE_PICTURE_SET);
+        expect(actions[10].payload).toEqual({
+          data: {
+            init: false,
+          },
+        });
+        expect(actions[10].type).toEqual(UI_SET);
+        expect(actions[11].payload).toEqual({
           data: {
             loading: false,
           },
         });
-        expect(actions[9].type).toEqual(LOADER_SET);
+        expect(actions[11].type).toEqual(UI_SET);
         expect(setItemSpy).toHaveBeenCalledTimes(2);
       });
       it('error', async () => {
@@ -117,7 +125,7 @@ describe('confirmation', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${CONFIRMATION} ${API_ERROR}`);
         expect(actions[4].type).toEqual(NOTIFICATION_SET);
         expect(actions[5].payload).toEqual({
@@ -125,7 +133,7 @@ describe('confirmation', () => {
             loading: false,
           },
         });
-        expect(actions[5].type).toEqual(LOADER_SET);
+        expect(actions[5].type).toEqual(UI_SET);
         expect(setItemSpy).toHaveBeenCalledTimes(0);
       });
     });

@@ -6,9 +6,10 @@ import {
   API_SUCCESS,
   LOGIN,
   LOGIN_FETCH,
-  LOADER_SET,
   LOGIN_SET,
   NOTIFICATION_SET,
+  PROFILE_PICTURE_SET,
+  UI_SET,
   USER,
   USER_FETCH,
   USER_SET,
@@ -96,7 +97,11 @@ describe('login', () => {
         }));
         const actions = store.getActions();
         expect(actions[0].type).toEqual(LOGIN_FETCH);
-        expect(actions[1].payload).toEqual({ data: { status: 'pending' } });
+        expect(actions[1].payload).toEqual({
+          data: {
+            status: 'fetching',
+          },
+        });
         expect(actions[1].type).toEqual(LOGIN_SET);
         expect(actions[2].type).toEqual(`${LOGIN} ${API_REQUEST}`);
         expect(actions[3].payload).toEqual({
@@ -104,7 +109,7 @@ describe('login', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${LOGIN} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -119,15 +124,22 @@ describe('login', () => {
             loading: true,
           },
         });
-        expect(actions[8].type).toEqual(LOADER_SET);
+        expect(actions[8].type).toEqual(UI_SET);
         expect(actions[9].type).toEqual(`${USER} ${API_SUCCESS}`);
         expect(actions[10].type).toEqual(USER_SET);
-        expect(actions[11].payload).toEqual({
+        expect(actions[11].type).toEqual(PROFILE_PICTURE_SET);
+        expect(actions[12].payload).toEqual({
+          data: {
+            init: false,
+          },
+        });
+        expect(actions[12].type).toEqual(UI_SET);
+        expect(actions[13].payload).toEqual({
           data: {
             loading: false,
           },
         });
-        expect(actions[11].type).toEqual(LOADER_SET);
+        expect(actions[13].type).toEqual(UI_SET);
       });
       it('with field error', () => {
         const passwordError = 'password error';
@@ -165,7 +177,7 @@ describe('login', () => {
         expect(actions[0].type).toEqual(LOGIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(LOGIN_SET);
@@ -175,7 +187,7 @@ describe('login', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${LOGIN} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -191,7 +203,7 @@ describe('login', () => {
             loading: false,
           },
         });
-        expect(actions[6].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
       });
       it('should fetch login error with global error', () => {
         const globalError = 'global error';
@@ -227,7 +239,7 @@ describe('login', () => {
         expect(actions[0].type).toEqual(LOGIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'fetching',
           },
         });
         expect(actions[1].type).toEqual(LOGIN_SET);
@@ -237,7 +249,7 @@ describe('login', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${LOGIN} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -257,7 +269,7 @@ describe('login', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
     });
   });

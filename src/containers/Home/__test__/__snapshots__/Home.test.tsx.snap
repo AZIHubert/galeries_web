@@ -3,27 +3,27 @@
 exports[`Home renders without crashing 1`] = `
 Array [
   <header
-    className="sc-jJEJSO jMobUu"
+    className="sc-hiSbYr eqKIme"
   >
     <div
-      className="sc-hiSbYr hRGsCU"
+      className="sc-gWHgXt eqweso"
     >
       <img
         alt="header logo"
-        className="sc-gWHgXt bMAel"
+        className="sc-cBNfnY ibltjY"
         src={Object {}}
       />
       <div
-        className="sc-iktFzd dZXJkI"
+        className="sc-jJEJSO iVmYzZ"
       >
         <button
-          className="sc-crrsfI bzejis"
+          className="sc-hBEYos foBSFR"
           onClick={[Function]}
         >
           Sign in
         </button>
         <button
-          className="sc-crrsfI nNBWb"
+          className="sc-hBEYos djnmZi"
           onClick={[Function]}
         >
           Log in
@@ -32,7 +32,7 @@ Array [
     </div>
   </header>,
   <div
-    className="sc-citwmv kCcWkG"
+    className="sc-jcVebW dUXAef"
   >
     <div
       className="sc-pFZIQ hSQOzh"
@@ -193,7 +193,7 @@ Array [
     </footer>
   </div>,
   <div
-    className="sc-cBNfnY gZMoYx"
+    className="sc-citwmv vXhlN"
   />,
 ]
 `;

@@ -61,7 +61,7 @@ const fetchSendTicket: Middleware = (
 ) => {
   next(action);
   if (action.type === SEND_TICKET_FETCH) {
-    dispatch(setSendTicket({ status: 'pending' }));
+    dispatch(setSendTicket({ status: 'fetching' }));
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,

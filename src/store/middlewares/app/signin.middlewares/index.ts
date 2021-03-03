@@ -60,7 +60,7 @@ const fetchSignin: Middleware = (
 ) => {
   next(action);
   if (action.type === SIGNIN_FETCH) {
-    dispatch(setSignin({ status: 'pending' }));
+    dispatch(setSignin({ status: 'fetching' }));
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,

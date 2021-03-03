@@ -15,14 +15,17 @@ import PopupProfile from '../index';
 const mockedStore = createStore(reducers);
 
 const Container = ({
+  handleClose,
   handleOpenTicket,
 }: {
-  handleOpenTicket: () => void
+  handleClose: () => void;
+  handleOpenTicket: () => void;
 }) => (
   <Provider store={mockedStore}>
     <ThemeProvider>
       <PopupProfile
         handleOpenTicket={handleOpenTicket}
+        handleClose={handleClose}
       />
     </ThemeProvider>
   </Provider>
@@ -34,15 +37,18 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const mockedHandleOpenTicket = jest.fn();
+const mockedHandleClose = jest.fn();
 
 describe('PopupProfile', () => {
-  it('should trigger handleOpenTicket', () => {
+  it('should trigger handleOpenTicket and handleClose when clicking on ticket button', () => {
     const { getByText } = render(
       <Container
+        handleClose={mockedHandleClose}
         handleOpenTicket={mockedHandleOpenTicket}
       />,
     );
     fireEvent.click(getByText('Share your opinion? Find a bug?'));
     expect(mockedHandleOpenTicket).toHaveBeenCalledTimes(1);
+    expect(mockedHandleClose).toHaveBeenCalledTimes(1);
   });
 });

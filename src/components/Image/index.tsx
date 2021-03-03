@@ -7,15 +7,23 @@ import useProgressiveImage from '#hooks/useProgressiveImage';
 interface ImageI {
   alt?: string;
   original: string;
-  pending: string;
+  pending?: string;
 }
 
 interface ContainerI {
-  uri: string;
+  uri?: string;
 }
 
 const Container = styled.div<ContainerI>`
-  background-image: ${({ uri }) => `url("${uri}")`};
+  background-image: ${({ uri }) => (
+    uri ? `url("${uri}")` : 'none'
+  )};
+  background-color: ${({
+    theme,
+    uri,
+  }) => (
+    uri ? theme.colors.secondary : 'none'
+  )}
 `;
 const Img = styled.img`
   width: 100%;

@@ -5,7 +5,7 @@ import {
 } from 'react-redux';
 
 import ModalContainer from '#components/ModalContainer';
-import TextButton from '#components/TextButton';
+import Button from '#components/Button';
 
 import {
   fetchSendResetPassword,
@@ -49,7 +49,7 @@ const ModalResetPasswordLanding = ({
         the email we sent to {currentEmail}.
         This helps keep your account secure.
       </p>
-      <TextButton
+      <Button.Text
         disabled={loading}
         justifyContent='center'
         onClick={onClick}

@@ -26,13 +26,15 @@ const Information = () => {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
       dispatch(fetchProfilePicture(formData));
-      // selectedFile
+      setSelectedFile(null);
     }
   }, [selectedFile]);
 
   const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setSelectedFile(e.target.files[0]);
+    const element = e.target as HTMLInputElement;
+    if (element.files) {
+      setSelectedFile(element.files[0]);
+      element.value = '';
     }
   };
   const inputClick = () => {
@@ -57,13 +59,13 @@ const Information = () => {
         ref={fileInputRef}
         type="file"
       />
-      <Button
+      <Button.Default
         marginBottom={15}
         marginTop={25}
         onClick={inputClick}
         title='Add a profile picture'
       />
-      <Button
+      <Button.Default
         title='Edit your info'
         variant='secondary'
       />

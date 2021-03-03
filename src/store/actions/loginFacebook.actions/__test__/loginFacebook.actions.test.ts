@@ -8,10 +8,11 @@ import {
   API_ERROR,
   API_REQUEST,
   API_SUCCESS,
-  LOADER_SET,
   LOGIN_FACEBOOK,
   LOGIN_FACEBOOK_FETCH,
   NOTIFICATION_SET,
+  PROFILE_PICTURE_SET,
+  UI_SET,
   USER,
   USER_FETCH,
   USER_SET,
@@ -81,7 +82,7 @@ describe('loginFacebook', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${LOGIN_FACEBOOK} ${API_SUCCESS}`);
         expect(actions[4].type).toEqual(USER_FETCH);
         expect(actions[5].type).toEqual(`${USER} ${API_REQUEST}`);
@@ -90,15 +91,22 @@ describe('loginFacebook', () => {
             loading: true,
           },
         });
-        expect(actions[6].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
         expect(actions[7].type).toEqual(`${USER} ${API_SUCCESS}`);
         expect(actions[8].type).toEqual(USER_SET);
-        expect(actions[9].payload).toEqual({
+        expect(actions[9].type).toEqual(PROFILE_PICTURE_SET);
+        expect(actions[10].payload).toEqual({
+          data: {
+            init: false,
+          },
+        });
+        expect(actions[10].type).toEqual(UI_SET);
+        expect(actions[11].payload).toEqual({
           data: {
             loading: false,
           },
         });
-        expect(actions[9].type).toEqual(LOADER_SET);
+        expect(actions[11].type).toEqual(UI_SET);
       });
       it('error', () => {
         const globalError = 'global error';
@@ -133,7 +141,7 @@ describe('loginFacebook', () => {
             loading: true,
           },
         });
-        expect(actions[2].type).toEqual(LOADER_SET);
+        expect(actions[2].type).toEqual(UI_SET);
         expect(actions[3].type).toEqual(`${LOGIN_FACEBOOK} ${API_ERROR}`);
         expect(actions[3].type).toEqual(`${LOGIN_FACEBOOK} ${API_ERROR}`);
         expect(actions[4].payload).toEqual({
@@ -148,7 +156,7 @@ describe('loginFacebook', () => {
             loading: false,
           },
         });
-        expect(actions[5].type).toEqual(LOADER_SET);
+        expect(actions[5].type).toEqual(UI_SET);
       });
     });
   });

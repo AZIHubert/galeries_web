@@ -7,9 +7,10 @@ import { CSSTransition } from 'react-transition-group';
 import Image from '#components/Image';
 import Modal from '#components/Modal';
 
-import selectProfilePicture from '#helpers/selectProfilePicture';
-
-import { userSelector } from '#store/selectors';
+import {
+  profilePictureCurrentSelector,
+  userSelector,
+} from '#store/selectors';
 
 import ModalTicket from './ModalTicket';
 import PopupProfile from './PopupProfile';
@@ -34,8 +35,7 @@ const ProfileButton = ({
   const user = useSelector(userSelector);
   const [openPopupProfil, setOpenPopupProfile] = React.useState<boolean>(false);
   const [openTicket, setOpenTicket] = React.useState<boolean>(false);
-
-  const { croped, pending } = selectProfilePicture(user);
+  const { croped, pending } = useSelector(profilePictureCurrentSelector);
 
   const handleClosePopup = () => setOpenPopupProfile(false);
 

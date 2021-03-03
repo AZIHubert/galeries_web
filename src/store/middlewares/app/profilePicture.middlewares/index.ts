@@ -6,10 +6,9 @@ import {
   PROFILE_PICTURE,
   PROFILE_PICTURE_FETCH,
   apiRequest,
-  fetchUser,
-  setProfilePicture,
-  setNotification,
   setLoader,
+  setNotification,
+  setProfilePicture,
 } from '#store/actions';
 
 import {
@@ -55,7 +54,7 @@ const fetchProfilePicture: Middleware = (
 ) => {
   next(action);
   if (action.type === PROFILE_PICTURE_FETCH) {
-    dispatch(setProfilePicture({ status: 'pending' }));
+    dispatch(setProfilePicture({ status: 'fetching' }));
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,
@@ -78,8 +77,15 @@ const successProfilePicture: Middleware = (
 ) => {
   next(action);
   if (action.type === `${PROFILE_PICTURE} ${API_SUCCESS}`) {
-    dispatch(setProfilePicture({ status: 'success' }));
-    dispatch(fetchUser());
+    dispatch(setProfilePicture({
+      status: 'success',
+      current: {
+        croped: action.payload ? action.payload.data.cropedImage.signedUrl : undefined,
+        original: action.payload ? action.payload.data.originalImage.signedUrl : undefined,
+        pending: action.payload ? action.payload.data.pendingImage.signedUrl : undefined,
+      },
+    }));
+    dispatch(setLoader(false));
   }
 };
 
