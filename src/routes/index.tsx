@@ -103,7 +103,7 @@ const Routes = () => {
             <Redirect to='/' />
           ) : (
             <>
-              <Header />
+              <Header.Desktop />
               <AnimatedRoute
                 path='/dashboard'
               >

@@ -3,7 +3,7 @@ import * as React from 'react';
 import Body from './Body';
 import Footer from './Footer';
 
-import HeaderHome from '#containers/HeaderHome';
+import Header from '#containers/Header';
 
 import {
   BackgroundImage,
@@ -12,7 +12,7 @@ import {
 
 const Home = () => (
   <>
-    <HeaderHome />
+    <Header.Home />
     <Container>
       <Body />
       <Footer />
