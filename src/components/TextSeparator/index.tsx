@@ -2,26 +2,36 @@ import * as React from 'react';
 
 import { Container } from './styled';
 
-interface TextSeparatorI {
+interface StylesI {
   marginBottom?: number;
-  marginBottomL?: number;
+  marginLeft?: number;
+  marginRight?: number;
   marginTop?: number;
-  marginTopL?: number;
+}
+
+interface TextSeparatorI {
+  styles?: StylesI;
+  stylesMobile?: StylesI;
+  stylesTablet?: StylesI;
+  stylesLaptop?: StylesI;
+  stylesLaptopL?: StylesI;
   text: string;
 }
 
 const TextSeparator = ({
-  marginBottom = 0,
-  marginBottomL,
-  marginTop = 0,
-  marginTopL,
+  styles,
+  stylesMobile,
+  stylesTablet,
+  stylesLaptop,
+  stylesLaptopL,
   text,
 }: TextSeparatorI) => (
   <Container
-    marginBottom={marginBottom}
-    marginBottomL={marginBottomL}
-    marginTop={marginTop}
-    marginTopL={marginTopL}
+    styles={styles}
+    stylesMobile={stylesMobile}
+    stylesLaptop={stylesLaptop}
+    stylesLaptopL={stylesLaptopL}
+    stylesTablet={stylesTablet}
   >
     {text}
   </Container>

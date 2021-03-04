@@ -11,14 +11,22 @@ import {
 type Action = 'login' | 'signin';
 type Variant = 'facebook' | 'google';
 
+interface StylesI {
+  marginBottom?: number;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+}
+
 interface SocialMediaButtonI {
   action?: Action;
   disabled?: boolean;
-  marginBottom?: number;
-  marginBottomL?: number;
-  marginTop?: number;
-  marginTopL?: number;
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+  styles?: StylesI;
+  stylesMobile?: StylesI;
+  stylesTablet?: StylesI;
+  stylesLaptop?: StylesI;
+  stylesLaptopL?: StylesI;
   testId?: string;
   variant?: Variant;
 }
@@ -26,21 +34,23 @@ interface SocialMediaButtonI {
 const SocialMediaButton = ({
   action = 'signin',
   disabled = false,
-  marginBottom = 0,
-  marginBottomL,
-  marginTop = 0,
-  marginTopL,
   onClick,
+  styles,
+  stylesMobile,
+  stylesTablet,
+  stylesLaptop,
+  stylesLaptopL,
   testId,
   variant = 'facebook',
 }: SocialMediaButtonI) => (
   <Button
     disabled={disabled}
-    marginBottom={marginBottom}
-    marginBottomL={marginBottomL}
-    marginTop={marginTop}
-    marginTopL={marginTopL}
     onClick={onClick}
+    styles={styles}
+    stylesMobile={stylesMobile}
+    stylesTablet={stylesTablet}
+    stylesLaptop={stylesLaptop}
+    stylesLaptopL={stylesLaptopL}
     testId={testId}
     variant={variant}
   >

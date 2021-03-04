@@ -1,22 +1,22 @@
 import * as React from 'react';
-import {
-  useSelector,
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Modal from '#components/Modal';
 
-import ModalDelete from './ModalDelete';
-
 import { loadingSelector } from '#store/selectors';
+
+import ModalDelete from './ModalDelete';
 
 const DeleteAccount = () => {
   const loading = useSelector(loadingSelector);
   const [openModal, setOpenModal] = React.useState<boolean>(false);
+
   const handleClose = () => {
     if (!loading) {
       setOpenModal(false);
     }
   };
+
   return (
     <div>
       <p>

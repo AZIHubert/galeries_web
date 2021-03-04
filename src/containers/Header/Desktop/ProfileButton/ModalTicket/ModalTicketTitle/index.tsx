@@ -1,17 +1,25 @@
 import * as React from 'react';
-import styled from 'styled-components';
 
 import Text from '#components/Text';
 
-const Container = styled.div`
-  margin-bottom: 20px;
-`;
+import {
+  Container,
+} from './styles';
 
 const ModalTicketTitle = () => (
   <Container>
     <Text
-      textAlign='center'
-      fontSize={1.4}
+      color='primary'
+      styles={{
+        fontSize: 1.2,
+        textAlign: 'center',
+      }}
+      stylesMobile={{
+        fontSize: 1.4,
+      }}
+      stylesLaptopL={{
+        fontSize: 1.5,
+      }}
     >
       Send a ticket
     </Text>

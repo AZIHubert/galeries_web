@@ -29,32 +29,9 @@ const Container = styled.div.attrs<ContainerI>(
     variant === 'primary' ? theme.colors.secondary : theme.colors.white
   )};
   font-size: 0.85rem;
-  left: 50%;
   padding: 6px 12px;
-  position: absolute;
   text-align: center;
-  top: 14px;
-  transform: translateX(-50%);
   width: 90%;
-  z-index: 10;
-  &.fade-enter {
-    opacity: 0;
-    top: 20px;
-  }
-  &.fade-enter-active {
-    opacity: 1;
-    top: 14px;
-    transition: 500ms;
-  }
-  &.fade-exit {
-    opacity: 1;
-    top: 14px;
-  }
-  &.fade-exit-active {
-    opacity: 0;
-    top: 20px;
-    transition: 500ms;
-  }
   @media ${mediaQueries.mobileL} {
     width: auto;
   }
@@ -62,18 +39,6 @@ const Container = styled.div.attrs<ContainerI>(
     font-size: 1rem;
     padding: 8px 14px;
     top: 20px;
-    &.fade-enter {
-      top: 25px;
-    }
-    &.fade-enter-active {
-      top: 20px;
-    }
-    &.fade-exit {
-      top: 20px;
-    }
-    &.fade-exit-active {
-      top: 25px;
-    }
   }
 `;
 

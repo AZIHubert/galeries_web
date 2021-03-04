@@ -1,8 +1,6 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-  useDispatch,
-} from 'react-redux';
 
 import Button from '#components/Button';
 
@@ -69,9 +67,11 @@ const Header = () => {
           />
           <ProfileButton />
           <Button.Header
-            marginLeft={40}
             onClick={() => dispatch(fetchLogout())}
             small
+            styles={{
+              marginLeft: 40,
+            }}
             title='logout'
           />
         </HeaderPart>

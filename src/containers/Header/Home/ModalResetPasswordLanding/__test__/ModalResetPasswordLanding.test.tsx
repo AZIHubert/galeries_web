@@ -50,9 +50,8 @@ describe('ModalResetPasswordLanding', () => {
   it('should reset fetch sendResetPassword on click', () => {
     const { getByText } = render(<Container />);
     fireEvent.click(getByText('resend it'));
-    expect(mockedDispatch).toHaveBeenCalledTimes(2);
-    expect(mockedDispatch).toHaveBeenNthCalledWith(1, mockedResetSendResetPassword);
-    expect(mockedDispatch).toHaveBeenNthCalledWith(2, mockedFetchSendResetPassword);
+    expect(mockedDispatch).toHaveBeenCalledTimes(1);
+    expect(mockedDispatch).toHaveBeenCalledWith(mockedFetchSendResetPassword);
   });
   it('should not dispatch if loading is true', () => {
     (loadingSelector as jest.Mock).mockImplementation(() => true);

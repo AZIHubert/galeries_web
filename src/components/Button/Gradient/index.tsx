@@ -4,35 +4,45 @@ import { Button } from './styles';
 
 type Type = 'button' | 'submit' | 'reset';
 
-interface GradientButtonI {
-  disabled: boolean;
+interface StylesI {
   marginBottom?: number;
-  marginBottomL?: number;
+  marginLeft?: number;
+  marginRight?: number;
   marginTop?: number;
-  marginTopL?: number;
+}
+
+interface GradiantI {
+  disabled: boolean;
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
+  styles?: StylesI;
+  stylesMobile?: StylesI;
+  stylesTablet?: StylesI;
+  stylesLaptop?: StylesI;
+  stylesLaptopL?: StylesI;
   testId?: string;
   title: string;
   type: Type;
 }
 
-const GradientButton = ({
+const Gradiant = ({
   disabled = false,
-  marginBottom = 0,
-  marginBottomL = 0,
-  marginTop = 0,
-  marginTopL = 0,
   onClick,
+  styles,
+  stylesMobile,
+  stylesTablet,
+  stylesLaptop,
+  stylesLaptopL,
   testId,
   title,
   type = 'button',
-}: GradientButtonI) => (
+}: GradiantI) => (
   <Button
+    styles={styles}
+    stylesMobile={stylesMobile}
+    stylesTablet={stylesTablet}
+    stylesLaptop={stylesLaptop}
+    stylesLaptopL={stylesLaptopL}
     disabled={disabled}
-    marginBottom={marginBottom}
-    marginBottomL={marginBottomL}
-    marginTop={marginTop}
-    marginTopL={marginTopL}
     onClick={onClick}
     testId={testId}
     type={type}
@@ -41,4 +51,4 @@ const GradientButton = ({
   </Button>
 );
 
-export default GradientButton;
+export default Gradiant;

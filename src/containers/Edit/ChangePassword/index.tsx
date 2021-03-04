@@ -1,18 +1,17 @@
-import * as React from 'react';
 import { useFormik } from 'formik';
-import {
-  useSelector,
-} from 'react-redux';
+import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 import Field from '#components/Field';
+
 import { changePasswordSchema } from '#helpers/schemas';
 
 import { loadingSelector } from '#store/selectors';
 
 const initialValues = {
+  confirmNewPassword: '',
   currentPassword: '',
   newPassword: '',
-  confirmNewPassword: '',
 };
 
 const ChangePassword = () => {
@@ -24,6 +23,7 @@ const ChangePassword = () => {
     validationSchema: changePasswordSchema,
   });
   const loading = useSelector(loadingSelector);
+
   return (
     <div>
       <p>
@@ -68,7 +68,6 @@ const ChangePassword = () => {
         />
         <button
           disabled={loading}
-          data-testid='submitButton'
           type='submit'
         >
           {loading ? 'loading' : 'change your password'}

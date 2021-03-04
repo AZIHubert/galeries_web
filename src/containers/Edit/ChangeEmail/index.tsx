@@ -1,12 +1,10 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
-import {
-  useSelector,
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import Field from '#components/Field';
 import { changeEmailSchema } from '#helpers/schemas';
 import { loadingSelector } from '#store/selectors';
-import Field from '#components/Field';
 
 const initialValues = {
   password: '',

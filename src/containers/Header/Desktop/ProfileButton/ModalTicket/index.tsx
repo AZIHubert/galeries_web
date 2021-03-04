@@ -1,8 +1,8 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 import {
-  useSelector,
   useDispatch,
+  useSelector,
 } from 'react-redux';
 
 import Field from '#components/Field';
@@ -42,7 +42,6 @@ const ModalTicket = ({
     initialValues,
     onSubmit: (value) => {
       if (!loading) {
-        resetForm();
         dispatch(fetchSendTicket(value));
       }
     },
@@ -54,16 +53,14 @@ const ModalTicket = ({
   const sendTicketError = useSelector(sendTicketErrorSelector);
   const sendTicketStatus = useSelector(sendTicketStatusSelector);
 
-  React.useEffect(() => () => resetForm(), []);
+  React.useEffect(() => () => {
+    dispatch(resetSendTicket());
+  }, []);
   React.useEffect(() => {
     if (sendTicketStatus === 'success') {
       handleClose();
     }
   }, [sendTicketStatus]);
-
-  const resetForm = () => {
-    dispatch(resetSendTicket());
-  };
 
   return (
     <Modal.Container
@@ -75,13 +72,11 @@ const ModalTicket = ({
       >
         <Field
           disabled={loading}
-          fieldTestId='header'
           error={
             formik.errors.header || sendTicketError.header
           }
+          fieldTestId='header'
           id='header'
-          marginBottom={6}
-          marginBottomL={10}
           label='title'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -96,6 +91,12 @@ const ModalTicket = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 6,
+          }}
+          stylesLaptopL={{
+            marginBottom: 10,
+          }}
           touched={formik.touched.header}
           value={formik.values.header}
         />
@@ -106,8 +107,6 @@ const ModalTicket = ({
           }
           fieldTestId='body'
           id='body'
-          marginBottom={12}
-          marginBottomL={15}
           multiline
           label='body'
           onBlur={formik.handleBlur}
@@ -123,16 +122,26 @@ const ModalTicket = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 12,
+          }}
+          stylesLaptopL={{
+            marginBottom: 15,
+          }}
           touched={formik.touched.body}
           value={formik.values.body}
         />
         <RequiredField />
         <Button.Gradiant
           disabled={loading}
-          marginBottom={15}
-          marginBottomL={22}
-          marginTop={15}
-          marginTopL={22}
+          styles={{
+            marginBottom: 15,
+            marginTop: 15,
+          }}
+          stylesLaptopL={{
+            marginBottom: 22,
+            marginTop: 22,
+          }}
           type='submit'
           title='send'
         />

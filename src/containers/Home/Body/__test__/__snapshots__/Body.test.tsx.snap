@@ -5,11 +5,14 @@ exports[`Body renders without crashing 1`] = `
   className="sc-pFZIQ hSQOzh"
 >
   <div>
-    <h2
-      className="sc-kEjbxe KyhCS"
+    <p
+      className="sc-bdfBwQ caJqnu"
+      color="black"
+      fontStyle="normal"
+      fontWeight="bold"
     >
       Welcome to
-    </h2>
+    </p>
     <h1
       className="sc-jrAGrp eIVJEn"
     >
@@ -137,17 +140,26 @@ exports[`Body renders without crashing 1`] = `
       </svg>
     </h1>
     <p
-      className="sc-fubCfw bCQQtl"
+      className="sc-bdfBwQ jdDqgt"
+      color="black"
+      fontStyle="italic"
+      fontWeight="normal"
     >
       A web app to share
     </p>
     <p
-      className="sc-fubCfw bCQQtl"
+      className="sc-bdfBwQ jdDqgt"
+      color="black"
+      fontStyle="italic"
+      fontWeight="normal"
     >
       pictures with
     </p>
     <p
-      className="sc-fubCfw bCQQtl"
+      className="sc-bdfBwQ jdDqgt"
+      color="black"
+      fontStyle="italic"
+      fontWeight="normal"
     >
       your friends and family.
     </p>

@@ -44,7 +44,6 @@ const ModalLogin = ({
     initialValues,
     onSubmit: async (values) => {
       if (!loading) {
-        resetForm();
         dispatch(fetchLogin(values));
       }
     },
@@ -57,7 +56,9 @@ const ModalLogin = ({
   const loginStatus = useSelector(loginStatusSelector);
   const notification = useSelector(notificationSelector);
 
-  React.useEffect(() => () => resetForm(), []);
+  React.useEffect(() => () => {
+    dispatch(resetLogin());
+  }, []);
 
   React.useEffect(() => {
     if (
@@ -67,10 +68,6 @@ const ModalLogin = ({
       setCurrentModal('resendConfirm');
     }
   });
-
-  const resetForm = () => {
-    dispatch(resetLogin());
-  };
 
   return (
     <Modal.Container
@@ -83,15 +80,19 @@ const ModalLogin = ({
         action='signin'
       />
       <TextSepatator
-        marginBottom={9}
-        marginBottomL={16}
-        marginTop={9}
-        marginTopL={16}
+        styles={{
+          marginBottom: 9,
+          marginTop: 9,
+        }}
+        stylesLaptopL={{
+          marginBottom: 16,
+          marginTop: 16,
+        }}
         text='or'
       />
       <form
-        onSubmit={formik.handleSubmit}
         data-testid='form'
+        onSubmit={formik.handleSubmit}
       >
         <Field
           disabled={loading}
@@ -100,8 +101,6 @@ const ModalLogin = ({
           }
           fieldTestId='userNameOrEmail'
           id='userNameOrEmail'
-          marginBottom={6}
-          marginBottomL={10}
           label='user name or email'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -116,6 +115,12 @@ const ModalLogin = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 6,
+          }}
+          stylesLaptopL={{
+            marginBottom: 10,
+          }}
           touched={formik.touched.userNameOrEmail}
           value={formik.values.userNameOrEmail}
         />
@@ -127,8 +132,6 @@ const ModalLogin = ({
           fieldTestId='password'
           id='password'
           label='password'
-          marginBottom={12}
-          marginBottomL={15}
           onBlur={formik.handleBlur}
           onChange={(e) => {
             formik.handleChange(e);
@@ -142,6 +145,12 @@ const ModalLogin = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 12,
+          }}
+          stylesLaptopL={{
+            marginBottom: 15,
+          }}
           touched={formik.touched.password}
           type='password'
           value={formik.values.password}
@@ -156,26 +165,34 @@ const ModalLogin = ({
             }}
             testId='forgotPasswordButton'
           >
-              Forgot your password?
+            Forgot your password?
           </ForgotPassword>
         </div>
         <Button.Gradiant
           disabled={loading}
-          marginBottom={15}
-          marginBottomL={22}
-          marginTop={15}
-          marginTopL={22}
+          styles={{
+            marginBottom: 15,
+            marginTop: 15,
+          }}
+          stylesLaptopL={{
+            marginBottom: 22,
+            marginTop: 22,
+          }}
           testId='button'
-          type='submit'
           title='Log in'
+          type='submit'
         />
       </form>
       <Button.Text
         disabled={loading}
-        fontSize={0.65}
-        fontSizeL={0.8}
-        justifyContent='center'
         onClick={() => setCurrentModal('signin')}
+        styles={{
+          fontSize: 0.65,
+          justifyContent: 'center',
+        }}
+        stylesLaptopL={{
+          fontSize: 0.8,
+        }}
         text='You don’t have an account yet? click'
         textButton='here'
       />

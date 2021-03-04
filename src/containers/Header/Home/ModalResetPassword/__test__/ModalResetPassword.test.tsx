@@ -42,11 +42,11 @@ const Container = ({
 );
 
 const mockedDispatch = jest.fn();
+const mockedFetchSendResetPassword = jest.fn();
 const mockedSetCurrentEmail = jest.fn();
 const mockedSetCurrentModal = jest.fn();
-const mockedFetchSendResetPassword = jest.fn();
-const mockedResetSendResetPassword = jest.fn();
 const mockedSetSendResetPassword = jest.fn();
+const mockedResetSendResetPassword = jest.fn();
 
 const email = 'email';
 const form = 'form';
@@ -96,9 +96,8 @@ describe('ModalResetPassword', () => {
     });
     fireEvent.submit(getByTestId(form));
     await waitFor(() => {
-      expect(mockedDispatch).toHaveBeenCalledTimes(2);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(1, mockedResetSendResetPassword);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(2, mockedFetchSendResetPassword);
+      expect(mockedDispatch).toHaveBeenCalledTimes(1);
+      expect(mockedDispatch).toHaveBeenCalledWith(mockedFetchSendResetPassword);
     });
   });
   it('should not dispatch if loading', async () => {

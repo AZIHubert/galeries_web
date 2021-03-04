@@ -2,30 +2,30 @@
 
 exports[`Header renders without crashing 1`] = `
 <header
-  className="sc-jNMdTA ftMkVh"
+  className="sc-cOajty dJwOpu"
 >
   <div
-    className="sc-bBrOnJ bPmExC"
+    className="sc-khAkjo fmwWGD"
   >
     <div
-      className="sc-dOSReg lbwhOS"
+      className="sc-AzgDb kpRfcw"
     >
       <img
         alt="header logo"
-        className="sc-cOajty gRnTCl"
+        className="sc-hTZhsR kyweWU"
         src={Object {}}
       />
       <div
-        className="sc-iBaPrD eDwboj"
+        className="sc-jNMdTA bueqA-D"
         onClick={[Function]}
       >
         <img
           alt="search pictogram"
-          className="sc-cTkwdZ oNOZO"
+          className="sc-bBrOnJ dPLKca"
           src={Object {}}
         />
         <input
-          className="sc-eggNIi hzVEBY"
+          className="sc-dOSReg ievEAf"
           onBlur={[Function]}
           onFocus={[Function]}
           placeholder="search on Galeries"
@@ -33,7 +33,7 @@ exports[`Header renders without crashing 1`] = `
       </div>
     </div>
     <div
-      className="sc-dOSReg lbwhOS"
+      className="sc-AzgDb kpRfcw"
     >
       <div
         className="sc-bqyKva bOOLZl"
@@ -44,7 +44,7 @@ exports[`Header renders without crashing 1`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-kstrdz eogjpQ"
+            className="sc-hBEYos ggqouw"
           >
             <svg
               className="sc-jrAGrp xQKQQ"
@@ -72,7 +72,7 @@ exports[`Header renders without crashing 1`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-kstrdz eogjpQ"
+            className="sc-hBEYos ggqouw"
           >
             <svg
               className="sc-iBPRYJ iBHXVy"
@@ -110,7 +110,7 @@ exports[`Header renders without crashing 1`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-kstrdz eogjpQ"
+            className="sc-hBEYos ggqouw"
           >
             <svg
               className="sc-iqHYGH gpBMoq"
@@ -130,24 +130,24 @@ exports[`Header renders without crashing 1`] = `
         </div>
       </div>
       <div
-        className="sc-bZSQDF flxYng"
+        className="sc-eggNIi fCWDMX"
       >
         <button
-          className="sc-jcVebW dQyFic"
+          className="sc-iBaPrD izHVKr"
           onClick={[Function]}
         >
           <div
-            className="sc-iUuytg chJtDV"
+            className="sc-cTkwdZ jHPlsD"
           >
             <div
-              className="sc-hBEYos kFjApp"
+              className="sc-fodVxV bpNrRt"
             />
           </div>
           user name
         </button>
       </div>
       <button
-        className="sc-eCssSg cQDgxF"
+        className="sc-eCssSg goafQX"
         onClick={[Function]}
       >
         logout

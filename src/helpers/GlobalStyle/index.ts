@@ -4,12 +4,12 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+  a {
+    text-decoration: none;
+  }
   body {
     background-color: ${({ theme }) => theme.colors.secondary};
     font-family: 'HelveticaLTstd';
-  }
-  a {
-    text-decoration: none;
   }
 `;
 

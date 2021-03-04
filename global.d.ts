@@ -148,10 +148,11 @@ declare global {
       'tertiary' |
       'white';
     type FontStyle =
-      'lighter' |
+      'italic' |
       'normal';
     type FontWeight =
       'bold' |
+      'lighter' |
       'normal';
     type JustifyContent =
       'center' |

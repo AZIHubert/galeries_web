@@ -8,6 +8,12 @@ import {
   TextArea,
 } from './styles';
 
+interface StylesI {
+  marginBottom?: number;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+}
 interface FieldI {
   containerTestId?: string;
   disabled?: boolean;
@@ -17,14 +23,15 @@ interface FieldI {
   id: string;
   label?: string;
   labelTestId?: string;
-  marginBottom?: number;
-  marginBottomL?: number;
-  marginTop?: number;
-  marginTopL?: number;
   multiline?: boolean;
   onBlur?: ((event: any) => void) | undefined;
   onChange?: ((event: any) => void) | undefined;
   required?: boolean;
+  styles?: StylesI;
+  stylesMobile?: StylesI;
+  stylesTablet?: StylesI;
+  stylesLaptop?: StylesI;
+  stylesLaptopL?: StylesI;
   touched?: boolean | undefined;
   type?: 'password' | 'text';
   value: string;
@@ -39,23 +46,25 @@ const Field = ({
   id,
   label,
   labelTestId,
-  marginBottom = 0,
-  marginBottomL,
-  marginTop = 0,
-  marginTopL,
   multiline = false,
   onBlur,
   onChange,
   required = false,
+  styles,
+  stylesMobile,
+  stylesTablet,
+  stylesLaptop,
+  stylesLaptopL,
   touched,
   type = 'text',
   value,
 }: FieldI) => (
   <Container
-    marginBottom={marginBottom}
-    marginBottomL={marginBottomL}
-    marginTop={marginTop}
-    marginTopL={marginTopL}
+    styles={styles}
+    stylesMobile={stylesMobile}
+    stylesLaptop={stylesLaptop}
+    stylesLaptopL={stylesLaptopL}
+    stylesTablet={stylesTablet}
     testId={containerTestId}
   >
     {label ? (

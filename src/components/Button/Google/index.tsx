@@ -5,22 +5,20 @@ import {
   useSelector,
 } from 'react-redux';
 
-import SocialMediaButton from '../SocialMediaButton';
-
-import {
-  fetchLoginGoogle,
-} from '#store/actions';
+import { fetchLoginGoogle } from '#store/actions';
 import { loadingSelector } from '#store/selectors';
+
+import SocialMediaButton from '../SocialMediaButton';
 
 type Action = 'login' | 'signin';
 
-interface GoogleButtonI {
+interface GoogleI {
   action: Action;
 }
 
-const GoogleButton = ({
+const Google = ({
   action = 'login',
-}: GoogleButtonI) => {
+}: GoogleI) => {
   const dispatch = useDispatch();
   const loading = useSelector(loadingSelector);
 
@@ -47,4 +45,4 @@ const GoogleButton = ({
   );
 };
 
-export default GoogleButton;
+export default Google;

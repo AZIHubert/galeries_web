@@ -4,30 +4,46 @@ import { Button } from './styles';
 
 type Variant = 'primary' | 'secondary';
 
-interface HeaderButtonI {
+interface StylesI {
+  marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
+  marginTop?: number;
+}
+
+interface HeaderI {
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
   small?: boolean;
+  styles?: StylesI;
+  stylesMobile?: StylesI;
+  stylesTablet?: StylesI;
+  stylesLaptop?: StylesI;
+  stylesLaptopL?: StylesI;
   testId?: string;
   title: string;
   variant?: Variant;
 }
 
-const HeaderButton = ({
-  marginLeft = 0,
-  marginRight = 0,
+const Header = ({
   onClick,
   small = false,
+  styles,
+  stylesMobile,
+  stylesTablet,
+  stylesLaptop,
+  stylesLaptopL,
   testId,
   title,
   variant = 'primary',
-}: HeaderButtonI) => (
+}: HeaderI) => (
   <Button
-    marginLeft={marginLeft}
-    marginRight={marginRight}
     onClick={onClick}
     small={small}
+    styles={styles}
+    stylesMobile={stylesMobile}
+    stylesTablet={stylesTablet}
+    stylesLaptop={stylesLaptop}
+    stylesLaptopL={stylesLaptopL}
     testId={testId}
     variant={variant}
   >
@@ -35,4 +51,4 @@ const HeaderButton = ({
   </Button>
 );
 
-export default HeaderButton;
+export default Header;

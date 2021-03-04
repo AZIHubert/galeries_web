@@ -14,7 +14,7 @@ const Container = styled.div.attrs<ContainerI>(
 )<ContainerI>`
   left: 50%;
   max-height: 90vh;
-  max-width: 80%;
+  max-width: 88%;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);

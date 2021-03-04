@@ -3,11 +3,11 @@ import {
 } from '@testing-library/react';
 import * as React from 'react';
 
-import HeaderButton from '../index';
-
 import ThemeProvider from '#contexts/ThemeContext';
 
 import theme from '#helpers/theme';
+
+import HeaderButton from '../index';
 
 type Variant = 'primary' | 'secondary';
 

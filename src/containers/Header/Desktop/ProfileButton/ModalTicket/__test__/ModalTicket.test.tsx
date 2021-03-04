@@ -44,9 +44,9 @@ const Container = ({
 
 const mockedDispatch = jest.fn();
 const mockedFetchSendTicket = jest.fn();
+const mockedHandleClose = jest.fn();
 const mockedResetSendTicket = jest.fn();
 const mockedSetSendTicket = jest.fn();
-const mockedHandleClose = jest.fn();
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux') as typeof reactRedux,
@@ -105,9 +105,8 @@ describe('ModalTicket', () => {
     });
     fireEvent.submit(getByTestId(form));
     await waitFor(() => {
-      expect(mockedDispatch).toHaveBeenCalledTimes(2);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(1, mockedResetSendTicket);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(2, mockedFetchSendTicket);
+      expect(mockedDispatch).toHaveBeenCalledTimes(1);
+      expect(mockedDispatch).toHaveBeenCalledWith(mockedFetchSendTicket);
     });
   });
   it('should not dispatch if loading when submit', async () => {

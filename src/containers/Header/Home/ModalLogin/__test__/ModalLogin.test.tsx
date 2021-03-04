@@ -46,8 +46,8 @@ const userNameOrEmail = 'userNameOrEmail';
 const mockedDispatch = jest.fn();
 const mockedFetchLogin = jest.fn();
 const mockedResetLogin = jest.fn();
-const mockedSetLogin = jest.fn();
 const mockedSetCurrentModal = jest.fn();
+const mockedSetLogin = jest.fn();
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux') as typeof reactRedux,
@@ -70,8 +70,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 describe('ModalLogin', () => {
   beforeEach(() => {
     (loginErrorSelector as jest.Mock).mockImplementation(() => ({
-      userNameOrEmail: '',
       password: '',
+      userNameOrEmail: '',
     }));
     (loginStatusSelector as jest.Mock).mockImplementation(() => 'pending');
     (notificationSelector as jest.Mock).mockImplementation(() => ({
@@ -111,9 +111,8 @@ describe('ModalLogin', () => {
     });
     fireEvent.submit(getByTestId(form));
     await waitFor(() => {
-      expect(mockedDispatch).toHaveBeenCalledTimes(2);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(1, mockedResetLogin);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(2, mockedFetchLogin);
+      expect(mockedDispatch).toHaveBeenCalledTimes(1);
+      expect(mockedDispatch).toHaveBeenCalledWith(mockedFetchLogin);
     });
   });
   it('should not dispatch if loading', async () => {

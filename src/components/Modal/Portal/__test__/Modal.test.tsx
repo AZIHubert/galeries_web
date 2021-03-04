@@ -20,7 +20,9 @@ const openButtonText = 'open modal';
 
 const Container = ({ initialOpen }: ContainerI) => {
   const [open, setOpen] = React.useState<boolean>(initialOpen);
+
   const handleClose = () => setOpen(false);
+
   return (
     <ThemeProvider>
       <button
@@ -29,10 +31,10 @@ const Container = ({ initialOpen }: ContainerI) => {
         {openButtonText}
       </button>
       <Modal
-        open={open}
-        handleClose={handleClose}
-        modalTestId='modal'
         backgroundTestId='background'
+        handleClose={handleClose}
+        open={open}
+        modalTestId='modal'
       >
         <div>{innerText}</div>
       </Modal>

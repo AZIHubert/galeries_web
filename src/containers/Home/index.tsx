@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import Body from './Body';
-import Footer from './Footer';
-
+import Footer from '#containers/Footer';
 import Header from '#containers/Header';
+
+import Body from './Body';
 
 import {
   BackgroundImage,

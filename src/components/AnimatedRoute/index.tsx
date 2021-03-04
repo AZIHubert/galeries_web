@@ -2,7 +2,10 @@ import * as React from 'react';
 import { Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
-import { Container } from './styles';
+import {
+  Container,
+  Fader,
+} from './styles';
 
 interface AnimatedRouteI {
   onExiting?: () => void;
@@ -32,11 +35,13 @@ const AnimatedRoute: React.FC<AnimatedRouteI> = ({
         timeout={300}
         unmountOnExit
       >
-        <Container
-          testId={testId}
-        >
-          {children}
-        </Container>
+        <Fader>
+          <Container
+            testId={testId}
+          >
+            {children}
+          </Container>
+        </Fader>
       </CSSTransition>
     )}
   </Route>

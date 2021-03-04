@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {
-  useSelector,
-} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
 import Image from '#components/Image';
@@ -32,10 +30,10 @@ const ProfileButton = ({
   const handleCloseTicket = React.useCallback(() => setOpenTicket(false), []);
   const handleOpenTicket = React.useCallback(() => setOpenTicket(true), []);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const { croped, pending } = useSelector(profilePictureCurrentSelector);
   const user = useSelector(userSelector);
   const [openPopupProfil, setOpenPopupProfile] = React.useState<boolean>(false);
   const [openTicket, setOpenTicket] = React.useState<boolean>(false);
-  const { croped, pending } = useSelector(profilePictureCurrentSelector);
 
   const handleClosePopup = () => setOpenPopupProfile(false);
 
@@ -76,14 +74,14 @@ const ProfileButton = ({
         unmountOnExit
       >
         <PopupProfile
-          handleOpenTicket={handleOpenTicket}
           handleClose={handleClosePopup}
+          handleOpenTicket={handleOpenTicket}
           testId={popupProfileTestId}
         />
       </CSSTransition>
       <Modal.Portal
-        modalTestId={modalTestId}
         handleClose={handleCloseTicket}
+        modalTestId={modalTestId}
         open={openTicket}
       >
         <ModalTicket

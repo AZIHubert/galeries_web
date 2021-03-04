@@ -7,8 +7,8 @@ import ThemeProvider from '#contexts/ThemeContext';
 
 import SearchBar from '../index';
 
-const inputTestId = 'input';
 const containerTestId = 'container';
+const inputTestId = 'input';
 
 const Container = () => (
   <ThemeProvider>

@@ -2,7 +2,10 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
-import { Container } from './styles';
+import {
+  Container,
+  Fader,
+} from './styles';
 
 type Variant = 'danger' | 'primary';
 
@@ -49,15 +52,17 @@ const Timer = ({
           }
           if (callBack) callBack();
         }}
-        timeout={300}
+        timeout={300000}
         unmountOnExit
       >
-        <Container
-          testId={testId}
-          variant={variant}
-        >
-          {text}
-        </Container>
+        <Fader>
+          <Container
+            testId={testId}
+            variant={variant}
+          >
+            {text}
+          </Container>
+        </Fader>
       </CSSTransition>,
       el.current,
     )

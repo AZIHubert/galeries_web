@@ -8,20 +8,20 @@ import {
   useSelector,
 } from 'react-redux';
 
-import SocialMediaButton from '../SocialMediaButton';
-
 import { fetchLoginFacebook } from '#store/actions';
 import { loadingSelector } from '#store/selectors';
 
+import SocialMediaButton from '../SocialMediaButton';
+
 type Action = 'login' | 'signin';
 
-interface FacebookButtonI {
+interface FacebookI {
   action?: Action;
 }
 
-const FacebookButton = ({
+const Facebook = ({
   action = 'login',
-}: FacebookButtonI) => {
+}: FacebookI) => {
   const dispatch = useDispatch();
   const loading = useSelector(loadingSelector);
 
@@ -40,8 +40,12 @@ const FacebookButton = ({
         <SocialMediaButton
           action={action}
           disabled={loading}
-          marginBottom={10}
-          marginBottomL={13}
+          styles={{
+            marginBottom: 10,
+          }}
+          stylesLaptopL={{
+            marginBottom: 13,
+          }}
           onClick={renderProps.onClick}
         />
       )}
@@ -49,4 +53,4 @@ const FacebookButton = ({
   );
 };
 
-export default FacebookButton;
+export default Facebook;

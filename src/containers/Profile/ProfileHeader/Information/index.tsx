@@ -46,9 +46,14 @@ const Information = () => {
       <Text
         color='primary'
         fontWeight='bold'
-        fontSize={2.4}
-        textAlign='center'
-        textAlignL='left'
+        styles={{
+          fontSize: 2,
+          textAlign: 'center',
+        }}
+        stylesTablet={{
+          fontSize: 2.4,
+          textAlign: 'left',
+        }}
       >
         {user ? user.userName : 'user name'}
       </Text>
@@ -60,8 +65,10 @@ const Information = () => {
         type="file"
       />
       <Button.Default
-        marginBottom={15}
-        marginTop={25}
+        styles={{
+          marginBottom: 15,
+          marginTop: 15,
+        }}
         onClick={inputClick}
         title='Add a profile picture'
       />

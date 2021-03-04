@@ -8,19 +8,21 @@ import ThemeProvider from '#contexts/ThemeContext';
 
 import TextButton from '../index';
 
-type jJustifyContent = 'center' | 'end' | 'flex-end' | 'flex-start' | 'normal' | 'right' | 'safe' | 'space-around' | 'space-evenly' | 'start' | 'stretch' | 'unsafe';
-
 const Container = ({
   disabled,
   fontSize,
   justifyContent,
   marginBottom,
+  marginLeft,
+  marginRight,
   marginTop,
 }: {
   disabled?: boolean;
   fontSize?: number;
-  justifyContent?: jJustifyContent;
+  justifyContent?: style.JustifyContent;
   marginBottom?: number;
+  marginLeft?: number;
+  marginRight?: number;
   marginTop?: number;
 }) => {
   const [click, setClick] = React.useState<boolean>(false);
@@ -31,11 +33,15 @@ const Container = ({
         buttonTestId='button'
         containerTestId='container'
         disabled={disabled}
-        fontSize={fontSize}
-        justifyContent={justifyContent}
-        marginBottom={marginBottom}
-        marginTop={marginTop}
         onClick={handleClick}
+        styles={{
+          fontSize,
+          justifyContent,
+          marginBottom,
+          marginLeft,
+          marginRight,
+          marginTop,
+        }}
         text='text'
         textButton='button'
       />
@@ -98,6 +104,26 @@ describe('TextButton', () => {
       />,
     );
     expect(getByTestId('container')).toHaveStyle('margin: 0px 0px 10px 0px');
+  });
+  it('should set margin-left', () => {
+    const {
+      getByTestId,
+    } = render(
+      <Container
+        marginLeft={10}
+      />,
+    );
+    expect(getByTestId('container')).toHaveStyle('margin: 0px 0px 0px 10px');
+  });
+  it('should set margin-right', () => {
+    const {
+      getByTestId,
+    } = render(
+      <Container
+        marginRight={10}
+      />,
+    );
+    expect(getByTestId('container')).toHaveStyle('margin: 0px 10px 0px 0px');
   });
   it('should set margin-top', () => {
     const {

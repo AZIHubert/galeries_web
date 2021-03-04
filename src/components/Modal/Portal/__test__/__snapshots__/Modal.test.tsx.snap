@@ -5,12 +5,12 @@ exports[`Modal renders without crashing 1`] = `
   className="sc-dlfnbm dqXZeE"
 >
   <div
-    className="sc-bdfBwQ bWYAcn modal"
+    className="sc-gsTCUz kJukDr modal"
   >
     <div />
   </div>
   <div
-    className="sc-gsTCUz bTOrFS background-modal"
+    className="sc-bdfBwQ UqOCl background-modal"
     onClick={[Function]}
   />
 </div>

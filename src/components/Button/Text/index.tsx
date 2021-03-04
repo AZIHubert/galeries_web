@@ -5,39 +5,48 @@ import {
   Container,
 } from './styles';
 
+interface StylesI {
+  fontSize?: number;
+  justifyContent?: style.JustifyContent;
+  marginBottom?: number;
+  marginLeft?: number;
+  marginRight?: number;
+  marginTop?: number;
+}
+
 interface TextButtonI {
   buttonTestId?: string;
   containerTestId?: string;
   disabled?: boolean;
-  fontSize?: number;
-  fontSizeL?: number;
-  justifyContent?: style.JustifyContent;
-  marginBottom?: number;
-  marginTop?: number;
   onClick?: () => void;
+  styles?: StylesI;
+  stylesMobile?: StylesI;
+  stylesTablet?: StylesI;
+  stylesLaptop?: StylesI;
+  stylesLaptopL?: StylesI;
   text: string;
   textButton: string;
 }
 
 const TextButton = ({
   buttonTestId,
-  disabled = false,
-  fontSize = 1,
-  fontSizeL,
-  justifyContent = 'flex-start',
-  marginBottom = 0,
-  marginTop = 0,
-  onClick,
   containerTestId,
+  disabled = false,
+  onClick,
+  styles,
+  stylesMobile,
+  stylesTablet,
+  stylesLaptop,
+  stylesLaptopL,
   text,
   textButton,
 }: TextButtonI) => (
   <Container
-    fontSize={fontSize}
-    fontSizeL={fontSizeL}
-    justifyContent={justifyContent}
-    marginBottom={marginBottom}
-    marginTop={marginTop}
+    styles={styles}
+    stylesMobile={stylesMobile}
+    stylesLaptop={stylesLaptop}
+    stylesLaptopL={stylesLaptopL}
+    stylesTablet={stylesTablet}
     testId={containerTestId}
   >
     <p>

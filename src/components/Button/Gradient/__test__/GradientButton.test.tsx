@@ -21,9 +21,9 @@ const Container = ({
     <ThemeProvider>
       <GradientButton
         disabled={disabled}
+        onClick={handleClick}
         title={title}
         type='button'
-        onClick={handleClick}
       />
       {click ? (
         <p>click</p>

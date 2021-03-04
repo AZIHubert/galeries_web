@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
 import {
   Container,
+  Fader,
   InnerContainer,
 } from './styles';
 
@@ -54,11 +54,13 @@ const Pictogram = ({
           timeout={300}
           unmountOnExit
         >
-          <InnerContainer
-            testId={hoverPictogramTestId}
-          >
-            <HoverPictogramComponent />
-          </InnerContainer>
+          <Fader>
+            <InnerContainer
+              testId={hoverPictogramTestId}
+            >
+              <HoverPictogramComponent />
+            </InnerContainer>
+          </Fader>
         </CSSTransition>
         <CSSTransition
           classNames='fade'

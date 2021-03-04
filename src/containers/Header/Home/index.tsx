@@ -96,8 +96,10 @@ const Header = () => {
         />
         <ButtonContainer>
           <Button.Header
-            marginRight={30}
             onClick={handleClickSignin}
+            styles={{
+              marginRight: 30,
+            }}
             title='Sign in'
           />
           <Button.Header

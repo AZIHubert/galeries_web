@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders without crashing 1`] = `
+<p
+  className="sc-bdfBwQ jizVJx"
+  color="black"
+  fontStyle="normal"
+  fontWeight="lighter"
+>
+  Allan Aoudji @2021
+</p>
+`;

@@ -8,7 +8,6 @@ import {
 import Button from '#components/Button';
 import Field from '#components/Field';
 import Modal from '#components/Modal';
-import Text from '#components/Text';
 
 import { allowResetPasswordSchema } from '#helpers/schemas';
 
@@ -23,6 +22,7 @@ import {
   sendResetPasswordStatusSelector,
 } from '#store/selectors';
 
+import ModalTitle from './ModalTitle';
 import {
   CancelButton,
   CancelButtonContainer,
@@ -54,7 +54,6 @@ const ModalResetPassword = ({
     initialValues,
     onSubmit: async (value) => {
       if (!loading) {
-        resetForm();
         dispatch(fetchSendResetPassword(value));
       }
     },
@@ -73,23 +72,17 @@ const ModalResetPassword = ({
     }
   }, [sendResetPasswordStatus]);
 
-  React.useEffect(() => () => resetForm(), []);
-
-  const resetForm = () => {
+  React.useEffect(() => () => {
     dispatch(resetSendResetPassword());
-  };
+  }, []);
 
   return (
     <Modal.Container
-      title={(
-        <Text>
-          Enter your email to reset your password
-        </Text>
-      )}
+      title={<ModalTitle />}
     >
       <form
-        onSubmit={formik.handleSubmit}
         data-testid='form'
+        onSubmit={formik.handleSubmit}
       >
         <Field
           disabled={loading}
@@ -116,11 +109,15 @@ const ModalResetPassword = ({
         />
         <Button.Gradiant
           disabled={loading}
-          marginBottom={20}
-          marginTop={20}
-          marginTopL={24}
-          type='submit'
+          styles={{
+            marginBottom: 20,
+            marginTop: 20,
+          }}
+          stylesLaptopL={{
+            marginTop: 24,
+          }}
           title='Reset'
+          type='submit'
         />
       </form>
       <CancelButtonContainer>

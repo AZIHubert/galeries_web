@@ -27,8 +27,8 @@ const Container = styled.div.attrs<SearchBarI>(
   @media ${mediaQueries.laptopL} {
     border-radius: 12px;
     height: 24px;
-    width: 250px;
     padding: 4px 11px;
+    width: 250px;
   }
 `;
 

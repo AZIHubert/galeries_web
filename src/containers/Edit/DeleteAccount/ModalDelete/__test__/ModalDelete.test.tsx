@@ -9,9 +9,11 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
+
 import {
   REQUIRED,
 } from '#helpers/formErrors';
+
 import reducers from '#store/reducers';
 
 import ModalDelete from '../index';

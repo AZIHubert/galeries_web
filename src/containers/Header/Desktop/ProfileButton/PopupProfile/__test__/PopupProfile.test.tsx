@@ -36,8 +36,8 @@ jest.mock('react-router-dom', () => ({
   Link: jest.fn(({ children }) => children),
 }));
 
-const mockedHandleOpenTicket = jest.fn();
 const mockedHandleClose = jest.fn();
+const mockedHandleOpenTicket = jest.fn();
 
 describe('PopupProfile', () => {
   it('should trigger handleOpenTicket and handleClose when clicking on ticket button', () => {

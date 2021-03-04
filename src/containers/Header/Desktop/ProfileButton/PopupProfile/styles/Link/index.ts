@@ -12,16 +12,18 @@ const StyledLink = styled(Link).attrs<LinkI>(
     'data-testid': testId,
   }),
 )<LinkI>`
+  align-items: center;
   background-color: transparent;
-  border: none;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.primary}`};
   cursor: pointer;
+  display: flex;
   height: 50px;
   width: 100%;
   &:focus {
     outline: none;
   }
   @media ${mediaQueries.laptopL} {
-    height: 65px;
+    height: 62px;
   }
 `;
 

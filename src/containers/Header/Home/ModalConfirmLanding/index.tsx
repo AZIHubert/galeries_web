@@ -4,8 +4,8 @@ import {
   useSelector,
 } from 'react-redux';
 
-import Modal from '#components/Modal';
 import Button from '#components/Button';
+import Modal from '#components/Modal';
 import Text from '#components/Text';
 
 import {
@@ -13,6 +13,8 @@ import {
   resetSendConfirmation,
 } from '#store/actions';
 import { loadingSelector } from '#store/selectors';
+
+import ModalTitle from './ModalTitle';
 
 interface ModalConfirmLandingI {
   currentEmail: string;
@@ -38,25 +40,23 @@ const ModalConfirmLanding = ({
 
   return (
     <Modal.Container
-      title={<Text
-        textAlign='center'
-      >
-          Verify your email
-      </Text>}
+      title={<ModalTitle />}
     >
-      <p>
+      <Text>
         To use Galeries, click the verification
         button in the email we sent
-        to {currentEmail}. This helps keep
-        your account secure.
-      </p>
+        to {currentEmail || '{{EMAIL_NOT_FOUND}}'}.
+        This helps keep your account secure.
+      </Text>
       {loading ? 'loading' : 'not loading'}
       <Button.Text
         disabled={loading}
-        justifyContent='center'
         onClick={onClick}
-        marginBottom={30}
-        marginTop={20}
+        styles={{
+          justifyContent: 'center',
+          marginBottom: 30,
+          marginTop: 20,
+        }}
         text='No email in your inbox or spam folder? Let’s'
         textButton='resend it'
       />

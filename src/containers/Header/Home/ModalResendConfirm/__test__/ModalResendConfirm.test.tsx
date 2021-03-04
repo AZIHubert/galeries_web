@@ -71,9 +71,8 @@ describe('ModalResendConfirm', () => {
     });
     fireEvent.submit(getByTestId(form));
     await waitFor(() => {
-      expect(mockedDispatch).toHaveBeenCalledTimes(2);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(1, mockedResendSendConfirmation);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(2, mockedFetchSendConfirmation);
+      expect(mockedDispatch).toHaveBeenCalledTimes(1);
+      expect(mockedDispatch).toHaveBeenCalledWith(mockedFetchSendConfirmation);
     });
   });
   it('should not dispatch if loading', async () => {

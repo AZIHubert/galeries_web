@@ -80,10 +80,14 @@ const ModalSignin = ({
         action='signin'
       />
       <TextSepatator
-        marginBottom={9}
-        marginBottomL={16}
-        marginTop={9}
-        marginTopL={16}
+        styles={{
+          marginBottom: 9,
+          marginTop: 9,
+        }}
+        stylesLaptopL={{
+          marginBottom: 16,
+          marginTop: 16,
+        }}
         text='or'
       />
       <form
@@ -97,8 +101,6 @@ const ModalSignin = ({
           }
           fieldTestId='userName'
           id='userName'
-          marginBottom={6}
-          marginBottomL={10}
           label='user name'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -113,6 +115,12 @@ const ModalSignin = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 6,
+          }}
+          stylesLaptopL={{
+            marginBottom: 10,
+          }}
           touched={formik.touched.userName}
           value={formik.values.userName}
         />
@@ -123,8 +131,6 @@ const ModalSignin = ({
           }
           fieldTestId='email'
           id='email'
-          marginBottom={6}
-          marginBottomL={10}
           label='email'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -139,6 +145,12 @@ const ModalSignin = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 6,
+          }}
+          stylesLaptopL={{
+            marginBottom: 10,
+          }}
           touched={formik.touched.email}
           value={formik.values.email}
         />
@@ -149,8 +161,6 @@ const ModalSignin = ({
           }
           fieldTestId='password'
           id='password'
-          marginBottom={6}
-          marginBottomL={10}
           label='password'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -165,6 +175,12 @@ const ModalSignin = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 6,
+          }}
+          stylesLaptopL={{
+            marginBottom: 10,
+          }}
           touched={formik.touched.password}
           type='password'
           value={formik.values.password}
@@ -176,8 +192,6 @@ const ModalSignin = ({
           }
           fieldTestId='confirmPassword'
           id='confirmPassword'
-          marginBottom={12}
-          marginBottomL={15}
           label='confirm password'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -192,6 +206,12 @@ const ModalSignin = ({
             }
           }}
           required
+          styles={{
+            marginBottom: 12,
+          }}
+          stylesLaptopL={{
+            marginBottom: 15,
+          }}
           touched={formik.touched.confirmPassword}
           type='password'
           value={formik.values.confirmPassword}
@@ -199,20 +219,28 @@ const ModalSignin = ({
         <RequiredField />
         <Button.Gradiant
           disabled={loading}
-          marginBottom={15}
-          marginBottomL={22}
-          marginTop={15}
-          marginTopL={22}
+          styles={{
+            marginBottom: 15,
+            marginTop: 15,
+          }}
+          stylesLaptopL={{
+            marginBottom: 22,
+            marginTop: 22,
+          }}
           type='submit'
           title='Sign in'
         />
       </form>
       <Button.Text
         disabled={loading}
-        fontSize={0.65}
-        fontSizeL={0.8}
-        justifyContent='center'
         onClick={() => setCurrentModal('login')}
+        styles={{
+          fontSize: 0.65,
+          justifyContent: 'center',
+        }}
+        stylesLaptopL={{
+          fontSize: 0.8,
+        }}
         text='You already have an account? click'
         textButton='here'
       />

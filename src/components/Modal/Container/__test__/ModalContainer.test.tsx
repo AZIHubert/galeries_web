@@ -29,7 +29,11 @@ describe('ModalContainer', () => {
   it('should have title with default attributes', () => {
     const { queryByText } = render(
       <Container
-        title={<p>title</p>}
+        title={(
+          <p>
+            title
+          </p>
+        )}
       />,
     );
     expect(queryByText('title')).toBeTruthy();

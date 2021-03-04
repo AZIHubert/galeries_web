@@ -16,6 +16,8 @@ import {
   loadingSelector,
 } from '#store/selectors';
 
+import ModalTitle from './ModalTitle';
+
 interface ModalResetPasswordLandingI {
   currentEmail: string;
 }
@@ -26,41 +28,34 @@ const ModalResetPasswordLanding = ({
   const dispatch = useDispatch();
   const loading = useSelector(loadingSelector);
 
-  React.useEffect(() => () => resetForm(), []);
+  React.useEffect(() => () => {
+    dispatch(resetSendResetPassword());
+  }, []);
 
   const onClick = async () => {
     if (!loading) {
-      resetForm();
       dispatch(fetchSendResetPassword({ email: currentEmail }));
     }
   };
 
-  const resetForm = () => {
-    dispatch(resetSendResetPassword());
-  };
-
   return (
     <Modal.Container
-      title={(
-        <Text
-          textAlign='center'
-        >
-          Reset your password
-        </Text>
-      )}
+      title={<ModalTitle />}
     >
-      <p>
+      <Text>
         To reset your password, click the
         verification button in
         the email we sent to {currentEmail}.
         This helps keep your account secure.
-      </p>
+      </Text>
       <Button.Text
         disabled={loading}
-        justifyContent='center'
         onClick={onClick}
-        marginBottom={30}
-        marginTop={20}
+        styles={{
+          justifyContent: 'center',
+          marginBottom: 30,
+          marginTop: 20,
+        }}
         text='No email in your inbox or spam folder? Let’s'
         textButton='resend it'
       />

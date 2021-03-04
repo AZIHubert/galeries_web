@@ -5,8 +5,8 @@ import {
   useSelector,
 } from 'react-redux';
 
-import Field from '#components/Field';
 import Button from '#components/Button';
+import Field from '#components/Field';
 import Modal from '#components/Modal';
 import Text from '#components/Text';
 
@@ -22,6 +22,8 @@ import {
   sendConfirmationErrorSelector,
 } from '#store/selectors';
 
+import ModalTitle from './ModalTitle';
+
 const initialValues: form.SendConfirmationI = {
   email: '',
 };
@@ -32,43 +34,36 @@ const ModalResendConfirm = () => {
     initialValues,
     onSubmit: async (value) => {
       if (!loading) {
-        resetForm();
         dispatch(fetchSendConfirmation(value));
       }
     },
-    validateOnChange: false,
     validateOnBlur: true,
+    validateOnChange: false,
     validationSchema: resetConfirmSchema,
   });
-  const sendConfirmationError = useSelector(sendConfirmationErrorSelector);
   const loading = useSelector(loadingSelector);
+  const sendConfirmationError = useSelector(sendConfirmationErrorSelector);
 
-  React.useEffect(() => () => resetForm(), []);
-
-  const resetForm = () => {
+  React.useEffect(() => () => {
     dispatch(resetSendConfirmation());
-  };
+  }, []);
 
   return (
     <Modal.Container
-      title={(
-        <Text>
-          Your account is not confirmed
-        </Text>
-      )}
+      title={<ModalTitle />}
     >
-      <p>
+      <Text>
         To use Galeries, click the verification
         button in the email we sent
         to the email you've register.
         This helps keep your account secure.
-      </p>
-      <p>
+      </Text>
+      <Text>
         Or resend a confirmation email.
-      </p>
+      </Text>
       <form
-        onSubmit={formik.handleSubmit}
         data-testid='form'
+        onSubmit={formik.handleSubmit}
       >
         <Field
           disabled={loading}
@@ -78,8 +73,6 @@ const ModalResendConfirm = () => {
           fieldTestId='email'
           id='email'
           label='email'
-          marginTop={20}
-          marginTopL={24}
           onBlur={formik.handleBlur}
           onChange={(e) => {
             formik.handleChange(e);
@@ -92,16 +85,26 @@ const ModalResendConfirm = () => {
               }));
             }
           }}
+          styles={{
+            marginTop: 20,
+          }}
+          stylesLaptopL={{
+            marginTop: 24,
+          }}
           touched={formik.touched.email}
           value={formik.values.email}
         />
         <Button.Gradiant
           disabled={loading}
-          marginBottom={20}
-          marginTop={20}
-          marginTopL={24}
-          type='submit'
+          styles={{
+            marginBottom: 20,
+            marginTop: 20,
+          }}
+          stylesLaptopL={{
+            marginTop: 24,
+          }}
           title='Reset'
+          type='submit'
         />
       </form>
     </Modal.Container>

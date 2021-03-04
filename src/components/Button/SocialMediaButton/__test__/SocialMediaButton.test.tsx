@@ -27,14 +27,18 @@ const Container = ({
   variant?: Variant;
 }) => {
   const [click, setClick] = React.useState<boolean>(false);
+
   const handleClick = () => setClick(true);
+
   return (
     <ThemeProvider>
       <SocialMediaButton
         action={action}
         disabled={disabled}
-        marginBottom={marginBottom}
-        marginTop={marginTop}
+        styles={{
+          marginBottom,
+          marginTop,
+        }}
         onClick={handleClick}
         testId='button'
         variant={variant}

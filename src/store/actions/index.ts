@@ -6,7 +6,7 @@ export * from './loginGoogle.actions';
 export * from './login.actions';
 export * from './logout.actions';
 export * from './notification.actions';
-export * from './postProfilePicture.actions';
+export * from './profilePicture.actions';
 export * from './profilePictures.actions';
 export * from './resetPassword.actions';
 export * from './sendConfirmation.actions';

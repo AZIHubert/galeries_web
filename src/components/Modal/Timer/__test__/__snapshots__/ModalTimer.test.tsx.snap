@@ -2,8 +2,12 @@
 
 exports[`Desktop renders without crashing 1`] = `
 <div
-  className="sc-bdfBwQ kwyfnM"
+  className="sc-gsTCUz gHjOfa"
 >
-  render text
+  <div
+    className="sc-bdfBwQ gkPuEC"
+  >
+    render text
+  </div>
 </div>
 `;

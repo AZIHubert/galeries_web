@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import * as React from 'react';
 
 const useProgressiveImage = (src: string) => {
-  const [sourceLoaded, setSourceLoaded] = useState<boolean>(false);
+  const [sourceLoaded, setSourceLoaded] = React.useState<boolean>(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const img = new Image();
     img.src = src;
     img.onload = () => setSourceLoaded(true);
