@@ -7,7 +7,7 @@ import {
 import Button from '#components/Button';
 import Text from '#components/Text';
 
-import { fetchProfilePicture } from '#store/actions';
+import { postProfilePicture } from '#store/actions';
 import { userSelector } from '#store/selectors';
 
 import {
@@ -25,7 +25,7 @@ const Information = () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append('image', selectedFile, selectedFile.name);
-      dispatch(fetchProfilePicture(formData));
+      dispatch(postProfilePicture(formData));
       setSelectedFile(null);
     }
   }, [selectedFile]);

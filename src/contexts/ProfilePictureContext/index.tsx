@@ -25,6 +25,9 @@ export const ProfilePictureContext = React.createContext<{
     pending: string;
   },
   isFetching: boolean,
+  isPosting: boolean,
+  setPuttingImage: React.Dispatch<React.SetStateAction<string | null>>,
+  puttingImage: string | null,
   profilePictures: { [name: string]: ProfilePictureI }
 }>({
   profilePicture: {
@@ -33,6 +36,9 @@ export const ProfilePictureContext = React.createContext<{
     pending: '',
   },
   isFetching: false,
+  isPosting: false,
+  setPuttingImage: () => {},
+  puttingImage: null,
   profilePictures: {},
 });
 
@@ -50,6 +56,8 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
   const profilePicturesStatus = useSelector(profilePicturesStatusSelector);
   const user = useSelector(userSelector);
 
+  const [puttingImage, setPuttingImage] = React.useState<string | null>(null);
+  const [action, setAction] = React.useState<'pending' | 'post' | 'put'>('pending');
   const [profilePicture, setProfilePicture] = React.useState(profilePictureSelect);
   const [profilePictures, setProfilePictures] = React.useState<{
     [name: string]: ProfilePictureI
@@ -96,9 +104,11 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
 
   // trigger timer when upload new profile pictures
   React.useEffect(() => {
-    if (profilePictureStatus === 'fetching') {
+    if (profilePictureStatus === 'fetching' || profilePictureStatus === 'put') {
       setWaitingTimer(true);
       timer.current = setTimeout(() => setWaitingTimer(false), 1000);
+      if (profilePictureStatus === 'fetching') setAction('post');
+      if (profilePictureStatus === 'put') setAction('put');
     }
   }, [profilePictureStatus]);
 
@@ -114,20 +124,32 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
     if (!waitingTimer && profilePictureStatus === 'success') {
       setProfilePicture(profilePictureSelect);
       setProfilePictures(ProfilePicturesSelect);
+      setPuttingImage(null);
     }
   }, [
+    action,
     profilePictureStatus,
     waitingTimer,
   ]);
 
-  const isFetching = waitingTimer || profilePictureStatus === 'fetching';
+  React.useEffect(() => {
+    if (profilePictureStatus === 'put') {
+      setAction('put');
+    }
+  }, [profilePictureStatus]);
+
+  const isFetching = (waitingTimer || profilePictureStatus === 'fetching') && action === 'post';
+  const isPosting = (waitingTimer || profilePictureStatus === 'fetching') && action === 'put';
 
   return (
     <ProfilePictureContext.Provider
       value={{
         isFetching,
+        isPosting,
         profilePicture,
         profilePictures,
+        puttingImage,
+        setPuttingImage,
       }}
     >
       {children}

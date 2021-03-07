@@ -10,6 +10,7 @@ const ImageContainer = styled.div<ImageContainerI>`
   right: 0;
   top: 0;
   transition: ${({ theme }) => theme.transition.slow};
+  width: 100%;
 `;
 
 ImageContainer.defaultProps = {

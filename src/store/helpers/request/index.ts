@@ -10,11 +10,12 @@ export default (
   confirmToken?: string,
   contentType?: string,
   page?: number,
+  params?: string,
 ) => axios.request({
   data: body,
   method,
   baseURL: 'http://localhost:5000',
-  url: `${url}${page ? `?page=${page}` : ''}`,
+  url: `${url}${params || ''}${page ? `?page=${page}` : ''}`,
   headers: {
     authorization: token,
     'Content-Type': contentType || 'application/json',

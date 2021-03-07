@@ -31,14 +31,16 @@ export const apiRequest: (
   confirmToken?: string,
   contentType?: string,
   page?: number,
+  params?: string,
 ) => store.ActionI = (
   body,
   method,
   url,
   entity,
-  confirmToken?,
-  contentType?,
-  page?,
+  confirmToken,
+  contentType,
+  page,
+  params,
 ) => ({
   payload: {
     data: body,
@@ -49,6 +51,7 @@ export const apiRequest: (
       method,
       url,
       page,
+      params,
     },
   },
   type: `${entity} ${API_REQUEST}`,

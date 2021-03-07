@@ -6,10 +6,10 @@ import {
   API_SUCCESS,
   NOTIFICATION_SET,
   PROFILE_PICTURE,
-  PROFILE_PICTURE_FETCH,
+  PROFILE_PICTURE_POST,
   PROFILE_PICTURE_SET,
   UI_SET,
-  fetchProfilePicture,
+  postProfilePicture,
   resetProfilePicture,
   setLoader,
   setProfilePicture,
@@ -23,12 +23,12 @@ jest.mock('#store/middlewares/core/api.middlewares', () => jest.fn());
 describe('profilePicture', () => {
   describe('actions', () => {
     const data = new FormData();
-    it('should create a fetch action', () => {
+    it('should create a post action', () => {
       const expectedAction = {
         payload: { data },
-        type: PROFILE_PICTURE_FETCH,
+        type: PROFILE_PICTURE_POST,
       };
-      expect(fetchProfilePicture(data)).toEqual(expectedAction);
+      expect(postProfilePicture(data)).toEqual(expectedAction);
     });
     it('should create a reset action', () => {
       const expectedAction = {
@@ -76,9 +76,9 @@ describe('profilePicture', () => {
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
-        store.dispatch(fetchProfilePicture(data));
+        store.dispatch(postProfilePicture(data));
         const actions = store.getActions();
-        expect(actions[0].type).toEqual(PROFILE_PICTURE_FETCH);
+        expect(actions[0].type).toEqual(PROFILE_PICTURE_POST);
         expect(actions[1].payload).toEqual({
           data: {
             status: 'fetching',
@@ -135,9 +135,9 @@ describe('profilePicture', () => {
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
-        store.dispatch(fetchProfilePicture(data));
+        store.dispatch(postProfilePicture(data));
         const actions = store.getActions();
-        expect(actions[0].type).toEqual(PROFILE_PICTURE_FETCH);
+        expect(actions[0].type).toEqual(PROFILE_PICTURE_POST);
         expect(actions[1].payload).toEqual({
           data: {
             status: 'fetching',

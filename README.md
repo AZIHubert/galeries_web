@@ -1,3 +1,7 @@
-Re-check every thing on Profile
+Check Profile (some modification PUT);
 
-Fetch change PP => PUT /users/me/profilePictures/id
+change status redux (putting | fetching | posting)
+
+change variable names profilePicturesContext
+
+Testing Context/profilePictures

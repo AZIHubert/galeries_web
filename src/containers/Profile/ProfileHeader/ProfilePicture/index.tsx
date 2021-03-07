@@ -2,7 +2,7 @@ import * as React from 'react';
 import BounceLoader from 'react-spinners/BounceLoader';
 import { CSSTransition } from 'react-transition-group';
 
-import themeColor from '#helpers/theme';
+import theme from '#helpers/theme';
 
 import Image from '#components/Image';
 
@@ -19,6 +19,7 @@ import {
 const ProfilePicture = () => {
   const {
     isFetching,
+    isPosting,
     profilePicture,
   } = React.useContext(ProfilePictureContext);
 
@@ -26,7 +27,7 @@ const ProfilePicture = () => {
     <Container>
       <InnerContainer>
         <ImageContainer
-          isPending={isFetching}
+          isPending={isFetching || isPosting}
         >
           <Image
             original={profilePicture.croped}
@@ -35,14 +36,14 @@ const ProfilePicture = () => {
         </ImageContainer>
         <CSSTransition
           classNames='fade'
-          in={isFetching}
+          in={isFetching || isPosting}
           timeout={300}
           unmountOnExit
         >
           <Fader>
             <SpinnerContainer>
               <BounceLoader
-                color={themeColor.colors.secondary}
+                color={theme.colors.secondary}
                 size={60}
               />
             </SpinnerContainer>

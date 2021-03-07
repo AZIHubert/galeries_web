@@ -10,7 +10,7 @@ import {
   LOGIN_GOOGLE,
   LOGIN_SET,
   LOGOUT,
-  PROFILE_PICTURE_FETCH,
+  PROFILE_PICTURE_POST,
   PROFILE_PICTURE_SET,
   PROFILE_PICTURES,
   REFRESH_TOKEN,
@@ -58,7 +58,7 @@ declare global {
       typeof LOGIN_SET |
       typeof LOGOUT |
       typeof PROFILE_PICTURES |
-      typeof PROFILE_PICTURE_FETCH |
+      typeof PROFILE_PICTURE_POST |
       typeof PROFILE_PICTURE_SET |
       typeof REFRESH_TOKEN |
       typeof RESET_PASSWORD |
@@ -72,6 +72,7 @@ declare global {
       'error' |
       'fetching' |
       'pending' |
+      'put' |
       'success';
 
     interface ActionI {
@@ -85,6 +86,7 @@ declare global {
           method?: Method;
           page?: number;
           url?: string;
+          params?: string;
         }
       }
     }

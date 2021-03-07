@@ -4,17 +4,21 @@ import {
   API_ERROR,
   API_SUCCESS,
   PROFILE_PICTURE,
-  PROFILE_PICTURE_FETCH,
+  PROFILE_PICTURE_POST,
+  PROFILE_PICTURE_PUT,
   apiRequest,
   setLoader,
   setNotification,
   setProfilePicture,
   setProfilePictures,
+  setUser,
 } from '#store/actions';
 
 import {
   endPoints,
 } from '#store/constant';
+
+import { selectProfilPicture } from '#store/helpers';
 
 const errorProfilePicture: Middleware = (
   { dispatch },
@@ -46,7 +50,7 @@ const errorProfilePicture: Middleware = (
   }
 };
 
-const fetchProfilePicture: Middleware = (
+const putProfilePicture: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -54,7 +58,32 @@ const fetchProfilePicture: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === PROFILE_PICTURE_FETCH) {
+  if (action.type === PROFILE_PICTURE_PUT) {
+    dispatch(setProfilePicture({ status: 'put' }));
+    dispatch(
+      apiRequest(
+        null,
+        'PUT',
+        endPoints.PROFILE_PICTURE,
+        PROFILE_PICTURE,
+        undefined,
+        undefined,
+        undefined,
+        action.payload ? action.payload.data.id : undefined,
+      ),
+    );
+  }
+};
+
+const postProfilePicture: Middleware = (
+  { dispatch },
+) => (
+  next,
+) => (
+  action: store.ActionI,
+) => {
+  next(action);
+  if (action.type === PROFILE_PICTURE_POST) {
     dispatch(setProfilePicture({ status: 'fetching' }));
     dispatch(
       apiRequest(
@@ -81,29 +110,41 @@ const successProfilePicture: Middleware = (
 ) => {
   next(action);
   if (action.type === `${PROFILE_PICTURE} ${API_SUCCESS}`) {
-    if (action.payload) {
-      const { id, ...rest }: ProfilePictureI = action.payload.data;
+    if (action.payload && action.payload.data) {
+      const {
+        id,
+        ...rest
+      }: ProfilePictureI = action.payload.data;
+      dispatch(setUser({
+        ...getState().user,
+        currentProfilePictureId: id,
+        currentProfilePicture: { ...rest },
+      }));
       dispatch(setProfilePictures({
         profilePictures: {
           [id]: { ...rest },
           ...getState().profilePictures.profilePictures,
         },
       }));
-      dispatch(setProfilePicture({
-        status: 'success',
-        current: {
-          croped: action.payload.data.cropedImage.signedUrl,
-          original: action.payload.data.originalImage.signedUrl,
-          pending: action.payload.data.pendingImage.signedUrl,
-        },
+    } else {
+      dispatch(setUser({
+        ...getState().user,
+        currentProfilePictureId: null,
+        currentProfilePicture: null,
       }));
     }
+    const currentProfilePicture = selectProfilPicture(getState().user);
+    dispatch(setProfilePicture({
+      status: 'success',
+      current: currentProfilePicture,
+    }));
     dispatch(setLoader(false));
   }
 };
 
 export default [
   errorProfilePicture,
-  fetchProfilePicture,
+  postProfilePicture,
+  putProfilePicture,
   successProfilePicture,
 ];
