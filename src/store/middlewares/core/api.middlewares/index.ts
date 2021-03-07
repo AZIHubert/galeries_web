@@ -39,6 +39,7 @@ const apiMiddleware: Middleware = (
         entity,
         method,
         url,
+        page,
       } = payload.meta;
       request(
         payload.data,
@@ -47,6 +48,7 @@ const apiMiddleware: Middleware = (
         token,
         confirmToken,
         contentType,
+        page,
       )
         .then((response) => {
           dispatch(

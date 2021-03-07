@@ -6,9 +6,9 @@ const InnerContainer = styled.div`
   border-radius: 50%;
   height: 120px;
   overflow: hidden;
+  position: relative;
   transition: ${({ theme }) => theme.transition.default};
   width: 120px;
-  position: relative;
   @media ${mediaQueries.tablet} {
     height: 160px;
     width: 160px;

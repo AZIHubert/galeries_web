@@ -7,19 +7,30 @@ export const fetchProfilePictures: () => store.ActionI = () => ({
   type: PROFILE_PICTURES_FETCH,
 });
 
+export const resetProfilePictures: () => store.ActionI = () => ({
+  payload: {
+    data: {
+      end: false,
+      status: 'pending',
+      profilePictures: {},
+      page: 1,
+    },
+  },
+  type: PROFILE_PICTURES_SET,
+});
+
 export const setProfilePictures: (
   data: {
+    end?: boolean;
     status?: store.FormStatus,
-    profilePictures?: ProfilePictureI[]
+    profilePictures?: { [name: string]: ProfilePictureI },
+    page?: number,
   },
 ) => store.ActionI = (
   data,
 ) => ({
   payload: {
-    data: {
-      status: data.status,
-      profilePictures: data.profilePictures || [],
-    },
+    data,
   },
   type: PROFILE_PICTURES_SET,
 });

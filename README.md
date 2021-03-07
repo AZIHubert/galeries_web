@@ -1,7 +1,3 @@
-refactor header and Button
-=> Header.Home Header.Desktop
-=> Button.Regular
-=> Button.Header
-=> Button.Gradiant
-Test Add ProfileButton
-Test Image Component
+Re-check every thing on Profile
+
+Fetch change PP => PUT /users/me/profilePictures/id

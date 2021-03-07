@@ -1,13 +1,17 @@
 import { PROFILE_PICTURES_SET } from '#store/actions';
 
 interface InitialStateI {
+  end: boolean;
   status: store.FormStatus;
   profilePictures: ProfilePictureI[];
+  page: number;
 }
 
 const initialState: InitialStateI = {
+  end: false,
   status: 'pending',
   profilePictures: [],
+  page: 0,
 };
 
 export default (
@@ -19,7 +23,6 @@ export default (
       return {
         ...state,
         ...action.payload ? action.payload.data : undefined,
-        profilePictures: action.payload ? action.payload.data.profilePictures : [],
       };
     default:
       return state;

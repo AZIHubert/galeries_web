@@ -20,10 +20,12 @@ const Image = ({
   original,
   pending,
 }: ImageI) => {
-  const loading = useProgressiveImage(original);
+  const imageRef = React.useRef<HTMLDivElement | null>(null);
+  const loading = useProgressiveImage(original, imageRef, true);
 
   return (
     <Container
+      ref={imageRef}
       uri={pending}
     >
       <CSSTransition

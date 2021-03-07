@@ -9,6 +9,7 @@ import {
   setLoader,
   setNotification,
   setProfilePicture,
+  setProfilePictures,
 } from '#store/actions';
 
 import {
@@ -69,7 +70,10 @@ const fetchProfilePicture: Middleware = (
 };
 
 const successProfilePicture: Middleware = (
-  { dispatch },
+  {
+    dispatch,
+    getState,
+  },
 ) => (
   next,
 ) => (
@@ -77,14 +81,23 @@ const successProfilePicture: Middleware = (
 ) => {
   next(action);
   if (action.type === `${PROFILE_PICTURE} ${API_SUCCESS}`) {
-    dispatch(setProfilePicture({
-      status: 'success',
-      current: {
-        croped: action.payload ? action.payload.data.cropedImage.signedUrl : undefined,
-        original: action.payload ? action.payload.data.originalImage.signedUrl : undefined,
-        pending: action.payload ? action.payload.data.pendingImage.signedUrl : undefined,
-      },
-    }));
+    if (action.payload) {
+      const { id, ...rest }: ProfilePictureI = action.payload.data;
+      dispatch(setProfilePictures({
+        profilePictures: {
+          [id]: { ...rest },
+          ...getState().profilePictures.profilePictures,
+        },
+      }));
+      dispatch(setProfilePicture({
+        status: 'success',
+        current: {
+          croped: action.payload.data.cropedImage.signedUrl,
+          original: action.payload.data.originalImage.signedUrl,
+          pending: action.payload.data.pendingImage.signedUrl,
+        },
+      }));
+    }
     dispatch(setLoader(false));
   }
 };

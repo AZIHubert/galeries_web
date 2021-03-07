@@ -48,25 +48,37 @@ const P = styled.p.attrs<PI>(
     fontWeight || 'normal'
   )};
   line-height: ${({ styles }) => {
-    if (styles) {
+    if (styles && styles.lineHeight) {
       const {
         lineHeight,
       } = styles;
-      return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
+      return `${lineHeight}rem`;
     }
     return 'normal';
   }};
-  margin: ${({ styles }) => {
-    if (styles) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = styles;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+  margin-bottom: ${({ styles }) => {
+    if (styles && styles.marginBottom) {
+      return `${styles.marginBottom}px`;
     }
-    return 0;
+    return '0px';
+  }};
+  margin-left: ${({ styles }) => {
+    if (styles && styles.marginLeft) {
+      return `${styles.marginLeft}px`;
+    }
+    return '0px';
+  }};
+  margin-right: ${({ styles }) => {
+    if (styles && styles.marginRight) {
+      return `${styles.marginRight}px`;
+    }
+    return '0px';
+  }};
+  margin-top: ${({ styles }) => {
+    if (styles && styles.marginTop) {
+      return `${styles.marginTop}px`;
+    }
+    return '0px';
   }};
   text-align: ${({ styles }) => {
     if (styles && styles.textAlign) {
@@ -92,13 +104,13 @@ const P = styled.p.attrs<PI>(
     styles,
     stylesMobile,
   }) => {
-    if (stylesMobile) {
+    if (stylesMobile && stylesMobile.lineHeight) {
       const {
         lineHeight,
       } = stylesMobile;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (styles) {
+    if (styles && styles.lineHeight) {
       const {
         lineHeight,
       } = styles;
@@ -106,29 +118,53 @@ const P = styled.p.attrs<PI>(
     }
     return 'normal';
   }};
-    margin: ${({
+    margin-bottom: ${({
     styles,
     stylesMobile,
   }) => {
-    if (stylesMobile) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesMobile;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesMobile && stylesMobile.marginBottom) {
+      return `${stylesMobile.marginBottom}px`;
     }
-    if (styles) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = styles;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (styles && styles.marginBottom) {
+      return `${styles.marginBottom}px`;
     }
-    return 0;
+    return '0px';
+  }};
+    margin-left: ${({
+    styles,
+    stylesMobile,
+  }) => {
+    if (stylesMobile && stylesMobile.marginLeft) {
+      return `${stylesMobile.marginLeft}px`;
+    }
+    if (styles && styles.marginLeft) {
+      return `${styles.marginLeft}px`;
+    }
+    return '0px';
+  }};
+    margin-right: ${({
+    styles,
+    stylesMobile,
+  }) => {
+    if (stylesMobile && stylesMobile.marginRight) {
+      return `${stylesMobile.marginRight}px`;
+    }
+    if (styles && styles.marginRight) {
+      return `${styles.marginRight}px`;
+    }
+    return '0px';
+  }};
+    margin-top: ${({
+    styles,
+    stylesMobile,
+  }) => {
+    if (stylesMobile && stylesMobile.marginTop) {
+      return `${stylesMobile.marginTop}px`;
+    }
+    if (styles && styles.marginTop) {
+      return `${styles.marginTop}px`;
+    }
+    return '0px';
   }};
     text-align: ${({
     styles,
@@ -137,7 +173,7 @@ const P = styled.p.attrs<PI>(
     if (stylesMobile && stylesMobile.textAlign) {
       return stylesMobile.textAlign;
     }
-    if (styles && styles.fontSize) {
+    if (styles && styles.textAlign) {
       return styles.textAlign;
     }
     return 'left';
@@ -165,19 +201,19 @@ const P = styled.p.attrs<PI>(
     stylesMobile,
     stylesTablet,
   }) => {
-    if (stylesTablet) {
+    if (stylesTablet && stylesTablet.lineHeight) {
       const {
         lineHeight,
       } = stylesTablet;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (stylesMobile) {
+    if (stylesMobile && stylesMobile.lineHeight) {
       const {
         lineHeight,
       } = stylesMobile;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (styles) {
+    if (styles && styles.lineHeight) {
       const {
         lineHeight,
       } = styles;
@@ -185,39 +221,69 @@ const P = styled.p.attrs<PI>(
     }
     return 'normal';
   }};
-    margin: ${({
+    margin-bottom: ${({
     styles,
     stylesMobile,
     stylesTablet,
   }) => {
-    if (stylesTablet) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesTablet;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesTablet && stylesTablet.marginBottom) {
+      return `${stylesTablet.marginBottom}px`;
     }
-    if (stylesMobile) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesMobile;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesMobile && stylesMobile.marginBottom) {
+      return `${stylesMobile.marginBottom}px`;
     }
-    if (styles) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = styles;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (styles && styles.marginBottom) {
+      return `${styles.marginBottom}px`;
     }
-    return 0;
+    return '0px';
+  }};
+    margin-left: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+  }) => {
+    if (stylesTablet && stylesTablet.marginLeft) {
+      return `${stylesTablet.marginLeft}px`;
+    }
+    if (stylesMobile && stylesMobile.marginLeft) {
+      return `${stylesMobile.marginLeft}px`;
+    }
+    if (styles && styles.marginLeft) {
+      return `${styles.marginLeft}px`;
+    }
+    return '0px';
+  }};
+    margin-right: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+  }) => {
+    if (stylesTablet && stylesTablet.marginRight) {
+      return `${stylesTablet.marginRight}px`;
+    }
+    if (stylesMobile && stylesMobile.marginRight) {
+      return `${stylesMobile.marginRight}px`;
+    }
+    if (styles && styles.marginRight) {
+      return `${styles.marginRight}px`;
+    }
+    return '0px';
+  }};
+    margin-top: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+  }) => {
+    if (stylesTablet && stylesTablet.marginTop) {
+      return `${stylesTablet.marginTop}px`;
+    }
+    if (stylesMobile && stylesMobile.marginTop) {
+      return `${stylesMobile.marginTop}px`;
+    }
+    if (styles && styles.marginTop) {
+      return `${styles.marginTop}px`;
+    }
+    return '0px';
   }};
     text-align: ${({
     styles,
@@ -263,25 +329,25 @@ const P = styled.p.attrs<PI>(
     stylesMobile,
     stylesTablet,
   }) => {
-    if (stylesLaptop) {
+    if (stylesLaptop && stylesLaptop.lineHeight) {
       const {
         lineHeight,
       } = stylesLaptop;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (stylesTablet) {
+    if (stylesTablet && stylesTablet.lineHeight) {
       const {
         lineHeight,
       } = stylesTablet;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (stylesMobile) {
+    if (stylesMobile && stylesMobile.lineHeight) {
       const {
         lineHeight,
       } = stylesMobile;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (styles) {
+    if (styles && styles.lineHeight) {
       const {
         lineHeight,
       } = styles;
@@ -289,49 +355,85 @@ const P = styled.p.attrs<PI>(
     }
     return 'normal';
   }};
-    margin: ${({
+    margin-bottom: ${({
     styles,
-    stylesLaptop,
     stylesMobile,
     stylesTablet,
+    stylesLaptop,
   }) => {
-    if (stylesLaptop) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesLaptop;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesLaptop && stylesLaptop.marginBottom) {
+      return `${stylesLaptop.marginBottom}px`;
     }
-    if (stylesTablet) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesTablet;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesTablet && stylesTablet.marginBottom) {
+      return `${stylesTablet.marginBottom}px`;
     }
-    if (stylesMobile) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesMobile;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesMobile && stylesMobile.marginBottom) {
+      return `${stylesMobile.marginBottom}px`;
     }
-    if (styles) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = styles;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (styles && styles.marginBottom) {
+      return `${styles.marginBottom}px`;
     }
-    return 0;
+    return '0px';
+  }};
+    margin-left: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+    stylesLaptop,
+  }) => {
+    if (stylesLaptop && stylesLaptop.marginLeft) {
+      return `${stylesLaptop.marginLeft}px`;
+    }
+    if (stylesTablet && stylesTablet.marginLeft) {
+      return `${stylesTablet.marginLeft}px`;
+    }
+    if (stylesMobile && stylesMobile.marginLeft) {
+      return `${stylesMobile.marginLeft}px`;
+    }
+    if (styles && styles.marginLeft) {
+      return `${styles.marginLeft}px`;
+    }
+    return '0px';
+  }};
+    margin-right: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+    stylesLaptop,
+  }) => {
+    if (stylesLaptop && stylesLaptop.marginRight) {
+      return `${stylesLaptop.marginRight}px`;
+    }
+    if (stylesTablet && stylesTablet.marginRight) {
+      return `${stylesTablet.marginRight}px`;
+    }
+    if (stylesMobile && stylesMobile.marginRight) {
+      return `${stylesMobile.marginRight}px`;
+    }
+    if (styles && styles.marginRight) {
+      return `${styles.marginRight}px`;
+    }
+    return '0px';
+  }};
+    margin-top: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+    stylesLaptop,
+  }) => {
+    if (stylesLaptop && stylesLaptop.marginTop) {
+      return `${stylesLaptop.marginTop}px`;
+    }
+    if (stylesTablet && stylesTablet.marginTop) {
+      return `${stylesTablet.marginTop}px`;
+    }
+    if (stylesMobile && stylesMobile.marginTop) {
+      return `${stylesMobile.marginTop}px`;
+    }
+    if (styles && styles.marginTop) {
+      return `${styles.marginTop}px`;
+    }
+    return '0px';
   }};
     text-align: ${({
     styles,
@@ -348,7 +450,7 @@ const P = styled.p.attrs<PI>(
     if (stylesMobile && stylesMobile.textAlign) {
       return stylesMobile.textAlign;
     }
-    if (styles && styles.fontSize) {
+    if (styles && styles.textAlign) {
       return styles.textAlign;
     }
     return 'left';
@@ -386,31 +488,31 @@ const P = styled.p.attrs<PI>(
     stylesMobile,
     stylesTablet,
   }) => {
-    if (stylesLaptopL) {
+    if (stylesLaptopL && stylesLaptopL.lineHeight) {
       const {
         lineHeight,
       } = stylesLaptopL;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (stylesLaptop) {
+    if (stylesLaptop && stylesLaptop.lineHeight) {
       const {
         lineHeight,
       } = stylesLaptop;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (stylesTablet) {
+    if (stylesTablet && stylesTablet.lineHeight) {
       const {
         lineHeight,
       } = stylesTablet;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (stylesMobile) {
+    if (stylesMobile && stylesMobile.lineHeight) {
       const {
         lineHeight,
       } = stylesMobile;
       return `${lineHeight ? `${lineHeight}rem` : 'normal'}`;
     }
-    if (styles) {
+    if (styles && styles.lineHeight) {
       const {
         lineHeight,
       } = styles;
@@ -418,59 +520,101 @@ const P = styled.p.attrs<PI>(
     }
     return 'normal';
   }};
-    margin: ${({
+    margin-bottom: ${({
     styles,
-    stylesLaptop,
-    stylesLaptopL,
     stylesMobile,
     stylesTablet,
+    stylesLaptop,
+    stylesLaptopL,
   }) => {
-    if (stylesLaptopL) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesLaptopL;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesLaptopL && stylesLaptopL.marginBottom) {
+      return `${stylesLaptopL.marginBottom}px`;
     }
-    if (stylesLaptop) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesLaptop;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesLaptop && stylesLaptop.marginBottom) {
+      return `${stylesLaptop.marginBottom}px`;
     }
-    if (stylesTablet) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesTablet;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesTablet && stylesTablet.marginBottom) {
+      return `${stylesTablet.marginBottom}px`;
     }
-    if (stylesMobile) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = stylesMobile;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (stylesMobile && stylesMobile.marginBottom) {
+      return `${stylesMobile.marginBottom}px`;
     }
-    if (styles) {
-      const {
-        marginBottom,
-        marginLeft,
-        marginRight,
-        marginTop,
-      } = styles;
-      return `${marginTop || 0}px ${marginRight || 0}px ${marginBottom || 0}px ${marginLeft || 0}px`;
+    if (styles && styles.marginBottom) {
+      return `${styles.marginBottom}px`;
     }
-    return 0;
+    return '0px';
+  }};
+    margin-left: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+    stylesLaptop,
+    stylesLaptopL,
+  }) => {
+    if (stylesLaptopL && stylesLaptopL.marginLeft) {
+      return `${stylesLaptopL.marginLeft}px`;
+    }
+    if (stylesLaptop && stylesLaptop.marginLeft) {
+      return `${stylesLaptop.marginLeft}px`;
+    }
+    if (stylesTablet && stylesTablet.marginLeft) {
+      return `${stylesTablet.marginLeft}px`;
+    }
+    if (stylesMobile && stylesMobile.marginLeft) {
+      return `${stylesMobile.marginLeft}px`;
+    }
+    if (styles && styles.marginLeft) {
+      return `${styles.marginLeft}px`;
+    }
+    return '0px';
+  }};
+    margin-right: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+    stylesLaptop,
+    stylesLaptopL,
+  }) => {
+    if (stylesLaptopL && stylesLaptopL.marginRight) {
+      return `${stylesLaptopL.marginRight}px`;
+    }
+    if (stylesLaptop && stylesLaptop.marginRight) {
+      return `${stylesLaptop.marginRight}px`;
+    }
+    if (stylesTablet && stylesTablet.marginRight) {
+      return `${stylesTablet.marginRight}px`;
+    }
+    if (stylesMobile && stylesMobile.marginRight) {
+      return `${stylesMobile.marginRight}px`;
+    }
+    if (styles && styles.marginRight) {
+      return `${styles.marginRight}px`;
+    }
+    return '0px';
+  }};
+    margin-top: ${({
+    styles,
+    stylesMobile,
+    stylesTablet,
+    stylesLaptop,
+    stylesLaptopL,
+  }) => {
+    if (stylesLaptopL && stylesLaptopL.marginTop) {
+      return `${stylesLaptopL.marginTop}px`;
+    }
+    if (stylesLaptop && stylesLaptop.marginTop) {
+      return `${stylesLaptop.marginTop}px`;
+    }
+    if (stylesTablet && stylesTablet.marginTop) {
+      return `${stylesTablet.marginTop}px`;
+    }
+    if (stylesMobile && stylesMobile.marginTop) {
+      return `${stylesMobile.marginTop}px`;
+    }
+    if (styles && styles.marginTop) {
+      return `${styles.marginTop}px`;
+    }
+    return '0px';
   }};
     text-align: ${({
     styles,
@@ -491,7 +635,7 @@ const P = styled.p.attrs<PI>(
     if (stylesMobile && stylesMobile.textAlign) {
       return stylesMobile.textAlign;
     }
-    if (styles && styles.fontSize) {
+    if (styles && styles.textAlign) {
       return styles.textAlign;
     }
     return 'left';

@@ -1,47 +1,34 @@
 import * as React from 'react';
 
-import Modal from '#components/Modal';
+import Image from '#components/Image';
 
-import ModalProfilePicture from './ModalProfilePicture';
+import {
+  Container,
+  Link,
+} from './styles';
 
-interface ProfilePictureComponentI {
-  profilePicture: ProfilePictureI;
+interface ProfilePictureContainerI {
+  id: string;
+  profilePicture: ProfilePictureI,
 }
 
 const ProfilePicture = ({
-  profilePicture,
-}: ProfilePictureComponentI) => {
-  const [openModal, setOpenModal] = React.useState<boolean>(false);
-  const handleClose = () => {
-    setOpenModal(false);
-  };
-  const switchCurrent = () => {};
-  return (
-    <div
-      data-testid='profilePicture'
+  id,
+  profilePicture: {
+    cropedImage,
+    pendingImage,
+  },
+}: ProfilePictureContainerI) => (
+  <Container>
+    <Link
+      to={`/image/${id}`}
     >
-      <button
-        data-testid='profilePictureButton'
-        onClick={() => switchCurrent()}
+      <Image
+        original={cropedImage.signedUrl}
+        pending={pendingImage.signedUrl}
       />
-      <button
-        onClick={() => setOpenModal((nextState) => !nextState)}
-      >
-        <img
-          alt='profile picture'
-          src={profilePicture.originalImage.signedUrl}
-        />
-      </button>
-      <Modal.Portal
-        open={openModal}
-        handleClose={handleClose}
-      >
-        <ModalProfilePicture
-          profilePicture={profilePicture}
-        />
-      </Modal.Portal>
-    </div>
-  );
-};
+    </Link>
+  </Container>
+);
 
 export default ProfilePicture;

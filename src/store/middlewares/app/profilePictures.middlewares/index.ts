@@ -34,16 +34,17 @@ const errorProfilePictures: Middleware = (
 };
 
 const fetchProfilePictures: Middleware = (
-  { dispatch },
+  { dispatch, getState },
 ) => (
   next,
 ) => (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === PROFILE_PICTURES_FETCH) {
+  if (action.type === PROFILE_PICTURES_FETCH && !getState().profilePictures.end) {
     dispatch(setProfilePictures({
       status: 'fetching',
+      profilePictures: getState().profilePictures.profilePictures,
     }));
     dispatch(
       apiRequest(
@@ -51,13 +52,16 @@ const fetchProfilePictures: Middleware = (
         'GET',
         endPoints.PROFILE_PICTURE,
         PROFILE_PICTURES,
+        undefined,
+        undefined,
+        getState().profilePictures.page + 1,
       ),
     );
   }
 };
 
 const successProfilePictures: Middleware = (
-  { dispatch },
+  { dispatch, getState },
 ) => (
   next,
 ) => (
@@ -65,10 +69,24 @@ const successProfilePictures: Middleware = (
 ) => {
   next(action);
   if (action.type === `${PROFILE_PICTURES} ${API_SUCCESS}`) {
-    dispatch(setProfilePictures({
-      status: 'success',
-      profilePictures: action.payload ? action.payload.data : [],
-    }));
+    if (action.payload) {
+      const newProfilePictures = action.payload.data;
+      const normalizeData = newProfilePictures.map(
+        ({ id, ...rest }: ProfilePictureI) => ({
+          [id]: { ...rest },
+        }),
+      );
+      const newObject = Object.assign({}, ...normalizeData);
+      dispatch(setProfilePictures({
+        page: getState().profilePictures.page + 1,
+        end: newProfilePictures.length < 20,
+        status: 'success',
+        profilePictures: {
+          ...getState().profilePictures.profilePictures,
+          ...newObject,
+        },
+      }));
+    }
     dispatch(setLoader(false));
   }
 };

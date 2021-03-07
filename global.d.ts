@@ -79,11 +79,12 @@ declare global {
       payload?: {
         data: any;
         meta?: {
-          entity?: Entity;
-          method?: Method;
-          url?: string;
           confirmToken?: string;
           contentType?: string;
+          entity?: Entity;
+          method?: Method;
+          page?: number;
+          url?: string;
         }
       }
     }
@@ -108,8 +109,10 @@ declare global {
         }
       };
       profilePictures: {
+        end: boolean;
+        page: number;
+        profilePictures: { [name: string]: ProfilePictureI };
         status: FormStatus;
-        profilePictures: ProfilePictureI[];
       }
       resetPassword: {
         status: FormStatus;

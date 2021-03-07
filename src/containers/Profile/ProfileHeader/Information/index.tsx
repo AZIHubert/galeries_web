@@ -47,11 +47,16 @@ const Information = () => {
         color='primary'
         fontWeight='bold'
         styles={{
-          fontSize: 2,
+          fontSize: 1.8,
+          marginTop: 20,
           textAlign: 'center',
+        }}
+        stylesMobile={{
+          fontSize: 2,
         }}
         stylesTablet={{
           fontSize: 2.4,
+          marginTop: 0,
           textAlign: 'left',
         }}
       >

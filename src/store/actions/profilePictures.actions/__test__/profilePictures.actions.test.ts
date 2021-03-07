@@ -10,6 +10,7 @@ import {
   PROFILE_PICTURES_SET,
   UI_SET,
   fetchProfilePictures,
+  resetProfilePictures,
   setLoader,
   setProfilePictures,
 } from '#store/actions';
@@ -27,12 +28,28 @@ describe('profilePictures', () => {
       };
       expect(fetchProfilePictures()).toEqual(expectedAction);
     });
+    it('should create a reset action', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            end: false,
+            status: 'pending',
+            profilePictures: {},
+            page: 1,
+          },
+        },
+        type: PROFILE_PICTURES_SET,
+      };
+      expect(resetProfilePictures()).toEqual(expectedAction);
+    });
     it('should create a set action', () => {
       const data = {
-        profilePictures: [],
+        end: true,
+        profilePictures: {},
         status: 'pending',
+        page: 4,
       } as {
-        profilePictures: ProfilePictureI[];
+        profilePictures: { [name: string]: ProfilePictureI };
         status: store.FormStatus;
       };
       const expectedAction = {

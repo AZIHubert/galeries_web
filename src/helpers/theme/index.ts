@@ -37,6 +37,36 @@ const theme: DefaultTheme = {
       },
     },
   },
+  profile: {
+    large: {
+      cropedImage: {
+        size: 240,
+        margin: 12,
+        numByRow: 4,
+      },
+    },
+    medium: {
+      cropedImage: {
+        size: 230,
+        margin: 10,
+        numByRow: 4,
+      },
+    },
+    small: {
+      cropedImage: {
+        size: 180,
+        margin: 4,
+        numByRow: 3,
+      },
+    },
+    smallest: {
+      cropedImage: {
+        size: 100,
+        margin: 4,
+        numByRow: 3,
+      },
+    },
+  },
   transition: {
     default: '0.3s',
     quick: '0.1s',
