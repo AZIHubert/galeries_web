@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const SpinnerContainer = styled.div`
+const SpinnerContainer = styled.div.attrs(
+  () => ({
+    'data-testid': 'spinner',
+  }),
+)`
   height: 60px;
   left: 50%;
   position: absolute;

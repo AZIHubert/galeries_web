@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-const InnerContainer = styled.div`
+const InnerContainer = styled.div.attrs(() => ({
+  'data-testid': 'container',
+}))`
   display: inline-flex;
   flex-wrap: wrap;
   margin: auto;

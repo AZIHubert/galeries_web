@@ -12,6 +12,14 @@ const ImageContainer = styled.div`
   width: ${({ theme }) => (
     `${theme.profile.smallest.cropedImage.size - theme.profile.smallest.cropedImage.margin * 2}px`
   )};
+  & .button {
+    opacity: 0;
+    transform: scale(0);
+  }
+  &:hover .button {
+    opacity: 1;
+    transform: scale(1);
+  }
   @media ${mediaQueries.mobileL} {
     height: ${({ theme }) => (
     `${theme.profile.small.cropedImage.size - theme.profile.small.cropedImage.margin * 2}px`

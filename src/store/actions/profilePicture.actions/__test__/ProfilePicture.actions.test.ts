@@ -45,7 +45,7 @@ describe('profilePicture', () => {
       const setData = {
         status: 'pending',
       } as {
-        status?: store.FormStatus;
+        status?: store.Status;
       };
       const expectedAction = {
         payload: { data: setData },

@@ -28,7 +28,7 @@ export const resetSendConfirmation: () => store.ActionI = () => ({
 export const setSendConfirmation: (
   data: {
     errors?: form.SendConfirmationI;
-    status?: store.FormStatus;
+    status?: store.Status;
   },
 ) => store.ActionI = (
   data,

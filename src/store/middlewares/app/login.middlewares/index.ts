@@ -65,7 +65,11 @@ const fetchLogin: Middleware = (
 ) => {
   next(action);
   if (action.type === LOGIN_FETCH) {
-    dispatch(setLogin({ status: 'fetching' }));
+    dispatch(
+      setLogin({
+        status: 'posting',
+      }),
+    );
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,

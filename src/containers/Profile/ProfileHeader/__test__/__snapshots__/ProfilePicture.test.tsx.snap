@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileHeader renders without crashing 1`] = `
+<div
+  className="sc-fodVxV jOKCT"
+>
+  <div
+    className="sc-crrsfI kYMcVJ"
+  >
+    <div
+      className="sc-kstrdz jajutf"
+    >
+      <div
+        className="sc-bqyKva jsVMnk"
+        data-testid="imageContainer"
+      >
+        <div
+          className="sc-jrAGrp gTHjHZ"
+          style={
+            Object {
+              "backgroundColor": "none",
+              "backgroundImage": "none",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-fubCfw fSjqqM"
+  >
+    <p
+      className="sc-iBPRYJ dENUWI"
+      color="primary"
+      fontStyle="normal"
+      fontWeight="bold"
+    >
+      user name
+    </p>
+    <input
+      accept="image/*"
+      className="sc-pFZIQ iDWbpF"
+      data-testid="inputFile"
+      onChange={[Function]}
+      type="file"
+    />
+    <button
+      className="sc-bdfBwQ bpoOet"
+      onClick={[Function]}
+    >
+      Add a profile picture
+    </button>
+    <button
+      className="sc-bdfBwQ fsgol"
+      onClick={[Function]}
+    >
+      Edit your info
+    </button>
+  </div>
+</div>
+`;

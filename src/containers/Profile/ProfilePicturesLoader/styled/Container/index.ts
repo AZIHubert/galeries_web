@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.div.attrs(() => ({
+  'data-testid': 'container',
+}))`
   align-items: center;
   bottom: 0;
   display: flex;

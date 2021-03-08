@@ -2,7 +2,7 @@ import { SEND_CONFIRMATION_SET } from '#store/actions';
 
 interface InitialStateI {
   errors: form.SendConfirmationI;
-  status: store.FormStatus;
+  status: store.Status;
 }
 
 const initialState: InitialStateI = {

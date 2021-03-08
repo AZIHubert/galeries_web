@@ -18,8 +18,8 @@ import {
 
 const ProfilePicture = () => {
   const {
-    isFetching,
     isPosting,
+    isPutting,
     profilePicture,
   } = React.useContext(ProfilePictureContext);
 
@@ -27,16 +27,17 @@ const ProfilePicture = () => {
     <Container>
       <InnerContainer>
         <ImageContainer
-          isPending={isFetching || isPosting}
+          isPending={isPosting || isPutting}
         >
           <Image
+            alt='current profile picture'
             original={profilePicture.croped}
             pending={profilePicture.pending}
           />
         </ImageContainer>
         <CSSTransition
           classNames='fade'
-          in={isFetching || isPosting}
+          in={isPosting || isPutting}
           timeout={300}
           unmountOnExit
         >

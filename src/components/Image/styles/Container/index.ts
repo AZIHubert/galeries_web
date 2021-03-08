@@ -13,16 +13,17 @@ interface ContainerI {
   uri?: string;
 }
 
-const Container = styled.div<ContainerI>`
-  background-image: ${({ uri }) => (
-    uri ? `url("${uri}")` : 'none'
-  )};
-  background-color: ${({
+const Container = styled.div.attrs<ContainerI>(
+  ({
     theme,
     uri,
-  }) => (
-    uri ? theme.colors.secondary : 'none'
-  )};
+  }) => ({
+    style: {
+      backgroundImage: uri ? `url("${uri}")` : 'none',
+      backgroundColor: uri ? theme.colors.secondary : 'none',
+    },
+  }),
+)<ContainerI>`
   width: 100%;
   height: 100%;
   @media (prefers-reduced-motion: no-preference) {

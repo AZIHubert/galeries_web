@@ -56,7 +56,7 @@ const Routes = () => {
       </CSSTransition>
       <CSSTransition
         classNames='fade'
-        in={allowRedirect}
+        in={allowRedirect && !init}
         timeout={300}
         unmountOnExit
       >

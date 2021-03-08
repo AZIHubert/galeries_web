@@ -63,7 +63,7 @@ describe('signin', () => {
         status: 'pending',
       } as {
         errors?: form.SigninI
-        status?: store.FormStatus;
+        status?: store.Status;
       };
       const expectedAction = {
         payload: {

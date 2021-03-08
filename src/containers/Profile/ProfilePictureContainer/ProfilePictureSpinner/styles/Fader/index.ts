@@ -8,7 +8,7 @@ const Fader = styled.div`
   &.fade-enter-active {
     opacity: 1;
     transform: translateY(0px) scale(1);
-    transition: 100ms;
+    transition: ${({ theme }) => theme.transition.default};
   }
   &.fade-exit {
     display: none;

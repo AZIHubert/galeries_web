@@ -59,7 +59,7 @@ describe('login', () => {
         status: 'pending',
       } as {
         errors?: form.LoginI,
-        status?: store.FormStatus
+        status?: store.Status
       };
       const exptectedAction = {
         type: LOGIN_SET,

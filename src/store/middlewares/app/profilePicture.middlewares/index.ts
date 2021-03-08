@@ -59,7 +59,11 @@ const putProfilePicture: Middleware = (
 ) => {
   next(action);
   if (action.type === PROFILE_PICTURE_PUT) {
-    dispatch(setProfilePicture({ status: 'put' }));
+    dispatch(
+      setProfilePicture({
+        status: 'putting',
+      }),
+    );
     dispatch(
       apiRequest(
         null,
@@ -84,7 +88,11 @@ const postProfilePicture: Middleware = (
 ) => {
   next(action);
   if (action.type === PROFILE_PICTURE_POST) {
-    dispatch(setProfilePicture({ status: 'fetching' }));
+    dispatch(
+      setProfilePicture({
+        status: 'posting',
+      }),
+    );
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,

@@ -2,7 +2,7 @@ import { PROFILE_PICTURES_SET } from '#store/actions';
 
 interface InitialStateI {
   end: boolean;
-  status: store.FormStatus;
+  status: store.Status;
   profilePictures: ProfilePictureI[];
   page: number;
 }

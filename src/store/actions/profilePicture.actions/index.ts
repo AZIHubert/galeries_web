@@ -35,7 +35,7 @@ export const resetProfilePicture: () => store.ActionI = () => ({
 
 export const setProfilePicture: (
   data: {
-    status?: store.FormStatus
+    status?: store.Status
     current?: {
       croped: string;
       original?: string;

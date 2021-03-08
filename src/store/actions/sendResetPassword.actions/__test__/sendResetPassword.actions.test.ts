@@ -54,7 +54,7 @@ describe('sendResetPassword', () => {
         status: 'pending',
       } as {
         errors?: form.SendResetPasswordI;
-        status?: store.FormStatus;
+        status?: store.Status;
       };
       const expectedAction = {
         payload: {

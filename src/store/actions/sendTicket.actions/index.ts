@@ -28,7 +28,7 @@ export const resetSendTicket: () => store.ActionI = () => ({
 export const setSendTicket: (
   data: {
     errors?: form.SendTicketI;
-    status?: store.FormStatus;
+    status?: store.Status;
   }
 ) => store.ActionI = (
   data,

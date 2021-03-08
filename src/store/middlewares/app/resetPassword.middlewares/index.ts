@@ -61,7 +61,11 @@ const fetchResetPassword: Middleware = (
 ) => {
   next(action);
   if (action.type === RESET_PASSWORD_FETCH) {
-    dispatch(setResetPassword({ status: 'fetching' }));
+    dispatch(
+      setResetPassword({
+        status: 'putting',
+      }),
+    );
     dispatch(
       apiRequest(
         {

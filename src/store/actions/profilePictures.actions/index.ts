@@ -22,7 +22,7 @@ export const resetProfilePictures: () => store.ActionI = () => ({
 export const setProfilePictures: (
   data: {
     end?: boolean;
-    status?: store.FormStatus,
+    status?: store.Status,
     profilePictures?: { [name: string]: ProfilePictureI },
     page?: number,
   },

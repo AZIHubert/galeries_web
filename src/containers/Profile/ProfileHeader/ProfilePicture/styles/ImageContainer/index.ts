@@ -4,7 +4,11 @@ interface ImageContainerI {
   isPending?: boolean;
 }
 
-const ImageContainer = styled.div<ImageContainerI>`
+const ImageContainer = styled.div.attrs<ImageContainerI>(
+  () => ({
+    'data-testid': 'imageContainer',
+  }),
+)<ImageContainerI>`
   opacity: ${({ isPending }) => (isPending ? 0.1 : 1)};
   position: absolute;
   right: 0;

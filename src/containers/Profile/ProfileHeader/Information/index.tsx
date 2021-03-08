@@ -7,6 +7,8 @@ import {
 import Button from '#components/Button';
 import Text from '#components/Text';
 
+import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+
 import { postProfilePicture } from '#store/actions';
 import { userSelector } from '#store/selectors';
 
@@ -16,6 +18,9 @@ import {
 } from './styles';
 
 const Information = () => {
+  const {
+    isPosting,
+  } = React.useContext(ProfilePictureContext);
   const dispatch = useDispatch();
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const user = useSelector(userSelector);
@@ -23,12 +28,17 @@ const Information = () => {
 
   React.useEffect(() => {
     if (selectedFile) {
-      const formData = new FormData();
-      formData.append('image', selectedFile, selectedFile.name);
-      dispatch(postProfilePicture(formData));
+      if (!isPosting) {
+        const formData = new FormData();
+        formData.append('image', selectedFile, selectedFile.name);
+        dispatch(postProfilePicture(formData));
+      }
       setSelectedFile(null);
     }
-  }, [selectedFile]);
+  }, [
+    selectedFile,
+    isPosting,
+  ]);
 
   const addFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const element = e.target as HTMLInputElement;
@@ -38,7 +48,9 @@ const Information = () => {
     }
   };
   const inputClick = () => {
-    if (fileInputRef.current) { fileInputRef.current.click(); }
+    if (fileInputRef.current && !isPosting) {
+      fileInputRef.current.click();
+    }
   };
 
   return (

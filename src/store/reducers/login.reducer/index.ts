@@ -2,7 +2,7 @@ import { LOGIN_SET } from '#store/actions';
 
 interface InitialStateI {
   errors: form.LoginI,
-  status: store.FormStatus,
+  status: store.Status,
 }
 
 const initialState: InitialStateI = {

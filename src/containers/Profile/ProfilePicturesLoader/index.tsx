@@ -14,7 +14,7 @@ import {
 
 const ProfilePicturesLoader = () => {
   const profilePicturesStatus = useSelector(profilePicturesStatusSelector);
-  const isFetching = profilePicturesStatus === 'fetching';
+  const isFetching = React.useMemo(() => profilePicturesStatus === 'fetching', [profilePicturesStatus]);
 
   return (
     <CSSTransition

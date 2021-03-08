@@ -56,7 +56,7 @@ describe('sendTicket', () => {
         status: 'pending',
       } as {
         errors?: form.SendTicketI;
-        status?: store.FormStatus;
+        status?: store.Status;
       };
       const expectedAction = {
         payload: {

@@ -27,7 +27,7 @@ export const resetLogin: () => store.ActionI = () => ({
 export const setLogin: (
   data: {
     errors?: form.LoginI;
-    status?: store.FormStatus;
+    status?: store.Status;
   },
 ) => store.ActionI = (
   data,

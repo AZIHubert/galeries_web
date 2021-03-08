@@ -13,12 +13,12 @@ import {
 } from './styles';
 
 const ProfilePictureSpinner = () => {
-  const { isFetching } = React.useContext(ProfilePictureContext);
+  const { isPosting } = React.useContext(ProfilePictureContext);
 
   return (
     <CSSTransition
       classNames='fade'
-      in={isFetching}
+      in={isPosting}
       timeout={300}
       unmountOnExit
     >

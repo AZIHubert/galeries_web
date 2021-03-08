@@ -50,7 +50,7 @@ describe('profilePictures', () => {
         page: 4,
       } as {
         profilePictures: { [name: string]: ProfilePictureI };
-        status: store.FormStatus;
+        status: store.Status;
       };
       const expectedAction = {
         payload: {

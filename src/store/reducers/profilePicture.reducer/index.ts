@@ -1,7 +1,7 @@
 import { PROFILE_PICTURE_SET } from '#store/actions';
 
 interface InitialStateI {
-  status: store.FormStatus;
+  status: store.Status;
   current: {
     croped: string;
     original: string;

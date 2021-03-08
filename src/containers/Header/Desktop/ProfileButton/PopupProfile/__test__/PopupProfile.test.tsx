@@ -31,13 +31,18 @@ const Container = ({
   </Provider>
 );
 
+const mockedHandleClose = jest.fn();
+const mockedHandleOpenTicket = jest.fn();
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as typeof ReactRouterDOM,
   Link: jest.fn(({ children }) => children),
 }));
-
-const mockedHandleClose = jest.fn();
-const mockedHandleOpenTicket = jest.fn();
+jest.mock('#components/Image', () => ({
+  __esModule: true,
+  A: true,
+  default: () => <div></div>,
+}));
 
 describe('PopupProfile', () => {
   it('should trigger handleOpenTicket and handleClose when clicking on ticket button', () => {

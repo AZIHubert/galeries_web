@@ -55,7 +55,7 @@ describe('sendConfirmation', () => {
         status: 'pending',
       } as {
         errors?: form.SendConfirmationI;
-        status?: store.FormStatus;
+        status?: store.Status;
       };
       const expectedAtion = {
         payload: {

@@ -68,11 +68,12 @@ declare global {
       typeof SIGNIN |
       typeof USER_SET;
 
-    type FormStatus =
+    type Status =
       'error' |
       'fetching' |
       'pending' |
-      'put' |
+      'posting' |
+      'putting' |
       'success';
 
     interface ActionI {
@@ -98,12 +99,12 @@ declare global {
 
     interface ReducersI {
       login: {
-        status: FormStatus;
+        status: Status;
         errors: form.LoginI;
       };
       notification: NotificationI;
       profilePicture: {
-        status: FormStatus;
+        status: Status;
         current: {
           croped: string;
           original: string;
@@ -114,26 +115,26 @@ declare global {
         end: boolean;
         page: number;
         profilePictures: { [name: string]: ProfilePictureI };
-        status: FormStatus;
+        status: Status;
       }
       resetPassword: {
-        status: FormStatus;
+        status: Status;
         errors: form.ResetPasswordI
       };
       sendConfirmation: {
-        status: FormStatus;
+        status: Status;
         errors: form.SendConfirmationI;
       };
       sendResetPassword: {
-        status: FormStatus;
+        status: Status;
         errors: form.SendResetPasswordI;
       };
       sendTicket: {
-        status: FormStatus;
+        status: Status;
         errors: form.SendTicketI;
       }
       signin: {
-        status: FormStatus;
+        status: Status;
         errors: SigninI;
       };
       ui: {
