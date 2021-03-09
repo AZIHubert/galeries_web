@@ -8,6 +8,7 @@ import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
 
 import themeColor from '#helpers/theme';
 
+import DeleteButton from './DeleteButton';
 import PutButton from './PutButton';
 
 import {
@@ -37,6 +38,9 @@ const ProfilePicture = ({
   return (
     <Container>
       <PutButton
+        id={id}
+      />
+      <DeleteButton
         id={id}
       />
       <Opacity
