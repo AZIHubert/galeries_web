@@ -8,3 +8,4 @@ export { default as LogoGaleries } from './LogoGaleries';
 export { default as Notification } from './Notification';
 export { default as NotificationHover } from './NotificationHover';
 export { default as Ticket } from './Ticket';
+export { default as UpArrow } from './UpArrow';

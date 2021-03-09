@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ProfilePictureProvider } from '#contexts/ProfilePictureContext';
 
 import Footer from '#containers/Footer';
+import ScrollToTop from '#components/ScrollToTop';
 
 import ProfileHeader from './ProfileHeader';
 import ProfilePictureContainer from './ProfilePictureContainer';
@@ -16,6 +17,7 @@ const Profile = () => (
       <ProfileHeader />
       <ProfilePictureContainer />
       <ProfilePicturesLoader />
+      <ScrollToTop />
       <Footer />
     </Container>
   </ProfilePictureProvider>

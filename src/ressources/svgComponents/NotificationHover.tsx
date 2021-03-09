@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const StyledSVG = styled.svg`
     height: 100%;
     & path {
-        fill: ${({ theme }) => theme.colors.primary}
+        fill: ${({ theme }) => theme.colors.secondary}
     }
 `;
 

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
+import smoothscroll from 'smoothscroll-polyfill';
 import { Reset } from 'styled-reset';
 
 import Notification from '#containers/Notification';
@@ -16,6 +17,8 @@ import GlobalStyle from '#helpers/GlobalStyle';
 import Routes from '#src/Routes';
 
 import store from '#store/index';
+
+smoothscroll.polyfill();
 
 const App = () => (
   <Provider store={store} >

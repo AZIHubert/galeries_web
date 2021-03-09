@@ -84,7 +84,7 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
 
   // Set into local state profilePicturesSelect
   // everytime request success
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (profilePicturesStatus === 'success') {
       setProfilePictures(ProfilePicturesSelect);
     }
@@ -126,7 +126,7 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
   // when timer is done
   // and new profile picture request === success
   // upload profilePicture/profilePictures local state
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (!waitingTimer && profilePictureStatus === 'success') {
       setProfilePicture(profilePictureSelect);
       setProfilePictures(ProfilePicturesSelect);
