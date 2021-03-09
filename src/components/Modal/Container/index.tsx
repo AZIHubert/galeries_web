@@ -8,22 +8,28 @@ import {
 
 interface ModalContainerI {
   containerTestId?: string;
+  variant?: 'default' | 'danger';
   title?: React.ReactNode;
 }
 
 const ModalContainer: React.FC<ModalContainerI> = ({
   children,
   containerTestId,
+  variant = 'default',
   title,
 }) => (
   <Container
     testId={containerTestId}
   >
-    <InnerContainer>
+    <InnerContainer
+      variant={variant}
+    >
       {title}
       {children}
     </InnerContainer>
-    <Background />
+    <Background
+      variant={variant}
+    />
   </Container>
 );
 

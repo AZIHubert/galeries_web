@@ -4,6 +4,7 @@ import {
   API_ERROR,
   API_SUCCESS,
   PROFILE_PICTURE,
+  PROFILE_PICTURE_DELETE,
   PROFILE_PICTURE_POST,
   PROFILE_PICTURE_PUT,
   apiRequest,
@@ -19,6 +20,33 @@ import {
 } from '#store/constant';
 
 import { selectProfilPicture } from '#store/helpers';
+
+const deleteProfilePicture: Middleware = (
+  { dispatch },
+) => (
+  next,
+) => (
+  action: store.ActionI,
+) => {
+  next(action);
+  if (action.type === PROFILE_PICTURE_DELETE) {
+    dispatch(setProfilePicture({
+      status: 'delete',
+    }));
+    dispatch(
+      apiRequest(
+        null,
+        'DELETE',
+        endPoints.PROFILE_PICTURE,
+        PROFILE_PICTURE,
+        undefined,
+        undefined,
+        undefined,
+        action.payload ? action.payload.data.id : undefined,
+      ),
+    );
+  }
+};
 
 const errorProfilePicture: Middleware = (
   { dispatch },
@@ -118,28 +146,66 @@ const successProfilePicture: Middleware = (
 ) => {
   next(action);
   if (action.type === `${PROFILE_PICTURE} ${API_SUCCESS}`) {
-    if (action.payload && action.payload.data) {
-      const {
-        id,
-        ...rest
-      }: ProfilePictureI = action.payload.data;
-      dispatch(setUser({
-        ...getState().user,
-        currentProfilePictureId: id,
-        currentProfilePicture: { ...rest },
-      }));
-      dispatch(setProfilePictures({
-        profilePictures: {
-          [id]: { ...rest },
-          ...getState().profilePictures.profilePictures,
-        },
-      }));
-    } else {
-      dispatch(setUser({
-        ...getState().user,
-        currentProfilePictureId: null,
-        currentProfilePicture: null,
-      }));
+    if (action.payload) {
+      if (action.payload.data.type === 'POST') {
+        const {
+          id,
+          ...rest
+        }: ProfilePictureI = action.payload.data.profilePicture;
+        dispatch(setUser({
+          ...getState().user,
+          currentProfilePictureId: id,
+          currentProfilePicture: { ...rest },
+        }));
+        dispatch(setProfilePictures({
+          profilePictures: {
+            [id]: { ...rest },
+            ...getState().profilePictures.profilePictures,
+          },
+        }));
+      }
+      if (action.payload.data.type === 'PUT') {
+        if (action.payload.data.profilePicture) {
+          const {
+            id,
+            ...rest
+          }: ProfilePictureI = action.payload.data.profilePicture;
+          dispatch(setUser({
+            ...getState().user,
+            currentProfilePictureId: id,
+            currentProfilePicture: { ...rest },
+          }));
+          dispatch(setProfilePictures({
+            profilePictures: {
+              [id]: { ...rest },
+              ...getState().profilePictures.profilePictures,
+            },
+          }));
+        } else {
+          dispatch(setUser({
+            ...getState().user,
+            currentProfilePictureId: null,
+            currentProfilePicture: null,
+          }));
+        }
+      }
+      if (action.payload.data.type === 'DELETE') {
+        const { currentProfilePictureId } = getState().user;
+        const newProfilePictures = { ...getState().profilePictures.profilePictures };
+        delete newProfilePictures[action.payload.data.id];
+        dispatch(setProfilePictures({
+          profilePictures: {
+            ...newProfilePictures,
+          },
+        }));
+        if (action.payload.data.id === currentProfilePictureId) {
+          dispatch(setUser({
+            ...getState().user,
+            currentProfilePictureId: null,
+            currentProfilePicture: null,
+          }));
+        }
+      }
     }
     const currentProfilePicture = selectProfilPicture(getState().user);
     dispatch(setProfilePicture({
@@ -151,6 +217,7 @@ const successProfilePicture: Middleware = (
 };
 
 export default [
+  deleteProfilePicture,
   errorProfilePicture,
   postProfilePicture,
   putProfilePicture,

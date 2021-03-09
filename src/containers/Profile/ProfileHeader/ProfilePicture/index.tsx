@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import BounceLoader from 'react-spinners/BounceLoader';
 import { CSSTransition } from 'react-transition-group';
 
@@ -7,6 +8,8 @@ import theme from '#helpers/theme';
 import Image from '#components/Image';
 
 import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+
+import { userSelector } from '#store/selectors';
 
 import {
   Container,
@@ -19,15 +22,25 @@ import {
 const ProfilePicture = () => {
   const {
     isPosting,
-    isPutting,
+    deletingImage,
+    puttingImage,
     profilePicture,
   } = React.useContext(ProfilePictureContext);
+
+  const user = useSelector(userSelector);
+
+  const isDeletingCurrentProfilePicture = () => {
+    if (user && !!deletingImage && user.currentProfilePictureId === deletingImage) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <Container>
       <InnerContainer>
         <ImageContainer
-          isPending={isPosting || isPutting}
+          isPending={isPosting || !!puttingImage || isDeletingCurrentProfilePicture()}
         >
           <Image
             alt='current profile picture'
@@ -37,7 +50,7 @@ const ProfilePicture = () => {
         </ImageContainer>
         <CSSTransition
           classNames='fade'
-          in={isPosting || isPutting}
+          in={isPosting || !!puttingImage || isDeletingCurrentProfilePicture()}
           timeout={300}
           unmountOnExit
         >

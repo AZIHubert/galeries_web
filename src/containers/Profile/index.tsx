@@ -9,16 +9,21 @@ import ProfileHeader from './ProfileHeader';
 import ProfilePictureContainer from './ProfilePictureContainer';
 import ProfilePicturesLoader from './ProfilePicturesLoader';
 
-import { Container } from './styles';
+import {
+  Body,
+  Container,
+} from './styles';
 
 const Profile = () => (
   <ProfilePictureProvider>
     <Container>
-      <ProfileHeader />
-      <ProfilePictureContainer />
-      <ProfilePicturesLoader />
-      <ScrollToTop />
+      <Body>
+        <ProfileHeader />
+        <ProfilePictureContainer />
+        <ProfilePicturesLoader />
+      </Body>
       <Footer />
+      <ScrollToTop />
     </Container>
   </ProfilePictureProvider>
 );

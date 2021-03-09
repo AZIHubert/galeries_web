@@ -21,8 +21,9 @@ const PutButton = ({
   id,
 }: PutButtonI) => {
   const {
+    deletingImage,
+    puttingImage,
     setPuttingImage,
-    isPutting,
   } = React.useContext(ProfilePictureContext);
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
@@ -34,8 +35,8 @@ const PutButton = ({
     return false;
   };
 
-  const onClick = () => {
-    if (!isPutting) {
+  const handleClick = () => {
+    if (!puttingImage && !deletingImage) {
       dispatch(putProfilePicture({ id }));
       setPuttingImage(id);
     }
@@ -44,7 +45,7 @@ const PutButton = ({
   return (
     <Container
       current={isCurrent()}
-      onClick={onClick}
+      onClick={handleClick}
     />
   );
 };

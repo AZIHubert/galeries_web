@@ -33,6 +33,7 @@ const ProfilePicture = ({
 }: ProfilePictureContainerI) => {
   const {
     puttingImage,
+    deletingImage,
   } = React.useContext(ProfilePictureContext);
 
   return (
@@ -44,7 +45,7 @@ const ProfilePicture = ({
         id={id}
       />
       <Opacity
-        isPutting={puttingImage === id}
+        isPutting={puttingImage === id || deletingImage === id}
       >
         <Link
           to={`/image/${id}`}
@@ -57,7 +58,7 @@ const ProfilePicture = ({
       </Opacity>
       <CSSTransition
         classNames='fade'
-        in={puttingImage === id}
+        in={puttingImage === id || deletingImage === id}
         timeout={300}
         unmountOnExit
       >

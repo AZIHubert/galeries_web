@@ -21,8 +21,8 @@ const Container = styled.button.attrs<ContainerI>(
   cursor: pointer;
   height: 25px;
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 15px;
+  top: 15px;
   transition: ${({ theme }) => theme.transition.default};
   width: 25px;
   z-index: 1;

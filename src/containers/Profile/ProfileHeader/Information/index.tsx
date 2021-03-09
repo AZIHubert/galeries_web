@@ -47,7 +47,7 @@ const Information = () => {
       element.value = '';
     }
   };
-  const inputClick = () => {
+  const handleClick = () => {
     if (fileInputRef.current && !isPosting) {
       fileInputRef.current.click();
     }
@@ -86,7 +86,7 @@ const Information = () => {
           marginBottom: 15,
           marginTop: 15,
         }}
-        onClick={inputClick}
+        onClick={handleClick}
         title='Add a profile picture'
       />
       <Button.Default

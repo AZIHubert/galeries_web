@@ -2,10 +2,17 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-const InnerContainer = styled.div`
+interface InnerContainerI {
+  variant?: 'default' | 'danger';
+}
+
+const InnerContainer = styled.div<InnerContainerI>`
   background-color: ${({ theme }) => theme.colors.secondary};
-  border: ${({ theme }) => (
-    `4px solid ${theme.colors.primary}`
+  border: ${({
+    variant,
+    theme,
+  }) => (
+    `4px solid ${variant === 'default' ? theme.colors.primary : theme.colors.danger}`
   )};
   border-radius: 20px 0;
   display: flex;
@@ -19,5 +26,9 @@ const InnerContainer = styled.div`
     padding: 35px 40px 25px 40px;
   }
 `;
+
+InnerContainer.defaultProps = {
+  variant: 'default',
+};
 
 export default InnerContainer;

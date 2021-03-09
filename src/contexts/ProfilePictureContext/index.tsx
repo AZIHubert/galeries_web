@@ -18,29 +18,33 @@ import {
   userSelector,
 } from '#store/selectors';
 
-export const ProfilePictureContext = React.createContext<{
-  profilePicture: {
-    croped: string;
-    original: string;
-    pending: string;
-  },
-  isPosting: boolean,
-  isPutting: boolean,
-  profilePictures: { [name: string]: ProfilePictureI }
-  puttingImage: string | null,
-  setPuttingImage: React.Dispatch<React.SetStateAction<string | null>>,
-}>({
+export const defaultValue = {
+  deletingImage: '',
   profilePicture: {
     croped: '',
     original: '',
     pending: '',
   },
   isPosting: false,
-  isPutting: false,
   profilePictures: {},
   puttingImage: null,
+  setDeletingImage: () => {},
   setPuttingImage: () => {},
-});
+};
+
+export const ProfilePictureContext = React.createContext<{
+  deletingImage: string | null;
+  profilePicture: {
+    croped: string;
+    original: string;
+    pending: string;
+  },
+  isPosting: boolean;
+  profilePictures: { [name: string]: ProfilePictureI }
+  puttingImage: string | null,
+  setDeletingImage: React.Dispatch<React.SetStateAction<string | null>>,
+  setPuttingImage: React.Dispatch<React.SetStateAction<string | null>>,
+}>(defaultValue);
 
 export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
   const dispatch = useDispatch();
@@ -62,10 +66,10 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
     [name: string]: ProfilePictureI
   }>({});
   const [puttingImage, setPuttingImage] = React.useState<string | null>(null);
+  const [deletingImage, setDeletingImage] = React.useState<string | null>(null);
   const [waitingTimer, setWaitingTimer] = React.useState<boolean>(false);
 
   const isPosting = React.useMemo(() => action === 'posting', [action]);
-  const isPutting = React.useMemo(() => action === 'putting', [action]);
 
   // fetch profile pictures
   // is profilepictures status is pending
@@ -90,6 +94,24 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
     }
   }, [profilePicturesStatus]);
 
+  // Refetch profile pictures
+  // if delete an image
+  // and profile pictures length < 10
+  // and it's not the end of fetching
+  React.useEffect(() => {
+    if (
+      !end
+      && profilePicturesStatus === 'success'
+      && Object.keys(ProfilePicturesSelect).length <= 10
+    ) {
+      dispatch(fetchProfilePictures());
+    }
+  }, [
+    end,
+    ProfilePicturesSelect,
+    profilePicturesStatus,
+  ]);
+
   // dispatch fetch profile pictures
   // if reach bottom
   // profilePictures status is not currently fetching
@@ -111,7 +133,11 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
 
   // trigger timer when upload new profile pictures
   React.useEffect(() => {
-    if (profilePictureStatus === 'posting' || profilePictureStatus === 'putting') {
+    if (
+      profilePictureStatus === 'posting'
+      || profilePictureStatus === 'putting'
+      || profilePictureStatus === 'delete'
+    ) {
       setWaitingTimer(true);
       timer.current = setTimeout(() => setWaitingTimer(false), 1000);
       setAction(profilePictureStatus);
@@ -127,11 +153,18 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
   // and new profile picture request === success
   // upload profilePicture/profilePictures local state
   React.useLayoutEffect(() => {
-    if (!waitingTimer && profilePictureStatus === 'success') {
+    if (
+      !waitingTimer
+      && (
+        profilePictureStatus === 'success'
+        || profilePictureStatus === 'error'
+      )
+    ) {
       setProfilePicture(profilePictureSelect);
       setProfilePictures(ProfilePicturesSelect);
       setPuttingImage(null);
       setAction(profilePictureStatus);
+      setDeletingImage(null);
     }
   }, [
     action,
@@ -142,11 +175,12 @@ export const ProfilePictureProvider: React.FC<{}> = ({ children }) => {
   return (
     <ProfilePictureContext.Provider
       value={{
+        deletingImage,
         isPosting,
-        isPutting,
         profilePicture,
         profilePictures,
         puttingImage,
+        setDeletingImage,
         setPuttingImage,
       }}
     >

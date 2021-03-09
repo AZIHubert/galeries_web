@@ -69,6 +69,7 @@ declare global {
       typeof USER_SET;
 
     type Status =
+      'delete' |
       'error' |
       'fetching' |
       'pending' |

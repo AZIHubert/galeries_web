@@ -12,6 +12,7 @@ interface StylesI {
 }
 
 interface DefaultI {
+  danger?: boolean;
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
   styles?: StylesI;
   stylesMobile?: StylesI;
@@ -25,6 +26,7 @@ interface DefaultI {
 }
 
 const Default = ({
+  danger = false,
   onClick,
   styles,
   stylesMobile,
@@ -37,6 +39,7 @@ const Default = ({
   variant = 'primary',
 }: DefaultI) => (
   <Button
+    danger={danger}
     styles={styles}
     stylesMobile={stylesMobile}
     stylesLaptop={stylesLaptop}

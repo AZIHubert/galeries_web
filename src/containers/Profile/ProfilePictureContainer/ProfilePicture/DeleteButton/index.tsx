@@ -1,49 +1,94 @@
 import * as React from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import themeColor from '#helpers/theme';
 
-const Container = styled.button.attrs(() => ({
-  className: 'button',
-}))`
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.danger};
-  border: none;
-  border-radius: 50%;
-  box-shadow: ${({ theme }) => theme.boxShadow};
-  cursor: pointer;
-  display: flex;
-  height: 25px;
-  justify-content: center;
-  left: 20px;
-  padding: 5px;
-  position: absolute;
-  top: 20px;
-  transition: ${({ theme }) => theme.transition.default};
-  width: 25px;
-  z-index: 1;
-  &:focus {
-    outline: none;
-  }
-`;
+import Modal from '#components/Modal';
+import Text from '#components/Text';
+import ButtonLol from '#components/Button';
+
+import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+
+import theme from '#helpers/theme';
+
+import { deleteProfilePicture } from '#store/actions';
+
+import {
+  Button,
+} from './styles';
 
 interface DeleteButtonI {
   id: string;
 }
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const DeleteButton = ({
   id,
 }: DeleteButtonI) => {
-  const handleClick = () => { console.log(id); };
+  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState<boolean>(false);
+  const {
+    deletingImage,
+    puttingImage,
+    setDeletingImage,
+  } = React.useContext(ProfilePictureContext);
+
+  const handleClick = () => {
+    if (!deletingImage && !puttingImage) {
+      setDeletingImage(id);
+      dispatch(deleteProfilePicture({ id }));
+      setOpen(false);
+    }
+  };
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+
+  console.log('from button', open);
 
   return (
-    <Container>
+    <Button>
       <AiOutlineDelete
-        color={themeColor.colors.secondary}
-        onClick={handleClick}
+        color={theme.colors.secondary}
+        onClick={handleOpen}
         size={20}
       />
-    </Container>
+      <Modal.Portal
+        handleClose={handleClose}
+        open={open}
+      >
+        <Modal.Container
+          variant='danger'
+        >
+          <Text
+            color='danger'
+            styles={{
+              fontSize: 1.3,
+              marginBottom: 40,
+            }}
+          >
+            Are you sure you want to delete this profile picture?
+          </Text>
+          <ButtonContainer>
+            <ButtonLol.Default
+              danger
+              title='yes'
+              variant='primary'
+              onClick={handleClick}
+            />
+            <ButtonLol.Default
+              danger
+              title='no'
+              variant='secondary'
+              onClick={handleClose}
+            />
+          </ButtonContainer>
+        </Modal.Container>
+      </Modal.Portal>
+    </Button>
   );
 };
 

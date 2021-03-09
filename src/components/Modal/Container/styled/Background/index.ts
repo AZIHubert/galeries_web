@@ -1,9 +1,18 @@
 import styled from 'styled-components';
 
-const Background = styled.div.attrs(() => ({
+interface BackgroundI {
+  variant?: 'default' | 'danger';
+}
+
+const Background = styled.div.attrs<BackgroundI>(() => ({
   className: 'background-container',
-}))`
-  background-color: ${({ theme }) => theme.colors.primary};
+}))<BackgroundI>`
+  background-color: ${({
+    variant,
+    theme,
+  }) => (
+    variant === 'default' ? theme.colors.primary : theme.colors.danger
+  )};
   border-radius: 20px 0;
   box-shadow: ${({ theme }) => theme.boxShadow};
   height: 100%;
@@ -12,5 +21,9 @@ const Background = styled.div.attrs(() => ({
   top: 15px;
   width: 100%;
 `;
+
+Background.defaultProps = {
+  variant: 'default',
+};
 
 export default Background;

@@ -12,6 +12,7 @@ interface StylesI {
 }
 
 interface ButtonI {
+  danger?: boolean;
   small?: boolean;
   styles?: StylesI;
   stylesMobile?: StylesI;
@@ -28,24 +29,38 @@ const Button = styled.button.attrs<ButtonI>(
   }),
 )<ButtonI>`
   background-color: ${({
+    danger,
     theme,
     variant,
-  }) => (
-    variant === 'primary'
-      ? theme.colors.primary
-      : theme.colors.secondary
-  )};
-  border: ${({ theme }) => `2px solid ${theme.colors.primary}`};
+  }) => {
+    const primary = danger ? theme.colors.danger : theme.colors.primary;
+    return (
+      variant === 'primary'
+        ? primary
+        : theme.colors.secondary
+    );
+  }};
+  border: ${({
+    danger,
+    theme,
+  }) => {
+    const primary = danger ? theme.colors.danger : theme.colors.primary;
+    return `2px solid ${primary}`;
+  }};
   border-radius: 3px;
   box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({
+    danger,
     theme,
     variant,
-  }) => (
-    variant === 'primary'
-      ? theme.colors.secondary
-      : theme.colors.primary
-  )};
+  }) => {
+    const primary = danger ? theme.colors.danger : theme.colors.primary;
+    return (
+      variant === 'primary'
+        ? theme.colors.secondary
+        : primary
+    );
+  }};
   cursor: pointer;
   font-size: ${({ small }) => (small ? '0.6rem' : '0.9rem')};
   margin-bottom: ${({ styles }) => {
@@ -82,21 +97,29 @@ const Button = styled.button.attrs<ButtonI>(
   }
   &:hover {
     background-color: ${({
+    danger,
     theme,
     variant,
-  }) => (
-    variant === 'primary'
-      ? theme.colors.secondary
-      : theme.colors.primary
-  )};
+  }) => {
+    const primary = danger ? theme.colors.danger : theme.colors.primary;
+    return (
+      variant === 'primary'
+        ? theme.colors.secondary
+        : primary
+    );
+  }};
     color: ${({
+    danger,
     theme,
     variant,
-  }) => (
-    variant === 'primary'
-      ? theme.colors.primary
-      : theme.colors.secondary
-  )};
+  }) => {
+    const primary = danger ? theme.colors.danger : theme.colors.primary;
+    return (
+      variant === 'primary'
+        ? primary
+        : theme.colors.secondary
+    );
+  }};
   }
   @media ${mediaQueries.mobileL} {
     margin-bottom: ${({
@@ -401,6 +424,7 @@ const Button = styled.button.attrs<ButtonI>(
 `;
 
 Button.defaultProps = {
+  danger: false,
   small: false,
   styles: {
     marginBottom: 0,
