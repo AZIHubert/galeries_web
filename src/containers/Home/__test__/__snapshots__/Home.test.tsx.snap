@@ -3,27 +3,27 @@
 exports[`Home renders without crashing 1`] = `
 Array [
   <header
-    className="sc-gGmIRh cArVnD"
+    className="sc-fbkhIv jLWcvt"
   >
     <div
-      className="sc-clsHhM gUjZbq"
+      className="sc-GqfZa iVkjdc"
     >
       <img
         alt="header logo"
-        className="sc-fbkhIv dCoSRu"
+        className="sc-fWSCIC fQXNKd"
         src={Object {}}
       />
       <div
-        className="sc-lcujXC byheIx"
+        className="sc-clsHhM cNTXtz"
       >
         <button
-          className="sc-jSgupP hhNyGu"
+          className="sc-jSgupP fBjfJW"
           onClick={[Function]}
         >
           Sign in
         </button>
         <button
-          className="sc-jSgupP eLROMp"
+          className="sc-jSgupP jCtSap"
           onClick={[Function]}
         >
           Log in
@@ -32,14 +32,14 @@ Array [
     </div>
   </header>,
   <div
-    className="sc-TmcTc lnDZoV"
+    className="sc-aemoO hba-DWJ"
   >
     <div
-      className="sc-GqfZa cEsNzG"
+      className="sc-dwfUOf hrOxTY"
     >
       <div>
         <p
-          className="sc-bdfBwQ caJqnu"
+          className="sc-bdfBwQ jBbmrr"
           color="black"
           fontStyle="normal"
           fontWeight="bold"
@@ -47,7 +47,7 @@ Array [
           Welcome to
         </p>
         <h1
-          className="sc-fWSCIC emgNKI"
+          className="sc-TmcTc iKQrsm"
         >
           <svg
             viewBox="0 0 356.12 51.77"
@@ -173,7 +173,7 @@ Array [
           </svg>
         </h1>
         <p
-          className="sc-bdfBwQ jdDqgt"
+          className="sc-bdfBwQ iHpmfc"
           color="black"
           fontStyle="italic"
           fontWeight="normal"
@@ -181,7 +181,7 @@ Array [
           A web app to share
         </p>
         <p
-          className="sc-bdfBwQ jdDqgt"
+          className="sc-bdfBwQ iHpmfc"
           color="black"
           fontStyle="italic"
           fontWeight="normal"
@@ -189,7 +189,7 @@ Array [
           pictures with
         </p>
         <p
-          className="sc-bdfBwQ jdDqgt"
+          className="sc-bdfBwQ iHpmfc"
           color="black"
           fontStyle="italic"
           fontWeight="normal"
@@ -199,7 +199,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdfBwQ jizVJx"
+      className="sc-bdfBwQ pCYUg"
       color="black"
       fontStyle="normal"
       fontWeight="lighter"
@@ -208,7 +208,7 @@ Array [
     </p>
   </div>,
   <div
-    className="sc-dwfUOf iWcsca"
+    className="sc-jHVexB hTOLAY"
   />,
 ]
 `;

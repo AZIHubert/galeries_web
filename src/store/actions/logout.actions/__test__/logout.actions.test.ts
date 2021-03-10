@@ -7,6 +7,7 @@ import {
   LOGOUT,
   LOGOUT_FETCH,
   NOTIFICATION_SET,
+  PROFILE_PICTURES_SET,
   UI_SET,
   USER,
   fetchLogout,
@@ -66,12 +67,21 @@ describe('logout', () => {
         expect(actions[4].type).toEqual(`${USER} Set`);
         expect(actions[5].payload).toEqual({
           data: {
+            end: false,
+            page: 1,
+            profilePictures: {},
+            status: 'pending',
+          },
+        });
+        expect(actions[5].type).toEqual(PROFILE_PICTURES_SET);
+        expect(actions[6].payload).toEqual({
+          data: {
             loading: false,
           },
         });
-        expect(actions[5].type).toEqual(UI_SET);
+        expect(actions[6].type).toEqual(UI_SET);
       });
-      it('success', () => {
+      it('error', () => {
         const globalError = 'global error';
         (apiMiddleware as jest.Mock).mockImplementation((
           { dispatch },

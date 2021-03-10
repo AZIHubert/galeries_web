@@ -82,13 +82,18 @@ describe('profilePictures', () => {
           }
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
-        const store = mockStore();
+        const store = mockStore({
+          profilePictures: {
+            end: false,
+            page: 0,
+            profilePictures: {},
+          },
+        });
         store.dispatch(fetchProfilePictures());
         const actions = store.getActions();
         expect(actions[0].type).toEqual(PROFILE_PICTURES_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            profilePictures: [],
             status: 'fetching',
           },
         });
@@ -103,7 +108,9 @@ describe('profilePictures', () => {
         expect(actions[4].type).toEqual(`${PROFILE_PICTURES} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
-            profilePictures: [],
+            end: true,
+            page: 1,
+            profilePictures: {},
             status: 'success',
           },
         });
@@ -138,13 +145,16 @@ describe('profilePictures', () => {
           }
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
-        const store = mockStore();
+        const store = mockStore({
+          profilePictures: {
+            end: false,
+          },
+        });
         store.dispatch(fetchProfilePictures());
         const actions = store.getActions();
         expect(actions[0].type).toEqual(PROFILE_PICTURES_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            profilePictures: [],
             status: 'fetching',
           },
         });
@@ -160,7 +170,6 @@ describe('profilePictures', () => {
         expect(actions[5].type).toEqual(NOTIFICATION_SET);
         expect(actions[6].payload).toEqual({
           data: {
-            profilePictures: [],
             status: 'error',
           },
         });

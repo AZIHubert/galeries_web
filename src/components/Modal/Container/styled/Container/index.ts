@@ -13,7 +13,6 @@ const Container = styled.div.attrs<ContainerI>(
   display: flex;
   flex-direction: column;
   height: auto;
-  position: 'absolute';
 `;
 
 export default Container;

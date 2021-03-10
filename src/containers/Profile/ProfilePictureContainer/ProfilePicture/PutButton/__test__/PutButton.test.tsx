@@ -7,7 +7,10 @@ import reactRedux, { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
-import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+import {
+  defaultValue,
+  ProfilePictureContext,
+} from '#contexts/ProfilePictureContext';
 
 import theme from '#helpers/theme';
 
@@ -21,29 +24,19 @@ const currentId = 'currentId';
 
 const mockedStore = createStore(reducers);
 
-const ProfilePictureProviderValues = {
-  isPosting: false,
-  isPutting: false,
-  profilePicture: {
-    croped: '',
-    original: '',
-    pending: '',
-  },
-  profilePictures: {},
-  puttingImage: null,
-  setPuttingImage: () => {},
-};
-
 const Container = ({
   id = defaultId,
-  isPutting = false,
+  puttingImage = null,
+}: {
+  id?: string;
+  puttingImage?: string | null;
 }) => (
   <Provider store={mockedStore}>
     <ThemeProvider>
       <ProfilePictureContext.Provider
         value={{
-          ...ProfilePictureProviderValues,
-          isPutting,
+          ...defaultValue,
+          puttingImage,
           setPuttingImage: mockedSetPuttingImage,
         }}
       >
@@ -83,12 +76,12 @@ describe('PutButton', () => {
     expect(mockedSetPuttingImage).toHaveBeenCalledTimes(1);
     expect(mockedSetPuttingImage).toHaveBeenLastCalledWith(defaultId);
   });
-  it('should not dispatch and not call setPuttingImage onClick if puttingImage is true', () => {
+  it('should not dispatch and not call setPuttingImage onClick if puttingImage is not null', () => {
     const {
       getByRole,
     } = render(
       <Container
-        isPutting
+        puttingImage='id'
       />,
     );
     fireEvent.click(getByRole('button'));

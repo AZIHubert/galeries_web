@@ -48,7 +48,7 @@ const ProfilePicture = ({
         isPutting={puttingImage === id || deletingImage === id}
       >
         <Link
-          to={`/image/${id}`}
+          to={`/profilePicture/${id}`}
         >
           <Image
             original={cropedImage.signedUrl}

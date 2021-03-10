@@ -99,7 +99,7 @@ describe('resetPassword', () => {
         expect(actions[0].type).toEqual(RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'putting',
           },
         });
         expect(actions[1].type).toEqual(RESET_PASSWORD_SET);
@@ -160,7 +160,7 @@ describe('resetPassword', () => {
         expect(actions[0].type).toEqual(RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'putting',
           },
         });
         expect(actions[1].type).toEqual(RESET_PASSWORD_SET);
@@ -225,7 +225,7 @@ describe('resetPassword', () => {
         expect(actions[0].type).toEqual(RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'putting',
           },
         });
         expect(actions[1].type).toEqual(RESET_PASSWORD_SET);

@@ -42,10 +42,11 @@ const fetchProfilePictures: Middleware = (
 ) => {
   next(action);
   if (action.type === PROFILE_PICTURES_FETCH && !getState().profilePictures.end) {
-    dispatch(setProfilePictures({
-      status: 'fetching',
-      profilePictures: getState().profilePictures.profilePictures,
-    }));
+    dispatch(
+      setProfilePictures({
+        status: 'fetching',
+      }),
+    );
     dispatch(
       apiRequest(
         null,
@@ -69,24 +70,28 @@ const successProfilePictures: Middleware = (
 ) => {
   next(action);
   if (action.type === `${PROFILE_PICTURES} ${API_SUCCESS}`) {
+    let newProfilePictures: any;
+    let newObject = {};
     if (action.payload) {
-      const newProfilePictures = action.payload.data;
+      newProfilePictures = action.payload.data;
       const normalizeData = newProfilePictures.map(
         ({ id, ...rest }: ProfilePictureI) => ({
           [id]: { ...rest },
         }),
       );
-      const newObject = Object.assign({}, ...normalizeData);
-      dispatch(setProfilePictures({
+      newObject = Object.assign({}, ...normalizeData);
+    }
+    dispatch(
+      setProfilePictures({
+        end: newProfilePictures ? newProfilePictures.length < 20 : true,
         page: getState().profilePictures.page + 1,
-        end: newProfilePictures.length < 20,
-        status: 'success',
         profilePictures: {
           ...getState().profilePictures.profilePictures,
           ...newObject,
         },
-      }));
-    }
+        status: 'success',
+      }),
+    );
     dispatch(setLoader(false));
   }
 };

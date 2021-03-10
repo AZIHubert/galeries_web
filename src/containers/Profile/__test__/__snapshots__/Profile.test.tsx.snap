@@ -2,64 +2,68 @@
 
 exports[`Profile renders without crashing 1`] = `
 <div
-  className="sc-cxFLnm iBHowK"
+  className="sc-cOajty ksAQLU"
 >
   <div
-    className="sc-bqyKva kzSeSU"
+    className="sc-bBrOnJ eYGPd"
   >
     <div
-      className="sc-jrAGrp ctAFHi"
+      className="sc-fKFyDc fMiTOn"
     >
       <div
-        className="sc-crrsfI iEhrOU"
+        className="sc-idOhPF iSChTy"
       >
         <div
-          className="sc-iqHYGH fXyBEw"
-          data-testid="imageContainer"
+          className="sc-dmlrTW itfrvb"
         >
-          <div />
+          <div
+            className="sc-hHftDr jnnxJq"
+            data-testid="imageContainer"
+          >
+            <div />
+          </div>
         </div>
+      </div>
+      <div
+        className="sc-fFubgz fLkKOp"
+      >
+        <p
+          className="sc-bdfBwQ haSqqC"
+          color="primary"
+          fontStyle="normal"
+          fontWeight="bold"
+        >
+          user name
+        </p>
+        <input
+          accept="image/*"
+          className="sc-bkzZxe hGYQrN"
+          data-testid="inputFile"
+          onChange={[Function]}
+          type="file"
+        />
+        <button
+          className="sc-iqHYGH hBMFDe"
+          onClick={[Function]}
+        >
+          Add a profile picture
+        </button>
+        <button
+          className="sc-iqHYGH jspEwG"
+          onClick={[Function]}
+        >
+          Edit your info
+        </button>
       </div>
     </div>
     <div
-      className="sc-fubCfw fSjqqM"
+      className="sc-eggNIi jakjRS"
     >
-      <p
-        className="sc-bdfBwQ haSqqC"
-        color="primary"
-        fontStyle="normal"
-        fontWeight="bold"
-      >
-        user name
-      </p>
-      <input
-        accept="image/*"
-        className="sc-pFZIQ iDWbpF"
-        data-testid="inputFile"
-        onChange={[Function]}
-        type="file"
+      <div
+        className="sc-cTkwdZ iKSNdt"
+        data-testid="container"
       />
-      <button
-        className="sc-gsTCUz QCFwd"
-        onClick={[Function]}
-      >
-        Add a profile picture
-      </button>
-      <button
-        className="sc-gsTCUz kmYGbx"
-        onClick={[Function]}
-      >
-        Edit your info
-      </button>
     </div>
-  </div>
-  <div
-    className="sc-kfzAmx knKwIO"
-  >
-    <div
-      className="sc-fKFyDc glfqUN"
-      data-testid="container"
-    />
   </div>
   <p
     className="sc-bdfBwQ pCYUg"

@@ -50,6 +50,11 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as typeof ReactRouterDOM,
   Link: jest.fn(({ children }) => children),
 }));
+jest.mock('#components/Image', () => ({
+  __esModule: true,
+  A: true,
+  default: () => <div></div>,
+}));
 
 describe('ProfileButton', () => {
   afterEach(cleanup);

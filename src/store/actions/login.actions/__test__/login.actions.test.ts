@@ -99,7 +99,7 @@ describe('login', () => {
         expect(actions[0].type).toEqual(LOGIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(LOGIN_SET);
@@ -177,7 +177,7 @@ describe('login', () => {
         expect(actions[0].type).toEqual(LOGIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(LOGIN_SET);
@@ -239,7 +239,7 @@ describe('login', () => {
         expect(actions[0].type).toEqual(LOGIN_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(LOGIN_SET);

@@ -2,7 +2,7 @@
 
 exports[`Footer renders without crashing 1`] = `
 <p
-  className="sc-bdfBwQ jizVJx"
+  className="sc-bdfBwQ pCYUg"
   color="black"
   fontStyle="normal"
   fontWeight="lighter"

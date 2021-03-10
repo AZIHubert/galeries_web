@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
-import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+import {
+  defaultValue,
+  ProfilePictureContext,
+} from '#contexts/ProfilePictureContext';
 
 import reducers from '#store/reducers';
 
@@ -12,30 +15,20 @@ import ProfilePicture from '../index';
 
 const mockedStore = createStore(reducers);
 
-const ProfilePictureProviderValues = {
-  isPosting: false,
-  isPuttong: false,
-  profilePicture: {
-    croped: '',
-    original: '',
-    pending: '',
-  },
-  profilePictures: {},
-  puttingImage: null,
-  setPuttingImage: () => {},
-};
-
 const Container = ({
   isPosting = false,
-  isPutting = false,
+  puttingImage = null,
+}: {
+  isPosting?: boolean;
+  puttingImage?: string | null;
 }) => (
   <Provider store={mockedStore}>
     <ThemeProvider>
       <ProfilePictureContext.Provider
         value={{
-          ...ProfilePictureProviderValues,
+          ...defaultValue,
           isPosting,
-          isPutting,
+          puttingImage,
         }}
       >
         <ProfilePicture />
@@ -91,7 +84,7 @@ describe('ProfilePicture', () => {
   it('should display spinner is is posting', () => {
     const { getByTestId } = render(
       <Container
-        isPutting
+        puttingImage='id'
       />,
     );
     expect(getByTestId(spinner)).toBeTruthy();
@@ -107,7 +100,7 @@ describe('ProfilePicture', () => {
   it('should have an opacity of 0.1 if is posting', () => {
     const { getByTestId } = render(
       <Container
-        isPutting
+        puttingImage='id'
       />,
     );
     expect(getByTestId(imageContainer)).toHaveStyle('opacity: 0.1');

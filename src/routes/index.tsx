@@ -5,7 +5,6 @@ import {
 } from 'react-redux';
 import {
   Redirect,
-  useLocation,
 } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
@@ -13,6 +12,7 @@ import AnimatedRoute from '#components/AnimatedRoute';
 
 import ConfirmAccount from '#containers/ConfirmAccount';
 import Desktop from '#containers/Desktop';
+import FullPageImage from '#containers/FullPageImage';
 import Header from '#containers/Header';
 import Home from '#containers/Home';
 import Loader from '#components/Loader';
@@ -31,7 +31,6 @@ import {
 
 const Routes = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const init = useSelector(initSelector);
   const user = useSelector(userSelector);
   const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
@@ -61,9 +60,6 @@ const Routes = () => {
         unmountOnExit
       >
         <Fader>
-          {user && !location.pathname.includes('image') ? (
-            <Header.Desktop />
-          ) : null}
           <AnimatedRoute
             path='/'
           >
@@ -110,14 +106,15 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            path='/image/:id'
+            path='/profilePicture/:id'
           >
             {!user ? (
               <Redirect to='/' />
             ) : (
-              <div>image</div>
+              <FullPageImage />
             )}
           </AnimatedRoute>
+          <Header.Desktop />
         </Fader>
       </CSSTransition>
     </>

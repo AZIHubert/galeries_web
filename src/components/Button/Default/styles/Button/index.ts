@@ -92,6 +92,7 @@ const Button = styled.button.attrs<ButtonI>(
     `color ${theme.transition.default} ease-in,
     background-color ${theme.transition.slow} ease-in;`
   )};
+  width: 100%;
   &:focus {
     outline: none;
   }

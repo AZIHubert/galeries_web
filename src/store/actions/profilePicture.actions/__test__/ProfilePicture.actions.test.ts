@@ -81,7 +81,7 @@ describe('profilePicture', () => {
         expect(actions[0].type).toEqual(PROFILE_PICTURE_POST);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(PROFILE_PICTURE_SET);
@@ -97,9 +97,7 @@ describe('profilePicture', () => {
           data: {
             status: 'success',
             current: {
-              croped: undefined,
-              original: undefined,
-              pending: undefined,
+              croped: {},
             },
           },
         });
@@ -140,7 +138,7 @@ describe('profilePicture', () => {
         expect(actions[0].type).toEqual(PROFILE_PICTURE_POST);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(PROFILE_PICTURE_SET);

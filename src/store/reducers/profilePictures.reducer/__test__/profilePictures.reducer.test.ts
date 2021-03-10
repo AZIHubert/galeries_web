@@ -6,29 +6,35 @@ import reducer from '../index';
 
 describe('profilePictures', () => {
   describe('reducer', () => {
+    const defaultValue = {
+      end: false,
+      page: 0,
+      profilePictures: {},
+      status: 'pending',
+    };
     it('should return the initial state', () => {
       expect(reducer(undefined, {
         type: '@@INIT',
-      })).toEqual({
-        status: 'pending',
-        profilePictures: [],
-      });
+      })).toEqual(defaultValue);
     });
     it('should set profilePictures status', () => {
       const data = {
-        status: 'success',
         profilePictures: [],
+        status: 'success',
       };
       expect(reducer(undefined, {
         payload: {
           data,
         },
         type: PROFILE_PICTURES_SET,
-      })).toEqual(data);
+      })).toEqual({
+        ...defaultValue,
+        ...data,
+      });
     });
     it('should set current profilePicture', () => {
-      const profilePictures: ProfilePictureI[] = [
-        {
+      const profilePictures: { [name: string]: ProfilePictureI } = {
+        0: {
           createdAt: new Date(),
           cropedImage: {
             bucketName: 'bucketName',
@@ -62,7 +68,7 @@ describe('profilePictures', () => {
             width: 1,
           },
         },
-      ];
+      };
       expect(reducer(undefined, {
         payload: {
           data: {
@@ -71,7 +77,7 @@ describe('profilePictures', () => {
         },
         type: PROFILE_PICTURES_SET,
       })).toEqual({
-        status: 'pending',
+        ...defaultValue,
         profilePictures,
       });
     });

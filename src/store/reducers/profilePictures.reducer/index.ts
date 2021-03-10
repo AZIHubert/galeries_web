@@ -2,16 +2,16 @@ import { PROFILE_PICTURES_SET } from '#store/actions';
 
 interface InitialStateI {
   end: boolean;
-  status: store.Status;
-  profilePictures: ProfilePictureI[];
   page: number;
+  profilePictures: { [name: string]: ProfilePictureI };
+  status: store.Status;
 }
 
 const initialState: InitialStateI = {
   end: false,
-  status: 'pending',
-  profilePictures: [],
   page: 0,
+  profilePictures: {},
+  status: 'pending',
 };
 
 export default (

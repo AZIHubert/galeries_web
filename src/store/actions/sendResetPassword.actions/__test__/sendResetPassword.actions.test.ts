@@ -93,7 +93,7 @@ describe('sendResetPassword', () => {
         expect(actions[0].type).toEqual(SEND_RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
@@ -154,7 +154,7 @@ describe('sendResetPassword', () => {
         expect(actions[0].type).toEqual(SEND_RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);
@@ -219,7 +219,7 @@ describe('sendResetPassword', () => {
         expect(actions[0].type).toEqual(SEND_RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_RESET_PASSWORD_SET);

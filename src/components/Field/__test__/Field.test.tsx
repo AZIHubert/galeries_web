@@ -12,9 +12,9 @@ const Component = ({
   error,
   label,
   marginBottom,
-  marginBottomL,
+  marginLeft,
+  marginRight,
   marginTop,
-  marginTopL,
   required,
   touched,
 }: {
@@ -22,9 +22,9 @@ const Component = ({
   error?: string;
   label?: string;
   marginBottom?: number;
-  marginBottomL?: number;
+  marginLeft?: number;
+  marginRight?: number;
   marginTop?: number;
-  marginTopL?: number;
   required?: boolean;
   touched?: boolean;
 }) => (
@@ -38,12 +38,14 @@ const Component = ({
       id='id'
       label={label}
       labelTestId='label'
-      marginBottom={marginBottom}
-      marginBottomL={marginBottomL}
-      marginTop={marginTop}
-      marginTopL={marginTopL}
       onChange={() => {}}
       required={required}
+      styles={{
+        marginBottom,
+        marginLeft,
+        marginRight,
+        marginTop,
+      }}
       touched={touched}
       value=''
     />

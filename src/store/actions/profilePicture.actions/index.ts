@@ -1,6 +1,7 @@
 export const PROFILE_PICTURE = '[PROFILE PICTURE]';
 
 export const PROFILE_PICTURE_DELETE = `${PROFILE_PICTURE} Delete`;
+export const PROFILE_PICTURE_FETCH = `${PROFILE_PICTURE} Fetch`;
 export const PROFILE_PICTURE_POST = `${PROFILE_PICTURE} Post`;
 export const PROFILE_PICTURE_PUT = `${PROFILE_PICTURE} Put`;
 export const PROFILE_PICTURE_SET = `${PROFILE_PICTURE} Set`;
@@ -14,6 +15,17 @@ export const deleteProfilePicture: (
 ) => ({
   payload: { data },
   type: PROFILE_PICTURE_DELETE,
+});
+
+export const fetchProfilePicture: (
+  data: {
+    id: string
+  }
+) => store.ActionI = (
+  data,
+) => ({
+  payload: { data },
+  type: PROFILE_PICTURE_FETCH,
 });
 
 export const postProfilePicture: (

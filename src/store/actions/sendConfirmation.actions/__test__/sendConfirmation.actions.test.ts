@@ -94,7 +94,7 @@ describe('sendConfirmation', () => {
         expect(actions[0].type).toEqual(SEND_CONFIRMATION_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_CONFIRMATION_SET);
@@ -155,7 +155,7 @@ describe('sendConfirmation', () => {
         expect(actions[0].type).toEqual(SEND_CONFIRMATION_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_CONFIRMATION_SET);
@@ -220,7 +220,7 @@ describe('sendConfirmation', () => {
         expect(actions[0].type).toEqual(SEND_CONFIRMATION_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_CONFIRMATION_SET);

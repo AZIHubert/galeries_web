@@ -5,6 +5,7 @@ import {
   API_SUCCESS,
   PROFILE_PICTURE,
   PROFILE_PICTURE_DELETE,
+  PROFILE_PICTURE_FETCH,
   PROFILE_PICTURE_POST,
   PROFILE_PICTURE_PUT,
   apiRequest,
@@ -37,6 +38,33 @@ const deleteProfilePicture: Middleware = (
       apiRequest(
         null,
         'DELETE',
+        endPoints.PROFILE_PICTURE,
+        PROFILE_PICTURE,
+        undefined,
+        undefined,
+        undefined,
+        action.payload ? action.payload.data.id : undefined,
+      ),
+    );
+  }
+};
+
+const fetchProfilePicture: Middleware = (
+  { dispatch },
+) => (
+  next,
+) => (
+  action: store.ActionI,
+) => {
+  next(action);
+  if (action.type === PROFILE_PICTURE_FETCH) {
+    dispatch(setProfilePicture({
+      status: 'fetching',
+    }));
+    dispatch(
+      apiRequest(
+        null,
+        'GET',
         endPoints.PROFILE_PICTURE,
         PROFILE_PICTURE,
         undefined,
@@ -164,6 +192,18 @@ const successProfilePicture: Middleware = (
           },
         }));
       }
+      if (action.payload.data.type === 'GET') {
+        const {
+          id,
+          ...rest
+        }: ProfilePictureI = action.payload.data.profilePicture;
+        dispatch(setProfilePictures({
+          profilePictures: {
+            [id]: { ...rest },
+            ...getState().profilePictures.profilePictures,
+          },
+        }));
+      }
       if (action.payload.data.type === 'PUT') {
         if (action.payload.data.profilePicture) {
           const {
@@ -218,6 +258,7 @@ const successProfilePicture: Middleware = (
 
 export default [
   deleteProfilePicture,
+  fetchProfilePicture,
   errorProfilePicture,
   postProfilePicture,
   putProfilePicture,

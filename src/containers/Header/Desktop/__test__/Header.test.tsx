@@ -23,12 +23,17 @@ const Container = () => (
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as typeof ReactRouterDOM,
   Link: jest.fn(({ children }) => children),
+  useLocation: () => ({
+    pathname: 'localhost:3000/example/path',
+  }),
 }));
 
 describe('Header', () => {
   afterEach(cleanup);
-  it('renders without crashing', () => {
-    const tree = renderer.create(<Container />).toJSON();
-    expect(tree).toMatchSnapshot();
+  describe('Desktop', () => {
+    it('renders without crashing', () => {
+      const tree = renderer.create(<Container />).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
   });
 });

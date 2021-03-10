@@ -25,19 +25,6 @@ import {
 
 const mockedStore = createStore(reducers);
 
-// const defaultValue = {
-//   profilePicture: {
-//     croped: '',
-//     original: '',
-//     pending: '',
-//   },
-//   isPosting: false,
-//   isPutting: false,
-//   profilePictures: {},
-//   puttingImage: null,
-//   setPuttingImage: () => {},
-// };
-
 const Container = () => (
   <Provider store={mockedStore}>
     <ProfilePictureProvider>
@@ -51,14 +38,14 @@ const Children = () => {
     profilePicture,
     profilePictures,
     isPosting,
-    isPutting,
+    puttingImage,
   } = React.useContext(ProfilePictureContext);
   const hasProfilePictures = Object.keys(profilePictures).length > 0;
   return (
     <>
       {hasProfilePictures && <p>has profile picture</p>}
       {isPosting && <p>is posting</p>}
-      {isPutting && <p>is putting</p>}
+      {puttingImage && <p>is putting</p>}
       {profilePicture.croped}
     </>
   );
@@ -99,12 +86,6 @@ describe('ProfilePictureContext', () => {
     (userSelector as jest.Mock).mockImplementation(() => ({}));
     render(<Container />);
     expect(mockedDispatch).toHaveBeenCalledWith(mockedFetchProfilePictures);
-  });
-  it('should not dispatch fetchProfilePictures if profile pictures is not pending', () => {
-    (profilePicturesStatusSelector as jest.Mock).mockImplementation(() => 'success');
-    (userSelector as jest.Mock).mockImplementation(() => ({}));
-    render(<Container />);
-    expect(mockedDispatch).not.toHaveBeenCalled();
   });
   it('should not dispatch fetchProfilePictures if user is not defined', () => {
     (profilePicturesStatusSelector as jest.Mock).mockImplementation(() => 'pending');
@@ -167,11 +148,6 @@ describe('ProfilePictureContext', () => {
     (profilePictureStatusSelector as jest.Mock).mockImplementation(() => 'posting');
     const { getByText } = render(<Container />);
     expect(getByText('is posting')).toBeTruthy();
-  });
-  it('should set is putting to true if profile picture is putting', () => {
-    (profilePictureStatusSelector as jest.Mock).mockImplementation(() => 'putting');
-    const { getByText } = render(<Container />);
-    expect(getByText('is putting')).toBeTruthy();
   });
   it('should set profile picture, if not waiting profile picture is success', () => {
     (profilePictureStatusSelector as jest.Mock).mockImplementation(() => 'success');

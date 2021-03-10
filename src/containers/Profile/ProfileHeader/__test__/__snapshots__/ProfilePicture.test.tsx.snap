@@ -15,7 +15,8 @@ exports[`ProfileHeader renders without crashing 1`] = `
         data-testid="imageContainer"
       >
         <div
-          className="sc-jrAGrp gTHjHZ"
+          className="sc-jrAGrp cqDxTB"
+          mode="cover"
           style={
             Object {
               "backgroundColor": "none",
@@ -45,13 +46,13 @@ exports[`ProfileHeader renders without crashing 1`] = `
       type="file"
     />
     <button
-      className="sc-bdfBwQ bpoOet"
+      className="sc-bdfBwQ cnXnzw"
       onClick={[Function]}
     >
       Add a profile picture
     </button>
     <button
-      className="sc-bdfBwQ fsgol"
+      className="sc-bdfBwQ eNRskY"
       onClick={[Function]}
     >
       Edit your info

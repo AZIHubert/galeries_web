@@ -9,14 +9,18 @@ import {
   Img,
 } from './styles';
 
+type Mode = 'cover' | 'height' | 'width';
+
 interface ImageI {
   alt?: string;
+  mode?: Mode;
   original: string;
   pending?: string;
 }
 
 const Image = ({
   alt = 'progressive image',
+  mode = 'cover',
   original,
   pending,
 }: ImageI) => {
@@ -25,6 +29,7 @@ const Image = ({
 
   return (
     <Container
+      mode={mode}
       ref={imageRef}
       uri={pending}
     >
@@ -34,9 +39,13 @@ const Image = ({
         timeout={300}
         unmountOnExit
       >
-        <Fader>
+        <Fader
+          mode={mode}
+
+        >
           <Img
             alt={alt}
+            mode={mode}
             src={original}
           />
         </Fader>

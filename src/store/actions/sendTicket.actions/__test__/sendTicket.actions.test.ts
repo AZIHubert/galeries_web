@@ -95,7 +95,7 @@ describe('sendTicket', () => {
         expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_TICKET_SET);
@@ -156,7 +156,7 @@ describe('sendTicket', () => {
         expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_TICKET_SET);
@@ -221,7 +221,7 @@ describe('sendTicket', () => {
         expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'fetching',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_TICKET_SET);

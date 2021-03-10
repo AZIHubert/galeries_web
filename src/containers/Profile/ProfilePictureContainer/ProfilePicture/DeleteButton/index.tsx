@@ -47,8 +47,6 @@ const DeleteButton = ({
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
-  console.log('from button', open);
-
   return (
     <Button>
       <AiOutlineDelete
@@ -75,9 +73,12 @@ const DeleteButton = ({
           <ButtonContainer>
             <ButtonLol.Default
               danger
+              onClick={handleClick}
+              styles={{
+                marginRight: 50,
+              }}
               title='yes'
               variant='primary'
-              onClick={handleClick}
             />
             <ButtonLol.Default
               danger

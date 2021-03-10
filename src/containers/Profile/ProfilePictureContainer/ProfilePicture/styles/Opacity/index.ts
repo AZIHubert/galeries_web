@@ -7,6 +7,7 @@ interface OpacityI {
 const Opacity = styled.div.attrs<OpacityI>(() => ({
   'data-testid': 'opacity',
 }))<OpacityI>`
+  height: 100%;
   opacity: ${({ isPutting }) => (isPutting ? 0.5 : 1)};
   transition: ${({ theme }) => theme.transition.default};
 `;

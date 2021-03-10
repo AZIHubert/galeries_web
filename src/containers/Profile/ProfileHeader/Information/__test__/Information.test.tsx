@@ -6,7 +6,10 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+import {
+  defaultValue,
+  ProfilePictureContext,
+} from '#contexts/ProfilePictureContext';
 import ThemeProvider from '#contexts/ThemeContext';
 
 import reducers from '#store/reducers';
@@ -15,19 +18,6 @@ import Information from '../index';
 
 const mockedStore = createStore(reducers);
 const file = new File(['(⌐□_□)'], 'file.xml', { type: 'application/xml' });
-
-const ProfilePictureProviderValues = {
-  isPosting: false,
-  isPutting: false,
-  profilePicture: {
-    croped: '',
-    original: '',
-    pending: '',
-  },
-  profilePictures: {},
-  puttingImage: null,
-  setPuttingImage: () => {},
-};
 
 const mockedDispatch = jest.fn();
 const mockedPostProfilePicture = jest.fn();
@@ -48,7 +38,7 @@ const Container = ({
     <ThemeProvider>
       <ProfilePictureContext.Provider
         value={{
-          ...ProfilePictureProviderValues,
+          ...defaultValue,
           isPosting,
         }}
       >
