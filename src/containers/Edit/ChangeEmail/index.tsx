@@ -2,8 +2,13 @@ import { useFormik } from 'formik';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 
+import Button from '#components/Button';
 import Field from '#components/Field';
+import RequiredField from '#components/RequiredField';
+import Text from '#components/Text';
+
 import { changeEmailSchema } from '#helpers/schemas';
+
 import { loadingSelector } from '#store/selectors';
 
 const initialValues = {
@@ -21,13 +26,15 @@ const ChangeEmail = () => {
   const loading = useSelector(loadingSelector);
   return (
     <div>
-      <p>
-        change your email
-      </p>
-      <p>
+      <Text
+        styles={{
+          fontSize: 0.8,
+          marginBottom: 20,
+        }}
+      >
         Enter your password to receive a message on your current adress.
         This message contain a link to update your email.
-      </p>
+      </Text>
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
@@ -37,16 +44,23 @@ const ChangeEmail = () => {
           label='password'
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
+          required
+          styles={{
+            marginBottom: 25,
+          }}
           touched={formik.touched.password}
           type='password'
           value={formik.values.password}
         />
-        <button
+        <RequiredField />
+        <Button.Gradiant
           disabled={loading}
+          styles={{
+            marginTop: 20,
+          }}
           type='submit'
-        >
-          {loading ? 'loading' : 'change your email'}
-        </button>
+          title='change your email'
+        />
       </form>
     </div>
   );
