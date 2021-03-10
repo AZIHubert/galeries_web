@@ -12,6 +12,7 @@ import AnimatedRoute from '#components/AnimatedRoute';
 
 import ConfirmAccount from '#containers/ConfirmAccount';
 import Desktop from '#containers/Desktop';
+import Edit from '#containers/Edit';
 import FullPageImage from '#containers/FullPageImage';
 import Header from '#containers/Header';
 import Home from '#containers/Home';
@@ -112,6 +113,15 @@ const Routes = () => {
               <Redirect to='/' />
             ) : (
               <FullPageImage />
+            )}
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/edit'
+          >
+            {!user ? (
+              <Redirect to='/' />
+            ) : (
+              <Edit />
             )}
           </AnimatedRoute>
           <Header.Desktop />
