@@ -9,6 +9,7 @@ import sendConfirmation from './sendConfirmation.reducer';
 import sendResetPassword from './sendResetPassword.reducer';
 import sendTicket from './sendTicket.reducer';
 import signin from './signin.reducer';
+import updatePassword from './updatePassword.reducer';
 import user from './user.reducer';
 import ui from './ui.reducer';
 
@@ -22,6 +23,7 @@ export default combineReducers({
   sendResetPassword,
   sendTicket,
   signin,
+  updatePassword,
   ui,
   user,
 });

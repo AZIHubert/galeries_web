@@ -48,6 +48,11 @@ declare global {
       password: string;
       userName: string;
     }
+    interface UpdatePasswordI {
+      confirmNewPassword: string;
+      currentPassword: string;
+      newPassword: string;
+    }
   }
   namespace store {
     type Entity =

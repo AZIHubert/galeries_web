@@ -19,6 +19,7 @@ export const resetLogin: () => store.ActionI = () => ({
         password: '',
         userNameOrEmail: '',
       },
+      status: 'pending',
     },
   },
   type: LOGIN_SET,
