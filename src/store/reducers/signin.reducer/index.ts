@@ -2,7 +2,7 @@ import { SIGNIN_SET } from '#store/actions';
 
 interface InitialStateI {
   errors: form.SigninI;
-  status: store.FormStatus;
+  status: store.Status;
 }
 
 const initialState: InitialStateI = {

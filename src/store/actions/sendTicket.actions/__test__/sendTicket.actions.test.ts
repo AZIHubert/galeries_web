@@ -4,12 +4,13 @@ import {
   API_ERROR,
   API_REQUEST,
   API_SUCCESS,
-  LOADER_SET,
   NOTIFICATION_SET,
   SEND_TICKET,
   SEND_TICKET_FETCH,
   SEND_TICKET_SET,
+  UI_SET,
   fetchSendTicket,
+  resetSendTicket,
   setLoader,
   setSendTicket,
 } from '#store/actions';
@@ -34,13 +35,28 @@ describe('sendTicket', () => {
       };
       expect(fetchSendTicket(data)).toEqual(expectedAction);
     });
+    it('should create a reset actions', () => {
+      const expectedAction = {
+        payload: {
+          data: {
+            errors: {
+              body: '',
+              header: '',
+            },
+            status: 'pending',
+          },
+        },
+        type: SEND_TICKET_SET,
+      };
+      expect(resetSendTicket()).toEqual(expectedAction);
+    });
     it('should create a set actions', () => {
       const setData = {
         errors: data,
         status: 'pending',
       } as {
         errors?: form.SendTicketI;
-        status?: store.FormStatus;
+        status?: store.Status;
       };
       const expectedAction = {
         payload: {
@@ -79,7 +95,7 @@ describe('sendTicket', () => {
         expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_TICKET_SET);
@@ -89,7 +105,7 @@ describe('sendTicket', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_TICKET} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -109,7 +125,7 @@ describe('sendTicket', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('global error', () => {
         const globalError = 'global error';
@@ -140,7 +156,7 @@ describe('sendTicket', () => {
         expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_TICKET_SET);
@@ -150,7 +166,7 @@ describe('sendTicket', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_TICKET} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -170,7 +186,7 @@ describe('sendTicket', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('field error', () => {
         const headerError = 'header error';
@@ -205,7 +221,7 @@ describe('sendTicket', () => {
         expect(actions[0].type).toEqual(SEND_TICKET_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'posting',
           },
         });
         expect(actions[1].type).toEqual(SEND_TICKET_SET);
@@ -215,7 +231,7 @@ describe('sendTicket', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${SEND_TICKET} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -231,7 +247,7 @@ describe('sendTicket', () => {
             loading: false,
           },
         });
-        expect(actions[6].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
       });
     });
   });

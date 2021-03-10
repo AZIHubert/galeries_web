@@ -16,7 +16,7 @@ const apiMiddleware: Middleware = (
   { dispatch },
 ) => (
   next,
-) => (
+) => async (
   action: store.ActionI,
 ) => {
   const {
@@ -24,7 +24,7 @@ const apiMiddleware: Middleware = (
   } = action;
   if (action.type.includes(API_REQUEST)) {
     dispatch(setLoader(true));
-    refreshToken();
+    await refreshToken();
     if (
       payload
       && payload.meta
@@ -35,9 +35,12 @@ const apiMiddleware: Middleware = (
       const token = getAuthToken();
       const {
         confirmToken,
+        contentType,
         entity,
         method,
         url,
+        page,
+        params,
       } = payload.meta;
       request(
         payload.data,
@@ -45,6 +48,9 @@ const apiMiddleware: Middleware = (
         url,
         token,
         confirmToken,
+        contentType,
+        page,
+        params,
       )
         .then((response) => {
           dispatch(

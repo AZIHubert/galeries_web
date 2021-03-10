@@ -3,27 +3,27 @@
 exports[`Home renders without crashing 1`] = `
 Array [
   <header
-    className="sc-jJEJSO jMobUu"
+    className="sc-fbkhIv jLWcvt"
   >
     <div
-      className="sc-hiSbYr hRGsCU"
+      className="sc-GqfZa iVkjdc"
     >
       <img
         alt="header logo"
-        className="sc-gWHgXt bMAel"
+        className="sc-fWSCIC fQXNKd"
         src={Object {}}
       />
       <div
-        className="sc-iktFzd dZXJkI"
+        className="sc-clsHhM cNTXtz"
       >
         <button
-          className="sc-crrsfI bzejis"
+          className="sc-jSgupP fBjfJW"
           onClick={[Function]}
         >
           Sign in
         </button>
         <button
-          className="sc-crrsfI nNBWb"
+          className="sc-jSgupP jCtSap"
           onClick={[Function]}
         >
           Log in
@@ -32,19 +32,22 @@ Array [
     </div>
   </header>,
   <div
-    className="sc-citwmv kCcWkG"
+    className="sc-aemoO hba-DWJ"
   >
     <div
-      className="sc-pFZIQ hSQOzh"
+      className="sc-dwfUOf hrOxTY"
     >
       <div>
-        <h2
-          className="sc-kEjbxe KyhCS"
+        <p
+          className="sc-bdfBwQ jBbmrr"
+          color="black"
+          fontStyle="normal"
+          fontWeight="bold"
         >
           Welcome to
-        </h2>
+        </p>
         <h1
-          className="sc-jrAGrp eIVJEn"
+          className="sc-TmcTc iKQrsm"
         >
           <svg
             viewBox="0 0 356.12 51.77"
@@ -170,30 +173,42 @@ Array [
           </svg>
         </h1>
         <p
-          className="sc-fubCfw bCQQtl"
+          className="sc-bdfBwQ iHpmfc"
+          color="black"
+          fontStyle="italic"
+          fontWeight="normal"
         >
           A web app to share
         </p>
         <p
-          className="sc-fubCfw bCQQtl"
+          className="sc-bdfBwQ iHpmfc"
+          color="black"
+          fontStyle="italic"
+          fontWeight="normal"
         >
           pictures with
         </p>
         <p
-          className="sc-fubCfw bCQQtl"
+          className="sc-bdfBwQ iHpmfc"
+          color="black"
+          fontStyle="italic"
+          fontWeight="normal"
         >
           your friends and family.
         </p>
       </div>
     </div>
-    <footer
-      className="sc-iqHYGH bifpOp"
+    <p
+      className="sc-bdfBwQ pCYUg"
+      color="black"
+      fontStyle="normal"
+      fontWeight="lighter"
     >
       Allan Aoudji @2021
-    </footer>
+    </p>
   </div>,
   <div
-    className="sc-cBNfnY gZMoYx"
+    className="sc-jHVexB hTOLAY"
   />,
 ]
 `;

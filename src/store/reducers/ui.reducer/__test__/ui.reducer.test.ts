@@ -1,4 +1,4 @@
-import { LOADER_SET } from '#store/actions';
+import { UI_SET } from '#store/actions';
 
 import reducer from '../index';
 
@@ -9,6 +9,7 @@ describe('ui', () => {
         type: '@@INIT',
       })).toEqual({
         loading: false,
+        init: false,
       });
     });
     it('should set loading', () => {
@@ -18,9 +19,23 @@ describe('ui', () => {
             loading: true,
           },
         },
-        type: LOADER_SET,
+        type: UI_SET,
       })).toEqual({
+        init: false,
         loading: true,
+      });
+    });
+    it('should set init', () => {
+      expect(reducer(undefined, {
+        payload: {
+          data: {
+            init: true,
+          },
+        },
+        type: UI_SET,
+      })).toEqual({
+        init: true,
+        loading: false,
       });
     });
   });

@@ -2,7 +2,7 @@ import { SEND_RESET_PASSWORD_SET } from '#store/actions';
 
 interface InitialStateI {
   errors: form.SendResetPasswordI;
-  status: store.FormStatus;
+  status: store.Status;
 }
 
 const initialState: InitialStateI = {

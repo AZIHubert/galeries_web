@@ -1,4 +1,4 @@
-export const LOADER_SET = '[UI] Set';
+export const UI_SET = '[UI] Set';
 
 export const setLoader: (
   data: boolean,
@@ -10,5 +10,18 @@ export const setLoader: (
       loading: data,
     },
   },
-  type: LOADER_SET,
+  type: UI_SET,
+});
+
+export const setInit: (
+  data: boolean,
+) => store.ActionI = (
+  data,
+) => ({
+  payload: {
+    data: {
+      init: data,
+    },
+  },
+  type: UI_SET,
 });

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import Body from './Body';
-import Footer from './Footer';
+import Footer from '#containers/Footer';
+import Header from '#containers/Header';
 
-import HeaderHome from '#containers/HeaderHome';
+import Body from './Body';
 
 import {
   BackgroundImage,
@@ -12,7 +12,7 @@ import {
 
 const Home = () => (
   <>
-    <HeaderHome />
+    <Header.Home />
     <Container>
       <Body />
       <Footer />

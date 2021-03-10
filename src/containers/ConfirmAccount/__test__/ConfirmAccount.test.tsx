@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createStore } from 'redux';
 
+import ThemeProvider from '#contexts/ThemeContext';
+
 import reducers from '#store/reducers';
 
 import ConfirmAccount from '../index';
@@ -37,7 +39,9 @@ jest.useFakeTimers();
 
 const Container = () => (
   <Provider store={mockedStore}>
-    <ConfirmAccount />
+    <ThemeProvider>
+      <ConfirmAccount />
+    </ThemeProvider>
   </Provider>
 );
 

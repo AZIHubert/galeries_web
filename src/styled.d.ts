@@ -27,9 +27,24 @@ interface HeaderI {
   dashboard: SubHeaderI;
 }
 
+interface ProfileI {
+  large: SubProfileI;
+  medium: SubProfileI;
+  small: SubProfileI;
+  smallest: SubProfileI;
+}
+
 interface SubHeaderI {
   height: HeaderHeightI;
   logoWidth: HeaderLogoI;
+}
+
+interface SubProfileI {
+  cropedImage: {
+    size: number;
+    margin: number;
+    numByRow: number;
+  }
 }
 
 interface TransitionI {
@@ -54,6 +69,7 @@ declare module 'styled-components' {
     boxShadow: string;
     colors: ColorsI;
     header: HeaderI;
+    profile: ProfileI;
     transition: TransitionI;
     wrapper: WrapperI;
   }

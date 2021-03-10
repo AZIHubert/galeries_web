@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
+
 import reducers from '#store/reducers';
 
 import DeleteAccount from '../index';

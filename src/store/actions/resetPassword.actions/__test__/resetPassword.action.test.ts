@@ -4,11 +4,11 @@ import {
   API_ERROR,
   API_REQUEST,
   API_SUCCESS,
-  LOADER_SET,
   NOTIFICATION_SET,
   RESET_PASSWORD,
   RESET_PASSWORD_FETCH,
   RESET_PASSWORD_SET,
+  UI_SET,
   fetchResetPassword,
   resetResetPassword,
   setLoader,
@@ -60,7 +60,7 @@ describe('resetPassword', () => {
         status: 'pending',
       } as {
         errors?: form.ResetPasswordI;
-        status?: store.FormStatus;
+        status?: store.Status;
       };
       const expectedAction = {
         payload: {
@@ -99,7 +99,7 @@ describe('resetPassword', () => {
         expect(actions[0].type).toEqual(RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'putting',
           },
         });
         expect(actions[1].type).toEqual(RESET_PASSWORD_SET);
@@ -109,7 +109,7 @@ describe('resetPassword', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${RESET_PASSWORD} ${API_SUCCESS}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -129,7 +129,7 @@ describe('resetPassword', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('with global error', () => {
         const globalError = 'global error';
@@ -160,7 +160,7 @@ describe('resetPassword', () => {
         expect(actions[0].type).toEqual(RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'putting',
           },
         });
         expect(actions[1].type).toEqual(RESET_PASSWORD_SET);
@@ -170,7 +170,7 @@ describe('resetPassword', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${RESET_PASSWORD} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -190,7 +190,7 @@ describe('resetPassword', () => {
             loading: false,
           },
         });
-        expect(actions[7].type).toEqual(LOADER_SET);
+        expect(actions[7].type).toEqual(UI_SET);
       });
       it('with field error', () => {
         const passwordError = 'password error';
@@ -225,7 +225,7 @@ describe('resetPassword', () => {
         expect(actions[0].type).toEqual(RESET_PASSWORD_FETCH);
         expect(actions[1].payload).toEqual({
           data: {
-            status: 'pending',
+            status: 'putting',
           },
         });
         expect(actions[1].type).toEqual(RESET_PASSWORD_SET);
@@ -235,7 +235,7 @@ describe('resetPassword', () => {
             loading: true,
           },
         });
-        expect(actions[3].type).toEqual(LOADER_SET);
+        expect(actions[3].type).toEqual(UI_SET);
         expect(actions[4].type).toEqual(`${RESET_PASSWORD} ${API_ERROR}`);
         expect(actions[5].payload).toEqual({
           data: {
@@ -251,7 +251,7 @@ describe('resetPassword', () => {
             loading: false,
           },
         });
-        expect(actions[6].type).toEqual(LOADER_SET);
+        expect(actions[6].type).toEqual(UI_SET);
       });
     });
   });

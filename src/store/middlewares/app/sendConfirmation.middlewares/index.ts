@@ -59,7 +59,11 @@ const fetchSendConfirmation: Middleware = (
 ) => {
   next(action);
   if (action.type === SEND_CONFIRMATION_FETCH) {
-    dispatch(setSendConfirmation({ status: 'pending' }));
+    dispatch(
+      setSendConfirmation({
+        status: 'posting',
+      }),
+    );
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,

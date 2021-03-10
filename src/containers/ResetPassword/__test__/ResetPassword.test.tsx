@@ -105,9 +105,8 @@ describe('ResetPassword', () => {
     });
     fireEvent.submit(getByTestId(form));
     await waitFor(() => {
-      expect(mockedDispatch).toHaveBeenCalledTimes(2);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(1, mockedResetResetPassword);
-      expect(mockedDispatch).toHaveBeenNthCalledWith(2, mockedFetchResetPassword);
+      expect(mockedDispatch).toHaveBeenCalledTimes(1);
+      expect(mockedDispatch).toHaveBeenCalledWith(mockedFetchResetPassword);
     });
   });
   it('should not dispatch on submit if loading is true', async () => {

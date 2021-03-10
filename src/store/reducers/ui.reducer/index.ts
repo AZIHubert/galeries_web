@@ -1,10 +1,12 @@
-import { LOADER_SET } from '#store/actions';
+import { UI_SET } from '#store/actions';
 
 interface InitialStateI {
+  init: boolean;
   loading: boolean;
 }
 
 const initialState: InitialStateI = {
+  init: false,
   loading: false,
 };
 
@@ -13,7 +15,7 @@ export default (
   action: store.ActionI,
 ) => {
   switch (action.type) {
-    case LOADER_SET:
+    case UI_SET:
       return {
         ...state,
         ...action.payload ? action.payload.data : undefined,

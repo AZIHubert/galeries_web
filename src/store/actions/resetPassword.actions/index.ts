@@ -32,7 +32,7 @@ export const resetResetPassword: () => store.ActionI = () => ({
 export const setResetPassword: (
   data: {
     errors?: form.ResetPasswordI;
-    status?: store.FormStatus;
+    status?: store.Status;
   },
 ) => store.ActionI = (
   data,

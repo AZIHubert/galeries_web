@@ -10,7 +10,7 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-bdfBwQ hqPaig"
+        className="sc-bdfBwQ iTZTNd"
       >
         <label
           className="sc-hKgILt bXTMsJ"
@@ -33,7 +33,7 @@ Array [
         />
       </div>
       <div
-        className="sc-bdfBwQ hqPaig"
+        className="sc-bdfBwQ iTZTNd"
       >
         <label
           className="sc-hKgILt bXTMsJ"
@@ -56,7 +56,7 @@ Array [
         />
       </div>
       <div
-        className="sc-bdfBwQ hqPaig"
+        className="sc-bdfBwQ iTZTNd"
       >
         <label
           className="sc-hKgILt bXTMsJ"
@@ -79,7 +79,6 @@ Array [
         />
       </div>
       <button
-        data-testid="submitButton"
         disabled={false}
         type="submit"
       >
@@ -98,7 +97,7 @@ Array [
       onSubmit={[Function]}
     >
       <div
-        className="sc-bdfBwQ hqPaig"
+        className="sc-bdfBwQ iTZTNd"
       >
         <label
           className="sc-hKgILt bXTMsJ"

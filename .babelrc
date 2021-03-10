@@ -12,6 +12,7 @@
               "#components": "./src/components",
               "#containers": "./src/containers",
               "#contexts": "./src/contexts",
+              "#hooks": "./src/hooks",
               "#helpers": "./src/helpers",
               "react-facebook-login":  "react-facebook-login/dist/facebook-login-render-props",
               "#ressources": "./src/ressources",

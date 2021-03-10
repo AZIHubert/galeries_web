@@ -10,6 +10,9 @@ import {
 } from '#helpers/formErrors';
 
 const changePasswordSchema = Yup.object().shape({
+  confirmNewPassword: Yup.string()
+    .required(REQUIRED)
+    .oneOf([Yup.ref('newPassword'), null], CONFIRM_PASSWORD),
   currentPassword: Yup.string()
     .required(REQUIRED),
   newPassword: Yup.string()
@@ -21,9 +24,6 @@ const changePasswordSchema = Yup.object().shape({
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,30}$/,
       PASSWORD,
     ),
-  confirmNewPassword: Yup.string()
-    .required(REQUIRED)
-    .oneOf([Yup.ref('newPassword'), null], CONFIRM_PASSWORD),
 });
 
 export default changePasswordSchema;

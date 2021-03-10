@@ -6,12 +6,16 @@ import {
   USER,
   USER_FETCH,
   apiRequest,
+  setInit,
   setLoader,
   setNotification,
   setUser,
+  setProfilePicture,
 } from '#store/actions';
 
 import { endPoints } from '#store/constant';
+
+import { selectProfilPicture } from '#store/helpers';
 
 const errorUser: Middleware = (
   { dispatch },
@@ -26,6 +30,7 @@ const errorUser: Middleware = (
       error: true,
       text: action.payload ? action.payload.data : 'Something went wrong.',
     }));
+    dispatch(setInit(false));
     dispatch(setLoader(false));
   }
 };
@@ -59,7 +64,11 @@ const getUser: Middleware = (
 ) => {
   next(action);
   if (action.type === `${USER} ${API_SUCCESS}`) {
-    dispatch(setUser(action.payload ? action.payload.data : undefined));
+    const user = action.payload ? action.payload.data : undefined;
+    dispatch(setUser(user));
+    const currentProfilePicture = selectProfilPicture(user);
+    dispatch(setProfilePicture({ current: currentProfilePicture }));
+    dispatch(setInit(false));
     dispatch(setLoader(false));
   }
 };

@@ -27,6 +27,7 @@ module.exports = {
     '#components/(.*)': '<rootDir>/src/components/$1',
     '#contexts/(.*)': '<rootDir>/src/contexts/$1',
     '#containers/(.*)': '<rootDir>/src/containers/$1',
+    '#hooks/(.*)': '<rootDir>/src/hooks/$1',
     '#helpers/(.*)': '<rootDir>/src/helpers/$1',
     '#ressources/(.*)': '<rootDir>/src/ressources/$1',
     '#src/(.*)': '<rootDir>/src/$1',

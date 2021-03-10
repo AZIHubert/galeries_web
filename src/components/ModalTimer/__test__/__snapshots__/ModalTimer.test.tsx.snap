@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Desktop renders without crashing 1`] = `
-<div
-  className="sc-bdfBwQ kwyfnM"
->
-  render text
-</div>
-`;

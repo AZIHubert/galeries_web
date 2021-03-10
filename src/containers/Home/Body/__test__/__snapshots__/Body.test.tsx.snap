@@ -2,16 +2,19 @@
 
 exports[`Body renders without crashing 1`] = `
 <div
-  className="sc-pFZIQ hSQOzh"
+  className="sc-jrAGrp hjYpvF"
 >
   <div>
-    <h2
-      className="sc-kEjbxe KyhCS"
+    <p
+      className="sc-bdfBwQ jBbmrr"
+      color="black"
+      fontStyle="normal"
+      fontWeight="bold"
     >
       Welcome to
-    </h2>
+    </p>
     <h1
-      className="sc-jrAGrp eIVJEn"
+      className="sc-kEjbxe dVcOQk"
     >
       <svg
         viewBox="0 0 356.12 51.77"
@@ -137,17 +140,26 @@ exports[`Body renders without crashing 1`] = `
       </svg>
     </h1>
     <p
-      className="sc-fubCfw bCQQtl"
+      className="sc-bdfBwQ iHpmfc"
+      color="black"
+      fontStyle="italic"
+      fontWeight="normal"
     >
       A web app to share
     </p>
     <p
-      className="sc-fubCfw bCQQtl"
+      className="sc-bdfBwQ iHpmfc"
+      color="black"
+      fontStyle="italic"
+      fontWeight="normal"
     >
       pictures with
     </p>
     <p
-      className="sc-fubCfw bCQQtl"
+      className="sc-bdfBwQ iHpmfc"
+      color="black"
+      fontStyle="italic"
+      fontWeight="normal"
     >
       your friends and family.
     </p>

@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile renders without crashing 1`] = `
+<div
+  className="sc-cOajty ksAQLU"
+>
+  <div
+    className="sc-bBrOnJ eYGPd"
+  >
+    <div
+      className="sc-fKFyDc fMiTOn"
+    >
+      <div
+        className="sc-idOhPF iSChTy"
+      >
+        <div
+          className="sc-dmlrTW itfrvb"
+        >
+          <div
+            className="sc-hHftDr jnnxJq"
+            data-testid="imageContainer"
+          >
+            <div />
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-fFubgz fLkKOp"
+      >
+        <p
+          className="sc-bdfBwQ haSqqC"
+          color="primary"
+          fontStyle="normal"
+          fontWeight="bold"
+        >
+          user name
+        </p>
+        <input
+          accept="image/*"
+          className="sc-bkzZxe hGYQrN"
+          data-testid="inputFile"
+          onChange={[Function]}
+          type="file"
+        />
+        <button
+          className="sc-iqHYGH hBMFDe"
+          onClick={[Function]}
+        >
+          Add a profile picture
+        </button>
+        <button
+          className="sc-iqHYGH jspEwG"
+          onClick={[Function]}
+        >
+          Edit your info
+        </button>
+      </div>
+    </div>
+    <div
+      className="sc-eggNIi jakjRS"
+    >
+      <div
+        className="sc-cTkwdZ iKSNdt"
+        data-testid="container"
+      />
+    </div>
+  </div>
+  <p
+    className="sc-bdfBwQ pCYUg"
+    color="black"
+    fontStyle="normal"
+    fontWeight="lighter"
+  >
+    Allan Aoudji @2021
+  </p>
+</div>
+`;

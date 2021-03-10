@@ -7,17 +7,28 @@ import ThemeProvider from '#contexts/ThemeContext';
 
 import TextSeparator from '../index';
 
-const Container = ({
-  marginBottom,
-  marginTop,
-}: {
+interface StylesI {
   marginBottom?: number;
+  marginLeft?: number;
+  marginRight?: number;
   marginTop?: number;
-}) => (
+}
+
+interface ContainerI {
+  small?: boolean;
+  styles?: StylesI;
+  stylesMobile?: StylesI;
+  stylesTablet?: StylesI;
+  stylesLaptop?: StylesI;
+  stylesLaptopL?: StylesI;
+}
+
+const Container = ({
+  styles,
+}: ContainerI) => (
   <ThemeProvider>
     <TextSeparator
-      marginBottom={marginBottom}
-      marginTop={marginTop}
+      styles={styles}
       text='text'
     />
   </ThemeProvider>
@@ -39,7 +50,9 @@ describe('TextSeparator', () => {
   it('should set margin-bottom', () => {
     const { getByText } = render(
       <Container
-        marginBottom={10}
+        styles={{
+          marginBottom: 10,
+        }}
       />,
     );
     expect(getByText('text')).toHaveStyle('margin: 0px 0px 10px 0px');
@@ -47,7 +60,9 @@ describe('TextSeparator', () => {
   it('should set margin-top', () => {
     const { getByText } = render(
       <Container
-        marginTop={10}
+        styles={{
+          marginTop: 10,
+        }}
       />,
     );
     expect(getByText('text')).toHaveStyle('margin: 10px 0px 0px 0px');

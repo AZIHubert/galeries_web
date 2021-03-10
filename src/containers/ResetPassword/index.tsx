@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 
 import Field from '#components/Field';
-import GradientButton from '#components/GradientButton';
+import Button from '#components/Button';
 import RequiredField from '#components/RequiredField';
 
 import { resetPasswordSchema } from '#helpers/schemas';
@@ -48,7 +48,6 @@ const ResetPassword = () => {
     initialValues,
     onSubmit: async (values) => {
       if (!loading) {
-        resetForm();
         dispatch(fetchResetPassword({
           ...values,
           confirmToken: `Bearer ${token}`,
@@ -71,11 +70,9 @@ const ResetPassword = () => {
     }
   }, [resetPasswordStatus]);
 
-  React.useEffect(() => () => resetForm(), []);
-
-  const resetForm = () => {
+  React.useEffect(() => () => {
     dispatch(resetResetPassword());
-  };
+  }, []);
 
   return (
     <Container>
@@ -93,8 +90,6 @@ const ResetPassword = () => {
           }
           fieldTestId='password'
           id='password'
-          marginBottom={6}
-          marginBottomL={10}
           label='password'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -109,6 +104,12 @@ const ResetPassword = () => {
             }
           }}
           required
+          styles={{
+            marginBottom: 6,
+          }}
+          stylesLaptopL={{
+            marginBottom: 10,
+          }}
           touched={formik.touched.password}
           type='password'
           value={formik.values.password}
@@ -120,7 +121,6 @@ const ResetPassword = () => {
           }
           fieldTestId='confirmPassword'
           id='confirmPassword'
-          marginBottom={12}
           label='confirm password'
           onBlur={formik.handleBlur}
           onChange={(e) => {
@@ -135,16 +135,23 @@ const ResetPassword = () => {
             }
           }}
           required
+          styles={{
+            marginBottom: 12,
+          }}
           touched={formik.touched.confirmPassword}
           type='password'
           value={formik.values.confirmPassword}
         />
         <RequiredField />
-        <GradientButton
+        <Button.Gradiant
           disabled={loading}
-          marginBottom={15}
-          marginTop={25}
-          marginTopL={35}
+          styles={{
+            marginBottom: 15,
+            marginTop: 25,
+          }}
+          stylesLaptopL={{
+            marginTop: 35,
+          }}
           title='Reset password'
           type='submit'
         />

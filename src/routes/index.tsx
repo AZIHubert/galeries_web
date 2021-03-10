@@ -4,95 +4,62 @@ import {
   useSelector,
 } from 'react-redux';
 import {
-  BrowserRouter as Router,
   Redirect,
 } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
-import styled from 'styled-components';
 import AnimatedRoute from '#components/AnimatedRoute';
-import Desktop from '#containers/Desktop';
-import Loader from '#components/Loader';
-import Modal from '#components/Modal';
-import ModalCallback from '#components/ModalCallback';
 
 import ConfirmAccount from '#containers/ConfirmAccount';
+import Desktop from '#containers/Desktop';
+import FullPageImage from '#containers/FullPageImage';
+import Header from '#containers/Header';
 import Home from '#containers/Home';
+import Loader from '#components/Loader';
+import Profile from '#containers/Profile';
 import ResetPassword from '#containers/ResetPassword';
 
-import { fetchUser } from '#store/actions';
+import { fetchInitUser } from '#store/actions';
 import {
+  initSelector,
   userSelector,
-  loadingSelector,
 } from '#store/selectors';
 
 import {
-  localStorages,
-} from '#store/constant';
-
-const Container = styled.div`
-  left: 0;
-  position: absolute;
-  right: 0;
-  &.fade-enter {
-    opacity: 0;
-  }
-  &.fade-enter-active {
-    opacity: 1;
-    transition: 500ms;
-  }
-  &.fade-exit {
-    opacity: 1;
-  }
-  &.fade-exit-active {
-    opacity: 0;
-    transition: 500ms;
-  }
-`;
-
-const token = localStorage.getItem(localStorages.AUTH_TOKEN);
-const expiresIn = localStorage.getItem(localStorages.EXPIRES_DATE_TOKEN);
+  Fader,
+} from './styles';
 
 const Routes = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(loadingSelector);
+  const init = useSelector(initSelector);
   const user = useSelector(userSelector);
   const [allowRedirect, setAllowRedirect] = React.useState<boolean>(false);
-  const [callbackModal, setCallbackModal] = React.useState<{
-    error: boolean;
-    open: boolean;
-    text: string;
-  }>({
-    error: false,
-    open: false,
-    text: '',
-  });
+
   React.useEffect(() => {
     const timer = setTimeout(() => setAllowRedirect(true), 2000);
-    if (token && expiresIn) {
-      dispatch(fetchUser());
-    }
+    dispatch(fetchInitUser());
     return () => clearTimeout(timer);
   }, []);
+
   return (
-    <Router>
+    <>
       <CSSTransition
         classNames='fade'
-        in={!allowRedirect || loading}
+        in={init || !allowRedirect}
         timeout={300}
         unmountOnExit
       >
-        <Container>
+        <Fader>
           <Loader />
-        </Container>
+        </Fader>
       </CSSTransition>
       <CSSTransition
         classNames='fade'
-        in={allowRedirect && !loading}
+        in={allowRedirect && !init}
         timeout={300}
         unmountOnExit
       >
-        <Container>
+        <Fader>
           <AnimatedRoute
             path='/'
           >
@@ -103,10 +70,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            onExiting={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: true,
-            }))}
             path='/confirmation/:token'
           >
             {user ? (
@@ -116,10 +79,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            onExiting={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: true,
-            }))}
             path='/resetPassword/:token'
           >
             {user ? (
@@ -129,10 +88,6 @@ const Routes = () => {
             )}
           </AnimatedRoute>
           <AnimatedRoute
-            onExiting={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: true,
-            }))}
             path='/dashboard'
           >
             {!user ? (
@@ -141,25 +96,28 @@ const Routes = () => {
               <Desktop />
             )}
           </AnimatedRoute>
-          <Modal
-            callBack={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              text: '',
-            }))}
-            handleClose={() => setCallbackModal((prevState) => ({
-              ...prevState,
-              open: false,
-            }))}
-            open={callbackModal.open && !!callbackModal.text}
+          <AnimatedRoute
+            path='/profile'
           >
-            <ModalCallback
-              text={callbackModal.text}
-              variant={callbackModal.error ? 'error' : 'primary'}
-            />
-          </Modal>
-        </Container>
+            {!user ? (
+              <Redirect to='/' />
+            ) : (
+              <Profile />
+            )}
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/profilePicture/:id'
+          >
+            {!user ? (
+              <Redirect to='/' />
+            ) : (
+              <FullPageImage />
+            )}
+          </AnimatedRoute>
+          <Header.Desktop />
+        </Fader>
       </CSSTransition>
-    </Router>
+    </>
   );
 };
 

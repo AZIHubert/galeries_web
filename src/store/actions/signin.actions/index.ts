@@ -30,7 +30,7 @@ export const resetSignin: () => store.ActionI = () => ({
 export const setSignin: (
   data: {
     errors?: form.SigninI
-    status?: store.FormStatus;
+    status?: store.Status;
   },
 ) => store.ActionI = (
   data,

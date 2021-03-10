@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal renders without crashing 1`] = `
+<div
+  className="sc-dlfnbm dqXZeE"
+>
+  <div
+    className="sc-gsTCUz kJukDr modal"
+  >
+    <div />
+  </div>
+  <div
+    className="sc-bdfBwQ UqOCl background-modal"
+    onClick={[Function]}
+  />
+</div>
+`;

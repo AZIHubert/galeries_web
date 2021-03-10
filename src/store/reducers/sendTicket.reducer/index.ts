@@ -2,7 +2,7 @@ import { SEND_TICKET_SET } from '#store/actions';
 
 interface InitialStateI {
   errors: form.SendTicketI,
-  status: store.FormStatus,
+  status: store.Status,
 }
 
 const initialState: InitialStateI = {

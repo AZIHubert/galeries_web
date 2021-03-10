@@ -1,47 +1,78 @@
 import * as React from 'react';
+import BounceLoader from 'react-spinners/BounceLoader';
+import { CSSTransition } from 'react-transition-group';
 
-import Modal from '#components/Modal';
+import Image from '#components/Image';
 
-import ModalProfilePicture from './ModalProfilePicture';
+import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
 
-interface ProfilePictureComponentI {
-  profilePicture: ProfilePictureI;
+import themeColor from '#helpers/theme';
+
+import DeleteButton from './DeleteButton';
+import PutButton from './PutButton';
+
+import {
+  Container,
+  Fader,
+  Link,
+  Opacity,
+  SpinnerContainer,
+} from './styles';
+
+interface ProfilePictureContainerI {
+  id: string;
+  profilePicture: ProfilePictureI,
 }
 
 const ProfilePicture = ({
-  profilePicture,
-}: ProfilePictureComponentI) => {
-  const [openModal, setOpenModal] = React.useState<boolean>(false);
-  const handleClose = () => {
-    setOpenModal(false);
-  };
-  const switchCurrent = () => {};
+  id,
+  profilePicture: {
+    cropedImage,
+    pendingImage,
+  },
+}: ProfilePictureContainerI) => {
+  const {
+    puttingImage,
+    deletingImage,
+  } = React.useContext(ProfilePictureContext);
+
   return (
-    <div
-      data-testid='profilePicture'
-    >
-      <button
-        data-testid='profilePictureButton'
-        onClick={() => switchCurrent()}
+    <Container>
+      <PutButton
+        id={id}
       />
-      <button
-        onClick={() => setOpenModal((nextState) => !nextState)}
+      <DeleteButton
+        id={id}
+      />
+      <Opacity
+        isPutting={puttingImage === id || deletingImage === id}
       >
-        <img
-          alt='profile picture'
-          src={profilePicture.originalImage.signedUrl}
-        />
-      </button>
-      <Modal
-        open={openModal}
-        handleClose={handleClose}
+        <Link
+          to={`/profilePicture/${id}`}
+        >
+          <Image
+            original={cropedImage.signedUrl}
+            pending={pendingImage.signedUrl}
+          />
+        </Link>
+      </Opacity>
+      <CSSTransition
+        classNames='fade'
+        in={puttingImage === id || deletingImage === id}
+        timeout={300}
+        unmountOnExit
       >
-        <ModalProfilePicture
-          profilePicture={profilePicture}
-        />
-      </Modal>
-    </div>
+        <Fader>
+          <SpinnerContainer>
+            <BounceLoader
+              color={themeColor.colors.secondary}
+              size={60}
+            />
+          </SpinnerContainer>
+        </Fader>
+      </CSSTransition>
+    </Container>
   );
 };
 
-export default ProfilePicture;
+export default React.memo(ProfilePicture);

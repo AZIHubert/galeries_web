@@ -1,17 +1,30 @@
 import * as React from 'react';
 
+import Text from '#components/Text';
+
 import {
   Container,
 } from './styles';
 
 const RequiredField = () => (
   <Container>
-    <p>
+    <Text
+      color='danger'
+      styles={{
+        fontSize: 0.8,
+        marginRight: 5,
+      }}
+    >
       *
-    </p>
-    <p>
+    </Text>
+    <Text
+      color='primary'
+      styles={{
+        fontSize: 0.8,
+      }}
+    >
       Required fields
-    </p>
+    </Text>
   </Container>
 );
 

@@ -10,6 +10,9 @@ import {
   LOGIN_GOOGLE,
   LOGIN_SET,
   LOGOUT,
+  PROFILE_PICTURE_POST,
+  PROFILE_PICTURE_SET,
+  PROFILE_PICTURES,
   REFRESH_TOKEN,
   RESET_PASSWORD,
   SEND_CONFIRMATION,
@@ -54,6 +57,9 @@ declare global {
       typeof LOGIN_GOOGLE |
       typeof LOGIN_SET |
       typeof LOGOUT |
+      typeof PROFILE_PICTURES |
+      typeof PROFILE_PICTURE_POST |
+      typeof PROFILE_PICTURE_SET |
       typeof REFRESH_TOKEN |
       typeof RESET_PASSWORD |
       typeof SEND_CONFIRMATION |
@@ -62,18 +68,27 @@ declare global {
       typeof SIGNIN |
       typeof USER_SET;
 
-    type FormStatus = 'pending' | 'success' | 'error';
+    type Status =
+      'delete' |
+      'error' |
+      'fetching' |
+      'pending' |
+      'posting' |
+      'putting' |
+      'success';
 
     interface ActionI {
       type: string;
       payload?: {
         data: any;
         meta?: {
+          confirmToken?: string;
+          contentType?: string;
           entity?: Entity;
           method?: Method;
+          page?: number;
           url?: string;
-          confirmToken?: string;
-          callback?: () => void;
+          params?: string;
         }
       }
     }
@@ -85,31 +100,48 @@ declare global {
 
     interface ReducersI {
       login: {
-        status: FormStatus;
+        status: Status;
         errors: form.LoginI;
       };
       notification: NotificationI;
+      profilePicture: {
+        status: Status;
+        current: {
+          croped: string;
+          original: string;
+          pending: string;
+        }
+      };
+      profilePictures: {
+        end: boolean;
+        page: number;
+        profilePictures: { [name: string]: ProfilePictureI };
+        status: Status;
+      }
       resetPassword: {
-        status: FormStatus;
+        status: Status;
         errors: form.ResetPasswordI
       };
       sendConfirmation: {
-        status: FormStatus;
+        status: Status;
         errors: form.SendConfirmationI;
       };
       sendResetPassword: {
-        status: FormStatus;
+        status: Status;
         errors: form.SendResetPasswordI;
       };
       sendTicket: {
-        status: FormStatus;
+        status: Status;
         errors: form.SendTicketI;
       }
       signin: {
-        status: FormStatus;
+        status: Status;
         errors: SigninI;
       };
-      ui: { loading: boolean; };
+      ui: {
+        init: boolean;
+        loading: boolean;
+      };
       user: UserI | null;
     }
   }
@@ -123,10 +155,11 @@ declare global {
       'tertiary' |
       'white';
     type FontStyle =
-      'lighter' |
+      'italic' |
       'normal';
     type FontWeight =
       'bold' |
+      'lighter' |
       'normal';
     type JustifyContent =
       'center' |

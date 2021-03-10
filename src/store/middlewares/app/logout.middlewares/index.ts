@@ -6,6 +6,7 @@ import {
   LOGOUT,
   LOGOUT_FETCH,
   apiRequest,
+  resetProfilePictures,
   setLoader,
   setNotification,
   setUser,
@@ -65,6 +66,7 @@ const successLogout: Middleware = (
   if (action.type === `${LOGOUT} ${API_SUCCESS}`) {
     localStorage.clear();
     dispatch(setUser(null));
+    dispatch(resetProfilePictures());
     dispatch(setLoader(false));
   }
 };

@@ -6,5 +6,6 @@ export const LOGIN_GOOGLE = '/users/auth/google';
 export const LOGOUT = '/users/logout';
 export const REFRESH_TOKEN = '/users/refreshToken';
 export const RESET_PASSWORD = '/users/resetPassword';
+export const PROFILE_PICTURE = '/users/me/profilePictures/';
 export const SIGNIN = '/users/signin';
 export const TICKET = '/tickets/';
