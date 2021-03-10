@@ -1,6 +1,9 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import {
+  useSelector,
+  useDispatch,
+} from 'react-redux';
 
 import Button from '#components/Button';
 import Field from '#components/Field';
@@ -8,7 +11,15 @@ import RequiredField from '#components/RequiredField';
 
 import { changePasswordSchema } from '#helpers/schemas';
 
-import { loadingSelector } from '#store/selectors';
+import {
+  putUpdatePassword,
+  setUpdatePassword,
+} from '#store/actions';
+import {
+  loadingSelector,
+  updatePasswordErrorsselector,
+  updatePasswordStatusSelector,
+} from '#store/selectors';
 
 const initialValues = {
   confirmNewPassword: '',
@@ -17,25 +28,54 @@ const initialValues = {
 };
 
 const ChangePassword = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {},
+    onSubmit: async (values) => {
+      if (!loading) {
+        dispatch(putUpdatePassword(values));
+      }
+    },
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: changePasswordSchema,
   });
   const loading = useSelector(loadingSelector);
+  const updatePasswordErrors = useSelector(updatePasswordErrorsselector);
+  const updatePasswordStatus = useSelector(updatePasswordStatusSelector);
+
+  React.useEffect(() => {
+    if (updatePasswordStatus === 'success') {
+      formik.resetForm({
+        values: initialValues,
+      });
+    }
+  }, [updatePasswordStatus]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <Field
         disabled={loading}
-        error={formik.errors.currentPassword}
+        error={
+          formik.errors.currentPassword || updatePasswordErrors.currentPassword
+        }
         fieldTestId='currentPassword'
         id='currentPassword'
         label='current password'
         onBlur={formik.handleBlur}
-        onChange={formik.handleChange}
+        onChange={(e) => {
+          formik.handleChange(e);
+          if (updatePasswordErrors.currentPassword) {
+            dispatch(
+              setUpdatePassword({
+                errors: {
+                  ...updatePasswordErrors,
+                  currentPassword: '',
+                },
+              }),
+            );
+          }
+        }}
         required
         styles={{
           marginBottom: 15,

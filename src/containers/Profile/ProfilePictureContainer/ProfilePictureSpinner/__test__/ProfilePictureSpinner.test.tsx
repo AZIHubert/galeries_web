@@ -4,26 +4,16 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
-import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+import {
+  defaultValue,
+  ProfilePictureContext,
+} from '#contexts/ProfilePictureContext';
 
 import reducers from '#store/reducers';
 
 import ProfilePictureSpinner from '../index';
 
 const mockedStore = createStore(reducers);
-
-const ProfilePictureProviderValues = {
-  isPosting: false,
-  isPutting: false,
-  profilePicture: {
-    croped: '',
-    original: '',
-    pending: '',
-  },
-  profilePictures: {},
-  puttingImage: null,
-  setPuttingImage: () => {},
-};
 
 const Container = ({
   isPosting = false,
@@ -32,7 +22,7 @@ const Container = ({
     <ThemeProvider>
       <ProfilePictureContext.Provider
         value={{
-          ...ProfilePictureProviderValues,
+          ...defaultValue,
           isPosting,
         }}
       >

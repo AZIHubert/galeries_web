@@ -48,6 +48,9 @@ declare global {
       password: string;
       userName: string;
     }
+    interface UpdateEmailI {
+      password: string;
+    }
     interface UpdatePasswordI {
       confirmNewPassword: string;
       currentPassword: string;
@@ -124,29 +127,37 @@ declare global {
         status: Status;
       }
       resetPassword: {
-        status: Status;
         errors: form.ResetPasswordI
+        status: Status;
       };
       sendConfirmation: {
-        status: Status;
         errors: form.SendConfirmationI;
+        status: Status;
       };
       sendResetPassword: {
-        status: Status;
         errors: form.SendResetPasswordI;
+        status: Status;
       };
       sendTicket: {
-        status: Status;
         errors: form.SendTicketI;
+        status: Status;
       }
       signin: {
-        status: Status;
         errors: SigninI;
+        status: Status;
       };
       ui: {
         init: boolean;
         loading: boolean;
       };
+      updateEmail: {
+        errors: form.UpdateEmailI;
+        status: Status;
+      }
+      updatePassword: {
+        errors: form.UpdatePasswordI;
+        status: Status;
+      }
       user: UserI | null;
     }
   }

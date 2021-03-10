@@ -1,142 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Edit renders without crashing 1`] = `
-Array [
-  <div>
-    <p>
-      change password
-    </p>
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="sc-bdfBwQ iTZTNd"
-      >
-        <label
-          className="sc-hKgILt bXTMsJ"
-          htmlFor="currentPassword"
-        >
-          <p>
-            current password
-          </p>
-        </label>
-        <input
-          className="sc-dlfnbm grJsJX"
-          data-testid="currentPassword"
-          disabled={false}
-          id="currentPassword"
-          name="currentPassword"
-          onBlur={[Function]}
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <div
-        className="sc-bdfBwQ iTZTNd"
-      >
-        <label
-          className="sc-hKgILt bXTMsJ"
-          htmlFor="newPassword"
-        >
-          <p>
-            new password
-          </p>
-        </label>
-        <input
-          className="sc-dlfnbm grJsJX"
-          data-testid="newPassword"
-          disabled={false}
-          id="newPassword"
-          name="newPassword"
-          onBlur={[Function]}
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <div
-        className="sc-bdfBwQ iTZTNd"
-      >
-        <label
-          className="sc-hKgILt bXTMsJ"
-          htmlFor="confirmNewPassword"
-        >
-          <p>
-            confirm new password
-          </p>
-        </label>
-        <input
-          className="sc-dlfnbm grJsJX"
-          data-testid="confirmNewPassword"
-          disabled={false}
-          id="confirmNewPassword"
-          name="confirmNewPassword"
-          onBlur={[Function]}
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <button
-        disabled={false}
-        type="submit"
-      >
-        change your password
-      </button>
-    </form>
-  </div>,
-  <div>
-    <p>
-      change your email
-    </p>
-    <p>
-      Enter your password to receive a message on your current adress. This message contain a link to update your email.
-    </p>
-    <form
-      onSubmit={[Function]}
-    >
-      <div
-        className="sc-bdfBwQ iTZTNd"
-      >
-        <label
-          className="sc-hKgILt bXTMsJ"
-          htmlFor="password"
-        >
-          <p>
-            password
-          </p>
-        </label>
-        <input
-          className="sc-dlfnbm grJsJX"
-          data-testid="field"
-          disabled={false}
-          id="password"
-          name="password"
-          onBlur={[Function]}
-          onChange={[Function]}
-          type="password"
-          value=""
-        />
-      </div>
-      <button
-        disabled={false}
-        type="submit"
-      >
-        change your email
-      </button>
-    </form>
-  </div>,
-  <div>
-    <p>
-      delete your account
-    </p>
-    <p>
-      Once you delete your account, there is no going back. Please be certain.
-    </p>
-    <button
-      onClick={[Function]}
-    />
-  </div>,
-]
+<div
+  className="sc-kfzAmx iciXgW"
+>
+  <p
+    className="sc-bdfBwQ pCYUg"
+    color="black"
+    fontStyle="normal"
+    fontWeight="lighter"
+  >
+    Allan Aoudji @2021
+  </p>
+</div>
 `;

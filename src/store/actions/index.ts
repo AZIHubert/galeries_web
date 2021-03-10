@@ -14,5 +14,6 @@ export * from './sendResetPassword.actions';
 export * from './sendTicket.actions';
 export * from './signin.actions';
 export * from './ui.actions';
+export * from './updateEmail.actions';
 export * from './updatePassword.actions';
 export * from './user.actions';

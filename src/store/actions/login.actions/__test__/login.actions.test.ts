@@ -44,6 +44,7 @@ describe('login', () => {
               password: '',
               userNameOrEmail: '',
             },
+            status: 'pending',
           },
         },
         type: LOGIN_SET,

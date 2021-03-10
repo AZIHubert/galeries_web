@@ -1,26 +1,21 @@
 import { Middleware } from 'redux';
 
 import {
+  UPDATE_EMAIL,
+  UPDATE_EMAIL_POST,
   API_ERROR,
   API_SUCCESS,
-  UPDATE_PASSWORD,
-  UPDATE_PASSWORD_PUT,
   apiRequest,
-  setUpdatePassword,
   setLoader,
   setNotification,
+  setUpdateEmail,
 } from '#store/actions';
 
 import {
   endPoints,
 } from '#store/constant';
 
-import {
-  setAuthToken,
-  setExpiresToken,
-} from '#store/helpers';
-
-const errorUpdatePassword: Middleware = (
+const errorUpdateEmail: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -28,18 +23,18 @@ const errorUpdatePassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === `${UPDATE_PASSWORD} ${API_ERROR}`) {
+  if (action.type === `${UPDATE_EMAIL} ${API_ERROR}`) {
     if (action.payload) {
       if (typeof action.payload.data === 'object') {
         dispatch(
-          setUpdatePassword({
+          setUpdateEmail({
             errors: action.payload.data,
             status: 'error',
           }),
         );
       } else {
         dispatch(
-          setUpdatePassword({
+          setUpdateEmail({
             status: 'error',
           }),
         );
@@ -52,7 +47,7 @@ const errorUpdatePassword: Middleware = (
       }
     } else {
       dispatch(
-        setUpdatePassword({
+        setUpdateEmail({
           status: 'error',
         }),
       );
@@ -67,7 +62,7 @@ const errorUpdatePassword: Middleware = (
   }
 };
 
-const putUpdatePassword: Middleware = (
+const postUpdateEmail: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -75,24 +70,24 @@ const putUpdatePassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === UPDATE_PASSWORD_PUT) {
+  if (action.type === UPDATE_EMAIL_POST) {
     dispatch(
-      setUpdatePassword({
-        status: 'putting',
+      setUpdateEmail({
+        status: 'posting',
       }),
     );
     dispatch(
       apiRequest(
         action.payload ? action.payload.data : undefined,
-        'PUT',
-        endPoints.UPDATE_PASSWORD,
-        UPDATE_PASSWORD,
+        'POST',
+        endPoints.UPDATE_EMAIL,
+        UPDATE_EMAIL,
       ),
     );
   }
 };
 
-const successUpdatePassword: Middleware = (
+const successUpdateEmail: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -100,26 +95,20 @@ const successUpdatePassword: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === `${UPDATE_PASSWORD} ${API_SUCCESS}`) {
-    if (action.payload) {
-      setAuthToken(action.payload.data.token);
-      setExpiresToken(action.payload.data.expiresIn);
-    }
-    dispatch(setUpdatePassword({
+  if (action.type === `${UPDATE_EMAIL} ${API_SUCCESS}`) {
+    dispatch(setUpdateEmail({
       status: 'success',
     }));
-    dispatch(
-      setNotification({
-        error: false,
-        text: 'you\'re password has been modify successfully',
-      }),
-    );
+    dispatch(setNotification({
+      error: false,
+      text: 'an email has been sent to you',
+    }));
     dispatch(setLoader(false));
   }
 };
 
 export default [
-  errorUpdatePassword,
-  putUpdatePassword,
-  successUpdatePassword,
+  errorUpdateEmail,
+  postUpdateEmail,
+  successUpdateEmail,
 ];
