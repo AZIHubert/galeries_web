@@ -11,6 +11,7 @@ import sendTicket from './sendTicket.reducer';
 import signin from './signin.reducer';
 import updateEmail from './updateEmail.reducer';
 import updateEmailConfirm from './updateEmailConfirm.reducer';
+import updateEmailValidate from './updateEmailValidate.reducer';
 import updatePassword from './updatePassword.reducer';
 import user from './user.reducer';
 import ui from './ui.reducer';
@@ -27,6 +28,7 @@ export default combineReducers({
   signin,
   updateEmail,
   updateEmailConfirm,
+  updateEmailValidate,
   updatePassword,
   ui,
   user,

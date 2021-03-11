@@ -1,6 +1,7 @@
 export const UPDATE_EMAIL = '[UPDATE EMAIL]';
 
 export const UPDATE_EMAIL_POST = `${UPDATE_EMAIL} Post`;
+export const UPDATE_EMAIL_PUT = `${UPDATE_EMAIL} Put`;
 export const UPDATE_EMAIL_SET = `${UPDATE_EMAIL} Set`;
 
 export const postUpdateEmail: (

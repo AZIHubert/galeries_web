@@ -23,6 +23,8 @@ export { default as updateEmailConfirmErrorsSelector } from './updateEmailConfir
 export { default as updateEmailConfirmStatusSelector } from './updateEmailConfirmStatus.selector';
 export { default as updateEmailErrorSelector } from './updateEmailError.selector';
 export { default as updateEmailStatusSelector } from './updateEmailStatus.selector';
+export { default as updateEmailValidateErrorsSelector } from './updateEmailValidateErrors.selector';
+export { default as updateEmailValidateStatusSelector } from './updateEmailValidateStatus.selector';
 export { default as updatePasswordErrorsselector } from './updatePasswordError.selector';
 export { default as updatePasswordStatusSelector } from './updatePasswordStatus.selector';
 export { default as userSelector } from './user.selector';

@@ -13,6 +13,7 @@ import sendTicketMiddlewares from './sendTicket.middlewares';
 import signinMiddlewares from './signin.middlewares';
 import updateEmailConfirmMiddlewares from './updateEmailConfirm.middlewares';
 import updateEmailMiddlewares from './updateEmail.middlewares';
+import updateEmailValidateMiddleware from './updateEmailValidate.middlewares';
 import updatePasswordMiddlewares from './updatePassword.middlewares';
 import userMiddlewares from './user.middlewares';
 
@@ -32,6 +33,7 @@ export default [
   ...sendTicketMiddlewares,
   ...updateEmailConfirmMiddlewares,
   ...updateEmailMiddlewares,
+  ...updateEmailValidateMiddleware,
   ...updatePasswordMiddlewares,
   ...userMiddlewares,
 ];

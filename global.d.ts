@@ -165,6 +165,10 @@ declare global {
         errors: form.ChangeEmailConfirmI;
         status: Status;
       }
+      updateEmailValidate: {
+        errors: form.UpdateEmailI;
+        status: Status;
+      }
       updatePassword: {
         errors: form.UpdatePasswordI;
         status: Status;
