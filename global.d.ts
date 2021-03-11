@@ -158,6 +158,10 @@ declare global {
         errors: form.UpdateEmailI;
         status: Status;
       }
+      updateEmailConfirm: {
+        errors: form.UpdateEmailConfirmI;
+        status: Status;
+      }
       updatePassword: {
         errors: form.UpdatePasswordI;
         status: Status;

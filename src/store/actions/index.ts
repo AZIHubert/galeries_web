@@ -15,5 +15,6 @@ export * from './sendTicket.actions';
 export * from './signin.actions';
 export * from './ui.actions';
 export * from './updateEmail.actions';
+export * from './updateEmailConfirm.actions';
 export * from './updatePassword.actions';
 export * from './user.actions';

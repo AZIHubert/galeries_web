@@ -10,4 +10,5 @@ export const PROFILE_PICTURE = '/users/me/profilePictures/';
 export const SIGNIN = '/users/signin';
 export const TICKET = '/tickets/';
 export const UPDATE_EMAIL = '/users/me/updateEmail/';
+export const UPDATE_EMAIL_CONFIRM = '/users/me/updateEmail/confirm';
 export const UPDATE_PASSWORD = '/users/me/updatePassword/';

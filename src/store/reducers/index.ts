@@ -10,6 +10,7 @@ import sendResetPassword from './sendResetPassword.reducer';
 import sendTicket from './sendTicket.reducer';
 import signin from './signin.reducer';
 import updateEmail from './updateEmail.reducer';
+import updateEmailConfirm from './updateEmailConfirm.reducer';
 import updatePassword from './updatePassword.reducer';
 import user from './user.reducer';
 import ui from './ui.reducer';
@@ -25,6 +26,7 @@ export default combineReducers({
   sendTicket,
   signin,
   updateEmail,
+  updateEmailConfirm,
   updatePassword,
   ui,
   user,

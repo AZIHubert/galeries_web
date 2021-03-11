@@ -1,16 +1,17 @@
 import reducer from '../index';
 
 import {
-  UPDATE_EMAIL_SET,
+  UPDATE_EMAIL_CONFIRM_SET,
 } from '#store/actions';
 
-describe('updateEmail', () => {
+describe('updateEmailConfirm', () => {
   describe('reducer', () => {
     it('should return the initial state', () => {
       expect(reducer(undefined, {
         type: '@@INIT',
       })).toEqual({
         errors: {
+          email: '',
           password: '',
         },
         status: 'pending',
@@ -27,10 +28,11 @@ describe('updateEmail', () => {
               },
             },
           },
-          type: UPDATE_EMAIL_SET,
+          type: UPDATE_EMAIL_CONFIRM_SET,
         },
       )).toEqual({
         errors: {
+          email: '',
           password,
         },
         status: 'pending',
@@ -45,10 +47,11 @@ describe('updateEmail', () => {
               status,
             },
           },
-          type: UPDATE_EMAIL_SET,
+          type: UPDATE_EMAIL_CONFIRM_SET,
         },
       )).toEqual({
         errors: {
+          email: '',
           password: '',
         },
         status,

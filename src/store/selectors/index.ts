@@ -19,6 +19,8 @@ export { default as sendTicketStatusSelector } from './sendTicketStatus.selector
 export { default as signinErrorSelector } from './signinError.selector';
 export { default as signinStatusSelector } from './signinStatus.selector';
 export { default as uiSelector } from './ui.selector';
+export { default as updateEmailConfirmErrorsSelector } from './updateEmailConfirmErrors.selector';
+export { default as updateEmailConfirmStatusSelector } from './updateEmailConfirmStatus.selector';
 export { default as updateEmailErrorSelector } from './updateEmailError.selector';
 export { default as updateEmailStatusSelector } from './updateEmailStatus.selector';
 export { default as updatePasswordErrorsselector } from './updatePasswordError.selector';

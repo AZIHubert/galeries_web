@@ -3,19 +3,19 @@ import { Middleware } from 'redux';
 import {
   API_ERROR,
   API_SUCCESS,
-  UPDATE_EMAIL,
-  UPDATE_EMAIL_POST,
+  UPDATE_EMAIL_CONFIRM,
+  UPDATE_EMAIL_CONFIRM_POST,
   apiRequest,
   setLoader,
   setNotification,
-  setUpdateEmail,
+  setUpdateEmailConfirm,
 } from '#store/actions';
 
 import {
   endPoints,
 } from '#store/constant';
 
-const errorUpdateEmail: Middleware = (
+const errorUpdateEmailConfirm: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -23,31 +23,31 @@ const errorUpdateEmail: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === `${UPDATE_EMAIL} ${API_ERROR}`) {
+  if (action.type === `${UPDATE_EMAIL_CONFIRM} ${API_ERROR}`) {
     if (action.payload) {
       if (typeof action.payload.data === 'object') {
         dispatch(
-          setUpdateEmail({
+          setUpdateEmailConfirm({
             errors: action.payload.data,
             status: 'error',
           }),
         );
       } else {
         dispatch(
-          setUpdateEmail({
+          setUpdateEmailConfirm({
             status: 'error',
           }),
         );
         dispatch(
           setNotification({
-            text: action.payload.data,
             error: true,
+            text: action.payload.data,
           }),
         );
       }
     } else {
       dispatch(
-        setUpdateEmail({
+        setUpdateEmailConfirm({
           status: 'error',
         }),
       );
@@ -62,7 +62,7 @@ const errorUpdateEmail: Middleware = (
   }
 };
 
-const postUpdateEmail: Middleware = (
+const postUpdateEmailConfirm: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -70,9 +70,9 @@ const postUpdateEmail: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === UPDATE_EMAIL_POST) {
+  if (action.type === UPDATE_EMAIL_CONFIRM_POST) {
     dispatch(
-      setUpdateEmail({
+      setUpdateEmailConfirm({
         status: 'posting',
       }),
     );
@@ -80,14 +80,14 @@ const postUpdateEmail: Middleware = (
       apiRequest(
         action.payload ? action.payload.data : undefined,
         'POST',
-        endPoints.UPDATE_EMAIL,
-        UPDATE_EMAIL,
+        endPoints.UPDATE_EMAIL_CONFIRM,
+        UPDATE_EMAIL_CONFIRM,
       ),
     );
   }
 };
 
-const successUpdateEmail: Middleware = (
+const successUpdateEmailConfirm: Middleware = (
   { dispatch },
 ) => (
   next,
@@ -95,20 +95,20 @@ const successUpdateEmail: Middleware = (
   action: store.ActionI,
 ) => {
   next(action);
-  if (action.type === `${UPDATE_EMAIL} ${API_SUCCESS}`) {
-    dispatch(setUpdateEmail({
+  if (action.type === `${UPDATE_EMAIL_CONFIRM} ${API_SUCCESS}`) {
+    dispatch(setUpdateEmailConfirm({
       status: 'success',
     }));
     dispatch(setNotification({
       error: false,
-      text: 'an email has been sent to you',
+      text: 'an email has been sent to the email address you register',
     }));
     dispatch(setLoader(false));
   }
 };
 
 export default [
-  errorUpdateEmail,
-  postUpdateEmail,
-  successUpdateEmail,
+  errorUpdateEmailConfirm,
+  postUpdateEmailConfirm,
+  successUpdateEmailConfirm,
 ];
