@@ -20,6 +20,7 @@ import Loader from '#components/Loader';
 import Profile from '#containers/Profile';
 import ResetPassword from '#containers/ResetPassword';
 import UpdateEmail from '#containers/UpdateEmail';
+import UpdateEmailLanding from '#containers/UpdateEmailLanding';
 
 import { fetchInitUser } from '#store/actions';
 import {
@@ -129,6 +130,11 @@ const Routes = () => {
             path='/updateEmail/:token'
           >
             <UpdateEmail />
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/validateEmail/:token'
+          >
+            <UpdateEmailLanding />
           </AnimatedRoute>
           <Header.Desktop />
         </Fader>
