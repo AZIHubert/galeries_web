@@ -78,10 +78,14 @@ const postUpdateEmailConfirm: Middleware = (
     );
     dispatch(
       apiRequest(
-        action.payload ? action.payload.data : undefined,
+        {
+          email: action.payload ? action.payload.data.email : undefined,
+          password: action.payload ? action.payload.data.password : undefined,
+        },
         'POST',
         endPoints.UPDATE_EMAIL_CONFIRM,
         UPDATE_EMAIL_CONFIRM,
+        action.payload ? action.payload.data.confirmToken : undefined,
       ),
     );
   }

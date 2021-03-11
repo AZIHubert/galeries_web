@@ -4,7 +4,11 @@ export const UPDATE_EMAIL_CONFIRM_POST = `${UPDATE_EMAIL_CONFIRM} Post`;
 export const UPDATE_EMAIL_CONFIRM_SET = `${UPDATE_EMAIL_CONFIRM} Set`;
 
 export const postUpdateEmailConfirm: (
-  data: form.UpdateEmailConfirmI
+  data: {
+    email: string;
+    password: string;
+    confirmToken: string;
+  }
 ) => store.ActionI = (
   data,
 ) => ({

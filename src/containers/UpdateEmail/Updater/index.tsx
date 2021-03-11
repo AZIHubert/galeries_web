@@ -1,8 +1,12 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import {
   Link,
+  useParams,
 } from 'react-router-dom';
 
 import Button from '#components/Button';
@@ -13,7 +17,13 @@ import Text from '#components/Text';
 import { changeEmailConfirmSchema } from '#helpers/schemas';
 
 import {
+  postUpdateEmailConfirm,
+  resetUpdateEmailConfirm,
+  setUpdateEmailConfirm,
+} from '#store/actions';
+import {
   loadingSelector,
+  updateEmailConfirmErrorsSelector,
 } from '#store/selectors';
 
 import {
@@ -28,14 +38,30 @@ const initialValues: form.UpdateEmailConfirmI = {
 };
 
 const Updater = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {},
+    onSubmit: async (values) => {
+      if (!loading) {
+        dispatch(
+          postUpdateEmailConfirm({
+            ...values,
+            confirmToken: `Bearer ${token}`,
+          }),
+        );
+      }
+    },
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: changeEmailConfirmSchema,
   });
   const loading = useSelector(loadingSelector);
+  const updateEmailConfirmErrors = useSelector(updateEmailConfirmErrorsSelector);
+  const { token } = useParams<{ token: string }>();
+
+  React.useEffect(() => () => {
+    dispatch(resetUpdateEmailConfirm());
+  }, []);
 
   return (
     <Container>
@@ -52,11 +78,23 @@ const Updater = () => {
         </Title>
         <Field
           disabled={loading}
-          error={formik.errors.email}
-          id='confirmPassword'
+          error={
+            formik.errors.email || updateEmailConfirmErrors.email
+          }
+          id='email'
           label='new email'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (updateEmailConfirmErrors.email) {
+              dispatch(setUpdateEmailConfirm({
+                errors: {
+                  ...updateEmailConfirmErrors,
+                  email: '',
+                },
+              }));
+            }
+          }}
           required
           styles={{
             marginBottom: 12,
@@ -67,12 +105,24 @@ const Updater = () => {
         />
         <Field
           disabled={loading}
-          error={formik.errors.password}
+          error={
+            formik.errors.password || updateEmailConfirmErrors.password
+          }
           fieldTestId='password'
           id='password'
           label='password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (updateEmailConfirmErrors.password) {
+              dispatch(setUpdateEmailConfirm({
+                errors: {
+                  ...updateEmailConfirmErrors,
+                  password: '',
+                },
+              }));
+            }
+          }}
           required
           styles={{
             marginBottom: 12,
