@@ -58,22 +58,22 @@ const Logger = () => {
 
   return (
     <Container>
+      <Text
+        fontStyle='italic'
+        styles={{
+          fontSize: 0.9,
+          marginBottom: 40,
+        }}
+      >
+        You should be logged in to register your email
+      </Text>
+      <Title>
+        Log in
+      </Title>
       <form
         data-testid='form'
         onSubmit={formik.handleSubmit}
       >
-        <Text
-          fontStyle='italic'
-          styles={{
-            fontSize: 0.9,
-            marginBottom: 40,
-          }}
-        >
-          You should be logged in to register your email
-        </Text>
-        <Title>
-          Log in
-        </Title>
         <Field
           disabled={loading}
           error={

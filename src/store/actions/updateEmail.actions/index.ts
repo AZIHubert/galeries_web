@@ -4,7 +4,7 @@ export const UPDATE_EMAIL_POST = `${UPDATE_EMAIL} Post`;
 export const UPDATE_EMAIL_SET = `${UPDATE_EMAIL} Set`;
 
 export const postUpdateEmail: (
-  data: form.UpdateEmailI
+  data: form.ChangeEmailI
 ) => store.ActionI = (
   data,
 ) => ({
@@ -28,7 +28,7 @@ export const resetUpdateEmail: () => store.ActionI = () => ({
 
 export const setUpdateEmail: (
   data: {
-    errors?: form.UpdateEmailI;
+    errors?: form.ChangeEmailI;
     status?: store.Status;
   }
 ) => store.ActionI = (

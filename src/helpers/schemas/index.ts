@@ -8,3 +8,4 @@ export { default as resetConfirmSchema } from './resetConfirmSchema';
 export { default as resetPasswordSchema } from './resetPasswordSchema';
 export { default as signinSchema } from './signinSchema';
 export { default as ticketSchema } from './ticketSchema';
+export { default as updateEmail } from './updateEmail';

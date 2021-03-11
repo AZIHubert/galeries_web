@@ -1,7 +1,7 @@
 import { UPDATE_EMAIL_CONFIRM_SET } from '#store/actions';
 
 interface InitialStateI {
-  errors: form.UpdateEmailConfirmI,
+  errors: form.ChangeEmailConfirmI,
   status: store.Status,
 }
 

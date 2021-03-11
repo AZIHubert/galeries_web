@@ -33,7 +33,7 @@ export const resetUpdateEmailConfirm: () => store.ActionI = () => ({
 
 export const setUpdateEmailConfirm: (
   data: {
-    errors?: form.UpdateEmailConfirmI;
+    errors?: form.ChangeEmailConfirmI;
     status?: store.Status
   }
 ) => store.ActionI = (

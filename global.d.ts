@@ -24,6 +24,13 @@ import {
 
 declare global {
   namespace form {
+    interface ChangeEmailI {
+      password: string;
+    }
+    interface ChangeEmailConfirmI {
+      password: string;
+      email: string;
+    }
     interface LoginI {
       password: string;
       userNameOrEmail: string;
@@ -50,10 +57,6 @@ declare global {
     }
     interface UpdateEmailI {
       password: string;
-    }
-    interface UpdateEmailConfirmI {
-      password: string;
-      email: string;
     }
     interface UpdatePasswordI {
       confirmNewPassword: string;
@@ -155,11 +158,11 @@ declare global {
         loading: boolean;
       };
       updateEmail: {
-        errors: form.UpdateEmailI;
+        errors: form.ChangeEmailI;
         status: Status;
       }
       updateEmailConfirm: {
-        errors: form.UpdateEmailConfirmI;
+        errors: form.ChangeEmailConfirmI;
         status: Status;
       }
       updatePassword: {

@@ -1,7 +1,7 @@
 import { UPDATE_EMAIL_SET } from '#store/actions';
 
 interface InitialStateI {
-  errors: form.UpdateEmailI,
+  errors: form.ChangeEmailI,
   status: store.Status,
 }
 

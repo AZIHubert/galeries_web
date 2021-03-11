@@ -54,7 +54,7 @@ describe('updateEmail', () => {
         },
         status: 'error',
       } as {
-        errors: form.UpdateEmailI;
+        errors: form.ChangeEmailI;
         status: store.Status;
       };
       const expectedAction = {

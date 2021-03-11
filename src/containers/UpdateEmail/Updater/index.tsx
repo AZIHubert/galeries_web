@@ -37,7 +37,7 @@ interface UpdaterI {
   setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const initialValues: form.UpdateEmailConfirmI = {
+const initialValues: form.ChangeEmailConfirmI = {
   password: '',
   email: '',
 };
