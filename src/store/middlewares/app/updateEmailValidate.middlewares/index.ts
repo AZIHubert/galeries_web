@@ -15,6 +15,11 @@ import {
   endPoints,
 } from '#store/constant';
 
+import {
+  setAuthToken,
+  setExpiresToken,
+} from '#store/helpers';
+
 const errorUpdateEmailValidate: Middleware = (
   { dispatch },
 ) => (
@@ -99,6 +104,10 @@ const successUpdateEmailValidate: Middleware = (
 ) => {
   next(action);
   if (action.type === `${UPDATE_EMAIL_VALIDATE} ${API_SUCCESS}`) {
+    if (action.payload) {
+      setAuthToken(action.payload.data.token);
+      setExpiresToken(action.payload.data.expiresIn);
+    }
     dispatch(setUpdateEmailValidate({
       status: 'success',
     }));
