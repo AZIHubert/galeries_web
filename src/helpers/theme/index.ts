@@ -38,31 +38,38 @@ const theme: DefaultTheme = {
     },
   },
   profile: {
-    large: {
+    largest: {
       cropedImage: {
         size: 240,
         margin: 12,
         numByRow: 4,
       },
     },
+    large: {
+      cropedImage: {
+        size: 170,
+        margin: 6,
+        numByRow: 4,
+      },
+    },
     medium: {
       cropedImage: {
-        size: 230,
-        margin: 10,
-        numByRow: 4,
+        size: 160,
+        margin: 5,
+        numByRow: 3,
       },
     },
     small: {
       cropedImage: {
-        size: 180,
+        size: 120,
         margin: 4,
         numByRow: 3,
       },
     },
     smallest: {
       cropedImage: {
-        size: 100,
-        margin: 4,
+        size: 90,
+        margin: 3,
         numByRow: 3,
       },
     },
