@@ -1,5 +1,6 @@
 export { default as allowResetPasswordSchema } from './allowResetPasswordSchema';
 export { default as changeEmailSchema } from './changeEmailSchema';
+export { default as changeEmailConfirmSchema } from './changeEmailConfirmSchema';
 export { default as changePasswordSchema } from './changePasswordSchema';
 export { default as deleteAccountSchema } from './deleteAccountSchema';
 export { default as loginSchema } from './loginSchema';

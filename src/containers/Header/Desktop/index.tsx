@@ -40,10 +40,14 @@ const Header = () => {
   const location = useLocation();
   const handleClickHome = () => history.push('/');
 
+  const show = !!user
+    && !location.pathname.includes('profilePicture')
+    && !location.pathname.includes('updateEmail');
+
   return (
     <CSSTransition
       classNames='fade'
-      in={!!user && !location.pathname.includes('profilePicture')}
+      in={show}
       timeout={300}
       unmountOnExit
     >

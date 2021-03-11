@@ -51,6 +51,10 @@ declare global {
     interface UpdateEmailI {
       password: string;
     }
+    interface UpdateEmailConfirmI {
+      password: string;
+      email: string;
+    }
     interface UpdatePasswordI {
       confirmNewPassword: string;
       currentPassword: string;

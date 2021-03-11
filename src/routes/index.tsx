@@ -19,6 +19,7 @@ import Home from '#containers/Home';
 import Loader from '#components/Loader';
 import Profile from '#containers/Profile';
 import ResetPassword from '#containers/ResetPassword';
+import UpdateEmail from '#containers/UpdateEmail';
 
 import { fetchInitUser } from '#store/actions';
 import {
@@ -123,6 +124,11 @@ const Routes = () => {
             ) : (
               <Edit />
             )}
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/updateEmail/:token'
+          >
+            <UpdateEmail />
           </AnimatedRoute>
           <Header.Desktop />
         </Fader>
