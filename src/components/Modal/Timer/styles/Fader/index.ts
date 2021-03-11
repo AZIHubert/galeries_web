@@ -4,7 +4,7 @@ import mediaQueries from '#helpers/mediaQueries';
 
 const Fader = styled.div`
   left: 50%;
-  position: absolute;
+  position: fixed;
   top: 14px;
   transform: translateX(-50%);
   z-index: 10;
