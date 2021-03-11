@@ -69,7 +69,7 @@ const Logger = () => {
             marginBottom: 40,
           }}
         >
-          You should be logged in to change your email
+          You should be logged in to register your email
         </Text>
         <Title>
           Log in

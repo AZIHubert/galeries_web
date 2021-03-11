@@ -32,17 +32,27 @@ import {
   Title,
 } from './styles';
 
+interface UpdaterI {
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
+
 const initialValues: form.UpdateEmailConfirmI = {
   password: '',
   email: '',
 };
 
-const Updater = () => {
+const Updater = ({
+  setEmail,
+  setPassword,
+}: UpdaterI) => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
       if (!loading) {
+        setEmail(values.email);
+        setPassword(values.password);
         dispatch(
           postUpdateEmailConfirm({
             ...values,
@@ -150,9 +160,9 @@ const Updater = () => {
       </form>
       <NavLink>
         <Link
-          to='/desktop'
+          to='/dashboard'
         >
-          DESKTOP
+          DASHBOARD
         </Link>
       </NavLink>
     </Container>
