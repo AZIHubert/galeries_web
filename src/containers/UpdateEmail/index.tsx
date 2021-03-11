@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
-import { LogoGaleries } from '#ressources/svgComponents';
+import FullPageForm from '#components/FullPageForm';
 
 import {
   userSelector,
@@ -13,10 +13,8 @@ import Logger from './Logger';
 import Updater from './Updater';
 import Landing from './Landing';
 import {
-  Container,
   Fader,
   InnerContainer,
-  Logo,
 } from './styles';
 
 const UpdateEmail = () => {
@@ -33,10 +31,7 @@ const UpdateEmail = () => {
   }, [updateEmailConfirmStatus]);
 
   return (
-    <Container>
-      <Logo>
-        <LogoGaleries />
-      </Logo>
+    <FullPageForm>
       <CSSTransition
         classNames='fade'
         in={!!user && !landing}
@@ -79,7 +74,7 @@ const UpdateEmail = () => {
           </InnerContainer>
         </Fader>
       </CSSTransition>
-    </Container>
+    </FullPageForm>
   );
 };
 
