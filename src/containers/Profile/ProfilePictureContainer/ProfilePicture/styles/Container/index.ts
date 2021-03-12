@@ -29,7 +29,7 @@ const ImageContainer = styled.div`
     `${theme.profile.small.cropedImage.size - theme.profile.small.cropedImage.margin * 2}px`
   )};
   }
-  @media ${mediaQueries.laptop} {
+  @media ${mediaQueries.tablet} {
     height: ${({ theme }) => (
     `${theme.profile.medium.cropedImage.size - theme.profile.medium.cropedImage.margin * 2}px`
   )};
@@ -38,13 +38,22 @@ const ImageContainer = styled.div`
     `${theme.profile.medium.cropedImage.size - theme.profile.medium.cropedImage.margin * 2}px`
   )};
   }
-  @media ${mediaQueries.laptopL} { 
+  @media ${mediaQueries.laptop} {
     height: ${({ theme }) => (
     `${theme.profile.large.cropedImage.size - theme.profile.large.cropedImage.margin * 2}px`
   )};
     margin: ${({ theme }) => `${theme.profile.large.cropedImage.margin}px`};
     width: ${({ theme }) => (
     `${theme.profile.large.cropedImage.size - theme.profile.large.cropedImage.margin * 2}px`
+  )};
+  }
+  @media ${mediaQueries.laptopL} { 
+    height: ${({ theme }) => (
+    `${theme.profile.largest.cropedImage.size - theme.profile.largest.cropedImage.margin * 2}px`
+  )};
+    margin: ${({ theme }) => `${theme.profile.largest.cropedImage.margin}px`};
+    width: ${({ theme }) => (
+    `${theme.profile.largest.cropedImage.size - theme.profile.largest.cropedImage.margin * 2}px`
   )};
   }
 `;

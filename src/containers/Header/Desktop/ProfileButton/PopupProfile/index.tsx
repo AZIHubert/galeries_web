@@ -80,8 +80,9 @@ const PopupProfile = ({
               </Text>
             </div>
           </Link>
-          <Button
-            borderBottom
+          <Link
+            onClick={handleClose}
+            to='/edit'
           >
             <LogoContainer>
               <Gear />
@@ -97,7 +98,7 @@ const PopupProfile = ({
             >
               Edit your informations
             </Text>
-          </Button>
+          </Link>
           <Button
             onClick={() => {
               handleClose();

@@ -90,13 +90,13 @@ const successLogin: Middleware = (
 ) => {
   next(action);
   if (action.type === `${LOGIN} ${API_SUCCESS}`) {
-    dispatch(setLogin({
-      status: 'success',
-    }));
     if (action.payload) {
       setAuthToken(action.payload.data.token);
       setExpiresToken(action.payload.data.expiresIn);
     }
+    dispatch(setLogin({
+      status: 'success',
+    }));
     dispatch(fetchUser());
   }
 };

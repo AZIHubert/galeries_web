@@ -1,3 +1,8 @@
-Testing Context/profilePictures
+check variables name
+selector (error)
+change email =>
+updateEmail
+updateEmailConfirm
+updateEmailValidate
 
-Go to top button if scroll > certain value
+store action fetch => post/put

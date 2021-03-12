@@ -28,6 +28,7 @@ interface HeaderI {
 }
 
 interface ProfileI {
+  largest: SubProfileI;
   large: SubProfileI;
   medium: SubProfileI;
   small: SubProfileI;

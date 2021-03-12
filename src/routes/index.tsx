@@ -12,12 +12,15 @@ import AnimatedRoute from '#components/AnimatedRoute';
 
 import ConfirmAccount from '#containers/ConfirmAccount';
 import Desktop from '#containers/Desktop';
+import Edit from '#containers/Edit';
 import FullPageImage from '#containers/FullPageImage';
 import Header from '#containers/Header';
 import Home from '#containers/Home';
 import Loader from '#components/Loader';
 import Profile from '#containers/Profile';
 import ResetPassword from '#containers/ResetPassword';
+import UpdateEmail from '#containers/UpdateEmail';
+import UpdateEmailLanding from '#containers/UpdateEmailLanding';
 
 import { fetchInitUser } from '#store/actions';
 import {
@@ -113,6 +116,25 @@ const Routes = () => {
             ) : (
               <FullPageImage />
             )}
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/edit'
+          >
+            {!user ? (
+              <Redirect to='/' />
+            ) : (
+              <Edit />
+            )}
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/updateEmail/:token'
+          >
+            <UpdateEmail />
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/validateEmail/:token'
+          >
+            <UpdateEmailLanding />
           </AnimatedRoute>
           <Header.Desktop />
         </Fader>

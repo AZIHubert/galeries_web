@@ -24,9 +24,24 @@ import {
 
 declare global {
   namespace form {
+    interface AccountI {
+      deleteAccountSentence: string;
+      password: string;
+      userNameOrEmail: string;
+    }
+    interface ChangeEmailI {
+      password: string;
+    }
+    interface ChangeEmailConfirmI {
+      password: string;
+      email: string;
+    }
     interface LoginI {
       password: string;
       userNameOrEmail: string;
+    }
+    interface PseudonymI {
+      pseudonym: string;
     }
     interface ResetPasswordI {
       confirmPassword: string;
@@ -47,6 +62,14 @@ declare global {
       email: string;
       password: string;
       userName: string;
+    }
+    interface UpdateEmailI {
+      password: string;
+    }
+    interface UpdatePasswordI {
+      confirmNewPassword: string;
+      currentPassword: string;
+      newPassword: string;
     }
   }
   namespace store {
@@ -99,6 +122,10 @@ declare global {
     }
 
     interface ReducersI {
+      account: {
+        errors: form.AccountI;
+        status: Status;
+      }
       login: {
         status: Status;
         errors: form.LoginI;
@@ -118,30 +145,50 @@ declare global {
         profilePictures: { [name: string]: ProfilePictureI };
         status: Status;
       }
-      resetPassword: {
+      pseudonym: {
+        errors: form.PseudonymI;
         status: Status;
+      }
+      resetPassword: {
         errors: form.ResetPasswordI
+        status: Status;
       };
       sendConfirmation: {
-        status: Status;
         errors: form.SendConfirmationI;
+        status: Status;
       };
       sendResetPassword: {
-        status: Status;
         errors: form.SendResetPasswordI;
+        status: Status;
       };
       sendTicket: {
-        status: Status;
         errors: form.SendTicketI;
+        status: Status;
       }
       signin: {
-        status: Status;
         errors: SigninI;
+        status: Status;
       };
       ui: {
         init: boolean;
         loading: boolean;
       };
+      updateEmail: {
+        errors: form.ChangeEmailI;
+        status: Status;
+      }
+      updateEmailConfirm: {
+        errors: form.ChangeEmailConfirmI;
+        status: Status;
+      }
+      updateEmailValidate: {
+        errors: form.UpdateEmailI;
+        status: Status;
+      }
+      updatePassword: {
+        errors: form.UpdatePasswordI;
+        status: Status;
+      }
       user: UserI | null;
     }
   }
@@ -221,6 +268,7 @@ declare global {
     facebookId: string | null;
     googleId: string | null;
     id: string;
+    pseudonym: string;
     role: string;
     updatedAt: string | null;
     userName: string;

@@ -11,12 +11,11 @@ import {
 } from 'react-router-dom';
 
 import Field from '#components/Field';
+import FullPageForm from '#components/FullPageForm';
 import Button from '#components/Button';
 import RequiredField from '#components/RequiredField';
 
 import { resetPasswordSchema } from '#helpers/schemas';
-
-import { LogoGaleries } from '#ressources/svgComponents';
 
 import {
   fetchResetPassword,
@@ -30,9 +29,7 @@ import {
 } from '#store/selectors';
 
 import {
-  Container,
   Form,
-  Logo,
   NavLink,
   Title,
 } from './styles';
@@ -75,10 +72,7 @@ const ResetPassword = () => {
   }, []);
 
   return (
-    <Container>
-      <Logo>
-        <LogoGaleries />
-      </Logo>
+    <FullPageForm>
       <Title>
         Reset password
       </Title>
@@ -163,7 +157,7 @@ const ResetPassword = () => {
           HOME
         </Link>
       </NavLink>
-    </Container>
+    </FullPageForm>
   );
 };
 

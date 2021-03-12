@@ -5,7 +5,10 @@ import ReactRouterDOM from 'react-router-dom';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
-import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+import {
+  defaultValue,
+  ProfilePictureContext,
+} from '#contexts/ProfilePictureContext';
 import reducers from '#store/reducers';
 
 import ProfilePictureContainer from '../index';
@@ -49,19 +52,6 @@ const profilePicture = (id: string) => ({
   },
 });
 
-const ProfilePictureProviderValues = {
-  isPosting: false,
-  isPutting: false,
-  profilePicture: {
-    croped: '',
-    original: '',
-    pending: '',
-  },
-  profilePictures: {},
-  puttingImage: null,
-  setPuttingImage: () => {},
-};
-
 const Container = ({
   profilePictures = {},
 }: {
@@ -71,7 +61,7 @@ const Container = ({
     <ThemeProvider>
       <ProfilePictureContext.Provider
         value={{
-          ...ProfilePictureProviderValues,
+          ...defaultValue,
           profilePictures,
         }}
       >

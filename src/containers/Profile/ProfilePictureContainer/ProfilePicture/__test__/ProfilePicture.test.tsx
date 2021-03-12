@@ -5,7 +5,10 @@ import ReactRouterDOM from 'react-router-dom';
 import { createStore } from 'redux';
 
 import ThemeProvider from '#contexts/ThemeContext';
-import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
+import {
+  defaultValue,
+  ProfilePictureContext,
+} from '#contexts/ProfilePictureContext';
 
 import reducers from '#store/reducers';
 
@@ -17,19 +20,6 @@ const puttingImage = 'puttingImage';
 
 const mockedStore = createStore(reducers);
 
-const ProfilePictureProviderValues = {
-  isPosting: false,
-  isPutting: false,
-  profilePicture: {
-    croped: '',
-    original: '',
-    pending: '',
-  },
-  profilePictures: {},
-  puttingImage: null,
-  setPuttingImage: () => {},
-};
-
 const Container = ({
   id = defaultId,
 }) => (
@@ -37,7 +27,7 @@ const Container = ({
     <ThemeProvider>
       <ProfilePictureContext.Provider
         value={{
-          ...ProfilePictureProviderValues,
+          ...defaultValue,
           puttingImage,
         }}
       >
