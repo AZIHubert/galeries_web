@@ -24,6 +24,11 @@ import {
 
 declare global {
   namespace form {
+    interface AccountI {
+      deleteAccountSentence: string;
+      password: string;
+      userNameOrEmail: string;
+    }
     interface ChangeEmailI {
       password: string;
     }

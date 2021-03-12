@@ -1,3 +1,4 @@
+export * from './account.actions';
 export * from './api.actions';
 export * from './confirmation.actions';
 export * from './initUser.actions';

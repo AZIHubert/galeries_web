@@ -1,3 +1,4 @@
+import accountMiddlewares from './account.middlewares';
 import confirmationMiddleware from './confirmation.middlewares';
 import initUserMiddleware from './initUser.middlewares';
 import loginFacebookMiddlewares from './loginFacebook.middlewares';
@@ -18,6 +19,7 @@ import updatePasswordMiddlewares from './updatePassword.middlewares';
 import userMiddlewares from './user.middlewares';
 
 export default [
+  ...accountMiddlewares,
   ...confirmationMiddleware,
   ...initUserMiddleware,
   ...loginFacebookMiddlewares,

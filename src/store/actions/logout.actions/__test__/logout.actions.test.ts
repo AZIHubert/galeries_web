@@ -13,7 +13,6 @@ import {
   fetchLogout,
   setLoader,
 } from '#store/actions';
-
 import { appMiddleware } from '#store/middlewares';
 import apiMiddleware from '#store/middlewares/core/api.middlewares';
 
@@ -101,7 +100,7 @@ describe('logout', () => {
               payload: { data: globalError },
               type: `${payload.meta.entity} ${API_ERROR}`,
             });
-          }
+          }k;
         });
         const mockStore = configureStore([...appMiddleware, apiMiddleware]);
         const store = mockStore();
