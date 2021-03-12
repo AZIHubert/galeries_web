@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 import {
+  useDispatch,
   useSelector,
 } from 'react-redux';
 
@@ -11,7 +12,13 @@ import RequiredField from '#components/RequiredField';
 import { pseudonymSchema } from '#helpers/schemas';
 
 import {
+  putPseudonym,
+  setPseudonym,
+} from '#store/actions';
+import {
   loadingSelector,
+  pseudonymErrorsSelector,
+  pseudonymStatusSelector,
 } from '#store/selectors';
 
 const initialValues: form.PseudonymI = {
@@ -19,14 +26,31 @@ const initialValues: form.PseudonymI = {
 };
 
 const ChangePeudonym = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {},
+    onSubmit: async (values) => {
+      if (!loading) {
+        dispatch(
+          putPseudonym(values),
+        );
+      }
+    },
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: pseudonymSchema,
   });
+  const pseudonymErrors = useSelector(pseudonymErrorsSelector);
+  const pseudonymStatus = useSelector(pseudonymStatusSelector);
   const loading = useSelector(loadingSelector);
+
+  React.useEffect(() => {
+    if (pseudonymStatus === 'success') {
+      formik.resetForm({
+        values: initialValues,
+      });
+    }
+  }, [pseudonymStatus]);
 
   return (
     <div>
@@ -34,13 +58,25 @@ const ChangePeudonym = () => {
         <Field
           disabled={loading}
           error={
-            formik.errors.pseudonym
+            formik.errors.pseudonym || pseudonymErrors.pseudonym
           }
           fieldTestId='field'
           id='pseudonym'
           label='pseudonym'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (pseudonymErrors.pseudonym) {
+              dispatch(
+                setPseudonym({
+                  errors: {
+                    ...pseudonymErrors,
+                    pseudonym: '',
+                  },
+                }),
+              );
+            }
+          }}
           required
           styles={{
             marginBottom: 25,
