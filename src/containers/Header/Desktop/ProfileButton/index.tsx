@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Image from '#components/Image';
 import Modal from '#components/Modal';
+import Text from '#components/Text';
 
 import {
   profilePictureCurrentSelector,
@@ -65,7 +66,20 @@ const ProfileButton = ({
             pending={pending}
           />
         </ProfileImage>
-        {user ? user.userName : 'user name'}
+        <div>
+          <Text
+            color='primary'
+          >
+            {user ? user.pseudonym : 'pseudonym'}
+          </Text>
+          <Text
+            styles={{
+              fontSize: 0.55,
+            }}
+          >
+            {user ? user.userName : '@userName'}
+          </Text>
+        </div>
       </Button>
       <CSSTransition
         classNames='fade'

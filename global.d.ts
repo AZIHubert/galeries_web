@@ -261,6 +261,7 @@ declare global {
     facebookId: string | null;
     googleId: string | null;
     id: string;
+    pseudonym: string;
     role: string;
     updatedAt: string | null;
     userName: string;

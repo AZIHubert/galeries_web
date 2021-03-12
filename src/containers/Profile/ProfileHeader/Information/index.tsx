@@ -3,6 +3,9 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import {
+  useHistory,
+} from 'react-router-dom';
 
 import Button from '#components/Button';
 import Text from '#components/Text';
@@ -15,6 +18,7 @@ import { userSelector } from '#store/selectors';
 import {
   Container,
   FileInput,
+  NameContainer,
 } from './styles';
 
 const Information = () => {
@@ -25,6 +29,7 @@ const Information = () => {
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const user = useSelector(userSelector);
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
+  const history = useHistory();
 
   React.useEffect(() => {
     if (selectedFile) {
@@ -55,25 +60,42 @@ const Information = () => {
 
   return (
     <Container>
-      <Text
-        color='primary'
-        fontWeight='bold'
-        styles={{
-          fontSize: 1.8,
-          marginTop: 20,
-          textAlign: 'center',
-        }}
-        stylesMobile={{
-          fontSize: 2,
-        }}
-        stylesTablet={{
-          fontSize: 2.4,
-          marginTop: 0,
-          textAlign: 'left',
-        }}
-      >
-        {user ? user.userName : 'user name'}
-      </Text>
+      <NameContainer>
+        <Text
+          color='primary'
+          fontWeight='bold'
+          styles={{
+            fontSize: 1.8,
+            marginTop: 20,
+            textAlign: 'center',
+          }}
+          stylesMobile={{
+            fontSize: 2,
+          }}
+          stylesTablet={{
+            fontSize: 2.4,
+            marginTop: 0,
+            textAlign: 'left',
+          }}
+        >
+          {user ? user.pseudonym : '@userName'}
+        </Text>
+        <Text
+          fontStyle='italic'
+          styles={{
+            fontSize: 1,
+            textAlign: 'center',
+          }}
+          stylesMobile={{
+            fontSize: 1.1,
+          }}
+          stylesTablet={{
+            textAlign: 'left',
+          }}
+        >
+          {user ? user.userName : 'pseudonym'}
+        </Text>
+      </NameContainer>
       <FileInput
         accept="image/*"
         data-testid='inputFile'
@@ -90,6 +112,9 @@ const Information = () => {
         title='Add a profile picture'
       />
       <Button.Default
+        onClick={() => {
+          history.push('/edit');
+        }}
         title='Edit your info'
         variant='secondary'
       />
