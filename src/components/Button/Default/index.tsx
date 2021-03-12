@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Button } from './styles';
 
+type Type = 'button' | 'submit' | 'reset';
 type Variant = 'primary' | 'secondary';
 
 interface StylesI {
@@ -13,6 +14,7 @@ interface StylesI {
 
 interface DefaultI {
   danger?: boolean;
+  disabled?: boolean;
   onClick?: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined;
   styles?: StylesI;
   stylesMobile?: StylesI;
@@ -22,11 +24,13 @@ interface DefaultI {
   small?: boolean;
   testId?: string;
   title: string;
+  type?: Type;
   variant?: Variant;
 }
 
 const Default = ({
   danger = false,
+  disabled = false,
   onClick,
   styles,
   stylesMobile,
@@ -36,10 +40,12 @@ const Default = ({
   small = false,
   testId,
   title,
+  type = 'button',
   variant = 'primary',
 }: DefaultI) => (
   <Button
     danger={danger}
+    disabled={disabled}
     styles={styles}
     stylesMobile={stylesMobile}
     stylesLaptop={stylesLaptop}
@@ -52,6 +58,7 @@ const Default = ({
     }}
     small={small}
     testId={testId}
+    type={type}
     variant={variant}
   >
     {title}

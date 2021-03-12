@@ -8,6 +8,7 @@ import {
 import Button from '#components/Button';
 import Field from '#components/Field';
 import Modal from '#components/Modal';
+import Text from '#components/Text';
 
 import { allowResetPasswordSchema } from '#helpers/schemas';
 
@@ -22,7 +23,6 @@ import {
   sendResetPasswordStatusSelector,
 } from '#store/selectors';
 
-import ModalTitle from './ModalTitle';
 import {
   CancelButton,
   CancelButtonContainer,
@@ -77,9 +77,15 @@ const ModalResetPassword = ({
   }, []);
 
   return (
-    <Modal.Container
-      title={<ModalTitle />}
-    >
+    <Modal.Container>
+      <Text
+        styles={{
+          fontSize: 1.1,
+          marginBottom: 30,
+        }}
+      >
+      Enter your email to reset your password
+      </Text>
       <form
         data-testid='form'
         onSubmit={formik.handleSubmit}

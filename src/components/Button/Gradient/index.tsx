@@ -37,12 +37,12 @@ const Gradiant = ({
   type = 'button',
 }: GradiantI) => (
   <Button
+    disabled={disabled}
     styles={styles}
     stylesMobile={stylesMobile}
     stylesTablet={stylesTablet}
     stylesLaptop={stylesLaptop}
     stylesLaptopL={stylesLaptopL}
-    disabled={disabled}
     onClick={onClick}
     testId={testId}
     type={type}
