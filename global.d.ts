@@ -119,6 +119,10 @@ declare global {
     }
 
     interface ReducersI {
+      account: {
+        errors: form.AccountI;
+        status: Status;
+      }
       login: {
         status: Status;
         errors: form.LoginI;

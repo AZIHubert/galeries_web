@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as React from 'react';
 import {
+  useDispatch,
   useSelector,
 } from 'react-redux';
 
@@ -10,7 +11,15 @@ import Text from '#components/Text';
 
 import { deleteAccountSchema } from '#helpers/schemas';
 
-import { loadingSelector } from '#store/selectors';
+import {
+  deleteAccount,
+  resetAccount,
+  setAccount,
+} from '#store/actions';
+import {
+  accountErrorsSelector,
+  loadingSelector,
+} from '#store/selectors';
 
 const initialValues = {
   deleteAccountSentence: '',
@@ -19,14 +28,25 @@ const initialValues = {
 };
 
 const ModalDelete = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
-    onSubmit: () => {},
+    onSubmit: async (values) => {
+      if (!loading) {
+        dispatch(deleteAccount(values));
+      }
+    },
     validateOnBlur: true,
     validateOnChange: false,
     validationSchema: deleteAccountSchema,
   });
   const loading = useSelector(loadingSelector);
+  const accountErrors = useSelector(accountErrorsSelector);
+
+  React.useEffect(() => () => {
+    dispatch(resetAccount());
+  }, []);
+
   return (
     <div>
       <Text
@@ -41,12 +61,26 @@ const ModalDelete = () => {
       <form onSubmit={formik.handleSubmit}>
         <Field
           disabled={loading}
-          error={formik.errors.userNameOrEmail}
+          error={
+            formik.errors.userNameOrEmail || accountErrors.userNameOrEmail
+          }
           fieldTestId='field'
           id='userNameOrEmail'
           label='user name or email'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (accountErrors.userNameOrEmail) {
+              dispatch(
+                setAccount({
+                  errors: {
+                    ...accountErrors,
+                    userNameOrEmail: '',
+                  },
+                }),
+              );
+            }
+          }}
           styles={{
             marginBottom: 6,
           }}
@@ -59,12 +93,26 @@ const ModalDelete = () => {
         />
         <Field
           disabled={loading}
-          error={formik.errors.deleteAccountSentence}
+          error={
+            formik.errors.deleteAccountSentence || accountErrors.deleteAccountSentence
+          }
           fieldTestId='field'
           id='deleteAccountSentence'
           label='To verify, type "delete my account" below:'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (accountErrors.deleteAccountSentence) {
+              dispatch(
+                setAccount({
+                  errors: {
+                    ...accountErrors,
+                    deleteAccountSentence: '',
+                  },
+                }),
+              );
+            }
+          }}
           styles={{
             marginBottom: 6,
           }}
@@ -77,12 +125,26 @@ const ModalDelete = () => {
         />
         <Field
           disabled={loading}
-          error={formik.errors.password}
+          error={
+            formik.errors.password || accountErrors.password
+          }
           fieldTestId='field'
           id='password'
           label='confirm your password'
           onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
+          onChange={(e) => {
+            formik.handleChange(e);
+            if (accountErrors.password) {
+              dispatch(
+                setAccount({
+                  errors: {
+                    ...accountErrors,
+                    password: '',
+                  },
+                }),
+              );
+            }
+          }}
           touched={formik.touched.password}
           type='password'
           value={formik.values.password}
