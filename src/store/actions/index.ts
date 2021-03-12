@@ -9,6 +9,7 @@ export * from './logout.actions';
 export * from './notification.actions';
 export * from './profilePicture.actions';
 export * from './profilePictures.actions';
+export * from './psuedonym.actions';
 export * from './resetPassword.actions';
 export * from './sendConfirmation.actions';
 export * from './sendResetPassword.actions';

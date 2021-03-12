@@ -10,6 +10,8 @@ export { default as profilePicturesSelector } from './profilePictures.selector';
 export { default as profilePicturesEndSelector } from './profilePicturesEnd.selector';
 export { default as profilePicturesStatusSelector } from './profilePicturesStatus.selector';
 export { default as profilePictureStatusSelector } from './profilePictureStatus.selector';
+export { default as pseudonymErrorsSelector } from './pseudonymErrors.selector';
+export { default as pseudonymStatusSelector } from './pseudonymStatus.selector';
 export { default as resetPasswordErrorSelector } from './resetPasswordError.selector';
 export { default as resetPasswordStatusSelector } from './resetPasswordStatus.selector';
 export { default as sendConfirmationErrorSelector } from './sendConfirmationError.selector';

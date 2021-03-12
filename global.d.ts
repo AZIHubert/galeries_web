@@ -145,6 +145,10 @@ declare global {
         profilePictures: { [name: string]: ProfilePictureI };
         status: Status;
       }
+      pseudonym: {
+        errors: form.PseudonymI;
+        status: Status;
+      }
       resetPassword: {
         errors: form.ResetPasswordI
         status: Status;

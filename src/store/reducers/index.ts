@@ -5,6 +5,7 @@ import login from './login.reducer';
 import notification from './notification.reducer';
 import profilePicture from './profilePicture.reducer';
 import profilePictures from './profilePictures.reducer';
+import pseudonym from './pseudonym.reducer';
 import resetPassword from './resetPassword.reducer';
 import sendConfirmation from './sendConfirmation.reducer';
 import sendResetPassword from './sendResetPassword.reducer';
@@ -23,6 +24,7 @@ export default combineReducers({
   notification,
   profilePicture,
   profilePictures,
+  pseudonym,
   resetPassword,
   sendConfirmation,
   sendResetPassword,

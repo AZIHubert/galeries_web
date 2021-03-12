@@ -7,6 +7,7 @@ import loginMiddlewares from './login.middlewares';
 import logoutMiddlewares from './logout.middlewares';
 import profilePictureMiddlewares from './profilePicture.middlewares';
 import profilePicturesMiddlewares from './profilePictures.middlewares';
+import pseudonymMiddlewares from './pseudonym.middlewares';
 import resetPasswordMiddlewares from './resetPassword.middlewares';
 import sendConfirmationMiddlewares from './sendConfirmation.middlewares';
 import sendResetPasswordMiddlewares from './sendResetPassword.middlewares';
@@ -28,6 +29,7 @@ export default [
   ...logoutMiddlewares,
   ...profilePictureMiddlewares,
   ...profilePicturesMiddlewares,
+  ...pseudonymMiddlewares,
   ...resetPasswordMiddlewares,
   ...signinMiddlewares,
   ...sendConfirmationMiddlewares,
