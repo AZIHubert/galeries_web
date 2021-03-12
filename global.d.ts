@@ -40,6 +40,9 @@ declare global {
       password: string;
       userNameOrEmail: string;
     }
+    interface PseudonymI {
+      pseudonym: string;
+    }
     interface ResetPasswordI {
       confirmPassword: string;
       password: string;

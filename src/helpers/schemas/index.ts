@@ -4,6 +4,7 @@ export { default as changeEmailConfirmSchema } from './changeEmailConfirmSchema'
 export { default as changePasswordSchema } from './changePasswordSchema';
 export { default as deleteAccountSchema } from './deleteAccountSchema';
 export { default as loginSchema } from './loginSchema';
+export { default as pseudonymSchema } from './pseudonymSchema';
 export { default as resetConfirmSchema } from './resetConfirmSchema';
 export { default as resetPasswordSchema } from './resetPasswordSchema';
 export { default as signinSchema } from './signinSchema';

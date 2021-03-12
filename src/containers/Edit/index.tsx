@@ -10,6 +10,7 @@ import { resetUpdatePassword } from '#store/actions';
 import { userSelector } from '#store/selectors';
 
 import ChangeEmail from './ChangeEmail';
+import ChangePeudonym from './ChangePseudonym';
 import ChangePassword from './ChangePassword';
 import DeleteAccount from './DeleteAccount';
 import Part from './Part';
@@ -32,6 +33,11 @@ const Edit = () => {
     <Container>
       {isNotAFacebookOrGoogleUser && (
         <>
+          <Part
+            title='Change your pseudonym'
+          >
+            <ChangePeudonym />
+          </Part>
           <Part
             title='Change your password'
           >
