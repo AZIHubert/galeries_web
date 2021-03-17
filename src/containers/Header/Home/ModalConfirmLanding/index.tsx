@@ -48,7 +48,6 @@ const ModalConfirmLanding = ({
         to {currentEmail || '{{EMAIL_NOT_FOUND}}'}.
         This helps keep your account secure.
       </Text>
-      {loading ? 'loading' : 'not loading'}
       <Button.Text
         disabled={loading}
         onClick={onClick}

@@ -103,7 +103,7 @@ const ModalResendConfirm = () => {
           stylesLaptopL={{
             marginTop: 24,
           }}
-          title='Reset'
+          title='Resend'
           type='submit'
         />
       </form>
