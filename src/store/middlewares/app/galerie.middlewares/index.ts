@@ -7,6 +7,7 @@ import {
   GALERIE_POST,
   apiRequest,
   setGalerie,
+  setGaleries,
   setLoader,
   setNotification,
 } from '#store/actions';
@@ -58,6 +59,9 @@ const errorGalerie: Middleware = (
         }),
       );
     }
+    dispatch(
+      setLoader(false),
+    );
   }
 };
 
@@ -87,7 +91,10 @@ const postGalerie: Middleware = (
 };
 
 const successGalerie: Middleware = (
-  { dispatch },
+  {
+    dispatch,
+    getState,
+  },
 ) => (
   next,
 ) => (
@@ -95,11 +102,26 @@ const successGalerie: Middleware = (
 ) => {
   next(action);
   if (action.type === `${GALERIE} ${API_SUCCESS}`) {
+    if (action.payload) {
+      const {
+        id,
+        ...rest
+      }: GalerieI = action.payload.data;
+      dispatch(
+        setGaleries({
+          galeries: {
+            [id]: { ...rest },
+            ...getState().galeries.galeries,
+          },
+        }),
+      );
+    }
     dispatch(
       setGalerie({
         status: 'success',
       }),
     );
+
     dispatch(setLoader(false));
   }
 };
