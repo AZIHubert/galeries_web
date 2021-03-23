@@ -1,7 +1,6 @@
 export const GALERIE = '[GALERIE]';
 
 export const GALERIE_POST = `${GALERIE} Post`;
-export const GALERIE_PUT = `${GALERIE} Put`;
 export const GALERIE_SET = `${GALERIE} Set`;
 
 export const postGalerie: (
