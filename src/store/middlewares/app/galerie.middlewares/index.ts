@@ -103,14 +103,11 @@ const successGalerie: Middleware = (
   next(action);
   if (action.type === `${GALERIE} ${API_SUCCESS}`) {
     if (action.payload) {
-      const {
-        id,
-        ...rest
-      }: GalerieI = action.payload.data;
+      const galerie: GalerieI = action.payload.data;
       dispatch(
         setGaleries({
           galeries: {
-            [id]: { ...rest },
+            [galerie.id]: galerie,
             ...getState().galeries.galeries,
           },
         }),

@@ -2,6 +2,8 @@ import axios, {
   Method,
 } from 'axios';
 
+axios.defaults.withCredentials = true;
+
 export default (
   body: any,
   method: Method,

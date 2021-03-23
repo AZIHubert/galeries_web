@@ -96,8 +96,8 @@ const successGaleries: Middleware = (
     if (action.payload) {
       newGaleries = action.payload.data;
       const normalizeData = newGaleries.map(
-        ({ id, ...rest }: GalerieI) => ({
-          [id]: { ...rest },
+        (galerie: GalerieI) => ({
+          [galerie.id]: { ...galerie },
         }),
       );
       newObject = Object.assign({}, ...normalizeData);

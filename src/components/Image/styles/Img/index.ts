@@ -7,7 +7,6 @@ interface ImgI {
 }
 
 const Img = styled.img<ImgI>`
-  vertical-align: middle;
   width: ${({ mode }) => {
     if (mode === 'cover' || mode === 'width') {
       return '100%';

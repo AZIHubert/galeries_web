@@ -274,8 +274,11 @@ declare global {
   interface GalerieI {
     id: string;
     name: string;
+    defaultCoverPicture: string;
     archived?: boolean;
     users: UserI[];
+    createdAt: Date;
+    updatedAt: Date;
   }
 
   interface UserI {
