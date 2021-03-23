@@ -1,5 +1,10 @@
 export { default as accountErrorsSelector } from './accountErrors.selector';
 export { default as accountStatusSelector } from './accountStatus.selector';
+export { default as galerieErrorSelector } from './galerieError.selector';
+export { default as galerieStatusSelector } from './galerieStatus.selector';
+export { default as galeriesSelector } from './galeries.selector';
+export { default as galeriesEndSelector } from './galeriesEnd.selector';
+export { default as galeriesStatusSelector } from './galeriesStatus.selector';
 export { default as initSelector } from './init.selector';
 export { default as loadingSelector } from './loading.selector';
 export { default as loginErrorSelector } from './loginError.selector';

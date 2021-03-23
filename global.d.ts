@@ -126,6 +126,18 @@ declare global {
         errors: form.AccountI;
         status: Status;
       }
+      galerie: {
+        status: Status;
+        errors: {
+          name: string;
+        }
+      }
+      galeries: {
+        end: boolean;
+        page: number;
+        galeries: { [name: string]: GalerieI };
+        status: Status;
+      }
       login: {
         status: Status;
         errors: form.LoginI;
