@@ -1,0 +1,42 @@
+export const GALERIE = '[GALERIE]';
+
+export const GALERIE_POST = `${GALERIE} Post`;
+export const GALERIE_PUT = `${GALERIE} Put`;
+export const GALERIE_SET = `${GALERIE} Set`;
+
+export const postGalerie: (
+  data: {
+    name: string;
+  }
+) => store.ActionI = (
+  data,
+) => ({
+  payload: { data },
+  type: GALERIE_POST,
+});
+
+export const resetGalerie: () => store.ActionI = () => ({
+  payload: {
+    data: {
+      status: 'pending',
+      errors: {
+        name: '',
+      },
+    },
+  },
+  type: GALERIE_SET,
+});
+
+export const setGalerie: (
+  data: {
+    status?: store.Status;
+    errors?: {
+      name?: string;
+    }
+  }
+) => store.ActionI = (
+  data,
+) => ({
+  payload: { data },
+  type: GALERIE_SET,
+});

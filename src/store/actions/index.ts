@@ -1,6 +1,7 @@
 export * from './account.actions';
 export * from './api.actions';
 export * from './confirmation.actions';
+export * from './galerie.actions';
 export * from './initUser.actions';
 export * from './loginFacebook.actions';
 export * from './loginGoogle.actions';
