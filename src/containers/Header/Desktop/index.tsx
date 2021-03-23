@@ -7,6 +7,7 @@ import {
 import { CSSTransition } from 'react-transition-group';
 
 import Button from '#components/Button';
+import Modal from '#components/Modal';
 
 import logo from '#ressources/svg/logoG.svg';
 import {
@@ -21,9 +22,9 @@ import {
 import { fetchLogout } from '#store/actions';
 import { userSelector } from '#store/selectors';
 
+import CreateGalerieModal from './CreateGalerieModal';
 import Pictogram from './Pictogram';
 import ProfileButton from './ProfileButton';
-import SearchBar from './SearchBar';
 import {
   Container,
   Fader,
@@ -39,6 +40,10 @@ const Header = () => {
   const user = useSelector(userSelector);
   const location = useLocation();
   const handleClickHome = () => history.push('/');
+  const [openCreateGalerie, setOpenCreateGalerie] = React.useState<boolean>(false);
+
+  const handleOpenCreateGalerie = () => setOpenCreateGalerie(true);
+  const handleCloseCreateGalerie = () => setOpenCreateGalerie(false);
 
   const show = !!user
     && !location.pathname.includes('profilePicture')
@@ -64,7 +69,6 @@ const Header = () => {
                   src={logo}
                 />
               </StyledLink>
-              <SearchBar />
             </HeaderPart>
             <HeaderPart>
               <Pictogram
@@ -78,6 +82,7 @@ const Header = () => {
                 hoverPictogram={CreateGalerieHover}
                 marginRight={25}
                 marginRightL={35}
+                onClick={handleOpenCreateGalerie}
                 pictogram={CreateGalerie}
               />
               <Pictogram
@@ -95,6 +100,14 @@ const Header = () => {
               />
             </HeaderPart>
           </InnerContainer>
+          <Modal.Portal
+            handleClose={handleCloseCreateGalerie}
+            open={openCreateGalerie}
+          >
+            <CreateGalerieModal
+              handleCloseCreateGalerie={handleCloseCreateGalerie}
+            />
+          </Modal.Portal>
         </Container>
       </Fader>
     </CSSTransition>
