@@ -259,6 +259,13 @@ declare global {
     pendingImage: ImageI
   }
 
+  interface GalerieI {
+    id: string;
+    name: string;
+    archived?: boolean;
+    users: UserI[];
+  }
+
   interface UserI {
     createdAt: Date;
     currentProfilePicture: ProfilePictureI | null;
@@ -270,7 +277,7 @@ declare global {
     id: string;
     pseudonym: string;
     role: string;
-    updatedAt: string | null;
+    updatedAt: Date | null;
     userName: string;
   }
 }

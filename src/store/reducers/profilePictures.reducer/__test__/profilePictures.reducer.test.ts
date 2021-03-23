@@ -19,7 +19,7 @@ describe('profilePictures', () => {
     });
     it('should set profilePictures status', () => {
       const data = {
-        profilePictures: [],
+        profilePictures: {},
         status: 'success',
       };
       expect(reducer(undefined, {

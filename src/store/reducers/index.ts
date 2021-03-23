@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import account from './account.reducer';
 import galerie from './galerie.reducer';
+import galeries from './galeries.reducer';
 import login from './login.reducer';
 import notification from './notification.reducer';
 import profilePicture from './profilePicture.reducer';
@@ -22,6 +23,7 @@ import ui from './ui.reducer';
 export default combineReducers({
   account,
   galerie,
+  galeries,
   login,
   notification,
   profilePicture,
