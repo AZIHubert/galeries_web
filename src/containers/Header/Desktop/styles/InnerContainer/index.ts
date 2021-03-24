@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import mediaQueries from '#helpers/mediaQueries';
 
 const InnerContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.secondary};
   border-bottom: ${({ theme }) => (
     `2px solid ${theme.colors.primary}`
   )};

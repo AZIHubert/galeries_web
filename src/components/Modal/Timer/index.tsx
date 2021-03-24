@@ -52,7 +52,7 @@ const Timer = ({
           }
           if (callBack) callBack();
         }}
-        timeout={300000}
+        timeout={200}
         unmountOnExit
       >
         <Fader>

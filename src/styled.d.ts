@@ -10,6 +10,14 @@ interface ColorsI {
   white: string;
 }
 
+interface GalerieI {
+  largest: SubGalerieI;
+  large: SubGalerieI;
+  medium: SubGalerieI;
+  small: SubGalerieI;
+  smallest: SubGalerieI;
+}
+
 interface HeaderHeightI {
   large: number;
   medium: number;
@@ -38,6 +46,14 @@ interface ProfileI {
 interface SubHeaderI {
   height: HeaderHeightI;
   logoWidth: HeaderLogoI;
+}
+
+interface SubGalerieI {
+  card: {
+    size: number;
+    margin: number;
+    numByRow: number;
+  }
 }
 
 interface SubProfileI {
@@ -69,6 +85,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     boxShadow: string;
     colors: ColorsI;
+    galerie: GalerieI;
     header: HeaderI;
     profile: ProfileI;
     transition: TransitionI;

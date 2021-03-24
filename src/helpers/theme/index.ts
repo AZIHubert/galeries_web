@@ -11,6 +11,43 @@ const theme: DefaultTheme = {
     tertiary: '#78FFF7',
     white: '#FFF',
   },
+  galerie: {
+    largest: {
+      card: {
+        size: 240,
+        margin: 20,
+        numByRow: 4,
+      },
+    },
+    large: {
+      card: {
+        size: 210,
+        margin: 15,
+        numByRow: 3,
+      },
+    },
+    medium: {
+      card: {
+        size: 190,
+        margin: 15,
+        numByRow: 3,
+      },
+    },
+    small: {
+      card: {
+        size: 200,
+        margin: 15,
+        numByRow: 2,
+      },
+    },
+    smallest: {
+      card: {
+        size: 250,
+        margin: 15,
+        numByRow: 1,
+      },
+    },
+  },
   header: {
     dashboard: {
       height: {
