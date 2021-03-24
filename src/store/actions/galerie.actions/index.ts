@@ -1,7 +1,19 @@
 export const GALERIE = '[GALERIE]';
 
+export const GALERIE_FETCH = `${GALERIE} Fetch`;
 export const GALERIE_POST = `${GALERIE} Post`;
 export const GALERIE_SET = `${GALERIE} Set`;
+
+export const fetchGalerie: (
+  data: {
+    id: string
+  }
+) => store.ActionI = (
+  data,
+) => ({
+  payload: { data },
+  type: GALERIE_FETCH,
+});
 
 export const postGalerie: (
   data: {

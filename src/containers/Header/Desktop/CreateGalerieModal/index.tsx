@@ -4,6 +4,9 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import {
+  useHistory,
+} from 'react-router-dom';
 
 import Button from '#components/Button';
 import Field from '#components/Field';
@@ -21,6 +24,7 @@ import {
   setGalerie,
 } from '#store/actions';
 import {
+  galeriesSelector,
   loadingSelector,
   galerieStatusSelector,
   galerieErrorSelector,
@@ -49,9 +53,11 @@ const CreateGalerieModal = ({
     validateOnChange: false,
     validationSchema: createGalerieSchema,
   });
+  const history = useHistory();
   const galerieErrors = useSelector(galerieErrorSelector);
   const galerieStatus = useSelector(galerieStatusSelector);
   const loading = useSelector(loadingSelector);
+  const galeries = useSelector(galeriesSelector);
 
   React.useEffect(() => () => {
     dispatch(resetGalerie());
@@ -59,6 +65,13 @@ const CreateGalerieModal = ({
   React.useEffect(() => {
     if (galerieStatus === 'success') {
       handleCloseCreateGalerie();
+      const lastGalerie = Object.keys(galeries).sort(
+        (a, b) => (
+          new Date(galeries[b].createdAt).getTime()
+          - new Date(galeries[a].createdAt).getTime()
+        ),
+      )[0];
+      history.push(`/galerie/${lastGalerie}`);
     }
   });
 

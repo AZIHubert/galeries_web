@@ -39,7 +39,7 @@ const Header = () => {
   const history = useHistory();
   const user = useSelector(userSelector);
   const location = useLocation();
-  const handleClickHome = () => history.push('/');
+  const handleClickHome = () => history.push('/dashboard');
   const [openCreateGalerie, setOpenCreateGalerie] = React.useState<boolean>(false);
 
   const handleOpenCreateGalerie = () => setOpenCreateGalerie(true);
@@ -62,7 +62,7 @@ const Header = () => {
           <InnerContainer>
             <HeaderPart>
               <StyledLink
-                to='/'
+                to='/dashboard'
               >
                 <Logo
                   alt="header logo"

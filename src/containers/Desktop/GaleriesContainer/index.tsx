@@ -4,11 +4,14 @@ import {
   useSelector,
 } from 'react-redux';
 
+import useReachBottom from '#hooks/useReachBottom';
 import {
   fetchGaleries,
 } from '#store/actions';
 import {
   galeriesSelector,
+  galeriesStatusSelector,
+  galeriesEndSelector,
 } from '#store/selectors';
 
 import Galerie from './Galerie';
@@ -20,13 +23,31 @@ import {
 
 const GaleriesContainer = () => {
   const dispatch = useDispatch();
+  const bottomReach = useReachBottom(40);
+  const end = useSelector(galeriesEndSelector);
   const galeries = useSelector(galeriesSelector);
+  const galeriesStatus = useSelector(galeriesStatusSelector);
 
   React.useEffect(() => {
-    dispatch(
-      fetchGaleries(),
-    );
-  }, []);
+    if (galeriesStatus === 'pending') {
+      dispatch(
+        fetchGaleries(),
+      );
+    }
+  }, [galeriesStatus]);
+
+  React.useEffect(() => {
+    if (
+      bottomReach
+      && !end
+      && galeriesStatus !== 'fetching'
+    ) {
+      dispatch(fetchGaleries());
+    }
+  }, [
+    bottomReach,
+    end,
+  ]);
 
   return (
     <Container>

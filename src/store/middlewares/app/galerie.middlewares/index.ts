@@ -4,6 +4,7 @@ import {
   API_ERROR,
   API_SUCCESS,
   GALERIE,
+  GALERIE_FETCH,
   GALERIE_POST,
   apiRequest,
   setGalerie,
@@ -65,6 +66,35 @@ const errorGalerie: Middleware = (
   }
 };
 
+const fetchGalerie: Middleware = (
+  { dispatch },
+) => (
+  next,
+) => (
+  action: store.ActionI,
+) => {
+  next(action);
+  if (action.type === GALERIE_FETCH) {
+    dispatch(
+      setGalerie({
+        status: 'fetching',
+      }),
+    );
+    dispatch(
+      apiRequest(
+        null,
+        'GET',
+        endPoints.GALERIES,
+        GALERIE,
+        undefined,
+        undefined,
+        undefined,
+        action.payload ? action.payload.data.id : undefined,
+      ),
+    );
+  }
+};
+
 const postGalerie: Middleware = (
   { dispatch },
 ) => (
@@ -103,15 +133,28 @@ const successGalerie: Middleware = (
   next(action);
   if (action.type === `${GALERIE} ${API_SUCCESS}`) {
     if (action.payload) {
-      const galerie: GalerieI = action.payload.data;
-      dispatch(
-        setGaleries({
-          galeries: {
-            [galerie.id]: galerie,
-            ...getState().galeries.galeries,
-          },
-        }),
-      );
+      if (action.payload.data.type === 'POST') {
+        const { galerie } = action.payload.data;
+        dispatch(
+          setGaleries({
+            galeries: {
+              [galerie.id]: galerie,
+              ...getState().galeries.galeries,
+            },
+          }),
+        );
+      }
+      if (action.payload.data.type === 'GET') {
+        const { galerie } = action.payload.data;
+        dispatch(
+          setGaleries({
+            galeries: {
+              [galerie.id]: galerie,
+              ...getState().galeries.galeries,
+            },
+          }),
+        );
+      }
     }
     dispatch(
       setGalerie({
@@ -125,6 +168,7 @@ const successGalerie: Middleware = (
 
 export default [
   errorGalerie,
+  fetchGalerie,
   postGalerie,
   successGalerie,
 ];
