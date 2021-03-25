@@ -279,6 +279,7 @@ declare global {
     users: UserI[];
     createdAt: Date;
     updatedAt: Date;
+    role: 'user' | 'admin' | 'creator';
   }
 
   interface UserI {

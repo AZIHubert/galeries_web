@@ -146,7 +146,6 @@ describe('galerie users', () => {
         });
         store.dispatch(fetchGalerieUsers(data));
         const actions = store.getActions();
-        console.log(actions);
         expect(actions[0].type).toEqual(GALERIE_USERS_FETCH);
         expect(actions[1].type).toEqual(`${GALERIE_USERS} ${API_REQUEST}`);
         expect(actions[2].payload).toEqual({

@@ -22,8 +22,6 @@ const Notification = () => {
     }
   }, [notification]);
 
-  console.log(openModalTimer);
-
   return (
     <Modal.Timer
       callBack={() => {
