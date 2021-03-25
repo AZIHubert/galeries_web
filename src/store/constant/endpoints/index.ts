@@ -1,5 +1,6 @@
 export const CONFIRMATION = '/users/confirmation';
 export const GALERIES = '/galeries/';
+export const GALERIES_USER = (id: string) => `/galeries/${id}/users`;
 export const GET_ME = '/users/me';
 export const LOGIN = '/users/login';
 export const LOGIN_FACEBOOK = '/users/auth/facebook';

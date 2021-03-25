@@ -1,6 +1,7 @@
 import accountMiddlewares from './account.middlewares';
 import confirmationMiddleware from './confirmation.middlewares';
 import galerieMiddleware from './galerie.middlewares';
+import galerieUsersMiddleware from './galerieUsers.middlewares';
 import galeriesMiddlewares from './galeries.middlewares';
 import initUserMiddleware from './initUser.middlewares';
 import loginFacebookMiddlewares from './loginFacebook.middlewares';
@@ -25,6 +26,7 @@ export default [
   ...accountMiddlewares,
   ...confirmationMiddleware,
   ...galerieMiddleware,
+  ...galerieUsersMiddleware,
   ...galeriesMiddlewares,
   ...initUserMiddleware,
   ...loginFacebookMiddlewares,
