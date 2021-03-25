@@ -126,6 +126,9 @@ declare global {
         errors: form.AccountI;
         status: Status;
       }
+      frame: {
+        status: Status;
+      }
       galerie: {
         status: Status;
         errors: {

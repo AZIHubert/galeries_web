@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import account from './account.reducer';
+import frame from './frame.reducer';
 import galerie from './galerie.reducer';
 import galeries from './galeries.reducer';
 import login from './login.reducer';
@@ -22,6 +23,7 @@ import ui from './ui.reducer';
 
 export default combineReducers({
   account,
+  frame,
   galerie,
   galeries,
   login,
