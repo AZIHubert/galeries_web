@@ -27,12 +27,16 @@ const GaleriesContainer = () => {
   const end = useSelector(galeriesEndSelector);
   const galeries = useSelector(galeriesSelector);
   const galeriesStatus = useSelector(galeriesStatusSelector);
+  const [firstLoad, setFirstLoad] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (galeriesStatus === 'pending') {
       dispatch(
         fetchGaleries(),
       );
+    }
+    if (galeriesStatus === 'success') {
+      setFirstLoad(true);
     }
   }, [galeriesStatus]);
 
@@ -51,19 +55,21 @@ const GaleriesContainer = () => {
 
   return (
     <Container>
-      <InnerContainer>
-        {Object.keys(galeries).sort(
-          (a, b) => (
-            new Date(galeries[b].createdAt).getTime()
+      {firstLoad ? (
+        <InnerContainer>
+          {Object.keys(galeries).sort(
+            (a, b) => (
+              new Date(galeries[b].createdAt).getTime()
             - new Date(galeries[a].createdAt).getTime()
-          ),
-        ).map((index) => (
-          <Galerie
-            key={galeries[index].id}
-            galerie={galeries[index]}
-          />
-        ))}
-      </InnerContainer>
+            ),
+          ).map((index) => (
+            <Galerie
+              key={galeries[index].id}
+              galerie={galeries[index]}
+            />
+          ))}
+        </InnerContainer>
+      ) : null}
     </Container>
   );
 };

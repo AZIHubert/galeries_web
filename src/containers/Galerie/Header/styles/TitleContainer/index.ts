@@ -4,8 +4,8 @@ const TitleContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 30px 0;
-  width: 70%;
+  padding: 22px 0;
+  width: 65%;
 `;
 
 export default TitleContainer;

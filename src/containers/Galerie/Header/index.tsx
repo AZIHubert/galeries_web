@@ -27,13 +27,17 @@ const Header = ({
         <Text
           fontWeight='bold'
           styles={{
-            fontSize: 1.9,
+            fontSize: 1.8,
             lineHeight: 2.3,
           }}
         >
           {galerie.name}
         </Text>
-        <Text>
+        <Text
+          styles={{
+            fontSize: 0.9,
+          }}
+        >
           {galerie.users.length} member{galerie.users.length > 1 ? 's' : ''}
         </Text>
       </div>
