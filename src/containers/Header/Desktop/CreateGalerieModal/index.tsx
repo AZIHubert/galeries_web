@@ -71,6 +71,7 @@ const CreateGalerieModal = ({
           - new Date(galeries[a].createdAt).getTime()
         ),
       )[0];
+      dispatch(resetGalerie());
       history.push(`/galerie/${lastGalerie}`);
     }
   });

@@ -11,6 +11,7 @@ import {
 import {
   fetchGalerie,
   fetchGalerieUsers,
+  resetGalerie,
 } from '#store/actions';
 import {
   galeriesSelector,
@@ -58,6 +59,9 @@ const Galerie = () => {
 
   React.useEffect(() => {
     if (!loading) {
+      dispatch(
+        resetGalerie(),
+      );
       setGalerie(galeries[id]);
     }
   }, [loading, id]);

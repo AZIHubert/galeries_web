@@ -1,6 +1,7 @@
 export * from './account.actions';
 export * from './api.actions';
 export * from './confirmation.actions';
+export * from './frame.actions';
 export * from './galerie.actions';
 export * from './galerieUser.actions';
 export * from './galeries.actions';

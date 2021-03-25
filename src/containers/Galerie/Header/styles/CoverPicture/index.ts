@@ -6,8 +6,9 @@ interface CoverPictureI {
 
 const CoverPicture = styled.div<CoverPictureI>`
   background-image: ${({ backgroundColor }) => backgroundColor};
-  border-radius: 0 0 10px 10px;
-  height: 250px;
+  border-radius: 0 0 15px 15px;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  height: 230px;
   width: 65%;
 `;
 
