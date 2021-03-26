@@ -7,19 +7,19 @@ interface BackgroundI {
 const Background = styled.div.attrs<BackgroundI>(() => ({
   className: 'background-container',
 }))<BackgroundI>`
-  background-color: ${({
+  /* border: ${({
     variant,
     theme,
   }) => (
-    variant === 'default' ? theme.colors.primary : theme.colors.danger
+    variant === 'default' ? `2px solid ${theme.colors.secondary}` : theme.colors.danger
   )};
-  border-radius: 20px 0;
+  border-radius: 10px;
   box-shadow: ${({ theme }) => theme.boxShadow};
   height: 100%;
   position: absolute;
   right: 15px;
   top: 15px;
-  width: 100%;
+  width: 100%; */
 `;
 
 Background.defaultProps = {
