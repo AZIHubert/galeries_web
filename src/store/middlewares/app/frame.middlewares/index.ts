@@ -101,7 +101,7 @@ const successFrame: Middleware = (
           setGaleries({
             galeries: {
               ...getState().galeries.galeries,
-              galeriesId: {
+              [galerieId]: {
                 ...currentGalerie,
                 frames: [
                   ...currentGalerie.frames,
