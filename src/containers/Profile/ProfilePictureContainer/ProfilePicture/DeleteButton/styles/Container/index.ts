@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Button = styled.button.attrs(() => ({
+const Container = styled.button.attrs(() => ({
   className: 'button',
 }))`
   align-items: center;
@@ -24,4 +24,4 @@ const Button = styled.button.attrs(() => ({
   }
 `;
 
-export default Button;
+export default Container;

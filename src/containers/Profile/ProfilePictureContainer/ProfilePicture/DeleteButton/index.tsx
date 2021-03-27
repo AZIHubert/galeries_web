@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Modal from '#components/Modal';
 import Text from '#components/Text';
-import ButtonLol from '#components/Button';
+import Button from '#components/Button';
 
 import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
 
@@ -14,7 +14,7 @@ import theme from '#helpers/theme';
 import { deleteProfilePicture } from '#store/actions';
 
 import {
-  Button,
+  Container,
 } from './styles';
 
 interface DeleteButtonI {
@@ -48,7 +48,7 @@ const DeleteButton = ({
   const handleOpen = () => setOpen(true);
 
   return (
-    <Button>
+    <Container>
       <AiOutlineDelete
         color={theme.colors.secondary}
         onClick={handleOpen}
@@ -71,7 +71,7 @@ const DeleteButton = ({
             Are you sure you want to delete this profile picture?
           </Text>
           <ButtonContainer>
-            <ButtonLol.Default
+            <Button.Default
               danger
               onClick={handleClick}
               styles={{
@@ -80,7 +80,7 @@ const DeleteButton = ({
               title='yes'
               variant='primary'
             />
-            <ButtonLol.Default
+            <Button.Default
               danger
               title='no'
               variant='secondary'
@@ -89,7 +89,7 @@ const DeleteButton = ({
           </ButtonContainer>
         </Modal.Container>
       </Modal.Portal>
-    </Button>
+    </Container>
   );
 };
 

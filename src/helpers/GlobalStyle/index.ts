@@ -11,6 +11,9 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.secondary};
     font-family: 'HelveticaLTstd';
   }
+  .sortableHelper {
+    z-index: 200;
+  }
 `;
 
 export default GlobalStyle;
