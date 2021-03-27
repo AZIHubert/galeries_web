@@ -31,7 +31,7 @@ const Container = styled.div`
     `0 ${theme.wrapper.margin.large}px`
   )};
     padding-top: ${({ theme }) => (
-    `${theme.header.dashboard.height.small + 120}px`
+    `${theme.header.dashboard.height.large + 120}px`
   )};
   }
 `;

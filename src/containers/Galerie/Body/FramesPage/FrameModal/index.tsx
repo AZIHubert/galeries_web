@@ -1,13 +1,12 @@
+import arrayMove from 'array-move';
 import * as React from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import {
   useDispatch,
+  useSelector,
 } from 'react-redux';
-import {
-  useParams,
-} from 'react-router-dom';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
+import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 import Button from '#components/Button';
 import Modal from '#components/Modal';
@@ -17,77 +16,76 @@ import theme from '#helpers/theme';
 
 import {
   postFrame,
+  resetFrame,
 } from '#store/actions';
+import {
+  frameStatusSelector,
+} from '#store/selectors';
+
+import SortableImageList from './SortableImageList';
 
 import {
   AddButton,
   AddFrameButtonContainer,
   FileInput,
-  Image,
-  ImageContainer,
 } from './styled';
 
 interface FrameModalI {
-  addFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  imagesLimitReach: boolean,
-  removeFile: (id: string) => void;
-  selectedFiles: {
-    file: File;
-    image: string;
-    id: string;
-  }[];
-  setSelectedFiles: React.Dispatch<React.SetStateAction<{
-    file: File;
-    id: string;
-    image: string;
-  }[]>>
+  handleClose: () => void;
 }
 
-const SortableItem = SortableElement(({ value, handleClick }: {
-  value: {
-    file: File;
-    image: string;
-    id: string;
-  },
-  handleClick: () => void;
-}) => <Image
-  url={value.image}
-  onClick={handleClick}
-/>);
-
-const SortableList = SortableContainer(({
-  items,
-  removeFile,
-}: {
-  items: {
-    file: File;
-    image: string;
-    id: string;
-  }[];
-  removeFile: (id: string) => void;
-}) => (
-  <ImageContainer>
-    {items.map((value, index: number) => (
-      <SortableItem
-        handleClick={() => removeFile(value.id)}
-        key={`item-${value.id}`}
-        index={index}
-        value={value}
-      />
-    ))}
-  </ImageContainer>
-));
-
 const FrameModal = ({
-  addFile,
-  imagesLimitReach,
-  removeFile,
-  selectedFiles,
-  setSelectedFiles,
+  handleClose,
 }: FrameModalI) => {
   const dispatch = useDispatch();
-  const fileInputRef = React.useRef<HTMLInputElement | null>(null);
   const { id: galerieId } = useParams<{ id: string }>();
+  const fileInputRef = React.useRef<HTMLInputElement | null>(null);
+  const frameStatus = useSelector(frameStatusSelector);
+  const [imagesLimitReach, setImagesLimitReach] = React.useState<boolean>(false);
+  const [selectedFiles, setSelectedFiles] = React.useState<Array<{
+    file: File,
+    id: string,
+    image: string,
+  }>>([]);
+
+  React.useEffect(() => {
+    if (frameStatus === 'success') {
+      handleClose();
+    }
+  }, [frameStatus]);
+
+  React.useEffect(() => () => {
+    dispatch(
+      resetFrame(),
+    );
+  }, []);
+
+  const addFile = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const element = e.target as HTMLInputElement;
+    if (element.files) {
+      if (selectedFiles.length <= 6) {
+        setImagesLimitReach(false);
+        setSelectedFiles((prevState) => {
+          if (element.files && (element.files.length + prevState.length) <= 6) {
+            const normalizedFiles = Object.values(element.files).map((file) => ({
+              file,
+              id: uuidv4(),
+              image: URL.createObjectURL(file),
+            }));
+            element.value = '';
+            return [
+              ...normalizedFiles,
+              ...prevState,
+            ];
+          }
+          setImagesLimitReach(true);
+          return prevState;
+        });
+      } else {
+        setImagesLimitReach(true);
+      }
+    }
+  }, []);
 
   const handleAddImages = () => {
     if (fileInputRef.current) {
@@ -119,9 +117,14 @@ const FrameModal = ({
     setSelectedFiles(newSelectedFile);
   };
 
+  const removeFile = React.useCallback((id: string) => {
+    setSelectedFiles((prevState) => [
+      ...prevState.filter((selectedFile) => selectedFile.id !== id),
+    ]);
+  }, []);
+
   return (
     <Modal.Container>
-
       <Text
         color='primary'
         styles={{
@@ -160,7 +163,7 @@ const FrameModal = ({
       {selectedFiles.length ? (
         <AddFrameButtonContainer>
           <Button.Default
-            disabled={false}
+            disabled={frameStatus === 'posting'}
             onClick={handlePostFrame}
             styles={{
               marginBottom: 30,
@@ -170,7 +173,7 @@ const FrameModal = ({
           />
         </AddFrameButtonContainer>
       ) : null}
-      <SortableList
+      <SortableImageList
         axis='xy'
         distance={1}
         helperClass='sortableHelper'
@@ -192,4 +195,4 @@ const FrameModal = ({
   );
 };
 
-export default React.memo(FrameModal);
+export default FrameModal;

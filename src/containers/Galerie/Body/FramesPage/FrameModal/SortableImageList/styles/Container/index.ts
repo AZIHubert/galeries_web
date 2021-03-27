@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ImageContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
@@ -8,4 +8,4 @@ const ImageContainer = styled.div`
   padding-top: 20px;
 `;
 
-export default ImageContainer;
+export default Container;

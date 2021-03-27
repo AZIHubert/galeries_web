@@ -68,7 +68,6 @@ const postFrame: Middleware = (
         status: 'posting',
       }),
     );
-    console.log(action.payload);
     dispatch(
       apiRequest(
         action.payload ? action.payload.data.images : undefined,

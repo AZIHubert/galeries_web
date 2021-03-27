@@ -24,7 +24,7 @@ jest.mock('#store/middlewares/core/api.middlewares', () => jest.fn());
 describe('frame', () => {
   describe('actions', () => {
     const data = {
-      images: [new FormData()],
+      images: new FormData(),
       galerieId: '1',
     };
     it('should create a post action', () => {

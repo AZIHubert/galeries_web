@@ -61,7 +61,7 @@ const Default = ({
     type={type}
     variant={variant}
   >
-    {title}
+    {disabled ? 'loading' : title}
   </Button>
 );
 

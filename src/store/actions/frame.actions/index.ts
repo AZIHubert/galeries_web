@@ -5,7 +5,7 @@ export const FRAME_SET = `${FRAME} Set`;
 
 export const postFrame: (
   data: {
-    images: FormData[],
+    images: FormData,
     galerieId: string;
   }
 ) => store.ActionI = (
