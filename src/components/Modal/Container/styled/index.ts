@@ -1,3 +1,2 @@
-export { default as Background } from './Background';
+// eslint-disable-next-line import/prefer-default-export
 export { default as Container } from './Container';
-export { default as InnerContainer } from './InnerContainer';

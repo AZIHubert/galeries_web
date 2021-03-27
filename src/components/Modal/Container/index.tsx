@@ -1,35 +1,22 @@
 import * as React from 'react';
 
 import {
-  Background,
   Container,
-  InnerContainer,
 } from './styled';
 
 interface ModalContainerI {
   containerTestId?: string;
   variant?: 'default' | 'danger';
-  title?: React.ReactNode;
 }
 
 const ModalContainer: React.FC<ModalContainerI> = ({
   children,
-  containerTestId,
   variant = 'default',
-  title,
 }) => (
   <Container
-    testId={containerTestId}
+    variant={variant}
   >
-    <InnerContainer
-      variant={variant}
-    >
-      {title}
-      {children}
-    </InnerContainer>
-    <Background
-      variant={variant}
-    />
+    {children}
   </Container>
 );
 
