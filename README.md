@@ -4,8 +4,6 @@ store action fetch => post/put
 
 apierror sometime no error
 
-modal container refactor
-
 slider header when mobile
 
 desktop add graphic
