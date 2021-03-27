@@ -36,6 +36,7 @@ const Information = () => {
       if (!isPosting) {
         const formData = new FormData();
         formData.append('image', selectedFile, selectedFile.name);
+        console.log(formData);
         dispatch(postProfilePicture(formData));
       }
       setSelectedFile(null);

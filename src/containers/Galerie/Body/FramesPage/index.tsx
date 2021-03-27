@@ -58,25 +58,25 @@ const AddButton = styled.button`
 const FramesPage = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const handleClose = () => setOpen(false);
-  const [selectedFile, setSelectedFile] = React.useState<Array<{
+  const [selectedFiles, setSelectedFiles] = React.useState<Array<{
     file: File,
     id: string,
     image: string,
   }>>([]);
   const [imagesLimitReach, setImagesLimitReach] = React.useState<boolean>(false);
 
-  const removeImage = React.useCallback((id: string) => {
-    setSelectedFile((prevState) => [
-      ...prevState.filter((image) => image.id !== id),
+  const removeFile = React.useCallback((id: string) => {
+    setSelectedFiles((prevState) => [
+      ...prevState.filter((selectedFile) => selectedFile.id !== id),
     ]);
   }, []);
 
   const addFile = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const element = e.target as HTMLInputElement;
     if (element.files) {
-      if (selectedFile.length <= 6) {
+      if (selectedFiles.length <= 6) {
         setImagesLimitReach(false);
-        setSelectedFile((prevState) => {
+        setSelectedFiles((prevState) => {
           if (element.files && (element.files.length + prevState.length) <= 6) {
             const normalizedFiles = Object.values(element.files).map((file) => ({
               file,
@@ -115,9 +115,9 @@ const FramesPage = () => {
         <FrameModal
           addFile={addFile}
           imagesLimitReach={imagesLimitReach}
-          removeImage={removeImage}
-          selectedFile={selectedFile}
-          setSelectedFile={setSelectedFile}
+          removeFile={removeFile}
+          selectedFiles={selectedFiles}
+          setSelectedFiles={setSelectedFiles}
         />
       </Modal.Portal>
     </Container>

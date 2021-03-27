@@ -68,9 +68,10 @@ const postFrame: Middleware = (
         status: 'posting',
       }),
     );
+    console.log(action.payload);
     dispatch(
       apiRequest(
-        action.payload ? action.payload.data : undefined,
+        action.payload ? action.payload.data.images : undefined,
         'POST',
         endPoints.GALERIES_FRAMES(action.payload ? action.payload.data.galerieId : undefined),
         FRAME,
@@ -96,17 +97,19 @@ const successFrame: Middleware = (
       if (action.payload.data.type === 'POST') {
         const { frame, galerieId } = action.payload.data;
         const currentGalerie = getState().galeries.galeries[galerieId];
-        // need to normalize frame
+        const normalizeData = {
+          [frame.id]: { ...frame },
+        };
         dispatch(
           setGaleries({
             galeries: {
               ...getState().galeries.galeries,
               [galerieId]: {
                 ...currentGalerie,
-                frames: [
+                frames: {
                   ...currentGalerie.frames,
-                  frame,
-                ],
+                  ...normalizeData,
+                },
               },
             },
           }),

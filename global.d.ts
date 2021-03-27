@@ -266,6 +266,20 @@ declare global {
     width: number;
   }
 
+  interface FrameI {
+    id: string;
+    galerieId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    galeriePictures: {
+      id: string;
+      index: number;
+      cropedImage: ImageI;
+      originalImage: ImageI;
+      pendingImage: ImageI;
+    }
+  }
+
   interface ProfilePictureI {
     createdAt: Date;
     cropedImage: ImageI;
@@ -280,6 +294,7 @@ declare global {
     defaultCoverPicture: string;
     archived?: boolean;
     users: UserI[];
+    frames: { [name: string]: GalerieI };
     createdAt: Date;
     updatedAt: Date;
     role: 'user' | 'admin' | 'creator';

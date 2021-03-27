@@ -1,5 +1,11 @@
 import * as React from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
+import {
+  useDispatch,
+} from 'react-redux';
+import {
+  useParams,
+} from 'react-router-dom';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
@@ -8,6 +14,10 @@ import Modal from '#components/Modal';
 import Text from '#components/Text';
 
 import theme from '#helpers/theme';
+
+import {
+  postFrame,
+} from '#store/actions';
 
 import {
   AddButton,
@@ -20,13 +30,13 @@ import {
 interface FrameModalI {
   addFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
   imagesLimitReach: boolean,
-  removeImage: (id: string) => void;
-  selectedFile: {
+  removeFile: (id: string) => void;
+  selectedFiles: {
     file: File;
     image: string;
     id: string;
   }[];
-  setSelectedFile: React.Dispatch<React.SetStateAction<{
+  setSelectedFiles: React.Dispatch<React.SetStateAction<{
     file: File;
     id: string;
     image: string;
@@ -47,19 +57,19 @@ const SortableItem = SortableElement(({ value, handleClick }: {
 
 const SortableList = SortableContainer(({
   items,
-  removeImage,
+  removeFile,
 }: {
   items: {
     file: File;
     image: string;
     id: string;
   }[];
-  removeImage: (id: string) => void;
+  removeFile: (id: string) => void;
 }) => (
   <ImageContainer>
     {items.map((value, index: number) => (
       <SortableItem
-        handleClick={() => removeImage(value.id)}
+        handleClick={() => removeFile(value.id)}
         key={`item-${value.id}`}
         index={index}
         value={value}
@@ -71,16 +81,31 @@ const SortableList = SortableContainer(({
 const FrameModal = ({
   addFile,
   imagesLimitReach,
-  removeImage,
-  selectedFile,
-  setSelectedFile,
+  removeFile,
+  selectedFiles,
+  setSelectedFiles,
 }: FrameModalI) => {
+  const dispatch = useDispatch();
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
+  const { id: galerieId } = useParams<{ id: string }>();
 
-  const handleClick = () => {
+  const handleAddImages = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const handlePostFrame = () => {
+    const formData = new FormData();
+    selectedFiles.forEach(({ file }) => {
+      formData.append('images', file, file.name);
+    });
+    dispatch(
+      postFrame({
+        images: formData,
+        galerieId,
+      }),
+    );
   };
 
   const onSortEnd = ({
@@ -90,8 +115,8 @@ const FrameModal = ({
     oldIndex: number;
     newIndex: number;
   }) => {
-    const newSelectedFile = arrayMove(selectedFile, oldIndex, newIndex);
-    setSelectedFile(newSelectedFile);
+    const newSelectedFile = arrayMove(selectedFiles, oldIndex, newIndex);
+    setSelectedFiles(newSelectedFile);
   };
 
   return (
@@ -108,6 +133,7 @@ const FrameModal = ({
       <Text
         color='black'
         styles={{
+          fontSize: 0.8,
           marginBottom: 20,
         }}
       >
@@ -121,9 +147,9 @@ const FrameModal = ({
         ref={fileInputRef}
         type="file"
       />
-      {selectedFile.length < 6 ? (
+      {selectedFiles.length < 6 ? (
         <AddButton
-          onClick={handleClick}
+          onClick={handleAddImages}
         >
           <AiOutlinePlus
             color={theme.colors.secondary}
@@ -131,10 +157,11 @@ const FrameModal = ({
           />
         </AddButton>
       ) : null}
-      {selectedFile.length ? (
+      {selectedFiles.length ? (
         <AddFrameButtonContainer>
           <Button.Default
             disabled={false}
+            onClick={handlePostFrame}
             styles={{
               marginBottom: 30,
             }}
@@ -147,9 +174,9 @@ const FrameModal = ({
         axis='xy'
         distance={1}
         helperClass='sortableHelper'
-        items={selectedFile}
+        items={selectedFiles}
         onSortEnd={onSortEnd}
-        removeImage={removeImage}
+        removeFile={removeFile}
       />
       {imagesLimitReach && (
         <Text
