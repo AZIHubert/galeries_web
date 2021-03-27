@@ -92,7 +92,7 @@ describe('frame', () => {
           galeries: {
             galeries: {
               1: {
-                frames: [],
+                frames: {},
               },
             },
           },

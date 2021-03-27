@@ -97,7 +97,15 @@ const successGaleries: Middleware = (
       newGaleries = action.payload.data;
       const normalizeData = newGaleries.map(
         (galerie: GalerieI) => ({
-          [galerie.id]: { ...galerie },
+          [galerie.id]: {
+            ...galerie,
+            frames: {
+              frames: {},
+              end: false,
+              page: 0,
+              status: 'pending',
+            },
+          },
         }),
       );
       newObject = Object.assign({}, ...normalizeData);

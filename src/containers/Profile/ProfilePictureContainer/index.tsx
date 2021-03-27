@@ -24,8 +24,7 @@ const ProfilePictureContainer = () => {
           ),
         ).map((index) => (
           <ProfilePicture
-            id={index}
-            key={index}
+            key={profilePictures[index].id}
             profilePicture={profilePictures[index]}
           />
         ))}

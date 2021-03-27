@@ -294,7 +294,12 @@ declare global {
     defaultCoverPicture: string;
     archived?: boolean;
     users: UserI[];
-    frames: { [name: string]: GalerieI };
+    frames: {
+      frames: { [name: string]: FramesI };
+      end: boolean;
+      page: number;
+      status: Status;
+    };
     createdAt: Date;
     updatedAt: Date;
     role: 'user' | 'admin' | 'creator';

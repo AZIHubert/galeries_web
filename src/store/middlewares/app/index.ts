@@ -1,6 +1,7 @@
 import accountMiddlewares from './account.middlewares';
 import confirmationMiddleware from './confirmation.middlewares';
 import frameMiddlewares from './frame.middlewares';
+import framesMiddlewares from './frames.middlewares';
 import galerieMiddleware from './galerie.middlewares';
 import galerieUsersMiddleware from './galerieUsers.middlewares';
 import galeriesMiddlewares from './galeries.middlewares';
@@ -27,6 +28,7 @@ export default [
   ...accountMiddlewares,
   ...confirmationMiddleware,
   ...frameMiddlewares,
+  ...framesMiddlewares,
   ...galerieMiddleware,
   ...galerieUsersMiddleware,
   ...galeriesMiddlewares,

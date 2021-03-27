@@ -20,13 +20,12 @@ import {
 } from './styles';
 
 interface ProfilePictureContainerI {
-  id: string;
   profilePicture: ProfilePictureI,
 }
 
 const ProfilePicture = ({
-  id,
   profilePicture: {
+    id,
     cropedImage,
     pendingImage,
   },

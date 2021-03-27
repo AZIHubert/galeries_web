@@ -22,19 +22,26 @@ const errorProfilePictures: Middleware = (
 ) => {
   next(action);
   if (action.type === `${PROFILE_PICTURES} ${API_ERROR}`) {
-    dispatch(setNotification({
-      error: true,
-      text: action.payload ? action.payload.data : 'Something went wrong.',
-    }));
-    dispatch(setProfilePictures({
-      status: 'error',
-    }));
+    dispatch(
+      setNotification({
+        error: true,
+        text: action.payload ? action.payload.data : 'Something went wrong.',
+      }),
+    );
+    dispatch(
+      setProfilePictures({
+        status: 'error',
+      }),
+    );
     dispatch(setLoader(false));
   }
 };
 
 const fetchProfilePictures: Middleware = (
-  { dispatch, getState },
+  {
+    dispatch,
+    getState,
+  },
 ) => (
   next,
 ) => (
@@ -62,7 +69,10 @@ const fetchProfilePictures: Middleware = (
 };
 
 const successProfilePictures: Middleware = (
-  { dispatch, getState },
+  {
+    dispatch,
+    getState,
+  },
 ) => (
   next,
 ) => (
@@ -75,8 +85,8 @@ const successProfilePictures: Middleware = (
     if (action.payload) {
       newProfilePictures = action.payload.data;
       const normalizeData = newProfilePictures.map(
-        ({ id, ...rest }: ProfilePictureI) => ({
-          [id]: { ...rest },
+        (profilePicture: ProfilePictureI) => ({
+          [profilePicture.id]: { ...profilePicture },
         }),
       );
       newObject = Object.assign({}, ...normalizeData);

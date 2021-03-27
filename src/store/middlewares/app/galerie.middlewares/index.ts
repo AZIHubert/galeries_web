@@ -138,7 +138,15 @@ const successGalerie: Middleware = (
         dispatch(
           setGaleries({
             galeries: {
-              [galerie.id]: galerie,
+              [galerie.id]: {
+                ...galerie,
+                frames: {
+                  frames: {},
+                  end: false,
+                  page: 0,
+                  status: 'pending',
+                },
+              },
               ...getState().galeries.galeries,
             },
           }),
@@ -149,7 +157,15 @@ const successGalerie: Middleware = (
         dispatch(
           setGaleries({
             galeries: {
-              [galerie.id]: galerie,
+              [galerie.id]: {
+                ...galerie,
+                frames: {
+                  frames: {},
+                  end: false,
+                  page: 0,
+                  status: 'pending',
+                },
+              },
               ...getState().galeries.galeries,
             },
           }),
