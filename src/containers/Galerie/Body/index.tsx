@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import ScrollToTop from '#components/ScrollToTop';
+
 import { GalerieContext } from '#contexts/galerieContext';
 
 import FramesPage from './FramesPage';
@@ -14,8 +16,11 @@ import {
 } from './styles';
 
 const Body = () => {
-  const { galerie } = React.useContext(GalerieContext);
-  const [page, setPage] = React.useState<'frames' | 'users' | 'options'>('frames');
+  const {
+    galerie,
+    page,
+    setPage,
+  } = React.useContext(GalerieContext);
 
   if (!galerie) {
     return null;
@@ -63,6 +68,7 @@ const Body = () => {
       <PageContainer>
         {currentPage}
       </PageContainer>
+      <ScrollToTop />
     </Container>
   );
 };
