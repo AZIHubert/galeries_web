@@ -21,41 +21,73 @@ const Carousel = ({
   galeriePictures,
 }: CarouselI) => {
   const circles = galeriePictures.map(({ id }) => ({ id }));
+  const [currentSlide, setCurrentSlide] = React.useState<number>(0);
+  const [size, setSize] = React.useState<number>(436);
+
+  React.useEffect(() => {
+    const handleSize = () => setSize(436);
+    window.addEventListener('resize', handleSize);
+    return () => {
+      window.removeEventListener('resize', handleSize);
+    };
+  }, []);
+
+  console.log(size * currentSlide);
 
   return (
     <>
       <Container>
-        <GaleriePicturesContainer>
+        <GaleriePicturesContainer
+          position={size * currentSlide}
+        >
           {galeriePictures
             .sort((a, b) => (
               a.index - b.index
-            )).map((galeriePicture) => (
+            )).map((galeriePicture, index) => (
               <GaleriePicture
                 galeriePicture={galeriePicture}
                 key={galeriePicture.id}
+                position={size * index}
               />
             ))}
         </GaleriePicturesContainer>
         {galeriePictures.length > 1 && (
           <>
-            <ArrowContainer>
-              <RiArrowLeftSLine
-                size={30}
-              />
-            </ArrowContainer>
-            <ArrowContainer
-              variant='right'
-            >
-              <RiArrowRightSLine
-                size={30}
-              />
-            </ArrowContainer>
+            {currentSlide !== 0 && (
+              <ArrowContainer
+                onClick={() => {
+                  if (currentSlide !== 0) {
+                    setCurrentSlide((prevState) => prevState - 1);
+                  }
+                }}
+              >
+                <RiArrowLeftSLine
+                  size={18}
+                />
+              </ArrowContainer>
+            )}
+            {(currentSlide < galeriePictures.length - 1) && (
+              <ArrowContainer
+                variant='right'
+              >
+                <RiArrowRightSLine
+                  size={18}
+                  onClick={() => {
+                    if (currentSlide < galeriePictures.length - 1) {
+                      setCurrentSlide((prevState) => prevState + 1);
+                    }
+                  }}
+                />
+              </ArrowContainer>
+            )}
           </>
         )}
       </Container>
       {galeriePictures.length > 1 && (
         <CirclesContainer
           circles={circles}
+          currentSlide={currentSlide}
+          setCurrentSlide={setCurrentSlide}
         />
       )}
     </>

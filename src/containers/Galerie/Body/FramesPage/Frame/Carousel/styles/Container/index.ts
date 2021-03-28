@@ -8,7 +8,7 @@ const Container = styled.div`
   position: relative;
   &:hover {
     & .arrow {
-      opacity: 0.5;
+      opacity: 0.75;
     }
     & .coverPictureButton {
       opacity: 1;

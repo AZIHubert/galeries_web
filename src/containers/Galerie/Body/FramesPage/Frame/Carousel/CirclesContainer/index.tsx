@@ -8,16 +8,22 @@ import {
 interface CarouselCirclesContainerI {
   circles: {
     id: string;
-  }[]
+  }[];
+  currentSlide: number;
+  setCurrentSlide: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const CarouselCirclesContainer = ({
   circles,
+  currentSlide,
+  setCurrentSlide,
 }: CarouselCirclesContainerI) => (
   <Container>
-    {circles.map((circle) => (
+    {circles.map((circle, index) => (
       <Circle
         key={circle.id}
+        current={currentSlide === index}
+        onClick={() => setCurrentSlide(index)}
       />
     ))}
   </Container>

@@ -12,14 +12,18 @@ import {
 
 interface GaleriePictureContainerI {
   galeriePicture: GaleriePictureI;
+  position: number;
 }
 
 const GaleriePicture = ({
   galeriePicture,
+  position,
 }: GaleriePictureContainerI) => {
   const { galerie } = React.useContext(GalerieContext);
   return (
-    <Container>
+    <Container
+      left={position}
+    >
       <Image
         alt={`image ${galeriePicture.index}`}
         key={galeriePicture.id}
