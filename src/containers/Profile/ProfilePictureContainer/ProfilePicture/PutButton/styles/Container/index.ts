@@ -15,10 +15,8 @@ const Container = styled.button.attrs<ContainerI>(
   }) => (
     current ? theme.colors.primary : theme.colors.secondary
   )};
-  border: none;
   border-radius: 50%;
   box-shadow: ${({ theme }) => theme.boxShadow};
-  cursor: pointer;
   height: 25px;
   position: absolute;
   right: 15px;
@@ -26,9 +24,6 @@ const Container = styled.button.attrs<ContainerI>(
   transition: ${({ theme }) => theme.transition.default};
   width: 25px;
   z-index: 1;
-  &:focus {
-    outline: none;
-  }
 `;
 
 Container.defaultProps = {

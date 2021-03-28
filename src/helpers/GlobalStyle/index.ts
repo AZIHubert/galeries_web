@@ -11,6 +11,15 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.secondary};
     font-family: 'HelveticaLTstd';
   }
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    &:focus {
+      outline: none;
+    }
+  }
   .sortableHelper {
     z-index: 200;
   }

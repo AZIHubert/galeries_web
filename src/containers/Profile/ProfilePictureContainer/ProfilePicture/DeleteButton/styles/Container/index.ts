@@ -5,10 +5,8 @@ const Container = styled.button.attrs(() => ({
 }))`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.danger};
-  border: none;
   border-radius: 50%;
   box-shadow: ${({ theme }) => theme.boxShadow};
-  cursor: pointer;
   display: flex;
   height: 25px;
   justify-content: center;
@@ -19,9 +17,6 @@ const Container = styled.button.attrs(() => ({
   transition: ${({ theme }) => theme.transition.default};
   width: 25px;
   z-index: 1;
-  &:focus {
-    outline: none;
-  }
 `;
 
 export default Container;

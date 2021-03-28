@@ -13,8 +13,6 @@ const Button = styled.button.attrs<ButtonI>(
   }),
 )<ButtonI>`
   align-items: center;
-  background-color: transparent;
-  border: none;
   border-bottom: ${({
     borderBottom,
     theme,
@@ -22,13 +20,9 @@ const Button = styled.button.attrs<ButtonI>(
     borderBottom && `1px solid ${theme.colors.primary}`
   )};
   display: flex;
-  cursor: pointer;
   height: 50px;
   padding: 10px 3px;
   width: 100%;
-  &:focus {
-    outline: none;
-  }
   @media ${mediaQueries.laptopL} {
     height: 65px;
   }

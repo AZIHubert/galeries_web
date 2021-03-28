@@ -55,7 +55,6 @@ const Button = styled.button.attrs<ButtonI>(
       ? theme.colors.white
       : theme.colors.black
   )};
-  cursor: pointer;
   display: flex;
   font-size: 0.85rem;
   height: 30px;

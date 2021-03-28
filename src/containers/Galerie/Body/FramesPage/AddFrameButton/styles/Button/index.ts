@@ -5,11 +5,9 @@ import mediaQueries from '#helpers/mediaQueries';
 const AddButton = styled.button`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.primary};
-  border: none;
   border-radius: 50%;
   bottom: 15px;
   box-shadow: ${({ theme }) => theme.boxShadow};
-  cursor: pointer;
   display: flex;
   height: 32px;
   justify-content: center;
@@ -19,9 +17,6 @@ const AddButton = styled.button`
   transition: ${({ theme }) => `transform ${theme.transition.default}`};
   & svg {
     transition: ${({ theme }) => `transform ${theme.transition.default}`};
-  }
-  &:focus {
-    outline: none;
   }
   &:hover {
     transform: scale(1.04);

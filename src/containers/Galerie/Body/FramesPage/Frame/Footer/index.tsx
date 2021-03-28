@@ -8,6 +8,7 @@ import theme from '#helpers/theme';
 
 import {
   Container,
+  LikeButton,
   LikeContainer,
 } from './styles';
 
@@ -27,10 +28,12 @@ const Footer = ({
       >
         {likes.length} like{likes.length > 1}
       </Text>
-      <AiOutlineHeart
-        color={theme.colors.danger}
-        size={25}
-      />
+      <LikeButton>
+        <AiOutlineHeart
+          color={theme.colors.danger}
+          size={25}
+        />
+      </LikeButton>
     </LikeContainer>
     <Text
       fontWeight='lighter'
