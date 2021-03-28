@@ -266,19 +266,21 @@ declare global {
     width: number;
   }
 
+  interface GaleriePictureI {
+    id: string;
+    index: number;
+    cropedImage: ImageI;
+    originalImage: ImageI;
+    pendingImage: ImageI;
+  }
+
   interface FrameI {
     id: string;
     galerieId: string;
     createdAt: Date;
     updatedAt: Date;
     user: UserI;
-    galeriePictures: [{
-      id: string;
-      index: number;
-      cropedImage: ImageI;
-      originalImage: ImageI;
-      pendingImage: ImageI;
-    }];
+    galeriePictures: GaleriePictureI[];
     likes: LikeI[]
   }
 

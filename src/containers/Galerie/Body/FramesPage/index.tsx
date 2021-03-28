@@ -11,7 +11,7 @@ import {
 } from './styles';
 
 import AddFrameButton from './AddFrameButton';
-import FramesContainer from './FramesContainer';
+import Frame from './Frame';
 
 const FramesPage = () => {
   const { galerie } = React.useContext(GalerieContext);
@@ -28,11 +28,19 @@ const FramesPage = () => {
 
   return (
     <Container>
-      {!!galerie && (
-        <FramesContainer
-          frames={frames}
-        />
-      )}
+      <div>
+        {!!galerie && Object.keys(frames).sort(
+          (a, b) => (
+            new Date(frames[b].createdAt).getTime()
+        - new Date(frames[a].createdAt).getTime()
+          ),
+        ).map((index) => (
+          <Frame
+            key={frames[index].id}
+            frame={frames[index]}
+          />
+        ))}
+      </div>
       <AddFrameButton
         onClick={handleOpen}
       />
