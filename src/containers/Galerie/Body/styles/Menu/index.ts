@@ -1,10 +1,24 @@
 import styled from 'styled-components';
 
-const Menu = styled.div`
-  display: flex;
-  border-bottom: ${({ theme }) => `2px solid ${theme.colors.primary}`};
-  justify-content: flex-end;
-  padding: 15px 20px;
+import mediaQueries from '#helpers/mediaQueries';
+
+interface MenuI {
+  fixed: boolean;
+}
+
+const Container = styled.header<MenuI>`
+  background-color: ${({ theme }) => theme.colors.secondary};
+  left: 0;
+  position: ${({ fixed }) => (fixed ? 'fixed' : 'static')};
+  top: ${({ theme }) => `${theme.header.dashboard.height.small}px`};
+  width: 100%;
+  z-index: 10;
+  @media ${mediaQueries.laptop} {
+    top: ${({ theme }) => `${theme.header.dashboard.height.medium}px`};
+  }
+  @media ${mediaQueries.laptopL} { 
+    top: ${({ theme }) => `${theme.header.dashboard.height.large}px`};
+  }
 `;
 
-export default Menu;
+export default Container;

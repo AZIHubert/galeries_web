@@ -5,25 +5,74 @@ import Text from '#components/Text';
 
 import { GalerieContext } from '#contexts/galerieContext';
 
+import theme from '#helpers/theme';
+
+import useWindowSize from '#hooks/useWindowSize';
+
 import {
   Container,
   CoverPicture,
   TitleContainer,
 } from './styles';
 
-const Header = () => {
+interface HeaderI {
+  setFixedMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Header = ({
+  setFixedMenu,
+}: HeaderI) => {
   const { galerie } = React.useContext(GalerieContext);
+  const headerRef = React.useRef<HTMLElement | null>(null);
+  const [
+    headerHeight,
+    setHeaderHeight,
+  ] = React.useState<number>(theme.header.dashboard.height.small);
+  const { width } = useWindowSize();
+
+  React.useEffect(() => {
+    const { current } = headerRef;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setFixedMenu(!entry.isIntersecting);
+      }, {
+        rootMargin: `-${headerHeight}px`,
+      },
+    );
+    if (current) observer.observe(current);
+    return () => {
+      if (current) observer.unobserve(current);
+    };
+  }, [
+    headerHeight,
+    headerRef,
+    galerie,
+  ]);
+
+  React.useEffect(() => {
+    if (width && width < 425) {
+      console.log('small');
+      setHeaderHeight(theme.header.dashboard.height.small);
+    } else if (width && width < 1440) {
+      console.log('medium');
+      setHeaderHeight(theme.header.dashboard.height.medium);
+    } else {
+      console.log('large');
+      setHeaderHeight(theme.header.dashboard.height.large);
+    }
+  }, [width]);
 
   if (!galerie) {
     return null;
   }
 
   return (
-    <Container>
+    <Container
+      ref={headerRef}
+    >
       <CoverPicture
         backgroundColor={galerie.defaultCoverPicture}
       >
-
       </CoverPicture>
       <TitleContainer>
         <div>
