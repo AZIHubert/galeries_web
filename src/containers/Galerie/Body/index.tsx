@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { GalerieContext } from '#contexts/galerieContext';
+
 import FramesPage from './FramesPage';
 import OptionsPage from './OptionsPage';
 import UsersPage from './UsersPage';
@@ -11,14 +13,13 @@ import {
   PageContainer,
 } from './styles';
 
-interface BodyI {
-  galerie: GalerieI;
-}
-
-const Body = ({
-  galerie,
-}: BodyI) => {
+const Body = () => {
+  const { galerie } = React.useContext(GalerieContext);
   const [page, setPage] = React.useState<'frames' | 'users' | 'options'>('frames');
+
+  if (!galerie) {
+    return null;
+  }
 
   const currentPage = (() => {
     switch (page) {

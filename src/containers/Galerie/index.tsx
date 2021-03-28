@@ -8,7 +8,10 @@ import {
   useParams,
 } from 'react-router-dom';
 
+import { GalerieContext } from '#contexts/galerieContext';
+
 import {
+  fetchFrames,
   fetchGalerie,
   fetchGalerieUsers,
   resetGalerie,
@@ -37,7 +40,12 @@ const Galerie = () => {
   const status = useSelector(galerieStatusSelector);
 
   const [hasFetch, setHasFetch] = React.useState<boolean>(false);
-  const [galerie, setGalerie] = React.useState<GalerieI | null>(null);
+
+  const {
+    galerie,
+    removeGalerie,
+    setGalerie,
+  } = React.useContext(GalerieContext);
 
   React.useEffect(() => {
     if (id) {
@@ -45,6 +53,9 @@ const Galerie = () => {
       if (currentGalerie) {
         dispatch(
           fetchGalerieUsers({ id }),
+        );
+        dispatch(
+          fetchFrames({ galerieId: id }),
         );
       } else {
         setHasFetch(true);
@@ -66,11 +77,18 @@ const Galerie = () => {
     }
   }, [loading, id]);
 
+  React.useEffect(() => () => {
+    removeGalerie();
+  }, []);
+
   React.useEffect(() => {
     if (hasFetch && id) {
       if (status === 'success') {
         dispatch(
           fetchGalerieUsers({ id }),
+        );
+        dispatch(
+          fetchFrames({ galerieId: id }),
         );
       }
       if (status === 'error') {
@@ -89,12 +107,8 @@ const Galerie = () => {
 
   return (
     <Container>
-      <Header
-        galerie={galerie}
-      />
-      <Body
-        galerie={galerie}
-      />
+      <Header />
+      <Body />
     </Container>
   );
 };

@@ -11,3 +11,5 @@ desktop add graphic
 picto (issue when clicking, sometime not trigger)
 
 add frame dnd then dispatch
+
+Rename src/routes => Routes

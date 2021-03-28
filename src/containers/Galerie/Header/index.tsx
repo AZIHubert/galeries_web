@@ -3,54 +3,58 @@ import * as React from 'react';
 import Button from '#components/Button';
 import Text from '#components/Text';
 
+import { GalerieContext } from '#contexts/galerieContext';
+
 import {
   Container,
   CoverPicture,
   TitleContainer,
 } from './styles';
 
-interface HeaderI {
-  galerie: GalerieI;
-}
+const Header = () => {
+  const { galerie } = React.useContext(GalerieContext);
 
-const Header = ({
-  galerie,
-}: HeaderI) => (
-  <Container>
-    <CoverPicture
-      backgroundColor={galerie.defaultCoverPicture}
-    >
+  if (!galerie) {
+    return null;
+  }
 
-    </CoverPicture>
-    <TitleContainer>
-      <div>
-        <Text
-          fontWeight='bold'
-          styles={{
-            fontSize: 1.8,
-            lineHeight: 2.3,
-          }}
-        >
-          {galerie.name}
-        </Text>
-        <Text
-          styles={{
-            fontSize: 0.9,
-          }}
-        >
-          {galerie.users.length} member{galerie.users.length > 1 ? 's' : ''}
-        </Text>
-      </div>
-      {galerie.role !== 'user' ? (
+  return (
+    <Container>
+      <CoverPicture
+        backgroundColor={galerie.defaultCoverPicture}
+      >
+
+      </CoverPicture>
+      <TitleContainer>
         <div>
-          <Button.Default
-            variant='secondary'
-            title='create an invitation'
-          />
+          <Text
+            fontWeight='bold'
+            styles={{
+              fontSize: 1.8,
+              lineHeight: 2.3,
+            }}
+          >
+            {galerie.name}
+          </Text>
+          <Text
+            styles={{
+              fontSize: 0.9,
+            }}
+          >
+            {galerie.users.length} member{galerie.users.length > 1 ? 's' : ''}
+          </Text>
         </div>
-      ) : null}
-    </TitleContainer>
-  </Container>
-);
+        {galerie.role !== 'user' ? (
+          <div>
+            <Button.Default
+              variant='secondary'
+              title='create an invitation'
+            />
+          </div>
+        ) : null}
+      </TitleContainer>
+    </Container>
+  );
+};
 
 export default Header;

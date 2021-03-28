@@ -1,31 +1,26 @@
 import * as React from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
 
 import Modal from '#components/Modal';
-
-import themeColor from '#helpers/theme';
 
 import FrameModal from './FrameModal';
 
 import {
-  AddButton,
   Container,
 } from './styles';
 
+import AddFrameButton from './AddFrameButton';
+
 const FramesPage = () => {
   const [open, setOpen] = React.useState<boolean>(false);
+
   const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
   return (
     <Container>
-      <AddButton
-        onClick={() => setOpen(true)}
-      >
-        <AiOutlinePlus
-          color={themeColor.colors.secondary}
-          size={20}
-        />
-      </AddButton>
+      <AddFrameButton
+        onClick={handleOpen}
+      />
       <Modal.Portal
         handleClose={handleClose}
         open={open}
