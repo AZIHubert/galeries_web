@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Carousel from './Carousel';
+import Carrousel from './Carrousel';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -25,7 +25,7 @@ const Frame = ({
     <Header
       user={user}
     />
-    <Carousel
+    <Carrousel
       galeriePictures={galeriePictures}
       frameId={id}
     />

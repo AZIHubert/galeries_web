@@ -16,6 +16,7 @@ import {
 
 import {
   Container,
+  DeleteButton,
   ProfilePictureImage,
   UserContainer,
 } from './styles';
@@ -48,14 +49,17 @@ const Header = ({
           {user.userName}
         </Text>
       </UserContainer>
-      {currentUser
-       && currentUser.id === user.id
-       && (
-         <AiOutlineDelete
-           color={theme.colors.danger}
-           size={15}
-         />
-       )
+      {
+        currentUser
+        && currentUser.id === user.id
+        && (
+          <DeleteButton>
+            <AiOutlineDelete
+              color={theme.colors.danger}
+              size={15}
+            />
+          </DeleteButton>
+        )
       }
     </Container>
   );

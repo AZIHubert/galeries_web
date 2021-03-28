@@ -13,15 +13,15 @@ import {
 import GaleriePicture from './GaleriePicture';
 import CirclesContainer from './CirclesContainer';
 
-interface CarouselI {
+interface CarrouselI {
   frameId: string;
   galeriePictures: GaleriePictureI[];
 }
 
-const Carousel = ({
+const Carrousel = ({
   frameId,
   galeriePictures,
-}: CarouselI) => {
+}: CarrouselI) => {
   const circles = galeriePictures.map(({ id }) => ({ id }));
   const [currentSlide, setCurrentSlide] = React.useState<number>(0);
   const [size, setSize] = React.useState<number>(436);
@@ -95,4 +95,4 @@ const Carousel = ({
   );
 };
 
-export default Carousel;
+export default Carrousel;

@@ -9,9 +9,15 @@ const Container = styled.div`
   &:hover {
     & .arrow {
       opacity: 0.75;
+      &:hover {
+        opacity: 1;
+      }
     }
     & .coverPictureButton {
-      opacity: 1;
+      opacity: 0.75;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 `;
