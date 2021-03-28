@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import {
   useSelector,
@@ -9,7 +10,7 @@ import { CSSTransition } from 'react-transition-group';
 import theme from '#helpers/theme';
 
 import {
-  frameStatusSelector,
+  framesStatusSelector,
 } from '#store/selectors';
 
 import {
@@ -28,7 +29,9 @@ const SortableItem = SortableElement(({ value, handleClick }: {
   },
   handleClick: () => void;
 }) => {
-  const frameStatus = useSelector(frameStatusSelector);
+  const { id } = useParams<{ id: string }>();
+  const frameStatus = useSelector(framesStatusSelector(id));
+
   return (
     <ImageContainer>
       <Image

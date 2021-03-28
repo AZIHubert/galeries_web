@@ -29,6 +29,8 @@ const Header = ({
 }: HeaderI) => {
   const currentUser = useSelector(userSelector);
 
+  console.log(user);
+
   return (
     <Container>
       <UserContainer>
@@ -38,15 +40,15 @@ const Header = ({
             original={selectProfilPicture(user).croped}
             pending={selectProfilPicture(user).pending}
           />
-          <Text
-            fontWeight='bold'
-            styles={{
-              fontSize: 0.8,
-            }}
-          >
-            {user.userName}
-          </Text>
         </ProfilePictureImage>
+        <Text
+          fontWeight='bold'
+          styles={{
+            fontSize: 0.8,
+          }}
+        >
+          {user.userName}
+        </Text>
       </UserContainer>
       {currentUser
        && currentUser.id === user.id

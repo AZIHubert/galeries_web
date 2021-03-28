@@ -19,7 +19,7 @@ import {
   resetFrame,
 } from '#store/actions';
 import {
-  frameStatusSelector,
+  framesStatusSelector,
 } from '#store/selectors';
 
 import SortableImageList from './SortableImageList';
@@ -40,8 +40,9 @@ const FrameModal = ({
   const dispatch = useDispatch();
   const { id: galerieId } = useParams<{ id: string }>();
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
-  const frameStatus = useSelector(frameStatusSelector);
+  const frameStatus = useSelector(framesStatusSelector(galerieId));
   const [imagesLimitReach, setImagesLimitReach] = React.useState<boolean>(false);
+  const [posting, setPosting] = React.useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = React.useState<Array<{
     file: File,
     id: string,
@@ -49,10 +50,13 @@ const FrameModal = ({
   }>>([]);
 
   React.useEffect(() => {
-    if (frameStatus === 'success') {
+    if (frameStatus === 'success' && posting) {
       handleClose();
     }
-  }, [frameStatus]);
+  }, [
+    frameStatus,
+    posting,
+  ]);
 
   React.useEffect(() => () => {
     dispatch(
@@ -94,6 +98,7 @@ const FrameModal = ({
   };
 
   const handlePostFrame = () => {
+    setPosting(true);
     const formData = new FormData();
     selectedFiles.forEach(({ file }) => {
       formData.append('images', file, file.name);
