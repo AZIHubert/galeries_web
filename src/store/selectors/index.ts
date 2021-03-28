@@ -1,6 +1,7 @@
 export { default as accountErrorsSelector } from './accountErrors.selector';
 export { default as accountStatusSelector } from './accountStatus.selector';
 export { default as frameStatusSelector } from './frameStatus.selector';
+export { default as framesStatusSelector } from './framesStatus.selector';
 export { default as galerieErrorSelector } from './galerieError.selector';
 export { default as galerieStatusSelector } from './galerieStatus.selector';
 export { default as galeriesSelector } from './galeries.selector';

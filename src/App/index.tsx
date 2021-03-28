@@ -11,9 +11,6 @@ import { Reset } from 'styled-reset';
 import Notification from '#containers/Notification';
 
 import ThemeProvider from '#contexts/ThemeContext';
-import {
-  GalerieProvider,
-} from '#contexts/galerieContext';
 
 import GlobalStyle from '#helpers/GlobalStyle';
 
@@ -25,16 +22,14 @@ smoothscroll.polyfill();
 
 const App = () => (
   <Provider store={store} >
-    <GalerieProvider>
-      <ThemeProvider>
-        <Router>
-          <GlobalStyle />
-          <Reset />
-          <Notification />
-          <Routes />
-        </Router>
-      </ThemeProvider>
-    </GalerieProvider>
+    <ThemeProvider>
+      <Router>
+        <GlobalStyle />
+        <Reset />
+        <Notification />
+        <Routes />
+      </Router>
+    </ThemeProvider>
   </Provider>
 );
 

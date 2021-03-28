@@ -271,13 +271,15 @@ declare global {
     galerieId: string;
     createdAt: Date;
     updatedAt: Date;
-    galeriePictures: {
+    user: UserI;
+    galeriePictures: [{
       id: string;
       index: number;
       cropedImage: ImageI;
       originalImage: ImageI;
       pendingImage: ImageI;
-    }
+    }];
+    likes: LikeI[]
   }
 
   interface ProfilePictureI {
@@ -288,14 +290,20 @@ declare global {
     pendingImage: ImageI
   }
 
+  interface LikeI {
+
+  }
+
   interface GalerieI {
     id: string;
     name: string;
     defaultCoverPicture: string;
+    coverPictureId: string;
+    coverPicture: GaleriePictureI;
     archived?: boolean;
     users: UserI[];
     frames: {
-      frames: { [name: string]: FramesI };
+      frames: { [name: string]: FrameI };
       end: boolean;
       page: number;
       status: Status;

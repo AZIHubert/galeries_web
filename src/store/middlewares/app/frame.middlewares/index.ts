@@ -55,7 +55,10 @@ const errorFrame: Middleware = (
 };
 
 const postFrame: Middleware = (
-  { dispatch },
+  {
+    dispatch,
+    getState,
+  },
 ) => (
   next,
 ) => (
@@ -63,11 +66,27 @@ const postFrame: Middleware = (
 ) => {
   next(action);
   if (action.type === FRAME_POST) {
-    dispatch(
-      setFrame({
-        status: 'posting',
-      }),
-    );
+    if (action.payload) {
+      dispatch(
+        setGaleries({
+          galeries: {
+            ...getState().galeries.galeries,
+            [action.payload.data.galerieId]: {
+              ...getState()
+                .galeries
+                .galeries[action.payload.data.galerieId],
+              frames: {
+                ...getState()
+                  .galeries
+                  .galeries[action.payload.data.galerieId]
+                  .frames,
+                status: 'posting',
+              },
+            },
+          },
+        }),
+      );
+    }
     dispatch(
       apiRequest(
         action.payload ? action.payload.data.images : undefined,
@@ -97,7 +116,10 @@ const successFrame: Middleware = (
         const { frame, galerieId } = action.payload.data;
         const currentGalerie = getState().galeries.galeries[galerieId];
         const normalizeData = {
-          [frame.id]: { ...frame },
+          [frame.id]: {
+            ...frame,
+            likes: [],
+          },
         };
         dispatch(
           setGaleries({
@@ -107,18 +129,17 @@ const successFrame: Middleware = (
                 ...currentGalerie,
                 frames: {
                   ...currentGalerie.frames,
-                  ...normalizeData,
+                  frames: {
+                    ...currentGalerie.frames.frames,
+                    ...normalizeData,
+                  },
+                  status: 'success',
                 },
               },
             },
           }),
         );
       }
-      dispatch(
-        setFrame({
-          status: 'success',
-        }),
-      );
       dispatch(setLoader(false));
     }
   }

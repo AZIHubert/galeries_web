@@ -7,13 +7,6 @@ interface ImgI {
 }
 
 const Img = styled.img<ImgI>`
-  width: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'width') {
-      return '100%';
-    }
-
-    return 'auto';
-  }};
   height: ${({ mode }) => {
     if (mode === 'cover' || mode === 'height') {
       return '100%';
@@ -21,6 +14,15 @@ const Img = styled.img<ImgI>`
 
     return 'auto';
   }};
+  vertical-align: middle;
+  width: ${({ mode }) => {
+    if (mode === 'cover' || mode === 'width') {
+      return '100%';
+    }
+
+    return 'auto';
+  }};
+  
 `;
 
 export default Img;
