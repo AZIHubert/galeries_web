@@ -14,6 +14,7 @@ interface FrameContainerI {
 
 const Frame = ({
   frame: {
+    id,
     createdAt,
     galeriePictures,
     likes,
@@ -26,6 +27,7 @@ const Frame = ({
     />
     <Carousel
       galeriePictures={galeriePictures}
+      frameId={id}
     />
     <Footer
       createdAt={createdAt}

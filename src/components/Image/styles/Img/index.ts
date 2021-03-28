@@ -1,28 +1,15 @@
 import styled from 'styled-components';
 
-type Mode = 'cover' | 'height' | 'width';
+type Mode = 'cover' | 'contain';
 
 interface ImgI {
   mode?: Mode;
 }
 
 const Img = styled.img<ImgI>`
-  height: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'height') {
-      return '100%';
-    }
-
-    return 'auto';
-  }};
-  vertical-align: middle;
-  width: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'width') {
-      return '100%';
-    }
-
-    return 'auto';
-  }};
-  
+  height: 100%;
+  object-fit: ${({ mode }) => `${mode !== 'cover' ? 'contain' : 'cover'}`};
+  width: ${({ mode }) => `${mode !== 'cover' ? 'auto' : '100%'}`};
 `;
 
 export default Img;

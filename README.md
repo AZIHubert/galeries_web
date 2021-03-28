@@ -24,3 +24,4 @@ normalize galerie.likes
 object-fit for image
 
 loader if frames are not ready yet
+set carousel size on theme

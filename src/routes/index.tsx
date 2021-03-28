@@ -146,6 +146,15 @@ const Routes = () => {
               <Galerie />
             )}
           </AnimatedRoute>
+          <AnimatedRoute
+            path='/galerie/:galerieId/frame/:frameId/galeriesPicture/:id'
+          >
+            {!user ? (
+              <Redirect to='/' />
+            ) : (
+              <FullPageImage />
+            )}
+          </AnimatedRoute>
           <Header.Desktop />
         </Fader>
       </CSSTransition>

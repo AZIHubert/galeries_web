@@ -9,7 +9,7 @@ import {
   Img,
 } from './styles';
 
-type Mode = 'cover' | 'height' | 'width';
+type Mode = 'cover' | 'contain';
 
 interface ImageI {
   alt?: string;
@@ -39,10 +39,7 @@ const Image = ({
         timeout={300}
         unmountOnExit
       >
-        <Fader
-          mode={mode}
-
-        >
+        <Fader>
           <Img
             alt={alt}
             mode={mode}

@@ -14,10 +14,12 @@ import GaleriePicture from './GaleriePicture';
 import CirclesContainer from './CirclesContainer';
 
 interface CarouselI {
+  frameId: string;
   galeriePictures: GaleriePictureI[];
 }
 
 const Carousel = ({
+  frameId,
   galeriePictures,
 }: CarouselI) => {
   const circles = galeriePictures.map(({ id }) => ({ id }));
@@ -31,8 +33,6 @@ const Carousel = ({
       window.removeEventListener('resize', handleSize);
     };
   }, []);
-
-  console.log(size * currentSlide);
 
   return (
     <>
@@ -48,6 +48,7 @@ const Carousel = ({
                 galeriePicture={galeriePicture}
                 key={galeriePicture.id}
                 position={size * index}
+                frameId={frameId}
               />
             ))}
         </GaleriePicturesContainer>

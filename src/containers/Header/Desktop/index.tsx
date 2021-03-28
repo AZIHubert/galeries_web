@@ -48,7 +48,8 @@ const Header = () => {
   const show = !!user
     && !location.pathname.includes('profilePicture')
     && !location.pathname.includes('updateEmail')
-    && !location.pathname.includes('validateEmail');
+    && !location.pathname.includes('validateEmail')
+    && !location.pathname.includes('galeriesPicture');
 
   return (
     <CSSTransition

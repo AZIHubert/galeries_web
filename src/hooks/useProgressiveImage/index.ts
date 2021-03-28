@@ -12,6 +12,7 @@ const useProgressiveImage = (
     const { current } = ref;
     const observer = new IntersectionObserver(
       ([entry], obs) => {
+        console.log(entry);
         setIntersecting(entry.isIntersecting);
         if (once) {
           if (entry.isIntersecting && current) {

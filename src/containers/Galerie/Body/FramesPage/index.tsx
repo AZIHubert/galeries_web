@@ -32,7 +32,7 @@ const FramesPage = () => {
         {!!galerie && Object.keys(frames).sort(
           (a, b) => (
             new Date(frames[b].createdAt).getTime()
-        - new Date(frames[a].createdAt).getTime()
+            - new Date(frames[a].createdAt).getTime()
           ),
         ).map((index) => (
           <Frame

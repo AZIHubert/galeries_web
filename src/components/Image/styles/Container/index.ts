@@ -9,7 +9,7 @@ const fadeIn = keyframes`
   }
 `;
 
-type Mode = 'cover' | 'height' | 'width';
+type Mode = 'cover' | 'contain';
 
 interface ContainerI {
   mode?: Mode;
@@ -28,20 +28,8 @@ const Container = styled.div.attrs<ContainerI>(
   }),
 )<ContainerI>`
   display: inline-block;
-  width: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'width') {
-      return '100%';
-    }
-
-    return 'auto';
-  }};
-  height: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'height') {
-      return '100%';
-    }
-
-    return 'auto';
-  }};
+  height: 100%;
+  width: ${({ mode }) => `${mode === 'contain' ? 'auto' : '100%'}`};
   @media (prefers-reduced-motion: no-preference) {
     animation-name: ${fadeIn};
     animation-fill-mode: backwards;

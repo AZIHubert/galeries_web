@@ -41,7 +41,6 @@ export const GalerieProvider: React.FC<{}> = ({ children }) => {
 
   React.useEffect(() => {
     if (framesStatus === 'success') {
-      console.log('set galerie');
       setGalerie(galeries[id]);
     }
   }, [

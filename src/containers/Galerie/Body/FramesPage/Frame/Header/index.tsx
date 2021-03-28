@@ -29,8 +29,6 @@ const Header = ({
 }: HeaderI) => {
   const currentUser = useSelector(userSelector);
 
-  console.log(user);
-
   return (
     <Container>
       <UserContainer>
