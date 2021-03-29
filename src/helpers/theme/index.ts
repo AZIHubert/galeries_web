@@ -99,16 +99,16 @@ const theme: DefaultTheme = {
     },
     small: {
       cropedImage: {
-        size: 140,
-        margin: 4,
+        size: 125,
+        margin: 3,
         numByRow: 3,
       },
     },
     smallest: {
       cropedImage: {
-        size: 250,
+        size: 130,
         margin: 3,
-        numByRow: 1,
+        numByRow: 2,
       },
     },
   },
