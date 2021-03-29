@@ -2,162 +2,22 @@ import * as React from 'react';
 import { IoCloseSharp } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
-import themeColor from '#helpers/theme';
-
-import { fetchLogout } from '#store/actions';
+import theme from '#helpers/theme';
 
 import { LogoGaleries } from '#ressources/svgComponents';
 
-const Container = styled.div.attrs(
-  () => ({
-    className: 'slideMenu',
-  }),
-)`
-  overflow-x: hidden;
-  transition: ${({ theme }) => theme.transition.default};
-  background-color: ${({ theme }) => theme.colors.secondary};
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  z-index: 300;
-  padding: 15px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+import { fetchLogout } from '#store/actions';
 
-const Background = styled.div.attrs(
-  () => ({
-    className: 'background',
-  }),
-)`
-  background-color: ${({ theme }) => theme.colors.black};
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
-`;
-
-interface ButtonsContainerI {
-  bottom?: boolean;
-  alignment?: 'left' | 'right' | 'center';
-}
-
-const ButtonsContainer = styled.div<ButtonsContainerI>`
-  display: flex;
-  flex-direction: column;
-  align-items: ${({ alignment }) => {
-    switch (alignment) {
-      case 'center':
-        return 'center';
-      case 'left':
-        return 'flex-start';
-      case 'right':
-        return 'flex-end';
-      default:
-        return 'flex-start';
-    }
-  }};
-  margin-bottom: ${({ bottom }) => (bottom ? '10px' : 0)};
-  padding-bottom: ${({ bottom }) => (bottom ? '10px' : 0)};
-`;
-
-ButtonsContainer.defaultProps = {
-  bottom: false,
-  alignment: 'left',
-};
-
-const Button = styled.button`
-  font-size: 1.1rem;
-  color: ${({ theme }) => theme.colors.primary};
-  transition: ${({ theme }) => theme.transition.default};
-  &:hover {
-    color: ${({ theme }) => theme.colors.black};
-  }
-`;
-
-const CustomLink = styled(NavLink)`
-  font-size: 1.1rem;
-  color: ${({ theme }) => theme.colors.primary};
-  transition: ${({ theme }) => theme.transition.default};
-  &.active {
-    color: ${({ theme }) => theme.colors.black};
-  }
-  &:hover {
-    color: ${({ theme }) => theme.colors.black};
-  }
-`;
-
-const Fader = styled.div`
-  &.fade-enter {
-    & .background {
-      opacity: 0;
-    }
-    & .slideMenu {
-      opacity: 0;
-      width: 0;
-    }
-  }
-  &.fade-enter-active {
-    & .background {
-      opacity: 0.7;
-      transition: 500ms;
-    }
-    & .slideMenu {
-      opacity: 1;
-      width: 250px;
-      transition: 500ms;
-    }
-  }
-  &.fade-enter-done {
-    & .background {
-      opacity: 0.7;
-    }
-    & .slideMenu {
-      opacity: 1;
-      width: 250px;
-    }
-  }
-  &.fade-exit {
-    & .background {
-      opacity: 0.7;
-    }
-    & .slideMenu {
-      opacity: 1;
-      width: 250px;
-    }
-  }
-  &.fade-exit-active {
-    & .background {
-      opacity: 0;
-      transition: 500ms;
-    }
-    & .slideMenu {
-      opacity: 0;
-      width: 0;
-      transition: 500ms;
-    }
-  }
-  &.fade-exit-done {
-    & .background {
-      opacity: 0;
-    }
-    & .slideMenu {
-      opacity: 0;
-      width: 0;
-    }
-  }
-`;
-
-const GaleriesLogo = styled.h2`
-  margin-bottom: 30px;
-  width: 90px;
-`;
+import {
+  Background,
+  Button,
+  Container,
+  Fader,
+  GaleriesLogo,
+  Link,
+  Part,
+} from './styles';
 
 interface SlideMenuI {
   handleClose: () => void;
@@ -175,12 +35,6 @@ const SlideMenu = ({
   const dispatch = useDispatch();
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
-  const handleClickOutside = React.useCallback((event: any) => {
-    if (containerRef.current && !containerRef.current.contains(event.target)) {
-      handleClose();
-    }
-  }, [containerRef]);
-
   React.useEffect(() => {
     if (!open) {
       document.addEventListener('click', handleClickOutside, true);
@@ -188,6 +42,12 @@ const SlideMenu = ({
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
+  }, [containerRef]);
+
+  const handleClickOutside = React.useCallback((event: any) => {
+    if (containerRef.current && !containerRef.current.contains(event.target)) {
+      handleClose();
+    }
   }, [containerRef]);
 
   return (
@@ -202,35 +62,35 @@ const SlideMenu = ({
           ref={containerRef}
         >
           <div>
-            <ButtonsContainer
-              bottom
+            <Part
               alignment='right'
+              bottom
             >
               <Button
                 onClick={handleClose}
               >
                 <IoCloseSharp
-                  color={themeColor.colors.primary}
+                  color={theme.colors.primary}
                   size={23}
                 />
               </Button>
-            </ButtonsContainer>
-            <ButtonsContainer
+            </Part>
+            <Part
               alignment='center'
             >
               <GaleriesLogo>
                 <LogoGaleries />
               </GaleriesLogo>
-            </ButtonsContainer>
-            <ButtonsContainer
+            </Part>
+            <Part
               bottom
             >
-              <CustomLink
-                to='/dashboard'
+              <Link
                 onClick={handleClose}
+                to='/dashboard'
               >
                 Home
-              </CustomLink>
+              </Link>
               <Button
                 onClick={() => {
                   handleOpenCreateGalerie();
@@ -242,20 +102,20 @@ const SlideMenu = ({
               <Button>
                 Notifications
               </Button>
-            </ButtonsContainer>
-            <ButtonsContainer>
-              <CustomLink
-                to='/profile'
+            </Part>
+            <Part>
+              <Link
                 onClick={handleClose}
+                to='/profile'
               >
                 See&nbsp;your&nbsp;profile
-              </CustomLink>
-              <CustomLink
-                to='/edit'
+              </Link>
+              <Link
                 onClick={handleClose}
+                to='/edit'
               >
                 Edit&nbsp;your&nbsp;informations
-              </CustomLink>
+              </Link>
               <Button
                 onClick={() => {
                   handleOpenSendTicket();
@@ -264,18 +124,18 @@ const SlideMenu = ({
               >
                 Send&nbsp;a&nbsp;ticket
               </Button>
-            </ButtonsContainer>
+            </Part>
           </div>
-          <ButtonsContainer>
+          <Part>
             <Button
               onClick={() => {
-                handleClose();
                 dispatch(fetchLogout());
+                handleClose();
               }}
             >
               Logout
             </Button>
-          </ButtonsContainer>
+          </Part>
         </Container>
         <Background />
       </Fader>
