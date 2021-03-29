@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.header`
   align-items: center;
-  background-color: #f1f1e7;
+  background-color: ${({ theme }) => theme.colors.quaternay};
   border-radius: 0 0 15px 15px;
   display: flex;
   flex-direction: column;

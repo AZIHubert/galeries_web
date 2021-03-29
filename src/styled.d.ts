@@ -5,6 +5,7 @@ interface ColorsI {
   danger: string;
   facebook: string;
   primary: string;
+  quaternay: string;
   secondary: string;
   tertiary: string;
   white: string;

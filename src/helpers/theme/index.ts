@@ -7,6 +7,7 @@ const theme: DefaultTheme = {
     danger: '#FC4903',
     facebook: '#3B579D',
     primary: '#7483FF',
+    quaternay: '#f1f1e7',
     secondary: '#FFFFF4',
     tertiary: '#78FFF7',
     white: '#FFF',

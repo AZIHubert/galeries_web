@@ -11,12 +11,12 @@ const Menu = styled.div<MenuI>`
   background-color: ${({
     fixed,
     theme,
-  }) => (fixed ? '#f1f1e7' : theme.colors.secondary)};
+  }) => (fixed ? theme.colors.quaternay : theme.colors.secondary)};
   display: flex;
   border-bottom: ${({
     fixed,
     theme,
-  }) => `2px solid ${fixed ? '#f1f1e7' : theme.colors.primary}`};
+  }) => `2px solid ${fixed ? theme.colors.quaternay : theme.colors.primary}`};
   height: 45px;
   justify-content: space-between;
   margin: ${({

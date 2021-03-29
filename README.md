@@ -25,3 +25,6 @@ object-fit for image
 
 loader if frames are not ready yet
 set carousel size on theme
+Send a ticket title
+always show carrousel button when mobile
+remove cover on galeries's header

@@ -9,6 +9,7 @@ import Field from '#components/Field';
 import Button from '#components/Button';
 import Modal from '#components/Modal';
 import RequiredField from '#components/RequiredField';
+import Text from '#components/Text';
 
 import { ticketSchema } from '#helpers/schemas';
 
@@ -22,8 +23,6 @@ import {
   sendTicketErrorSelector,
   sendTicketStatusSelector,
 } from '#store/selectors';
-
-import ModalTicketTitle from './ModalTicketTitle';
 
 const initialValues: form.SendTicketI = {
   body: '',
@@ -63,9 +62,23 @@ const ModalTicket = ({
   }, [sendTicketStatus]);
 
   return (
-    <Modal.Container
-      title={<ModalTicketTitle />}
-    >
+    <Modal.Container>
+      <Text
+        color='primary'
+        styles={{
+          fontSize: 1.2,
+          marginBottom: 20,
+          textAlign: 'center',
+        }}
+        stylesMobile={{
+          fontSize: 1.4,
+        }}
+        stylesLaptopL={{
+          fontSize: 1.5,
+        }}
+      >
+        Create galerie
+      </Text>
       <form
         data-testid='form'
         onSubmit={formik.handleSubmit}
