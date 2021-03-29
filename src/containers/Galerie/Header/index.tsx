@@ -51,13 +51,10 @@ const Header = ({
 
   React.useEffect(() => {
     if (width && width < 425) {
-      console.log('small');
       setHeaderHeight(theme.header.dashboard.height.small);
     } else if (width && width < 1440) {
-      console.log('medium');
       setHeaderHeight(theme.header.dashboard.height.medium);
     } else {
-      console.log('large');
       setHeaderHeight(theme.header.dashboard.height.large);
     }
   }, [width]);
