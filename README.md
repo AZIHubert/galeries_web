@@ -28,3 +28,4 @@ set carousel size on theme
 Send a ticket title
 always show carrousel button when mobile
 remove cover on galeries's header
+remove profile pictures button and add delete/remove on FullPageImage

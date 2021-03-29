@@ -9,7 +9,7 @@ const fadeIn = keyframes`
   }
 `;
 
-type Mode = 'cover' | 'contain';
+type Mode = 'cover' | 'height' | 'width' | 'fill';
 
 interface ContainerI {
   mode?: Mode;
@@ -18,18 +18,26 @@ interface ContainerI {
 
 const Container = styled.div.attrs<ContainerI>(
   ({
-    theme,
     uri,
   }) => ({
     style: {
       backgroundImage: uri ? `url("${uri}")` : 'none',
-      backgroundColor: uri ? theme.colors.tertiary : 'none',
     },
   }),
 )<ContainerI>`
   display: inline-block;
-  height: 100%;
-  width: ${({ mode }) => `${mode === 'contain' ? 'auto' : '100%'}`};
+  width: ${({ mode }) => {
+    if (mode === 'width' || mode === 'fill') {
+      return '100%';
+    }
+    return 'auto';
+  }};
+  height: ${({ mode }) => {
+    if (mode === 'height' || mode === 'fill') {
+      return '100%';
+    }
+    return 'auto';
+  }};
   @media (prefers-reduced-motion: no-preference) {
     animation-name: ${fadeIn};
     animation-fill-mode: backwards;

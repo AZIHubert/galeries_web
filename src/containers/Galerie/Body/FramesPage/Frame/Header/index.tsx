@@ -36,6 +36,7 @@ const Header = ({
         <ProfilePictureImage>
           <Image
             alt={`${user.userName}'s profile picture`}
+            mode='fill'
             original={selectProfilPicture(user).croped}
             pending={selectProfilPicture(user).pending}
           />

@@ -2,7 +2,11 @@ import styled from 'styled-components';
 
 import mediaQueries from '#helpers/mediaQueries';
 
-const ImageContainer = styled.div`
+interface ContainerI {
+  isMobile: boolean;
+}
+
+const Container = styled.div<ContainerI>`
   height: ${({ theme }) => (
     `${theme.profile.smallest.cropedImage.size - theme.profile.smallest.cropedImage.margin * 2}px`
   )};
@@ -13,8 +17,8 @@ const ImageContainer = styled.div`
     `${theme.profile.smallest.cropedImage.size - theme.profile.smallest.cropedImage.margin * 2}px`
   )};
   & .button {
-    opacity: 0;
-    transform: scale(0);
+    opacity: ${({ isMobile }) => (isMobile ? 1 : 0)};
+    transform: ${({ isMobile }) => (isMobile ? 'scale(1)' : 'scale(0)')};
   }
   &:hover .button {
     opacity: 1;
@@ -58,4 +62,8 @@ const ImageContainer = styled.div`
   }
 `;
 
-export default ImageContainer;
+Container.defaultProps = {
+  isMobile: false,
+};
+
+export default Container;

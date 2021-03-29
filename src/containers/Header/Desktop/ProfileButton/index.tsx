@@ -26,12 +26,10 @@ const ProfileButton = ({
   popupProfileTestId,
   handleOpenSendTicket,
 }: ProfileButtonI) => {
-  const handleOpenTicket = React.useCallback(() => setOpenTicket(true), []);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const { croped, pending } = useSelector(profilePictureCurrentSelector);
   const user = useSelector(userSelector);
   const [openPopupProfil, setOpenPopupProfile] = React.useState<boolean>(false);
-  const [openTicket, setOpenTicket] = React.useState<boolean>(false);
 
   const handleClosePopup = () => setOpenPopupProfile(false);
 
@@ -42,13 +40,11 @@ const ProfileButton = ({
   }, [containerRef]);
 
   React.useEffect(() => {
-    if (!openTicket) {
-      document.addEventListener('click', handleClickOutside, true);
-    }
+    document.addEventListener('click', handleClickOutside, true);
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  }, [openTicket]);
+  }, []);
 
   return (
     <Container
@@ -59,6 +55,7 @@ const ProfileButton = ({
       >
         <ProfileImage>
           <Image
+            mode='fill'
             original={croped}
             pending={pending}
           />

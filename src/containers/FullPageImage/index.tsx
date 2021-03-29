@@ -48,6 +48,34 @@ const FullPageImage = () => {
   const status = useSelector(profilePictureStatusSelector);
   const [hasFetch, setHasFetch] = React.useState<boolean>(false);
   const [image, setImage] = React.useState<ProfilePictureI | GaleriePictureI |null>(null);
+  const [mode, setMode] = React.useState<'width' | 'height' | 'cover'>('cover');
+
+  React.useEffect(() => {
+    const handleMode = () => {
+      if (image) {
+        const {
+          height,
+          width,
+        } = image.originalImage;
+        const innerWidthWithPadding = window.innerWidth - paddingHorizontal * 2;
+        const innerHeightWidthPadding = window.innerHeight - paddingVertical * 2;
+        const maxWidth = (height * innerWidthWithPadding) / width;
+        if (
+          height < innerHeightWidthPadding
+          && width < innerWidthWithPadding
+        ) {
+          setMode('cover');
+        } else if (innerHeightWidthPadding > maxWidth) {
+          setMode('width');
+        } else {
+          setMode('height');
+        }
+      }
+    };
+    handleMode();
+    window.addEventListener('resize', handleMode);
+    return () => window.removeEventListener('resize', handleMode);
+  }, [image]);
 
   React.useEffect(() => {
     if (id) {
@@ -125,7 +153,7 @@ const FullPageImage = () => {
         </Link>
         <Image
           alt='image'
-          mode='contain'
+          mode={mode}
           original={image.originalImage.signedUrl}
           pending={image.pendingImage.signedUrl}
         />

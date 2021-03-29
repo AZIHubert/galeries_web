@@ -8,6 +8,8 @@ import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
 
 import themeColor from '#helpers/theme';
 
+import useWindowSize from '#hooks/useWindowSize';
+
 import DeleteButton from './DeleteButton';
 import PutButton from './PutButton';
 
@@ -34,9 +36,21 @@ const ProfilePicture = ({
     puttingImage,
     deletingImage,
   } = React.useContext(ProfilePictureContext);
+  const [isMobile, setIsMobile] = React.useState<boolean>(false);
+  const { width } = useWindowSize();
+
+  React.useEffect(() => {
+    if (width && width < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [width]);
 
   return (
-    <Container>
+    <Container
+      isMobile={isMobile}
+    >
       <PutButton
         id={id}
       />
@@ -50,6 +64,7 @@ const ProfilePicture = ({
           to={`/profilePicture/${id}`}
         >
           <Image
+            mode='fill'
             original={cropedImage.signedUrl}
             pending={pendingImage.signedUrl}
           />

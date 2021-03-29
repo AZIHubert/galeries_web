@@ -32,6 +32,7 @@ const GaleriePicture = ({
         <Image
           alt={`image ${galeriePicture.index}`}
           key={galeriePicture.id}
+          mode='fill'
           original={galeriePicture.cropedImage.signedUrl}
           pending={galeriePicture.pendingImage.signedUrl}
         />
