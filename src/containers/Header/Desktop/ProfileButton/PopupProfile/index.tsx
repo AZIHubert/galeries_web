@@ -51,6 +51,7 @@ const PopupProfile = ({
           >
             <ProfileImage>
               <Image
+                mode='fill'
                 original={croped}
                 pending={pending}
               />
