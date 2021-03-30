@@ -36,14 +36,6 @@ interface HeaderI {
   dashboard: SubHeaderI;
 }
 
-interface ProfileI {
-  largest: SubProfileI;
-  large: SubProfileI;
-  medium: SubProfileI;
-  small: SubProfileI;
-  smallest: SubProfileI;
-}
-
 interface SubHeaderI {
   height: HeaderHeightI;
   logoWidth: HeaderLogoI;
@@ -51,14 +43,6 @@ interface SubHeaderI {
 
 interface SubGalerieI {
   card: {
-    size: number;
-    margin: number;
-    numByRow: number;
-  }
-}
-
-interface SubProfileI {
-  cropedImage: {
     size: number;
     margin: number;
     numByRow: number;
@@ -88,7 +72,6 @@ declare module 'styled-components' {
     colors: ColorsI;
     galerie: GalerieI;
     header: HeaderI;
-    profile: ProfileI;
     transition: TransitionI;
     wrapper: WrapperI;
   }

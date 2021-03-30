@@ -15,7 +15,7 @@ const Container = styled.div`
   width: 128px;
   @media ${mediaQueries.tablet} {
     height: 168px;
-    margin-right: 90px;
+    margin-right: 50px;
     width: 168px;
   }
   @media ${mediaQueries.laptop} {

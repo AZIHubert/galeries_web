@@ -8,11 +8,6 @@ import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
 
 import themeColor from '#helpers/theme';
 
-import useWindowSize from '#hooks/useWindowSize';
-
-import DeleteButton from './DeleteButton';
-import PutButton from './PutButton';
-
 import {
   Container,
   Fader,
@@ -22,10 +17,12 @@ import {
 } from './styles';
 
 interface ProfilePictureContainerI {
+  bigPicture: boolean;
   profilePicture: ProfilePictureI,
 }
 
 const ProfilePicture = ({
+  bigPicture,
   profilePicture: {
     id,
     cropedImage,
@@ -36,27 +33,11 @@ const ProfilePicture = ({
     puttingImage,
     deletingImage,
   } = React.useContext(ProfilePictureContext);
-  const [isMobile, setIsMobile] = React.useState<boolean>(false);
-  const { width } = useWindowSize();
-
-  React.useEffect(() => {
-    if (width && width < 768) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  }, [width]);
 
   return (
     <Container
-      isMobile={isMobile}
+      bigPicture={bigPicture}
     >
-      <PutButton
-        id={id}
-      />
-      <DeleteButton
-        id={id}
-      />
       <Opacity
         isPutting={puttingImage === id || deletingImage === id}
       >

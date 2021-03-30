@@ -7,7 +7,6 @@ import ProfilPictureSpinner from './ProfilePictureSpinner';
 
 import {
   Container,
-  InnerContainer,
 } from './styles';
 
 const ProfilePictureContainer = () => {
@@ -15,20 +14,22 @@ const ProfilePictureContainer = () => {
 
   return (
     <Container>
-      <InnerContainer>
-        <ProfilPictureSpinner />
-        {Object.keys(profilePictures).sort(
-          (a, b) => (
-            new Date(profilePictures[b].createdAt).getTime()
-            - new Date(profilePictures[a].createdAt).getTime()
-          ),
-        ).map((index) => (
+      <ProfilPictureSpinner />
+      {Object.keys(profilePictures).sort(
+        (a, b) => (
+          new Date(profilePictures[b].createdAt).getTime()
+          - new Date(profilePictures[a].createdAt).getTime()
+        ),
+      ).map((index, i) => {
+        const bigPicture = i % 12 === 3;
+        return (
           <ProfilePicture
+            bigPicture={bigPicture}
             key={profilePictures[index].id}
             profilePicture={profilePictures[index]}
           />
-        ))}
-      </InnerContainer>
+        );
+      })}
     </Container>
   );
 };

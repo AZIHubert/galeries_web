@@ -75,43 +75,6 @@ const theme: DefaultTheme = {
       },
     },
   },
-  profile: {
-    largest: {
-      cropedImage: {
-        size: 240,
-        margin: 12,
-        numByRow: 4,
-      },
-    },
-    large: {
-      cropedImage: {
-        size: 170,
-        margin: 6,
-        numByRow: 4,
-      },
-    },
-    medium: {
-      cropedImage: {
-        size: 160,
-        margin: 5,
-        numByRow: 3,
-      },
-    },
-    small: {
-      cropedImage: {
-        size: 125,
-        margin: 3,
-        numByRow: 3,
-      },
-    },
-    smallest: {
-      cropedImage: {
-        size: 130,
-        margin: 3,
-        numByRow: 2,
-      },
-    },
-  },
   transition: {
     default: '0.3s',
     quick: '0.1s',
