@@ -2,10 +2,6 @@ import styled from 'styled-components';
 
 const Fader = styled.div`
   &.fade-enter {
-    & .background-container {
-      right: 8px;
-      top: 8px;
-    }
     & .background-modal {
       opacity: 0;
     }
@@ -15,11 +11,6 @@ const Fader = styled.div`
     }
   }
   &.fade-enter-active {
-    & .background-container {
-      right: 15px;
-      top: 15px;
-      transition: 400ms;
-    }
     & .background-modal {
       opacity: 0.7;
       transition: opacity 300ms;
@@ -31,10 +22,6 @@ const Fader = styled.div`
     }
   }
   &.fade-exit {
-    & .background-container {
-      right: 15px;
-      top: 15px;
-    }
     & .background-modal {
       opacity: 0.7;
     }
@@ -44,11 +31,6 @@ const Fader = styled.div`
     }
   }
   &.fade-exit-active {
-    & .background-container {
-      right: 8px;
-      top: 8px;
-      transition:  450ms;
-    }
     & .background-modal {
       opacity: 0;
       transition: opacity 300ms;

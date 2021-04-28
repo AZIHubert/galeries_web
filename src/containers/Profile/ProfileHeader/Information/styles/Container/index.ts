@@ -6,7 +6,7 @@ const Container = styled.div`
   align-items: 'center';
   display: flex;
   flex-direction: column;
-  width: 240px;
+  width: 290px;
   @media ${mediaQueries.laptopL} { 
     width: 340px;
   }

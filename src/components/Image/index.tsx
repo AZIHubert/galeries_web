@@ -9,7 +9,7 @@ import {
   Img,
 } from './styles';
 
-type Mode = 'cover' | 'height' | 'width';
+type Mode = 'cover' | 'height' | 'width' | 'fill';
 
 interface ImageI {
   alt?: string;
@@ -26,6 +26,7 @@ const Image = ({
 }: ImageI) => {
   const imageRef = React.useRef<HTMLDivElement | null>(null);
   const loading = useProgressiveImage(original, imageRef, true);
+  const [hide, setHide] = React.useState<boolean>(true);
 
   return (
     <Container
@@ -36,12 +37,12 @@ const Image = ({
       <CSSTransition
         classNames='fade'
         in={loading}
+        onEntered={() => setHide(false)}
         timeout={300}
-        unmountOnExit
       >
         <Fader
           mode={mode}
-
+          hide={hide}
         >
           <Img
             alt={alt}

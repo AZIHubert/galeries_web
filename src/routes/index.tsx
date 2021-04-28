@@ -14,6 +14,7 @@ import ConfirmAccount from '#containers/ConfirmAccount';
 import Desktop from '#containers/Desktop';
 import Edit from '#containers/Edit';
 import FullPageImage from '#containers/FullPageImage';
+import Galerie from '#containers/Galerie';
 import Header from '#containers/Header';
 import Home from '#containers/Home';
 import Loader from '#components/Loader';
@@ -135,6 +136,24 @@ const Routes = () => {
             path='/validateEmail/:token'
           >
             <UpdateEmailLanding />
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/galerie/:id'
+          >
+            {!user ? (
+              <Redirect to='/' />
+            ) : (
+              <Galerie />
+            )}
+          </AnimatedRoute>
+          <AnimatedRoute
+            path='/galerie/:galerieId/frame/:frameId/galeriesPicture/:id'
+          >
+            {!user ? (
+              <Redirect to='/' />
+            ) : (
+              <FullPageImage />
+            )}
           </AnimatedRoute>
           <Header.Desktop />
         </Fader>

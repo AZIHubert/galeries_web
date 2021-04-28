@@ -9,7 +9,7 @@ const fadeIn = keyframes`
   }
 `;
 
-type Mode = 'cover' | 'height' | 'width';
+type Mode = 'cover' | 'height' | 'width' | 'fill';
 
 interface ContainerI {
   mode?: Mode;
@@ -18,28 +18,24 @@ interface ContainerI {
 
 const Container = styled.div.attrs<ContainerI>(
   ({
-    theme,
     uri,
   }) => ({
     style: {
       backgroundImage: uri ? `url("${uri}")` : 'none',
-      backgroundColor: uri ? theme.colors.tertiary : 'none',
     },
   }),
 )<ContainerI>`
   display: inline-block;
   width: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'width') {
+    if (mode === 'width' || mode === 'fill') {
       return '100%';
     }
-
     return 'auto';
   }};
   height: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'height') {
+    if (mode === 'height' || mode === 'fill') {
       return '100%';
     }
-
     return 'auto';
   }};
   @media (prefers-reduced-motion: no-preference) {

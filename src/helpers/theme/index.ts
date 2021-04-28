@@ -7,9 +7,47 @@ const theme: DefaultTheme = {
     danger: '#FC4903',
     facebook: '#3B579D',
     primary: '#7483FF',
+    quaternay: '#f1f1e7',
     secondary: '#FFFFF4',
     tertiary: '#78FFF7',
     white: '#FFF',
+  },
+  galerie: {
+    largest: {
+      card: {
+        size: 240,
+        margin: 20,
+        numByRow: 4,
+      },
+    },
+    large: {
+      card: {
+        size: 210,
+        margin: 15,
+        numByRow: 3,
+      },
+    },
+    medium: {
+      card: {
+        size: 190,
+        margin: 15,
+        numByRow: 3,
+      },
+    },
+    small: {
+      card: {
+        size: 200,
+        margin: 15,
+        numByRow: 2,
+      },
+    },
+    smallest: {
+      card: {
+        size: 250,
+        margin: 15,
+        numByRow: 1,
+      },
+    },
   },
   header: {
     dashboard: {
@@ -34,43 +72,6 @@ const theme: DefaultTheme = {
         large: 54,
         medium: 38,
         small: 34,
-      },
-    },
-  },
-  profile: {
-    largest: {
-      cropedImage: {
-        size: 240,
-        margin: 12,
-        numByRow: 4,
-      },
-    },
-    large: {
-      cropedImage: {
-        size: 170,
-        margin: 6,
-        numByRow: 4,
-      },
-    },
-    medium: {
-      cropedImage: {
-        size: 160,
-        margin: 5,
-        numByRow: 3,
-      },
-    },
-    small: {
-      cropedImage: {
-        size: 120,
-        margin: 4,
-        numByRow: 3,
-      },
-    },
-    smallest: {
-      cropedImage: {
-        size: 90,
-        margin: 3,
-        numByRow: 3,
       },
     },
   },

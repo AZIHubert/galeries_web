@@ -126,6 +126,21 @@ declare global {
         errors: form.AccountI;
         status: Status;
       }
+      frame: {
+        status: Status;
+      }
+      galerie: {
+        status: Status;
+        errors: {
+          name: string;
+        }
+      }
+      galeries: {
+        end: boolean;
+        page: number;
+        galeries: { [name: string]: GalerieI };
+        status: Status;
+      }
       login: {
         status: Status;
         errors: form.LoginI;
@@ -251,12 +266,53 @@ declare global {
     width: number;
   }
 
+  interface GaleriePictureI {
+    id: string;
+    index: number;
+    cropedImage: ImageI;
+    originalImage: ImageI;
+    pendingImage: ImageI;
+  }
+
+  interface FrameI {
+    id: string;
+    galerieId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    user: UserI;
+    galeriePictures: GaleriePictureI[];
+    likes: LikeI[]
+  }
+
   interface ProfilePictureI {
     createdAt: Date;
     cropedImage: ImageI;
     id: string;
     originalImage: ImageI;
     pendingImage: ImageI
+  }
+
+  interface LikeI {
+
+  }
+
+  interface GalerieI {
+    id: string;
+    name: string;
+    defaultCoverPicture: string;
+    coverPictureId: string;
+    coverPicture: GaleriePictureI;
+    archived?: boolean;
+    users: UserI[];
+    frames: {
+      frames: { [name: string]: FrameI };
+      end: boolean;
+      page: number;
+      status: Status;
+    };
+    createdAt: Date;
+    updatedAt: Date;
+    role: 'user' | 'admin' | 'creator';
   }
 
   interface UserI {
@@ -270,7 +326,7 @@ declare global {
     id: string;
     pseudonym: string;
     role: string;
-    updatedAt: string | null;
+    updatedAt: Date | null;
     userName: string;
   }
 }

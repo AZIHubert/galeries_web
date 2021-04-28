@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 
 import Image from '#components/Image';
-import Modal from '#components/Modal';
 import Text from '#components/Text';
 
 import {
@@ -11,7 +10,6 @@ import {
   userSelector,
 } from '#store/selectors';
 
-import ModalTicket from './ModalTicket';
 import PopupProfile from './PopupProfile';
 import {
   Button,
@@ -20,38 +18,33 @@ import {
 } from './styles';
 
 interface ProfileButtonI {
-  modalTestId?: string;
   popupProfileTestId?: string;
+  handleOpenSendTicket: () => void;
 }
 
 const ProfileButton = ({
-  modalTestId,
   popupProfileTestId,
+  handleOpenSendTicket,
 }: ProfileButtonI) => {
-  const handleCloseTicket = React.useCallback(() => setOpenTicket(false), []);
-  const handleOpenTicket = React.useCallback(() => setOpenTicket(true), []);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const { croped, pending } = useSelector(profilePictureCurrentSelector);
   const user = useSelector(userSelector);
   const [openPopupProfil, setOpenPopupProfile] = React.useState<boolean>(false);
-  const [openTicket, setOpenTicket] = React.useState<boolean>(false);
 
   const handleClosePopup = () => setOpenPopupProfile(false);
 
-  const handleClickOutside = (event: any) => {
+  const handleClickOutside = React.useCallback((event: any) => {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
       handleClosePopup();
     }
-  };
+  }, [containerRef]);
 
   React.useEffect(() => {
-    if (!openTicket) {
-      document.addEventListener('click', handleClickOutside, true);
-    }
+    document.addEventListener('click', handleClickOutside, true);
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  });
+  }, []);
 
   return (
     <Container
@@ -62,6 +55,7 @@ const ProfileButton = ({
       >
         <ProfileImage>
           <Image
+            mode='fill'
             original={croped}
             pending={pending}
           />
@@ -89,19 +83,10 @@ const ProfileButton = ({
       >
         <PopupProfile
           handleClose={handleClosePopup}
-          handleOpenTicket={handleOpenTicket}
+          handleOpenTicket={handleOpenSendTicket}
           testId={popupProfileTestId}
         />
       </CSSTransition>
-      <Modal.Portal
-        handleClose={handleCloseTicket}
-        modalTestId={modalTestId}
-        open={openTicket}
-      >
-        <ModalTicket
-          handleClose={handleCloseTicket}
-        />
-      </Modal.Portal>
     </Container>
   );
 };

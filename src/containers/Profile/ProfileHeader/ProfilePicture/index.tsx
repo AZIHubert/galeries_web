@@ -44,6 +44,7 @@ const ProfilePicture = () => {
         >
           <Image
             alt='current profile picture'
+            mode='fill'
             original={profilePicture.croped}
             pending={profilePicture.pending}
           />

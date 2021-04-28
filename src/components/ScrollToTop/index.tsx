@@ -12,23 +12,24 @@ const ScrollToTop = () => {
   const [show, setShow] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = 'innerHeight' in window
+        ? window.innerHeight
+        : document.documentElement.offsetHeight;
+      const windowBottom = Math.round(window.pageYOffset);
+      if (windowBottom >= windowHeight - 200) {
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    };
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   });
 
-  const handleScroll = () => {
-    const windowHeight = 'innerHeight' in window
-      ? window.innerHeight
-      : document.documentElement.offsetHeight;
-    const windowBottom = Math.round(window.pageYOffset);
-    if (windowBottom >= windowHeight - 200) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  };
   const scrollTop = () => {
     if (show) {
       window.scrollTo({ top: 0, behavior: 'smooth' });

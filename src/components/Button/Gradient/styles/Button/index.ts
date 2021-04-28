@@ -29,11 +29,9 @@ const Button = styled.button.attrs<ButtonI>(
   )};
   background-size: 200%;
   background-position: ${({ disabled }) => (`${disabled} ? left : right`)};
-  border: none;
   border-radius: 5px;
   box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({ theme }) => theme.colors.secondary};
-  cursor: pointer;
   font-size: 0.9rem;
   height: 29px;
   margin-bottom: ${({ styles }) => {
@@ -64,9 +62,6 @@ const Button = styled.button.attrs<ButtonI>(
   text-transform: capitalize;
   transition: ${({ theme }) => `background-position ${theme.transition.default} ease-in`};
   width: 100%;
-  &:focus {
-    outline: none;
-  }
   &:hover {
     background-position: right;
   }

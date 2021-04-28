@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-type Mode = 'cover' | 'height' | 'width';
+type Mode = 'cover' | 'height' | 'width' | 'fill';
 
 interface ImgI {
   mode?: Mode;
@@ -9,17 +9,15 @@ interface ImgI {
 const Img = styled.img<ImgI>`
   vertical-align: middle;
   width: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'width') {
+    if (mode === 'width' || mode === 'fill') {
       return '100%';
     }
-
     return 'auto';
   }};
   height: ${({ mode }) => {
-    if (mode === 'cover' || mode === 'height') {
+    if (mode === 'height' || mode === 'fill') {
       return '100%';
     }
-
     return 'auto';
   }};
 `;

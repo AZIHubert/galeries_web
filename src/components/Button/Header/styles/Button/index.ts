@@ -46,7 +46,6 @@ const Button = styled.button.attrs<ButtonI>(
       ? theme.colors.secondary
       : theme.colors.primary
   )};
-  cursor: pointer;
   font-size: ${({ small }) => (small ? '0.6rem' : '1rem')};
   margin-bottom: ${({ styles }) => {
     if (styles && styles.marginBottom) {
@@ -77,9 +76,6 @@ const Button = styled.button.attrs<ButtonI>(
     `background-color ${theme.transition.slow} ease-in,
     color ${theme.transition.default} ease-in:`
   )};
-  &:focus {
-    outline: none;
-  }
   &:hover {
     background-color: ${({
     theme,

@@ -8,9 +8,6 @@ import { ProfilePictureContext } from '#contexts/ProfilePictureContext';
 
 import themeColor from '#helpers/theme';
 
-import DeleteButton from './DeleteButton';
-import PutButton from './PutButton';
-
 import {
   Container,
   Fader,
@@ -20,13 +17,14 @@ import {
 } from './styles';
 
 interface ProfilePictureContainerI {
-  id: string;
+  bigPicture: boolean;
   profilePicture: ProfilePictureI,
 }
 
 const ProfilePicture = ({
-  id,
+  bigPicture,
   profilePicture: {
+    id,
     cropedImage,
     pendingImage,
   },
@@ -37,13 +35,9 @@ const ProfilePicture = ({
   } = React.useContext(ProfilePictureContext);
 
   return (
-    <Container>
-      <PutButton
-        id={id}
-      />
-      <DeleteButton
-        id={id}
-      />
+    <Container
+      bigPicture={bigPicture}
+    >
       <Opacity
         isPutting={puttingImage === id || deletingImage === id}
       >
@@ -51,6 +45,7 @@ const ProfilePicture = ({
           to={`/profilePicture/${id}`}
         >
           <Image
+            mode='fill'
             original={cropedImage.signedUrl}
             pending={pendingImage.signedUrl}
           />

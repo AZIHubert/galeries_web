@@ -42,39 +42,36 @@ const Pictogram = ({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       testId={containerTestId}
+      onClick={() => {
+        if (onClick) onClick();
+      }}
     >
-      <div
-        onClick={() => {
-          if (onClick) onClick();
-        }}
+      <CSSTransition
+        classNames='fade'
+        in={hover}
+        timeout={300}
+        unmountOnExit
       >
-        <CSSTransition
-          classNames='fade'
-          in={hover}
-          timeout={300}
-          unmountOnExit
-        >
-          <Fader>
-            <InnerContainer
-              testId={hoverPictogramTestId}
-            >
-              <HoverPictogramComponent />
-            </InnerContainer>
-          </Fader>
-        </CSSTransition>
-        <CSSTransition
-          classNames='fade'
-          in={!hover}
-          timeout={300}
-          unmountOnExit
-        >
+        <Fader>
           <InnerContainer
-            testId={pictogramTestId}
+            testId={hoverPictogramTestId}
           >
-            <PictogramComponent />
+            <HoverPictogramComponent />
           </InnerContainer>
-        </CSSTransition>
-      </div>
+        </Fader>
+      </CSSTransition>
+      <CSSTransition
+        classNames='fade'
+        in={!hover}
+        timeout={300}
+        unmountOnExit
+      >
+        <InnerContainer
+          testId={pictogramTestId}
+        >
+          <PictogramComponent />
+        </InnerContainer>
+      </CSSTransition>
     </Container>
   );
 };

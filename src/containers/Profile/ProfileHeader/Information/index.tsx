@@ -70,11 +70,11 @@ const Information = () => {
             textAlign: 'center',
           }}
           stylesMobile={{
+            marginTop: 0,
             fontSize: 2,
           }}
           stylesTablet={{
             fontSize: 2.4,
-            marginTop: 0,
             textAlign: 'left',
           }}
         >

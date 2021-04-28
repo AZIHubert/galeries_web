@@ -15,7 +15,7 @@ const Background = styled.div<BackgroundI>`
   opacity: 0.75;
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 80%;
   z-index: -1;
 `;
 

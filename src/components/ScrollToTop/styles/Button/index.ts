@@ -4,20 +4,15 @@ import mediaQueries from '#helpers/mediaQueries';
 
 const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
-  border: none;
   border-radius: 50%;
   bottom: 15px;
   box-shadow: ${({ theme }) => theme.boxShadow};
-  cursor: pointer;
   display: flex;
   height: 32px;
   padding: 10px;
   position: fixed;
   right: 25px;
   width: 32px;
-  &:focus {
-    outline: none;
-  }
   @media ${mediaQueries.tablet} {
     bottom: 30px;
     right: 30px;

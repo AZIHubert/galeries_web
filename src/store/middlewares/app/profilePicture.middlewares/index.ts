@@ -176,48 +176,39 @@ const successProfilePicture: Middleware = (
   if (action.type === `${PROFILE_PICTURE} ${API_SUCCESS}`) {
     if (action.payload) {
       if (action.payload.data.type === 'POST') {
-        const {
-          id,
-          ...rest
-        }: ProfilePictureI = action.payload.data.profilePicture;
+        const newProfilePicture: ProfilePictureI = action.payload.data.profilePicture;
         dispatch(setUser({
           ...getState().user,
-          currentProfilePictureId: id,
-          currentProfilePicture: { ...rest },
+          currentProfilePictureId: newProfilePicture.id,
+          currentProfilePicture: newProfilePicture,
         }));
         dispatch(setProfilePictures({
           profilePictures: {
-            [id]: { ...rest },
+            [newProfilePicture.id]: newProfilePicture,
             ...getState().profilePictures.profilePictures,
           },
         }));
       }
       if (action.payload.data.type === 'GET') {
-        const {
-          id,
-          ...rest
-        }: ProfilePictureI = action.payload.data.profilePicture;
+        const newProfilePicture: ProfilePictureI = action.payload.data.profilePicture;
         dispatch(setProfilePictures({
           profilePictures: {
-            [id]: { ...rest },
+            [newProfilePicture.id]: newProfilePicture,
             ...getState().profilePictures.profilePictures,
           },
         }));
       }
       if (action.payload.data.type === 'PUT') {
         if (action.payload.data.profilePicture) {
-          const {
-            id,
-            ...rest
-          }: ProfilePictureI = action.payload.data.profilePicture;
+          const newProfilePicture: ProfilePictureI = action.payload.data.profilePicture;
           dispatch(setUser({
             ...getState().user,
-            currentProfilePictureId: id,
-            currentProfilePicture: { ...rest },
+            currentProfilePictureId: newProfilePicture.id,
+            currentProfilePicture: newProfilePicture,
           }));
           dispatch(setProfilePictures({
             profilePictures: {
-              [id]: { ...rest },
+              [newProfilePicture.id]: newProfilePicture,
               ...getState().profilePictures.profilePictures,
             },
           }));

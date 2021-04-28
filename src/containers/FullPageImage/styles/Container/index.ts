@@ -10,10 +10,9 @@ interface ContainerI {
 }
 
 const Container = styled.div<ContainerI>`
-  align-items: center;
   display: flex;
   height: 100%;
-  justify-content: center;
+  justify-content: space-between;
   left: 0;
   padding: ${({
     styles,
